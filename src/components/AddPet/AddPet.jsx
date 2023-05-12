@@ -8,7 +8,7 @@ import {
   Textstep,
   StyledLink,
 } from './AddPet.styled';
-
+//Треба глянути тут ще як і що додати краще
 const AddPet = () => {
   const [active, setActive] = useState(true);
   const location = useLocation();
