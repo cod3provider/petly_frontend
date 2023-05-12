@@ -15,6 +15,6 @@ export const theme = {
 		desktop: {
 			media: '(min-width: 1280px)',
 			width: '1280px',
-		}
+		},
 	}
 }
