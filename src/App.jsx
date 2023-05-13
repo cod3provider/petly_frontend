@@ -11,7 +11,9 @@ import AddPet from './components/AddPet/AddPet';
 
 import './App.css';
 
-// Удалить когда будут компоненты
+import { ROUTES } from './utils/keys.js';
+
+// Удалять по мере подключения компонентов
 const SharedLayout = () => {
   return <></>;
 };
@@ -20,10 +22,28 @@ const Spinner = () => {
   return <></>;
 };
 
+const NewsPage = () => {
+  return <></>;
+};
+
+const NoticesPage = () => {
+  return <></>;
+};
+
+const FriendsPage = () => {
+  return <></>;
+};
+
+const UserPage = () => {
+  return <></>;
+};
+
 const NotFoundPage = () => {
   return <></>;
 };
 // ===================================
+
+// Работу роутов редактировать в процессе работы
 
 function App() {
   return (
@@ -31,9 +51,13 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/addpet" element={<AddPet />} />
+          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.NEWS} element={<NewsPage />} />
+          <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
+          <Route path={ROUTES.FRIENDS} element={<FriendsPage />} />
+          <Route path={ROUTES.USER} element={<UserPage />} />
+          <Route path={ROUTES.ADDPET} element={<AddPet />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
