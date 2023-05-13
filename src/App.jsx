@@ -1,11 +1,16 @@
-import './App.css';
-import HomePage from './pages/HomePage/HomePage.jsx';
+
+import './App.css'
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx"
 import AddPet from './components/AddPet/AddPet';
 function App() {
   return (
     <>
-      {/* <HomePage /> */}
-      <AddPet />
+      <HomePage />
+      <RegisterPage />
+      <LoginPage/>
+  <AddPet />
     </>
   );
 }
