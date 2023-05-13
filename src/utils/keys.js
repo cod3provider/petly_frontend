@@ -18,3 +18,4 @@ const BACKEND_ENDPOINTS = {
 };
 
 export { ROUTES, BACKEND_ENDPOINTS };
+};

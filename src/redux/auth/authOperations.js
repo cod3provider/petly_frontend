@@ -43,7 +43,7 @@ export const login = createAsyncThunk(
         // getCurrentUser()
       );
       return data;
-    } catch (error) {9+
+    } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.message);
     }
