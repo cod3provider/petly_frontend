@@ -1,4 +1,5 @@
 import { Formik, Field, Form } from 'formik';
+import PropTypes from 'prop-types';
 
 const FirsStepForm = ({ setStep, setState }) => {
   const handleBack = () => {
@@ -53,3 +54,8 @@ const FirsStepForm = ({ setStep, setState }) => {
 };
 
 export default FirsStepForm;
+
+FirsStepForm.propTypes = {
+  setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+};

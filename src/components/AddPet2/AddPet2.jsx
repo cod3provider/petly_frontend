@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Wrapper, Container, StepList, StepLi } from './AddPet2.styled';
+import { Wrapper, Container, StepList, StepLi, Title } from './AddPet2.styled';
 import FirsStepForm from './FirsStepForm/FirsStepForm';
 import SecondStepForm from './SecondStepForm/SecondStepForm';
 import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
@@ -30,7 +30,7 @@ const AddPet2 = () => {
   return (
     <Container>
       <Wrapper>
-        <h3>{text}</h3>
+        <Title>{text}</Title>
         <StepList>
           <StepLi>Choose option</StepLi>
           <StepLi>Personal details</StepLi>

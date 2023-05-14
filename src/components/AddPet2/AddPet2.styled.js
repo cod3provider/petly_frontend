@@ -16,6 +16,17 @@ export const Wrapper = styled.div`
   border-radius: 40px;
 `;
 
+export const Title = styled.h2`
+  text-align: left;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+  margin-left: 12px;
+  margin-bottom: 24px;
+
+  color: #111111;
+`;
+
 export const StepList = styled.ul`
   display: flex;
 `;
