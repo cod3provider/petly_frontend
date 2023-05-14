@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HeaderStyled, DivStyled } from './Header.styled.js';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
@@ -7,9 +7,22 @@ import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
 import Navigation from '../Navigations/Navigation/Navigation.jsx';
 import { useMedia } from 'react-use';
 import { theme } from '../../utils/theme.jsx';
+import { ModalStyled, CloseModal } from './Header.styled.js';
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowModal(false);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleClick = () => {
     setShowModal(!showModal);
@@ -23,7 +36,7 @@ export default function Header() {
     document.body.style.overflow = 'unset';
   };
 
-  const isMobile = useMedia(theme.breakpoints.tablet.media);
+  const isMobile = useMedia(theme.breakpoints.mobile.media);
   const isTablet = useMedia(theme.breakpoints.tablet.media);
   const isDesktop = useMedia(theme.breakpoints.desktop.media);
 
@@ -31,19 +44,25 @@ export default function Header() {
     <HeaderStyled>
       <DivStyled>
         <Logo onClick={handleClick} />
+        {showModal && (
+          <CloseModal
+            src={closeModal}
+            alt="Close Modal"
+            onClick={handleCloseModal}
+          />
+        )}
         {isTablet && !showModal && <AuthNav onClick={handleCloseModal} />}
         {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
         {isMobile && showModal && (
-          <div>
+          <ModalStyled>
             <AuthNav onClick={handleCloseModal} />
             <Navigation onClick={handleCloseModal} />
-            <img
-              src={closeModal}
-              alt="Close Modal"
-              onClick={handleCloseModal}
-              style={{ width: '24px', height: '24px' }}
-            />
-          </div>
+          </ModalStyled>
+        )}
+        {isTablet && showModal && (
+          <ModalStyled>
+            <Navigation onClick={handleCloseModal} />
+          </ModalStyled>
         )}
         {isDesktop && (
           <>

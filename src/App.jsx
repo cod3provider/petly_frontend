@@ -10,10 +10,16 @@ import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import AddPet from './components/AddPet/AddPet.jsx';
 import { ROUTES } from './utils/keys.js';
+import { Suspense } from 'react';
+
+const Spinner = () => {
+  return <></>;
+};
 
 function App() {
   return (
     <>
+      <Suspense fallback={<Spinner />}></Suspense>
       <Routes>
         <Route
           path={ROUTES.HOMEPAGE}
