@@ -72,7 +72,7 @@ function App() {
           }
         />
         <Route
-          path={ROUTES.ADDPET}
+          path={ROUTES.ADDPEThe}
           element={
             <SharedLayout>
               <AddPet />

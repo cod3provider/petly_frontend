@@ -6,8 +6,7 @@ import closeModal from '../../images/cross-small.jpg';
 import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
 import Navigation from '../Navigations/Navigation/Navigation.jsx';
 import { useMedia } from 'react-use';
-// import { HiMenu } from 'react-icons/hi';
-// import { GrClose } from 'react-icons/gr';
+import { theme } from '../../utils/theme.jsx';
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
@@ -24,12 +23,17 @@ export default function Header() {
     document.body.style.overflow = 'unset';
   };
 
+  const isMobile = useMedia(theme.breakpoints.tablet.media);
+  const isTablet = useMedia(theme.breakpoints.tablet.media);
+  const isDesktop = useMedia(theme.breakpoints.desktop.media);
+
   return (
     <HeaderStyled>
       <DivStyled>
         <Logo onClick={handleClick} />
-        {!showModal && <BurgerMenu onClick={handleClick} />}
-        {showModal && (
+        {isTablet && !showModal && <AuthNav onClick={handleCloseModal} />}
+        {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
+        {isMobile && showModal && (
           <div>
             <AuthNav onClick={handleCloseModal} />
             <Navigation onClick={handleCloseModal} />
@@ -40,6 +44,12 @@ export default function Header() {
               style={{ width: '24px', height: '24px' }}
             />
           </div>
+        )}
+        {isDesktop && (
+          <>
+            <Navigation onClick={handleCloseModal} />
+            <AuthNav onClick={handleCloseModal} />
+          </>
         )}
       </DivStyled>
     </HeaderStyled>
