@@ -8,7 +8,12 @@ import FindPets from './components/FindPets/FindPets.jsx';
 import OurFriends from './components/OurFriends/OurFriends.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
+import { ROUTES } from './utils/keys.js';
+import { lazy, Suspense } from 'react';
 // import AddPet from './components/AddPet/AddPet';
+
+const Spinner = () => {
+  return <></>;
 
 function App() {
   return (
