@@ -5,15 +5,17 @@ const ROUTES = {
   NOTICES: '/notices',
   FRIENDS: '/friends',
   USER: '/user',
+  ADDPET: '/AddPet',
 };
 
 const BACKEND_ENDPOINTS = {
-  REGISTER: 'auth/register',
-  LOGIN: 'auth/login',
-  LOGOUT: 'auth/logout',
-}
+  REGISTER: 'users/register',
+  LOGIN: 'users/login',
+  CURRENT: 'users/current',
+  UPDATE: 'users/update',
+  AVATARS: 'users/avatars',
+  LOGOUT: 'users/logout',
+};
 
-export {
-  ROUTES,
-  BACKEND_ENDPOINTS,
-}
+export { ROUTES, BACKEND_ENDPOINTS };
+};
