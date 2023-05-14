@@ -8,29 +8,78 @@ import FindPets from './components/FindPets/FindPets.jsx';
 import OurFriends from './components/OurFriends/OurFriends.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
+import AddPet from './components/AddPet/AddPet.jsx';
 import { ROUTES } from './utils/keys.js';
-import { lazy, Suspense } from 'react';
-// import AddPet from './components/AddPet/AddPet';
-
-const Spinner = () => {
-  return <></>;
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/main" />} />
-        <Route path="/main" element={<SharedLayout />}>
-          <Route index element={<HomePage />} />
-        </Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/notices" element={<FindPets />} />
-        <Route path="/friends" element={<OurFriends />} />
+        <Route
+          path={ROUTES.HOMEPAGE}
+          element={
+            <SharedLayout>
+              <Navigate to={ROUTES.MAIN} />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.MAIN}
+          element={
+            <SharedLayout>
+              <HomePage />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.LOGIN}
+          element={
+            <SharedLayout>
+              <LoginPage />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.REGISTER}
+          element={
+            <SharedLayout>
+              <RegisterForm />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.NEWS}
+          element={
+            <SharedLayout>
+              <News />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.NOTICES}
+          element={
+            <SharedLayout>
+              <FindPets />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.FRIENDS}
+          element={
+            <SharedLayout>
+              <OurFriends />
+            </SharedLayout>
+          }
+        />
+        <Route
+          path={ROUTES.ADDPET}
+          element={
+            <SharedLayout>
+              <AddPet />
+            </SharedLayout>
+          }
+        />
       </Routes>
-
-      {/*<AddPet />*/}
     </>
   );
 }
