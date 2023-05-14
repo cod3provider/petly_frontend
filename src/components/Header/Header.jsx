@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { HeaderStyled, DivStyled } from './Header.styled.js';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
-import closeModal from '../../images/cross-small.jpg';
+// import closeModal from '../../images/cross-small.jpg';
 import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
 import Navigation from '../Navigations/Navigation/Navigation.jsx';
 import { useMedia } from 'react-use';
 import { theme } from '../../utils/theme.jsx';
-import { ModalStyled, CloseModal } from './Header.styled.js';
+import { ModalStyled } from './Header.styled.js';
+// import { GrClose } from 'react-icons/gr';
+import { TfiClose } from 'react-icons/tfi';
+import UserPageLogo from '../UserPageLogo/UserPageLogo.jsx';
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
@@ -44,17 +47,17 @@ export default function Header() {
     <HeaderStyled>
       <DivStyled>
         <Logo onClick={handleClick} />
-        {showModal && (
-          <CloseModal
-            src={closeModal}
-            alt="Close Modal"
-            onClick={handleCloseModal}
-          />
+        {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
+        {isTablet && !showModal && (
+          <>
+            <AuthNav onClick={handleCloseModal} />
+            <UserPageLogo iconSize="20" />
+          </>
         )}
-        {isTablet && !showModal && <AuthNav onClick={handleCloseModal} />}
         {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
         {isMobile && showModal && (
           <ModalStyled>
+            <UserPageLogo iconSize="40" />
             <AuthNav onClick={handleCloseModal} />
             <Navigation onClick={handleCloseModal} />
           </ModalStyled>

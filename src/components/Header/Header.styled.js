@@ -30,6 +30,7 @@ export const ModalStyled = styled.div`
 
 export const CloseModal = styled.img`
   position: absolute;
+  color: #ffc107;
   right: 10px;
   width: 24px;
   height: 24px;
