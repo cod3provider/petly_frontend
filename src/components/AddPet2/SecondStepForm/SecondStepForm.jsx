@@ -10,6 +10,7 @@ const SecondStepForm = ({ setStep, setState }) => {
 
   const handleBack = () => {
     setStep('first');
+    setState({ type: 'your pet' });
   };
 
   const handleChange = e => {

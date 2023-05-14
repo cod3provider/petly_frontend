@@ -2,7 +2,7 @@ import { Formik, Field, Form } from 'formik';
 
 const FirsStepForm = ({ setStep, setState }) => {
   const handleBack = () => {
-    console.log('go back');
+    setState({ type: 'your pet' });
   };
 
   return (
@@ -13,12 +13,15 @@ const FirsStepForm = ({ setStep, setState }) => {
       }}
       onSubmit={values => {
         setStep('second');
-        setState(prev => ({ ...prev, type: values.picked }));
+        setState(prev => ({
+          ...prev,
+          type: values.picked,
+        }));
       }}
     >
       {({ values }) => (
         <Form>
-          <div id="my-radio-group">Picked</div>
+          <div id="my-radio-group"></div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
               <Field type="radio" name="picked" value="your pet" />
