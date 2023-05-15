@@ -9,8 +9,11 @@ import OurFriends from './components/OurFriends/OurFriends.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import AddPet from './components/AddPet/AddPet.jsx';
+
 import { ROUTES } from './utils/keys.js';
 import { Suspense } from 'react';
+import UserPage from './pages/UserPage/UserPage.jsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 
 const Spinner = () => {
   return <></>;
@@ -18,75 +21,31 @@ const Spinner = () => {
 
 function App() {
   return (
-    <>
-      <Suspense fallback={<Spinner />}></Suspense>
-      <Routes>
-        <Route
-          path={ROUTES.HOMEPAGE}
-          element={
-            <SharedLayout>
-              <Navigate to={ROUTES.MAIN} />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.MAIN}
-          element={
-            <SharedLayout>
-              <HomePage />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.LOGIN}
-          element={
-            <SharedLayout>
-              <LoginPage />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.REGISTER}
-          element={
-            <SharedLayout>
-              <RegisterForm />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.NEWS}
-          element={
-            <SharedLayout>
-              <News />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.NOTICES}
-          element={
-            <SharedLayout>
-              <FindPets />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.FRIENDS}
-          element={
-            <SharedLayout>
-              <OurFriends />
-            </SharedLayout>
-          }
-        />
-        <Route
-          path={ROUTES.ADDPEThe}
-          element={
-            <SharedLayout>
-              <AddPet />
-            </SharedLayout>
-          }
-        />
-      </Routes>
-    </>
+    <Suspense fallback={<Spinner />}>
+      <SharedLayout>
+        <Routes>
+          <Route
+            path={ROUTES.HOMEPAGE}
+            element={<Navigate to={ROUTES.MAIN} />}
+          />
+          <Route path={ROUTES.MAIN} element={<HomePage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
+          <Route path={ROUTES.NEWS} element={<News />} />
+          <Route path={ROUTES.NOTICES} element={<FindPets />} />
+          <Route path={ROUTES.FRIENDS} element={<OurFriends />} />
+          <Route path={ROUTES.ADDPET} element={<AddPet />} />
+          <Route
+            path={ROUTES.USER}
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </SharedLayout>
+    </Suspense>
   );
 }
 
