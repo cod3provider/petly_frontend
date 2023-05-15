@@ -25,22 +25,37 @@ const FirsStepForm = ({ setStep, setState }) => {
           <div id="my-radio-group"></div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
-              <Field type="radio" name="picked" value="your pet" />
+              <Field
+                styled="none"
+                type="radio"
+                name="picked"
+                value="your pet"
+              />
               your pet
             </label>
             <label>
-              <Field type="radio" name="picked" value="sell" />
+              <Field styled="none" type="radio" name="picked" value="sell" />
               sell
             </label>
             <label>
-              <Field type="radio" name="picked" value="lost/found" />
+              <Field
+                styled="none"
+                type="radio"
+                name="picked"
+                value="lost/found"
+              />
               lost/found
             </label>
             <label>
-              <Field type="radio" name="picked" value="in good hands" />
+              <Field
+                styled="none"
+                type="radio"
+                name="picked"
+                value="in good hands"
+              />
               in good hands
             </label>
-            <div>Picked: {values.picked}</div>
+            <div> Picked: {values.picked}</div>
           </div>
 
           <button type="button" onClick={handleBack}>

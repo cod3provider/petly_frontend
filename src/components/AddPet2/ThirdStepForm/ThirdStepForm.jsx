@@ -1,7 +1,8 @@
 import { Formik, Field, Form } from 'formik';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const ThirdStepForm = ({ setStep, State, setState }) => {
+const ThirdStepForm = ({ setStep, state, setState }) => {
   const [FormState, setFormState] = useState({
     location: '',
     price: '',
@@ -22,7 +23,7 @@ const ThirdStepForm = ({ setStep, State, setState }) => {
       ...FormState,
     }));
 
-    console.log('Отправляем запрос на сервер с карточкой:', State);
+    console.log('Отправляем запрос на сервер с карточкой:', state);
 
     setStep('first');
   };
@@ -67,3 +68,9 @@ const ThirdStepForm = ({ setStep, State, setState }) => {
 };
 
 export default ThirdStepForm;
+
+ThirdStepForm.propTypes = {
+  setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
+};

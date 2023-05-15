@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { Wrapper, Container, StepList, StepLi, Title } from './AddPet2.styled';
+
+import {
+  Wrapper,
+  Container,
+  StepList,
+  StepLi,
+  Title,
+  StepLiFirst,
+  StepLiSecond,
+  StepLiThird,
+} from './AddPet2.styled';
+
 import FirsStepForm from './FirsStepForm/FirsStepForm';
 import SecondStepForm from './SecondStepForm/SecondStepForm';
 import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
@@ -24,7 +35,7 @@ const AddPet2 = () => {
       text = 'Add pet in good hands';
       break;
     default:
-      'Oops, it not category';
+      'Oops, this not a category.';
   }
 
   return (
@@ -32,9 +43,15 @@ const AddPet2 = () => {
       <Wrapper>
         <Title>{text}</Title>
         <StepList>
-          <StepLi>Choose option</StepLi>
-          <StepLi>Personal details</StepLi>
-          <StepLi>More info</StepLi>
+          <StepLi>
+            <StepLiFirst step={step}>Choose option</StepLiFirst>
+          </StepLi>
+          <StepLi>
+            <StepLiSecond step={step}>Personal details</StepLiSecond>
+          </StepLi>
+          <StepLi>
+            <StepLiThird step={step}>More info</StepLiThird>
+          </StepLi>
         </StepList>
 
         {step === 'first' && (
