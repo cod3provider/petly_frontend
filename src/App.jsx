@@ -15,9 +15,9 @@ import { Routes, Route } from 'react-router-dom';
 import { ROUTES } from './utils/keys.js';
 
 // Удалять по мере подключения компонентов
-const SharedLayout = () => {
-  return <></>;
-};
+// const SharedLayout = () => {
+//   return <></>;
+// };
 
 const Spinner = () => {
   return <></>;
@@ -50,7 +50,7 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
+        {/*<Route path="/" element={<SharedLayout />}>*/}
           <Route index element={<HomePage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
@@ -60,7 +60,7 @@ function App() {
           <Route path={ROUTES.USER} element={<UserPage />} />
           {/*<Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
           <Route path="*" element={<NotFoundPage />} />
-        </Route>
+        {/*</Route>*/}
       </Routes>
     </Suspense>
   );
