@@ -1,15 +1,26 @@
+import './App.css';
+import HomePage from './pages/HomePage/HomePage.jsx';
+import GlobalStyles from './utils/globalStyles.js';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+
+function App() {
+  return (
+    <>
+      <GlobalStyles />
+      <HomePage />
+      <RegisterPage />
+      <LoginPage />
+    </>
+
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
-import HomePage from './pages/HomePage/HomePage.jsx';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+
 import AddPet from './components/AddPet/AddPet';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-
-import './App.css';
 
 import { ROUTES } from './utils/keys.js';
 

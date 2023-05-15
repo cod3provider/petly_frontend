@@ -7,7 +7,7 @@ export const ContainerStyled = styled.div`
   padding: 0 20px;
   
   @media (${theme.breakpoints.mobile.media}) {
-    width: ${theme.breakpoints.mobile.width};
+    min-width: ${theme.breakpoints.mobile.width};
   }
   @media ${theme.breakpoints.tablet.media} {
     padding: 0 30px;
