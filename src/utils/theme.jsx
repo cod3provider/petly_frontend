@@ -1,4 +1,3 @@
-
 export const theme = {
 	baseColors: {
 		accentColor: '#54ADFF',
@@ -35,7 +34,7 @@ export const theme = {
 			width: '320px',
 		},
 		tablet: {
-			media: '(min-width: 768px) and (max-width: 1279px)',
+			media: '(min-width: 768px)',
 			width: '768px',
 		},
 		desktop: {
