@@ -1,9 +1,13 @@
+/* eslint-disable react/no-children-prop */
 // import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../../redux/auth/authOperations';
+import AuthFormButton from '../../Buttons/AuthFormButton/AuthFormButton';
+import { SectionStyled } from '../../common/Section/Section.styled';
+import { InputStyle, LinkWraper } from './RegisterForm.style';
 // import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import { toast } from 'react-toastify';
 
@@ -37,7 +41,7 @@ function RegisterForm() {
   });
 
   return (
-    <>
+    <SectionStyled>
       <div>
         <Formik
           initialValues={{
@@ -67,7 +71,7 @@ function RegisterForm() {
           }) => (
             <form onSubmit={handleSubmit}>
               <label htmlFor="email">
-                <input
+                <InputStyle
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -80,7 +84,7 @@ function RegisterForm() {
               </label>
 
               <label htmlFor="password">
-                <input
+                <InputStyle
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -93,7 +97,7 @@ function RegisterForm() {
               </label>
 
               <label htmlFor="passwordRepeat">
-                <input
+                <InputStyle
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirm password"
@@ -105,23 +109,24 @@ function RegisterForm() {
                 <ErrorMessage component="div" name="confirmPassword" />
               </label>
 
-              <button
+              <AuthFormButton
                 type="submit"
                 disabled={isSubmitting}
+                children="Registration"
               // onClick={openModal}
               >
-                Registration
-              </button>
+
+              </AuthFormButton>
               {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
-              <div>
+              <LinkWraper>
                 <p>Already have an account?</p>
-                {/* <Link to="/login">Login</Link> */}
-              </div>
+                <Link to="/login">Login</Link>
+              </LinkWraper>
             </form>
           )}
         </Formik>
       </div>
-    </>
+    </SectionStyled>
   );
 }
 

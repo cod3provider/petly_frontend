@@ -1,9 +1,12 @@
 // import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/auth/authOperations';
+import AuthFormButton from '../../Buttons/AuthFormButton/AuthFormButton';
+import { SectionStyled } from '../../common/Section/Section.styled';
+import { InputStyle, LinkWraper } from './LoginForm.style';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -19,7 +22,7 @@ function LoginForm() {
   });
 
   return (
-    <>
+    <SectionStyled>
       <div>
         <Formik
           initialValues={{
@@ -45,7 +48,7 @@ function LoginForm() {
           }) => (
             <form onSubmit={handleSubmit}>
               <label htmlFor="email">
-                <input
+                <InputStyle
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -58,7 +61,7 @@ function LoginForm() {
               </label>
 
               <label htmlFor="password">
-                <input
+                <InputStyle
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -70,18 +73,21 @@ function LoginForm() {
                 <ErrorMessage component="div" name="password" />
               </label>
 
-              <button type="submit" disabled={isSubmitting}>
+              <AuthFormButton
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Login
-              </button>
-              <div>
+              </AuthFormButton>
+              <LinkWraper>
                 <p>Don&#39;t have an account?</p>
-                {/* <Link to="/register">Register</Link> */}
-              </div>
+                <Link to="/register">Register</Link>
+              </LinkWraper>
             </form>
           )}
         </Formik>
       </div>
-    </>
+    </SectionStyled>
   );
 }
 

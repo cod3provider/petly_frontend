@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 // import { getCurrentUser } from 'redux/user/userOperations';
 
-axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/api/';
+axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
 export const token = {
   set(token) {
@@ -25,6 +25,7 @@ export const register = createAsyncThunk(
           password,
         })
       );
+      console.log(credentials);
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.message);
