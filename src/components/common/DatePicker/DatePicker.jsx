@@ -12,9 +12,8 @@ import './styles.css';
  *
  * const [selectedDay, setSelectedDay] = useState();
  *
- * @param {selectedDay} selected day state
- * @param {setSelectedDay} day selection function
- * @returns
+ * @param {selectedDay} state selected day state
+ * @param {setSelectedDay} setState day selection function
  */
 const DatePicker = ({ selectedDay, setSelectedDay }) => {
   // const [selectedDay, setSelectedDay] = useState();
