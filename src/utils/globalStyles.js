@@ -5,6 +5,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    font-family: 'Manrope', sans-serif;
+  }
+
   img {
     display: block;
     width: 100%;
