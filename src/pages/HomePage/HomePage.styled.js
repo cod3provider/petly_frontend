@@ -56,13 +56,25 @@ export const MobileHero = styled.img`
   top: 168px;
   left: -95px;
 
+  // @media (${theme.breakpoints.tablet.media}) {
+  //   width: 900px;
+  //   top: 305px; 
+  // }
+  //
+  // @media (${theme.breakpoints.desktop.media}) {
+  //   top: 30px;
+  //   left: 365px;
+  // }
+`;
+
+export const TabletHero = styled.img`
   @media (${theme.breakpoints.tablet.media}) {
     width: 900px;
-    top: 305px; 
+    top: 305px;
   }
 
   @media (${theme.breakpoints.desktop.media}) {
     top: 30px;
     left: 365px;
   }
-`;
+`

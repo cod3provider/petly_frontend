@@ -1,17 +1,7 @@
 import './App.css';
 import HomePage from './pages/HomePage/HomePage.jsx';
-import GlobalStyles from './utils/globalStyles.js';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
-
-function App() {
-  return (
-    <>
-      <GlobalStyles />
-      <HomePage />
-      <RegisterPage />
-      <LoginPage />
-    </>
 
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -19,7 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
 
-import AddPet from './components/AddPet/AddPet';
+//! import AddPet from './components/AddPet/AddPet';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 import { ROUTES } from './utils/keys.js';
@@ -68,7 +58,7 @@ function App() {
           <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
           <Route path={ROUTES.FRIENDS} element={<FriendsPage />} />
           <Route path={ROUTES.USER} element={<UserPage />} />
-          <Route path={ROUTES.ADDPET} element={<AddPet />} />
+          {/*<Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
