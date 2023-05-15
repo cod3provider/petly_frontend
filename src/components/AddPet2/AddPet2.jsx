@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Wrapper,
@@ -17,31 +17,36 @@ import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 
 const AddPet2 = () => {
   const [state, setState] = useState({ type: 'your pet' });
+  const [title, setTitle] = useState('Oops, this not a category.');
   const [step, setStep] = useState('first');
 
-  let text = '';
+  useEffect(() => {
+    switch (state.type) {
+      case 'your pet':
+        setTitle('Add your pet');
+        break;
 
-  switch (state.type) {
-    case 'your pet':
-      text = 'Add your pet';
-      break;
-    case 'sell':
-      text = 'Add pet for sell';
-      break;
-    case 'lost/found':
-      text = 'Add lost pet';
-      break;
-    case 'in good hands':
-      text = 'Add pet in good hands';
-      break;
-    default:
-      'Oops, this not a category.';
-  }
+      case 'sell':
+        setTitle('Add pet for sell');
+        break;
+
+      case 'lost/found':
+        setTitle('Add lost pet');
+        break;
+
+      case 'in good hands':
+        setTitle('Add pet in good hands');
+
+        break;
+      default:
+        'Oops, this not a category.';
+    }
+  }, [state.type]);
 
   return (
     <Container>
       <Wrapper>
-        <Title>{text}</Title>
+        <Title>{title}</Title>
         <StepList>
           <StepLi>
             <StepLiFirst step={step}>Choose option</StepLiFirst>
@@ -58,7 +63,11 @@ const AddPet2 = () => {
           <FirsStepForm setStep={setStep} setState={setState} />
         )}
         {step === 'second' && (
-          <SecondStepForm setStep={setStep} setState={setState} state={state} />
+          <SecondStepForm
+            setStep={setStep}
+            setState={setState}
+            type={state.type}
+          />
         )}
         {step === 'third' && (
           <ThirdStepForm state={state} setStep={setStep} setState={setState} />

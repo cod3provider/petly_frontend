@@ -2,7 +2,7 @@ import { Formik, Field, Form } from 'formik';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const SecondStepForm = ({ setStep, state, setState }) => {
+const SecondStepForm = ({ setStep, setState, type }) => {
   const [FormState, setFormState] = useState({
     namePet: '',
     birth: '',
@@ -20,7 +20,6 @@ const SecondStepForm = ({ setStep, state, setState }) => {
   };
 
   const handleSubmit = () => {
-    console.log(FormState);
     setStep('third');
     setState(prev => ({
       ...prev,
@@ -28,35 +27,10 @@ const SecondStepForm = ({ setStep, state, setState }) => {
     }));
   };
 
-  const setTypeCategory = setState => {
-    const typeSell = setState({ type: 'sell' });
-    const typeFound = setState({ type: 'lost/found' });
-    if (typeSell || typeFound) {
-      return (
-        <>
-          <label htmlFor="titlePet">Title of add</label>
-          <Field
-            id="titlePet"
-            name="titlePet"
-            placeholder="Title pet"
-            value={FormState.titlePet}
-            onChange={handleChange}
-            required
-          />
-        </>
-      );
-    }
-    return null;
-  };
-  // const typeFound = { type: 'lost/found' };
   return (
     <Formik initialValues={FormState} onSubmit={handleSubmit}>
       <Form>
-        {(titlePet === typeSell || titlePet === typeFound) && (
-          <>{setTypeCategory()}</>
-        )}
-
-        {/* {typeFound ? (
+        {(type === 'sell' || type === 'lost/found') && (
           <>
             <label htmlFor="titlePet">Title of add</label>
             <Field
@@ -68,7 +42,8 @@ const SecondStepForm = ({ setStep, state, setState }) => {
               requared
             />
           </>
-        ) : null} */}
+        )}
+
         <label htmlFor="namePet">Name pet</label>
         <Field
           id="namePet"
