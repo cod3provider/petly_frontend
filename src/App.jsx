@@ -1,10 +1,19 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
-
+import RegisterForm from './components/AuthForm/RegisterForm/RegisterForm.jsx';
+import News from './components/News/News.jsx';
+import FindPets from './components/FindPets/FindPets.jsx';
+import OurFriends from './components/OurFriends/OurFriends.jsx';
+import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
+import HomePage from './pages/HomePage/HomePage.jsx';
+import AddPet from './components/AddPet/AddPet.jsx';
+import { ROUTES } from './utils/keys.js';
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+
 
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
@@ -20,7 +29,6 @@ import UserPage from './pages/UserPage/UserPage.jsx';
 //! import AddPet from './components/AddPet/AddPet';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
-import { ROUTES } from './utils/keys.js';
 
 // Удалять по мере подключения компонентов
 // const SharedLayout = () => {
