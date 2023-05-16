@@ -96,6 +96,20 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       });
+    // .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+    //   state.user = payload;
+    //   state.isLoading = false;
+    //   state.isLoggedIn = true;
+    //   state.error = null;
+    // })
+    // .addCase(getCurrentUser.pending, state => {
+    //   state.isLoading = true;
+    //   state.error = null;
+    // })
+    // .addCase(getCurrentUser.rejected, (state, { payload }) => {
+    //   state.isLoading = false;
+    //   state.error = payload;
+    // });
   },
 });
 

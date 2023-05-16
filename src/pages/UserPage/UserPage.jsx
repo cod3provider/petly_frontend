@@ -1,15 +1,19 @@
-import { useState } from 'react';
-import { SectionStyled } from '../../components/common/Section/Section.styled';
-import UserData from '../../components/UserProfile/UserData';
-import UserPets from '../../components/UserProfile/UserPets';
+export default function UserPage() {
+  return <UserPage />;
+}
 
-const UserPage = () => {
-  return (
-    <div>
-      <UserData />
-      <UserPets />
-    </div>
-  );
-};
+// import { useState } from 'react';
+// import { SectionStyled } from '../../components/common/Section/Section.styled';
+// import UserData from '../../components/UserProfile/UserData';
+// import UserPets from '../../components/UserProfile/UserPets';
 
-export default UserPage;
+// const UserPage = () => {
+//   return (
+//     <div>
+//       <UserData />
+//       <UserPets />
+//     </div>
+//   );
+// };
+
+// export default UserPage;

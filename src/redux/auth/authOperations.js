@@ -40,7 +40,8 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
       token.set(data.token);
-      await dispatch(getCurrentUser());
+//       dispatch();
+//       getCurrentUser()
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -64,22 +65,22 @@ export const logout = createAsyncThunk(
   }
 );
 
-export const getCurrentUser = createAsyncThunk(
-  'auth/getCurrentUser',
-  async (_, { rejectWithValue, getState }) => {
-    const value = getState().auth.token;
-    if (value) {
-      token.set(value);
-    }
-    try {
-      const { data } = await axios.get('user/current');
-      return data;
-    } catch (error) {
-      console.log(error.response.data);
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getCurrentUser = createAsyncThunk(
+//   'auth/getCurrentUser',
+//   async (_, { rejectWithValue, getState }) => {
+//     const value = getState().auth.token;
+//     if (value) {
+//       token.set(value);
+//     }
+//     try {
+//       const { data } = await axios.get('user/current');
+//       return data;
+//     } catch (error) {
+//       console.log(error.response.data);
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // export const refreshThunk = createAsyncThunk(
 //   'users/refresh',

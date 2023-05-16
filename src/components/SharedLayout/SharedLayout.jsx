@@ -1,23 +1,14 @@
 import Header from '../Header/Header.jsx';
 
-import PropTypes from 'prop-types';
-import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-export const SharedLayout = ({ children }) => {
+function SharedLayout() {
   return (
-    <>
-      <Header></Header>
-      <Suspense>
-        {children}
-        <Outlet />
-      </Suspense>
-    </>
+    <div>
+      <Header />
+      <Outlet />
+    </div>
   );
-};
-
-SharedLayout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default SharedLayout;
