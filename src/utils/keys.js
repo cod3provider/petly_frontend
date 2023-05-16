@@ -6,6 +6,8 @@ const ROUTES = {
   FRIENDS: '/friends',
   USER: '/user',
   ADDPET: '/AddPet',
+  MAIN: '/main',
+  HOMEPAGE: '/',
 };
 
 const BACKEND_ENDPOINTS = {
