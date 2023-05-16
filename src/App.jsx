@@ -9,8 +9,8 @@ import News from './components/News/News.jsx';
 import FindPets from './components/FindPets/FindPets.jsx';
 import OurFriends from './components/OurFriends/OurFriends.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
-import HomePage from './pages/HomePage/HomePage.jsx';
-import AddPet from './components/AddPet/AddPet.jsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
+// import AddPet from './components/AddPet/AddPet.jsx';
 import { ROUTES } from './utils/keys.js';
 import { lazy, Suspense } from 'react';
 
@@ -47,9 +47,9 @@ const UserPage = () => {
   return <></>;
 };
 
-const NotFoundPage = () => {
-  return <></>;
-};
+// const NotFoundPage = () => {
+//   return <></>;
+// };
 // ===================================
 
 // Работу роутов редактировать в процессе работы
