@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
-export default function Logo() {
+export default function Logo({ width, height }) {
   return (
     <Link to="/main">
       <svg
-        width={162}
-        height={28}
+        width={width}
+        height={height}
         viewBox="0 0 162 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
