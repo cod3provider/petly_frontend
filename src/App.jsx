@@ -5,7 +5,12 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
+
 // import AddPet from './components/AddPet/AddPet.jsx';
+
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
+// import AddPet from './components/AddPet/AddPet.jsx';
+
 import { ROUTES } from './utils/keys.js';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import { lazy, Suspense } from 'react';
@@ -25,9 +30,14 @@ const Spinner = () => {
   return <></>;
 };
 
-const NotFoundPage = () => {
+const FriendsPage = () => {
   return <></>;
 };
+
+// const NotFoundPage = () => {
+//   return <></>;
+// };
+
 // ===================================
 
 // Работу роутов редактировать в процессе работы
