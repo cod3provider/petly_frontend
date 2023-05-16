@@ -1,12 +1,12 @@
-import RegisterForm from '../../components/AuthForm/RegisterForm/RegisterForm'
+import RegisterForm from '../../components/AuthForm/RegisterForm/RegisterForm';
 
 function RegisterPage() {
-    return (
+  return (
     <>
-        <h1>Registration</h1>
-        <RegisterForm/>
+      <h1>Registration</h1>
+      <RegisterForm />
     </>
-    )
+  );
 }
 
 export default RegisterPage;
