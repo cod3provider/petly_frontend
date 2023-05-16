@@ -10,6 +10,7 @@ import App from './App.jsx';
 
 import './index.css';
 import { theme } from './utils/theme';
+import GlobalStyles from './utils/globalStyles.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ThemeProvider theme={theme}>
+            <GlobalStyles />
             <App />
           </ThemeProvider>
         </BrowserRouter>

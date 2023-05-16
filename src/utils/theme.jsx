@@ -1,4 +1,3 @@
-
 export const theme = {
 	baseColors: {
 		accentColor: '#54ADFF',
