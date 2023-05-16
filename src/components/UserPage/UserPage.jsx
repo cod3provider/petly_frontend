@@ -1,3 +1,15 @@
+import UserData from './UserProfile/UserData';
+// import UserPets from './UserProfile/UserPets';
+import { ContainerStyled } from '../common/Container/Container.styled';
+import { SectionStyled } from '../common/Section/Section.styled';
+
 export default function UserPage() {
-  return <h1>User Page</h1>;
+  return (
+    <ContainerStyled>
+      <SectionStyled>
+        <UserData />
+        {/* <UserPets /> */}
+      </SectionStyled>
+    </ContainerStyled>
+  );
 }
