@@ -18,6 +18,14 @@ import { lazy, Suspense } from 'react';
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
 
+import HomePage from './pages/HomePage/HomePage.jsx';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+import AddPet from './components/AddPet/AddPet';
+import UserPage from './pages/UserPage/UserPage.jsx';
+// import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+
+
 //! import AddPet from './components/AddPet/AddPet';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
@@ -40,10 +48,6 @@ const NoticesPage = () => {
 };
 
 const FriendsPage = () => {
-  return <></>;
-};
-
-const UserPage = () => {
   return <></>;
 };
 
