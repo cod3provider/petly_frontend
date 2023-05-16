@@ -7,8 +7,8 @@ import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
 
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 // import AddPet from './components/AddPet/AddPet.jsx';
-
 
 import { ROUTES } from './utils/keys.js';
 import UserPage from './pages/UserPage/UserPage.jsx';
@@ -44,6 +44,7 @@ const NoticesPage = () => {
 const FriendsPage = () => {
   return <></>;
 };
+
 
 // const NotFoundPage = () => {
 //   return <></>;
