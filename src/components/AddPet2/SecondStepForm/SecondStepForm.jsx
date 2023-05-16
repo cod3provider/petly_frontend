@@ -15,9 +15,11 @@ const SecondStepForm = ({ setStep, setState, type }) => {
   // }
   const handleBack = () => {
     setStep('first');
-    setState({ step: 'your pet' });
+    setState(prev => ({
+      ...prev,
+      ...FormState,
+    }));
   };
-
   const handleChange = e => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -34,7 +36,9 @@ const SecondStepForm = ({ setStep, setState, type }) => {
   return (
     <Formik initialValues={FormState} onSubmit={handleSubmit}>
       <Form>
-        {(type === 'sell' || type === 'lost/found') && (
+        {(type === 'sell' ||
+          type === 'lost/found' ||
+          type === 'in good hands') && (
           <>
             <label htmlFor="titlePet">Title of add</label>
             <Field
@@ -43,7 +47,7 @@ const SecondStepForm = ({ setStep, setState, type }) => {
               placeholder="Title pet"
               value={FormState.titlePet}
               onChange={handleChange}
-              requared
+              required
             />
           </>
         )}

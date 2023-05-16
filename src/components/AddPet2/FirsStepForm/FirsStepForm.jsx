@@ -30,6 +30,7 @@ const FirsStepForm = ({ setStep, setState }) => {
                 type="radio"
                 name="picked"
                 value="your pet"
+                required
               />
               your pet
             </label>
@@ -43,6 +44,7 @@ const FirsStepForm = ({ setStep, setState }) => {
                 type="radio"
                 name="picked"
                 value="lost/found"
+                required
               />
               lost/found
             </label>
@@ -52,6 +54,7 @@ const FirsStepForm = ({ setStep, setState }) => {
                 type="radio"
                 name="picked"
                 value="in good hands"
+                required
               />
               in good hands
             </label>
