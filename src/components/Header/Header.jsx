@@ -17,10 +17,10 @@ export default function Header() {
   const [showModal, setShowModal] = useState(false);
 
   const isLoggedIn = useSelector(getIsLoggedIn);
+  console.log('isLoggedIn', isLoggedIn);
 
   // const userName = useSelector(getName);
   // userName={userName?.name}
-
 
   useEffect(() => {
     const handleResize = () => {
