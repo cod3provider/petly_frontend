@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { HeaderStyled } from './Header.styled.js';
+import { useSelector } from 'react-redux';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
-// import closeModal from '../../images/cross-small.jpg';
 import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
 import Navigation from '../Navigations/Navigation/Navigation.jsx';
 import { useMedia } from 'react-use';
 import { theme } from '../../utils/theme.jsx';
 import { ModalStyled } from './Header.styled.js';
-// import { GrClose } from 'react-icons/gr';
 import { TfiClose } from 'react-icons/tfi';
 import UserPageLogo from '../UserPageLogo/UserPageLogo.jsx';
-import { useSelector } from 'react-redux';
+
 import { getIsLoggedIn } from '../../redux/auth/authSelectors.js';
 
 export default function Header() {
@@ -21,6 +20,7 @@ export default function Header() {
 
   // const userName = useSelector(getName);
   // userName={userName?.name}
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,14 +55,19 @@ export default function Header() {
       <nav>
         <Logo onClick={handleClick} />
         {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
-        {isTablet && isLoggedIn && <UserPageLogo iconSize="20" />}
+        {isLoggedIn && (
+          <>
+            {isMobile && <UserPageLogo iconSize="40" />}
+            {isTablet && <UserPageLogo iconSize="20" />}
+            {isDesktop && <UserPageLogo iconSize="20" />}
+          </>
+        )}
         {isTablet && !showModal && !isLoggedIn && (
           <AuthNav onClick={handleCloseModal} />
         )}
         {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
         {isLoggedIn && isMobile && showModal && (
           <ModalStyled>
-            {isMobile && <UserPageLogo iconSize="40" />}
             <Navigation onClick={handleCloseModal} />
           </ModalStyled>
         )}

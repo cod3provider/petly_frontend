@@ -9,6 +9,6 @@ function SharedLayout() {
       <Outlet />
     </div>
   );
-}
+};
 
 export default SharedLayout;

@@ -40,8 +40,8 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
       token.set(data.token);
-      dispatch();
-      // getCurrentUser()
+//       dispatch();
+//       getCurrentUser()
       return data;
     } catch (error) {
       console.log(error.response.data);
