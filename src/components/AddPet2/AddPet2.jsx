@@ -58,10 +58,19 @@ const AddPet2 = () => {
           <FirsStepForm setStep={setStep} setState={setState} />
         )}
         {step === 'second' && (
-          <SecondStepForm setStep={setStep} setState={setState} state={state} />
+          <SecondStepForm
+            setStep={setStep}
+            setState={setState}
+            type={state.type}
+          />
         )}
         {step === 'third' && (
-          <ThirdStepForm state={state} setStep={setStep} setState={setState} />
+          <ThirdStepForm
+            state={state}
+            setStep={setStep}
+            setState={setState}
+            type={state.type}
+          />
         )}
       </Wrapper>
     </Container>
