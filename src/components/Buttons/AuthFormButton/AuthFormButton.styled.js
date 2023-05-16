@@ -4,7 +4,8 @@ import { theme } from '../../../utils/theme';
 export const StyledButton = styled('button')`
   display: block;
   width: 100%;
-  margin: 12px;
+  margin-top: 32px;
+  margin-bottom: 24px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: ${theme.baseColors.accentButtonColor};
