@@ -34,7 +34,7 @@ export const theme = {
 			width: '320px',
 		},
 		tablet: {
-			media: '(min-width: 768px)',
+			media: '(min-width: 768px) and (max-width: 1279px)',
 			width: '768px',
 		},
 		desktop: {

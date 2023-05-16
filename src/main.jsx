@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './utils/theme';
 import GlobalStyles from './utils/globalStyles.js';
+
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
