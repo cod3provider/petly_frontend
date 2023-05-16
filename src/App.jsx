@@ -14,13 +14,11 @@ import AddPet from './components/AddPet/AddPet.jsx';
 import { ROUTES } from './utils/keys.js';
 import { lazy, Suspense } from 'react';
 
-
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
 
 //! import AddPet from './components/AddPet/AddPet';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-
 
 // Удалять по мере подключения компонентов
 // const SharedLayout = () => {
@@ -59,15 +57,15 @@ function App() {
     <Suspense fallback={<Spinner />}>
       <Routes>
         {/*<Route path="/" element={<SharedLayout />}>*/}
-          <Route index element={<HomePage />} />
-          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.NEWS} element={<NewsPage />} />
-          <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
-          <Route path={ROUTES.FRIENDS} element={<FriendsPage />} />
-          <Route path={ROUTES.USER} element={<UserPage />} />
-          {/*<Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
-          <Route path="*" element={<NotFoundPage />} />
+        <Route index element={<HomePage />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.NEWS} element={<NewsPage />} />
+        <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
+        <Route path={ROUTES.FRIENDS} element={<FriendsPage />} />
+        <Route path={ROUTES.USER} element={<UserPage />} />
+        {/*<Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
+        <Route path="*" element={<NotFoundPage />} />
         {/*</Route>*/}
       </Routes>
     </Suspense>
