@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HeaderStyled, DivStyled } from './Header.styled.js';
+import { HeaderStyled } from './Header.styled.js';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
 // import closeModal from '../../images/cross-small.jpg';
@@ -11,9 +11,16 @@ import { ModalStyled } from './Header.styled.js';
 // import { GrClose } from 'react-icons/gr';
 import { TfiClose } from 'react-icons/tfi';
 import UserPageLogo from '../UserPageLogo/UserPageLogo.jsx';
+import { useSelector } from 'react-redux';
+import { getIsLoggedIn } from '../../redux/auth/authSelectors.js';
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
+
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
+  // const userName = useSelector(getName);
+  // userName={userName?.name}
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,35 +52,45 @@ export default function Header() {
 
   return (
     <HeaderStyled>
-      <DivStyled>
+      <nav>
         <Logo onClick={handleClick} />
         {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
-        {isTablet && !showModal && (
-          <>
-            <AuthNav onClick={handleCloseModal} />
-            <UserPageLogo iconSize="20" />
-          </>
+        {isTablet && isLoggedIn && <UserPageLogo iconSize="20" />}
+        {isTablet && !showModal && !isLoggedIn && (
+          <AuthNav onClick={handleCloseModal} />
         )}
         {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
-        {isMobile && showModal && (
+        {isLoggedIn && isMobile && showModal && (
           <ModalStyled>
-            <UserPageLogo iconSize="40" />
+            {isMobile && <UserPageLogo iconSize="40" />}
+            <Navigation onClick={handleCloseModal} />
+          </ModalStyled>
+        )}
+        {!isLoggedIn && isMobile && showModal && (
+          <ModalStyled>
             <AuthNav onClick={handleCloseModal} />
             <Navigation onClick={handleCloseModal} />
           </ModalStyled>
         )}
-        {isTablet && showModal && (
+        {isLoggedIn && isTablet && showModal && (
           <ModalStyled>
             <Navigation onClick={handleCloseModal} />
           </ModalStyled>
         )}
-        {isDesktop && (
+        {!isLoggedIn && isTablet && showModal && (
+          <ModalStyled>
+            <AuthNav onClick={handleCloseModal} />
+            <Navigation onClick={handleCloseModal} />
+          </ModalStyled>
+        )}
+        {isLoggedIn && isDesktop && <Navigation onClick={handleCloseModal} />}
+        {!isLoggedIn && isDesktop && (
           <>
             <Navigation onClick={handleCloseModal} />
             <AuthNav onClick={handleCloseModal} />
           </>
         )}
-      </DivStyled>
+      </nav>
     </HeaderStyled>
   );
 }

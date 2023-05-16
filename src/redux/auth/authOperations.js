@@ -65,6 +65,23 @@ export const logout = createAsyncThunk(
   }
 );
 
+// export const getCurrentUser = createAsyncThunk(
+//   'auth/getCurrentUser',
+//   async (_, { rejectWithValue, getState }) => {
+//     const value = getState().auth.token;
+//     if (value) {
+//       token.set(value);
+//     }
+//     try {
+//       const { data } = await axios.get('user/current');
+//       return data;
+//     } catch (error) {
+//       console.log(error.response.data);
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 // export const refreshThunk = createAsyncThunk(
 //   'users/refresh',
 //   async (credentials, { rejectWithValue }) => {

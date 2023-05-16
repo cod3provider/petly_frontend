@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { theme } from "../../utils/theme.jsx";
+import { theme } from '../../utils/theme.jsx';
 
 export const BackgroundImage = styled.img`
   position: absolute;
@@ -22,7 +22,7 @@ export const MainTitle = styled.h1`
   line-height: 1.38;
   color: ${theme.baseColors.titleColor};
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   @media (min-width: ${theme.breakpoints.tablet.width}) {
     padding-top: 80px;
@@ -44,8 +44,8 @@ export const Wrap = styled.div`
   position: relative;
   width: 320px;
   height: 560px;
-  margin: 0 auto;
-
+  //margin: 0 auto;
+  margin-top: 91px;
   @media (${theme.breakpoints.tablet.media}) {
     width: 768px;
     height: 1120px;
@@ -65,7 +65,7 @@ export const HeroImage = styled.img`
 
   @media (${theme.breakpoints.tablet.media}) {
     width: 900px;
-    top: 305px; 
+    top: 305px;
   }
 
   @media (${theme.breakpoints.desktop.media}) {
