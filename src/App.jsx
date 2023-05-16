@@ -11,17 +11,16 @@ import OurFriends from './components/OurFriends/OurFriends.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import AddPet from './components/AddPet/AddPet.jsx';
+
 import { ROUTES } from './utils/keys.js';
+import UserPage from './pages/UserPage/UserPage.jsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import { lazy, Suspense } from 'react';
 
 
 // import Spinner from './pages/Spinner/Spinner';
 // import SharedLayout from './pages/SharedLayout/SharedLayout';
 
-import HomePage from './pages/HomePage/HomePage.jsx';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
-import AddPet from './components/AddPet/AddPet';
 import UserPage from './pages/UserPage/UserPage.jsx';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
@@ -61,19 +60,29 @@ const NotFoundPage = () => {
 function App() {
   return (
     <Suspense fallback={<Spinner />}>
-      <Routes>
-        {/*<Route path="/" element={<SharedLayout />}>*/}
-          <Route index element={<HomePage />} />
-          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+      <SharedLayout>
+        <Routes>
+          <Route
+            path={ROUTES.HOMEPAGE}
+            element={<Navigate to={ROUTES.MAIN} />}
+          />
+          <Route path={ROUTES.MAIN} element={<HomePage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.NEWS} element={<NewsPage />} />
-          <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
-          <Route path={ROUTES.FRIENDS} element={<FriendsPage />} />
-          <Route path={ROUTES.USER} element={<UserPage />} />
-          {/*<Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
-          <Route path="*" element={<NotFoundPage />} />
-        {/*</Route>*/}
-      </Routes>
+          <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
+          <Route path={ROUTES.NEWS} element={<News />} />
+          <Route path={ROUTES.NOTICES} element={<FindPets />} />
+          <Route path={ROUTES.FRIENDS} element={<OurFriends />} />
+          <Route path={ROUTES.ADDPET} element={<AddPet />} />
+          <Route
+            path={ROUTES.USER}
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </SharedLayout>
     </Suspense>
   );
 }

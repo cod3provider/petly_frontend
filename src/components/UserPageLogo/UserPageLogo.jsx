@@ -1,15 +1,20 @@
 import { FaUser } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function UserPageLogo({ iconSize }) {
+export default function UserPageLogo({ iconSize, userName }) {
+  const displayName = userName || 'User';
   return (
     <div>
-      <h3>User</h3>
-      <FaUser color="#FFC107" size={iconSize} />;
+      <Link to="/user">
+        <h3>{displayName}</h3>
+        <FaUser color="#FFC107" size={iconSize} />
+      </Link>
     </div>
   );
 }
 
 UserPageLogo.propTypes = {
   iconSize: PropTypes.number,
+  userName: PropTypes.string.isRequired,
 };
