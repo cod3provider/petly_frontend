@@ -34,19 +34,18 @@ export const ImageNotFound = styled.img`
 export const Button = styled.button`
   display: flex;
   gap: 12px;
-  padding: 8px 28px;
+  padding: 10px 50px;
+  color: ${theme.baseColors.buttonTextColor};
   background: #54ADFF;
   border-radius: 40px;
-
 `;
 
 export const IconButton = styled(IoPawOutline)`
-  // color: ${theme.baseColors.accentColor};
-  color: #000;
-  transform: rotate(45deg);
   width: 24px;
   height: 24px;
-`
+  color: ${theme.baseColors.buttonTextColor};
+  transform: rotate(45deg);
+`;
 
 // export const BgImageStyled = styled.div`
 //   position: absolute;
