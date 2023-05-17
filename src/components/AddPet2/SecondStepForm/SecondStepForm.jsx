@@ -1,22 +1,31 @@
+import PropTypes from 'prop-types';
 import { Formik, Field, Form } from 'formik';
 import { useState } from 'react';
-
-const SecondStepForm = ({ setStep, setState }) => {
+import ButtonPet from '../ButtonPet/ButtonPet';
+const SecondStepForm = ({ setStep, setState, type, step }) => {
   const [FormState, setFormState] = useState({
     namePet: '',
     birth: '',
     breed: '',
+    titlePet: '',
   });
 
+  // function goBack() {
+  //   history.back();
+  // }
   const handleBack = () => {
     setStep('first');
+    setState(prev => ({
+      ...prev,
+      ...FormState,
+    }));
   };
-
   const handleChange = e => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = () => {
+    console.log(FormState);
     setStep('third');
     setState(prev => ({
       ...prev,
@@ -27,6 +36,22 @@ const SecondStepForm = ({ setStep, setState }) => {
   return (
     <Formik initialValues={FormState} onSubmit={handleSubmit}>
       <Form>
+        {(type === 'sell' ||
+          type === 'lost/found' ||
+          type === 'in good hands') && (
+          <>
+            <label htmlFor="titlePet">Title of add</label>
+            <Field
+              id="titlePet"
+              name="titlePet"
+              placeholder="Title pet"
+              value={FormState.titlePet}
+              onChange={handleChange}
+              required
+            />
+          </>
+        )}
+
         <label htmlFor="namePet">Name pet</label>
         <Field
           id="namePet"
@@ -34,6 +59,7 @@ const SecondStepForm = ({ setStep, setState }) => {
           placeholder="Name pet"
           value={FormState.namePet}
           onChange={handleChange}
+          required
         />
 
         <label htmlFor="birth">Date of birth</label>
@@ -44,6 +70,7 @@ const SecondStepForm = ({ setStep, setState }) => {
           placeholder="Date of birth"
           value={FormState.birth}
           onChange={handleChange}
+          required
         />
 
         <label htmlFor="breed">Breed</label>
@@ -53,15 +80,23 @@ const SecondStepForm = ({ setStep, setState }) => {
           placeholder="Breed"
           value={FormState.breed}
           onChange={handleChange}
+          required
         />
 
         <button type="button" onClick={handleBack}>
           back
         </button>
-        <button type="submit">Next step</button>
+        <ButtonPet step={step} />
       </Form>
     </Formik>
   );
 };
 
 export default SecondStepForm;
+
+SecondStepForm.propTypes = {
+  setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  step: PropTypes.string.isRequired,
+};
