@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ContainerStyled } from '../../components/common/Container/Container.styled.jsx';
 import { theme } from '../../utils/theme.jsx';
-import { IoPawOutline } from "react-icons/io5";
+import { IoPawOutline } from 'react-icons/io5';
 
 export const Container = styled(ContainerStyled)`
   position: relative;
@@ -11,7 +11,7 @@ export const Container = styled(ContainerStyled)`
   align-items: center;
   padding-top: 120px;
   padding-bottom: 80px;
-`
+`;
 
 export const Title = styled.h2`
   margin-bottom: 80px;
@@ -36,7 +36,7 @@ export const Button = styled.button`
   gap: 12px;
   padding: 10px 50px;
   color: ${theme.baseColors.buttonTextColor};
-  background: #54ADFF;
+  background: #54adff;
   border-radius: 40px;
 `;
 
@@ -59,7 +59,3 @@ export const IconButton = styled(IoPawOutline)`
 //   background-repeat: no-repeat;
 //   object-fit: contain;
 // `;
-
-// export const BgImageStyled = styled(BackgroundImage)`
-//
-// `

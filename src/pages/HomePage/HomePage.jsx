@@ -1,14 +1,12 @@
-import {
-  HeroImage,
-  MainTitle, Wrap,
-} from './HomePage.styled.js';
-import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
 import { useMedia } from 'react-use';
+
+import { HeroImage, MainTitle, Wrap } from './HomePage.styled.js';
+import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
+
 import { theme } from '../../utils/theme.jsx';
 
 import HeroMobileImage from './img/hero/hero-mobile.png';
 import HeroTabletAndDeskImage from './img/hero/hero-tablet-desk.png';
-
 import bgImageMobile from './img/background/bg_mobile.jpg';
 import bgImageTablet from './img/background/bg_tablet.jpg';
 import bgImageDesktop from './img/background/bg_desktop.jpg';
