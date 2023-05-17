@@ -1,7 +1,8 @@
 import {
-  BackgroundImage, HeroImage,
+  HeroImage,
   MainTitle, Wrap,
 } from './HomePage.styled.js';
+import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
 import { useMedia } from 'react-use';
 import { theme } from '../../utils/theme.jsx';
 
