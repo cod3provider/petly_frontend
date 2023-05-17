@@ -4,7 +4,8 @@ import { BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-const ThirdStepForm = ({ setStep, state, setState, type }) => {
+import ButtonPet from '../ButtonPet/ButtonPet';
+const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   const [FormState, setFormState] = useState({
     location: '',
     price: '',
@@ -129,7 +130,7 @@ const ThirdStepForm = ({ setStep, state, setState, type }) => {
           <button type="button" onClick={handleBack}>
             back
           </button>
-          <button type="submit">Done</button>
+          <ButtonPet step={step} />
         </Form>
       </Formik>
     </>
@@ -143,4 +144,5 @@ ThirdStepForm.propTypes = {
   setState: PropTypes.func.isRequired,
   state: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
+  step: PropTypes.string.isRequired,
 };

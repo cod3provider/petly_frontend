@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types';
-
-const FirsStepForm = ({ setStep, setState }) => {
+import ButtonPet from '../ButtonPet/ButtonPet.jsx';
+const FirsStepForm = ({ setStep, setState, step }) => {
   const handleBack = () => {
     setState({ type: 'your pet' });
   };
@@ -60,11 +60,10 @@ const FirsStepForm = ({ setStep, setState }) => {
             </label>
             <div> Picked: {values.picked}</div>
           </div>
-
           <button type="button" onClick={handleBack}>
             back
           </button>
-          <button type="submit">Next step</button>
+          <ButtonPet step={step} />
         </Form>
       )}
     </Formik>
@@ -76,4 +75,5 @@ export default FirsStepForm;
 FirsStepForm.propTypes = {
   setStep: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
+  step: PropTypes.string.isRequired,
 };
