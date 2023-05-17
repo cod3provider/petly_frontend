@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { HeaderStyled, NavStyled } from './Header.styled.js';
-import { useSelector } from 'react-redux';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
 import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
@@ -9,18 +9,22 @@ import { useMedia } from 'react-use';
 import { theme } from '../../utils/theme.jsx';
 import { ModalStyled } from './Header.styled.js';
 import { TfiClose } from 'react-icons/tfi';
+import { getIsLoggedIn, getName } from '../../redux/auth/authSelectors.js';
 import UserPageLogo from '../UserPageLogo/UserPageLogo.jsx';
-
-import { getIsLoggedIn } from '../../redux/auth/authSelectors.js';
+import { getCurrentUser } from '../../redux/auth/authOperations.js';
 
 export default function Header() {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   const isLoggedIn = useSelector(getIsLoggedIn);
-  console.log('isLoggedIn', isLoggedIn);
+  const userName = useSelector(getName);
 
-  // const userName = useSelector(getName);
-  // userName={userName?.name}
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,9 +61,9 @@ export default function Header() {
         {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
         {isLoggedIn && (
           <>
-            {isMobile && <UserPageLogo iconSize="40" />}
-            {isTablet && <UserPageLogo iconSize="20" />}
-            {isDesktop && <UserPageLogo iconSize="20" />}
+            {isMobile && <UserPageLogo iconSize="40" userName={userName} />}
+            {isTablet && <UserPageLogo iconSize="20" userName={userName} />}
+            {isDesktop && <UserPageLogo iconSize="20" userName={userName} />}
           </>
         )}
         {isTablet && !showModal && !isLoggedIn && (
