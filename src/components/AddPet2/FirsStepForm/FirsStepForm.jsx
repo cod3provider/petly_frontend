@@ -1,16 +1,16 @@
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
+
 const FirsStepForm = ({ setStep, setState, step }) => {
   const handleBack = () => {
     setState({ type: 'your pet' });
   };
-
+  const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: '',
+        picked: 'your pet',
       }}
       onSubmit={values => {
         setStep('second');
@@ -20,45 +20,22 @@ const FirsStepForm = ({ setStep, setState, step }) => {
         }));
       }}
     >
-      {({ values }) => (
+      {({ values, handleChange }) => (
         <Form>
-          <div id="my-radio-group"></div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field
-                styled="none"
-                type="radio"
-                name="picked"
-                value="your pet"
-                required
-              />
-              your pet
-            </label>
-            <label>
-              <Field styled="none" type="radio" name="picked" value="sell" />
-              sell
-            </label>
-            <label>
-              <Field
-                styled="none"
-                type="radio"
-                name="picked"
-                value="lost/found"
-                required
-              />
-              lost/found
-            </label>
-            <label>
-              <Field
-                styled="none"
-                type="radio"
-                name="picked"
-                value="in good hands"
-                required
-              />
-              in good hands
-            </label>
-            <div> Picked: {values.picked}</div>
+          <div id="my-radio-group">
+            {categories.map(categorie => (
+              <label key={categorie}>
+                <input
+                  type="radio"
+                  name="picked"
+                  value={categorie}
+                  required
+                  checked={values.picked === categorie}
+                  onChange={handleChange}
+                />
+                {categorie}
+              </label>
+            ))}
           </div>
           <button type="button" onClick={handleBack}>
             back

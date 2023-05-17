@@ -31,18 +31,13 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
       ...FormState,
       type: values.picked,
     }));
+
     try {
-      const response = await axios.post('/', response.data);
+      const response = await axios.post('/', FormState);
       console.log(response.data);
     } catch (error) {
       console.log(error.message);
     }
-    // try {
-    //   const response = await axios.get('/');
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
 
     console.log('Отправляем запрос на сервер с карточкой:', state);
 
@@ -66,7 +61,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                   name="sex"
                   styled="none"
                   type="radio"
-                  value="Female"
+                  value={(FormState.sex = 'Female')}
                   required
                 />
                 <BsGenderFemale />
@@ -77,10 +72,11 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                   name="sex"
                   styled="none"
                   type="radio"
-                  value="Male"
+                  value={(FormState.sex = 'Male')}
                   required
                 />
                 <BsGenderMale />
+                <div></div>
               </div>
               <label htmlFor="location">Location</label>
               <Field
