@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HeaderStyled } from './Header.styled.js';
+import { HeaderStyled, NavStyled } from './Header.styled.js';
 import { useSelector } from 'react-redux';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
@@ -52,7 +52,7 @@ export default function Header() {
 
   return (
     <HeaderStyled>
-      <nav>
+      <NavStyled>
         <Logo onClick={handleClick} />
         {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
         {isLoggedIn && (
@@ -95,7 +95,7 @@ export default function Header() {
             <AuthNav onClick={handleCloseModal} />
           </>
         )}
-      </nav>
+      </NavStyled>
     </HeaderStyled>
   );
 }
