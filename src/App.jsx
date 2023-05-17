@@ -6,13 +6,19 @@ import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage.jsx'));
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage/RegisterPage.jsx')
+);
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.jsx'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage.jsx'));
-const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage.jsx'));
+const OurFriendsPage = lazy(() =>
+  import('./pages/OurFriendsPage/OurFriendsPage.jsx')
+);
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage.jsx'));
-const UserPage = lazy(() => import('./components/UserPage/UserPage.jsx'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage.jsx'));
+const UserPage = lazy(() => import('./pages/UserPage/UserPage.jsx'));
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage/NotFoundPage.jsx')
+);
 
 // import HomePage from './pages/HomePage/HomePage.jsx';
 // import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
