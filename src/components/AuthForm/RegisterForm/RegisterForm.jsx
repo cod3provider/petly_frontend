@@ -1,9 +1,21 @@
-// import React from 'react';
+/* eslint-disable react/no-children-prop */
+import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../../redux/auth/authOperations';
+import AuthFormButton from '../../Buttons/AuthFormButton/AuthFormButton';
+// import { SectionStyled } from '../../common/Section/Section.styled';
+import {
+  AuthForm,
+  ButtonIcon,
+  InputStyle,
+  InputWrapper,
+  LinkWraper,
+  StyledEyeIcon,
+  StyledEyeIconOff,
+} from './RegisterForm.style';
 // import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import { toast } from 'react-toastify';
 
@@ -36,91 +48,107 @@ function RegisterForm() {
       .oneOf([Yup.ref('password'), null], 'Passwords must match!'),
   });
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   return (
     <>
-      <div>
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-            confirmPassword: '',
-          }}
-          validationSchema={regValidationSchema}
-          onSubmit={(values, { resetForm }) => {
-            const newUser = {
-              email: values.email,
-              password: values.password,
-            };
-            dispatch(register(newUser));
-            resetForm();
-            console.log(newUser);
-          }}
-        >
-          {({
-            values,
-            // errors,
-            // touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="email">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
-                {/* {errors.email && touched.email && errors.email} */}
-                <ErrorMessage component="div" name="email" />
-              </label>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+          confirmPassword: '',
+        }}
+        validationSchema={regValidationSchema}
+        onSubmit={(values, { resetForm }) => {
+          const newUser = {
+            email: values.email,
+            password: values.password,
+          };
+          dispatch(register(newUser));
+          resetForm();
+          console.log(newUser);
+        }}
+      >
+        {({
+          values,
+          // errors,
+          // touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <AuthForm onSubmit={handleSubmit}>
+            <label htmlFor="email">
+              <InputStyle
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              {/* {errors.email && touched.email && errors.email} */}
+              <ErrorMessage component="div" name="email" />
+            </label>
 
-              <label htmlFor="password">
-                <input
-                  type="password"
+            <label htmlFor="password">
+              <InputWrapper>
+                <InputStyle
+                  type={passwordVisible ? 'text' : 'password'}
                   name="password"
                   placeholder="Password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
                 />
-                {/* {errors.password && touched.password && errors.password} */}
-                <ErrorMessage component="div" name="password" />
-              </label>
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                  {passwordVisible ? <StyledEyeIconOff /> : <StyledEyeIcon />}
+                </ButtonIcon>
+              </InputWrapper>
+              {/* {errors.password && touched.password && errors.password} */}
+              <ErrorMessage component="div" name="password" />
+            </label>
 
-              <label htmlFor="passwordRepeat">
-                <input
-                  type="password"
+            <label htmlFor="passwordRepeat">
+              <InputWrapper>
+                <InputStyle
+                  type={passwordVisible ? 'text' : 'password'}
                   name="confirmPassword"
                   placeholder="Confirm password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.confirmPassword}
                 />
-                {/* {errors.password && touched.password && errors.password} */}
-                <ErrorMessage component="div" name="confirmPassword" />
-              </label>
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                  {passwordVisible ? <StyledEyeIconOff /> : <StyledEyeIcon />}
+                </ButtonIcon>
+              </InputWrapper>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
+              {/* {errors.password && touched.password && errors.password} */}
+              <ErrorMessage component="div" name="confirmPassword" />
+            </label>
+
+            <AuthFormButton
+              type="submit"
+              disabled={isSubmitting}
+              children="Registration"
               // onClick={openModal}
-              >
-                Registration
-              </button>
-              {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
-              <div>
-                <p>Already have an account?</p>
-                {/* <Link to="/login">Login</Link> */}
-              </div>
-            </form>
-          )}
-        </Formik>
-      </div>
+            ></AuthFormButton>
+            {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
+            <LinkWraper>
+              <p>Already have an account?</p>
+              <Link to="/login">Login</Link>
+            </LinkWraper>
+          </AuthForm>
+        )}
+      </Formik>
     </>
   );
 }
