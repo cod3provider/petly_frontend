@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const HeaderStyled = styled.header`
   position: relative;
-  z-index: 2;
   display: flex;
   align-items: center;
+  padding: 20px;
   width: 100%;
+  z-index: 2;
 `;
 
 export const DivStyled = styled.div`
@@ -36,3 +37,10 @@ export const CloseModal = styled.img`
   height: 24px;
   cursor: pointer;
 `;
+
+export const NavStyled = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
