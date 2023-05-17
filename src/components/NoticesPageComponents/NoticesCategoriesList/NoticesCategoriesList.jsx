@@ -1,22 +1,20 @@
 import PropTypes from 'prop-types';
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
+import {NoticesCategoriesListList} from "./NoticesCategoriesList.styled"
 
-const NoticesCategoriesList = ({ items }) => {
-    return <ul>
+const NoticesCategoriesList = ({ items, openModal }) => {
+    return <NoticesCategoriesListList>
         {items.map(item => (<NoticeCategoryItem
             key={item.id}
-            imageUrl={item.imageUrl}
-            category={item.category}
-            location={item.location}
-            age={item.age}
-            sex={item.sex}
-            title={item.notice}
+            data={item}
+            openModal={openModal}
         />))}
-    </ul>;
+    </NoticesCategoriesListList>;
 }
 
 export default NoticesCategoriesList;
 
 NoticesCategoriesList.propTypes = {
     items: PropTypes.array.isRequired,
+    openModal: PropTypes.func.isRequired,
 }

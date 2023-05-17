@@ -3,16 +3,18 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import GlobalStyles from './utils/globalStyles.js';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
 
-function App() {
-  return (
-    <>
-      <GlobalStyles />
-      <HomePage />
-      <RegisterPage />
-      <LoginPage />
-    </>
-
+// function App() {
+//   return (
+//     <>
+//       <GlobalStyles />
+//       <HomePage />
+//       <RegisterPage />
+//       <LoginPage />
+//     </>
+//   )
+// }
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -25,9 +27,9 @@ import AddPet from './components/AddPet/AddPet';
 import { ROUTES } from './utils/keys.js';
 
 // Удалять по мере подключения компонентов
-const SharedLayout = () => {
-  return <></>;
-};
+// const SharedLayout = () => {
+//   return <></>;
+// };
 
 const Spinner = () => {
   return <></>;
@@ -37,9 +39,9 @@ const NewsPage = () => {
   return <></>;
 };
 
-const NoticesPage = () => {
-  return <></>;
-};
+// const NoticesPage = () => {
+//   return <></>;
+// };
 
 const FriendsPage = () => {
   return <></>;
@@ -60,7 +62,7 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
+        {/* //<Route path="/" element={<SharedLayout />}> */}
           <Route index element={<HomePage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
@@ -70,7 +72,7 @@ function App() {
           <Route path={ROUTES.USER} element={<UserPage />} />
           <Route path={ROUTES.ADDPET} element={<AddPet />} />
           <Route path="*" element={<NotFoundPage />} />
-        </Route>
+        {/* //</Route> */}
       </Routes>
     </Suspense>
   );

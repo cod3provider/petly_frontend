@@ -1,17 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { NoticesCategoriesNavLink, NoticesCategoriesNavUl } from "./NoticesCategoriesNav.styled";
 
 const NoticesCategoriesNav = () => {
-    return <ul>
+    return <NoticesCategoriesNavUl>
         <li>
-            <NavLink to="/notices/sell">sell</NavLink>
+            <NoticesCategoriesNavLink to="/notices/sell">sell</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NavLink to="/notices/lost-found">lost/found</NavLink>
+            <NoticesCategoriesNavLink to="/notices/lost-found">lost/found</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NavLink to="/notices/for-free">in good hands</NavLink>
+            <NoticesCategoriesNavLink to="/notices/for-free">in good hands</NoticesCategoriesNavLink>
         </li>
-    </ul>;
+        <li>
+            <NoticesCategoriesNavLink to="/notices/favorite">favorite ads</NoticesCategoriesNavLink>
+        </li>
+        <li>
+            <NoticesCategoriesNavLink to="/notices/own">my ads</NoticesCategoriesNavLink>
+        </li>
+    </NoticesCategoriesNavUl>;
 }
 
 export default NoticesCategoriesNav;

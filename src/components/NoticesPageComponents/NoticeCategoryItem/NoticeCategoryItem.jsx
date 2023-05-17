@@ -1,36 +1,58 @@
 import PropTypes from 'prop-types';
+import {
+    NoticeCategoryItemItem,
+    NoticeCategoryItemPhotoContainer,
+    NoticeCategoryItemCategoryContainer,
+    NoticeCategoryItemFavoriteButton,
+    NoticeCategoryItemInfoList,
+    NoticeCategoryItemInfoItem,
+    NoticeCategoryItemInfoText,
+    NoticeCategoryItemCategoryText,
+    NoticeCategoryItemTitleContainer,
+    NoticeCategoryItemTitle,
+    NoticeCategoryItemMoreButton,
+    NoticeCategoryItemLocationIcon,
+    NoticeCategoryItemClockIcon,
+    NoticeCategoryItemFemaleIcon,
+    NoticeCategoryItemMaleIcon,
+    NoticeCategoryItemHeartIcon
+} from "./NoticeCategoryItem.styled"
 
-const NoticeCategoryItem = ({imageUrl, category, location, age, sex, title}) => {
-    return <li>
-        <div>
-            <div>
-                <img src={imageUrl} alt="pet photo" />
-                <p>{category}</p>
-                <ul>
-                    <li><button type='button'></button></li>
-                    <li><button type='button'></button></li>
-                </ul>
-                <ul>
-                    <li>{location}</li>
-                    <li>{age}</li>
-                    <li>{sex}</li>
-                </ul>
-            </div>
-            <div>
-                <h2>{title}</h2>
-                <button type='button'>Learn more</button>
-            </div>
-        </div>
-    </li>;
+const NoticeCategoryItem = ({ data, openModal }) => {
+    return <NoticeCategoryItemItem>
+        <NoticeCategoryItemPhotoContainer>
+            <img src={data.imageUrl} alt="pet photo" />
+            <NoticeCategoryItemCategoryContainer>
+                <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
+            </NoticeCategoryItemCategoryContainer>
+            <NoticeCategoryItemFavoriteButton type='button'>
+                <NoticeCategoryItemHeartIcon></NoticeCategoryItemHeartIcon>
+            </NoticeCategoryItemFavoriteButton>
+            <NoticeCategoryItemInfoList>
+                <NoticeCategoryItemInfoItem>
+                    <NoticeCategoryItemLocationIcon></NoticeCategoryItemLocationIcon>
+                    <NoticeCategoryItemInfoText>{data.location}</NoticeCategoryItemInfoText>
+                </NoticeCategoryItemInfoItem>
+                <NoticeCategoryItemInfoItem>
+                    <NoticeCategoryItemClockIcon></NoticeCategoryItemClockIcon>
+                    <NoticeCategoryItemInfoText>{data.age}</NoticeCategoryItemInfoText>
+                </NoticeCategoryItemInfoItem>
+                <NoticeCategoryItemInfoItem>
+                    {data.sex==="female"?<NoticeCategoryItemFemaleIcon/>:<NoticeCategoryItemMaleIcon/>}
+                    <NoticeCategoryItemInfoText>{data.sex}</NoticeCategoryItemInfoText>
+                </NoticeCategoryItemInfoItem>
+            </NoticeCategoryItemInfoList>
+        </NoticeCategoryItemPhotoContainer>
+        <NoticeCategoryItemTitleContainer>
+            <NoticeCategoryItemTitle>{data.title}</NoticeCategoryItemTitle>
+            <NoticeCategoryItemMoreButton type='button' onClick={() => openModal(data)}>Learn more</NoticeCategoryItemMoreButton>
+        </NoticeCategoryItemTitleContainer>
+    </NoticeCategoryItemItem>;
 }
 
 NoticeCategoryItem.propTypes = {
-    imageUrl: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
-    sex: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired,
+    openModal: PropTypes.func.isRequired,
 }
 
 export default NoticeCategoryItem;

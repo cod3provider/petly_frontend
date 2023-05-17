@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NoticesSearchInput,NoticesSearchForm, NoticesSearchButton, NoticesSearchIcon, NoticesSearchClearIcon } from "./NoticesSearch.styled.js"
 
 const NoticesSearch = ({onSubmit}) => {
     const [query, setQuery] = useState('');
@@ -17,11 +18,15 @@ const NoticesSearch = ({onSubmit}) => {
         setQuery('');
     }
 
-    return <form onSubmit={handleSubmit}>
-        <input type="text" name="query" value={query} onChange={handleChange} placeholder='Search' />
-        <button type='button' onClick={reset}></button>
-        <button type='submit'></button>
-    </form>;
+    return <NoticesSearchForm  onSubmit={handleSubmit}>
+        <NoticesSearchInput type="text" name="query" value={query} onChange={handleChange} placeholder='Search' />
+        {!query || <NoticesSearchButton type='button' onClick={reset}>
+            <NoticesSearchClearIcon></NoticesSearchClearIcon>
+        </NoticesSearchButton>}
+        <NoticesSearchButton type='submit'>
+            <NoticesSearchIcon></NoticesSearchIcon>
+        </NoticesSearchButton>
+    </NoticesSearchForm>;
 }
 
 export default NoticesSearch;
