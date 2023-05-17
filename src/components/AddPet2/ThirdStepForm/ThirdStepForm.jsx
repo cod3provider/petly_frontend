@@ -33,7 +33,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     }));
 
     try {
-      const response = await axios.post('/', FormState);
+      const response = await axios.post('/', response.data);
       console.log(response.data);
     } catch (error) {
       console.log(error.message);
