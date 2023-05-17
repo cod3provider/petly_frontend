@@ -16,7 +16,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import { lazy, Suspense } from 'react';
 import OurFriendsPage from './pages/OurFriendsPage/OurFriendsPage.jsx';
 import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
-import UserPage from './components/UserPage/UserPage.jsx';
+import UserPage from './pages/UserPage/UserPage.jsx';
 import NewsPage from './pages/NewsPage/NewsPage.jsx';
 
 // import Spinner from './pages/Spinner/Spinner';
