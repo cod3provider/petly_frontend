@@ -1,42 +1,29 @@
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import HomePage from './pages/HomePage/HomePage.jsx';
-import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
+import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
+import OurFriendsPage from './pages/OurFriendsPage/OurFriendsPage.jsx';
+import NewsPage from './pages/NewsPage/NewsPage.jsx';
+import UserPage from './components/UserPage/UserPage.jsx';
 
-// import AddPet from './components/AddPet/AddPet.jsx';
-
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
+
 // import AddPet from './components/AddPet/AddPet.jsx';
 
 import { ROUTES } from './utils/keys.js';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
-import { lazy, Suspense } from 'react';
-import OurFriendsPage from './pages/OurFriendsPage/OurFriendsPage.jsx';
-import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
-import UserPage from './components/UserPage/UserPage.jsx';
-import NewsPage from './pages/NewsPage/NewsPage.jsx';
+
+import './App.css';
 
 // import Spinner from './pages/Spinner/Spinner';
-
-// import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-
-//! import AddPet from './components/AddPet/AddPet';
-// import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const Spinner = () => {
   return <></>;
 };
-
-const FriendsPage = () => {
-  return <></>;
-};
-
-// const NotFoundPage = () => {
-//   return <></>;
-// };
 
 // ===================================
 
@@ -67,7 +54,7 @@ function App() {
             }
           />
           <Route path="*" element={<NotFoundPage />} />
-        {/* //</Route> */}
+         </Route>
       </Routes>
     </Suspense>
   );
