@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import News from '../../components/News/News.jsx';
 
-export default function Login() {
+export default function NewsPage() {
   return (
     <HelmetProvider>
       <div>

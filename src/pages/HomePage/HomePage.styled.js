@@ -1,15 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { theme } from "../../utils/theme.jsx";
+import { theme } from '../../utils/theme.jsx';
 
-export const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100vh;
-  object-fit: contain;
-`;
+// export const BackgroundImage = styled.img`
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 100%;
+//   height: 100vh;
+//   object-fit: contain;
+// `;
 
 export const MainTitle = styled.h1`
   position: absolute;
@@ -22,7 +22,7 @@ export const MainTitle = styled.h1`
   line-height: 1.38;
   color: ${theme.baseColors.titleColor};
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   @media (min-width: ${theme.breakpoints.tablet.width}) {
     padding-top: 80px;
@@ -42,16 +42,16 @@ export const MainTitle = styled.h1`
 
 export const Wrap = styled.div`
   position: relative;
+  margin: 91px auto 0;
   width: 320px;
   height: 560px;
-  margin: 0 auto;
-
   @media (${theme.breakpoints.tablet.media}) {
     width: 768px;
     height: 1120px;
   }
 
   @media ${theme.breakpoints.desktop.media} {
+    padding: 0 15px;
     width: 1280px;
     height: 700px;
   }
@@ -61,11 +61,12 @@ export const HeroImage = styled.img`
   position: absolute;
   width: 550px;
   top: 168px;
-  left: -95px;
+  left: -115px;
 
   @media (${theme.breakpoints.tablet.media}) {
     width: 900px;
-    top: 305px; 
+    top: 305px;
+    left: -65px;
   }
 
   @media (${theme.breakpoints.desktop.media}) {
