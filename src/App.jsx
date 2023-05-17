@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+
+import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
-import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
 import OurFriendsPage from './pages/OurFriendsPage/OurFriendsPage.jsx';
 import NewsPage from './pages/NewsPage/NewsPage.jsx';
