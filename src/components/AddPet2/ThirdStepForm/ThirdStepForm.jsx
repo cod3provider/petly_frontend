@@ -25,21 +25,20 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = async () => {
     setState(prev => ({
       ...prev,
       ...FormState,
-      type: values.picked,
+      // type: values.picked,
     }));
-
-    try {
-      const response = await axios.post('/', FormState);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-
     console.log('Отправляем запрос на сервер с карточкой:', state);
+
+    // try {
+    //   const response = await axios.post('/', FormState);
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
 
     setStep('first');
   };
