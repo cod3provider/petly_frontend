@@ -18,7 +18,7 @@ import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 const AddPet2 = () => {
   const [state, setState] = useState({ type: 'your pet' });
   const [step, setStep] = useState('first');
-
+  console.log(state);
   let text = '';
 
   switch (state.type) {
