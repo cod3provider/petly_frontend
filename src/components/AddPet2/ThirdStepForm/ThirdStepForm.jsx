@@ -18,9 +18,9 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   axios.defaults.baseURL =
     'https://your-pet-backend-jfrs.onrender.com/api-docs';
 
-  const handleBack = () => {
-    setStep('second');
-  };
+  // const handleBack = () => {
+  //   setStep('second');
+  // };
 
   const handleChange = e => {
     console.log(e.target.name);
@@ -38,6 +38,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   };
 
   const handleSubmit = async () => {
+
     try {
       const formData = new FormData();
       formData.append('location', formState.location);
@@ -76,7 +77,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                 id="sex"
                 name="sex"
                 type="radio"
-                value={(formState.sex = 'Female')}
+                value={(formState.sex = 'Female')}    
                 required
               />
               <BsGenderFemale />

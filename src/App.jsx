@@ -29,15 +29,9 @@ const NotFoundPage = lazy(() =>
 // import UserPage from './components/UserPage/UserPage.jsx';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 
-// import AddPet from './components/AddPet/AddPet.jsx';
+import AddPet from './components/AddPet2/AddPet2.jsx';
 
 import { ROUTES } from './utils/keys.js';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
-import { lazy, Suspense } from 'react';
-import OurFriendsPage from './pages/OurFriendsPage/OurFriendsPage.jsx';
-import NoticesPage from './pages/NoticesPage/NoticesPage.jsx';
-import UserPage from './pages/UserPage/UserPage.jsx';
-import NewsPage from './pages/NewsPage/NewsPage.jsx';
 
 // import Spinner from './pages/Spinner/Spinner';
 
@@ -68,7 +62,7 @@ function App() {
           <Route path={ROUTES.NEWS} element={<NewsPage />} />
           <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
           <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
-          {/*// <Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
+          <Route path={ROUTES.ADDPET} element={<AddPet />} />
           <Route
             path={ROUTES.USER}
             element={
