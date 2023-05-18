@@ -18,4 +18,6 @@ const BACKEND_ENDPOINTS = {
   LOGOUT: 'users/logout',
 };
 
+export const BASE_URL = 'https://your-pet-backend-jfrs.onrender.com';
+
 export { ROUTES, BACKEND_ENDPOINTS };
