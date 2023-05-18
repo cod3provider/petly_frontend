@@ -13,6 +13,8 @@ export const StyledEyeIconOff = styled(FiEyeOff)`
 `;
 
 export const AuthWraper = styled.div`
+  max-width: 608px;
+  margin: 0 auto;
   background-color: lightgrey;
   border: 2px;
   border-color: black;
@@ -24,7 +26,7 @@ export const AuthWraper = styled.div`
   }
 `;
 
-export const TitleH1 = styled.h1`
+export const TitleH1 = styled.h2`
   font-weight: 400;
   font-size: ${theme.fontSizes.l};
 
@@ -63,7 +65,8 @@ export const InputStyle = styled('input')`
   margin-top: 24px;
   padding: 10px 16px;
   border-radius: 40px;
-  border-color: ${theme.baseColors.accentColor};
+  border-color:  ${props =>
+    props.error ? 'red' : props.success ? '#54ADFF' : '#54ADFF'};
   background-color: ${theme.baseColors.filterActiveTextColor};
   font-size: ${theme.fontSizes.s};
   cursor: pointer;
@@ -74,6 +77,7 @@ export const InputStyle = styled('input')`
 
   @media screen and (min-width: 768px) {
     margin-top: 32px;
+    font-size: ${theme.fontSizes.m};
   }
 `;
 
@@ -83,4 +87,8 @@ export const LinkWraper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: ${theme.fontSizes.xs};
+
+  @media screen and (min-width: 768px) {
+    font-size: ${theme.fontSizes.s};
+  }
 `;
