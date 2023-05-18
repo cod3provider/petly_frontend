@@ -7,8 +7,7 @@ export default function UserPageLogo({ iconSize, userName }) {
   return (
     <div>
       <Link to="/">
-        {/*<h3>User</h3>*/}
-        <h3>{displayName}</h3>
+        <span>{displayName}</span>
         <FaUser color="#FFC107" size={iconSize} />
       </Link>
     </div>

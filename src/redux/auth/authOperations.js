@@ -72,7 +72,7 @@ export const getCurrentUser = createAsyncThunk(
       token.set(value);
     }
     try {
-      const { data } = await axios.get('users/current');
+      const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
       console.log(error.response.data);
