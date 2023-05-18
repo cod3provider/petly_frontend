@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
 const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
-  const [FormState, setFormState] = useState({
+  const [formState, setFormState] = useState({
     location: '',
     price: '',
     comments: '',
@@ -17,9 +17,9 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   axios.defaults.baseURL =
     'https://your-pet-backend-jfrs.onrender.com/api-docs';
 
-  const handleBack = () => {
-    setStep('second');
-  };
+  // const handleBack = () => {
+  //   setStep('second');
+  // };
 
   const handleChange = e => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -28,7 +28,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   const handleSubmit = async () => {
     setState(prev => ({
       ...prev,
-      ...FormState,
+      ...formState,
       // type: values.picked,
     }));
     console.log('Отправляем запрос на сервер с карточкой:', state);
@@ -45,7 +45,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
 
   return (
     <>
-      <Formik initialValues={FormState} onSubmit={handleSubmit}>
+      <Formik initialValues={formState} onSubmit={handleSubmit}>
         <Form>
           {(type === 'sell' ||
             type === 'lost/found' ||
@@ -60,7 +60,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                   name="sex"
                   styled="none"
                   type="radio"
-                  value={(FormState.sex = 'Female')}
+                  value={(formState.sex = 'Female')}
                   required
                 />
                 <BsGenderFemale />
@@ -71,7 +71,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                   name="sex"
                   styled="none"
                   type="radio"
-                  value={(FormState.sex = 'Male')}
+                  value={(formState.sex = 'Male')}
                   required
                 />
                 <BsGenderMale />
@@ -82,7 +82,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                 id="location"
                 name="location"
                 placeholder="Location"
-                value={FormState.location}
+                value={formState.location}
                 onChange={handleChange}
                 required
               />
@@ -95,7 +95,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                 id="price"
                 name="price"
                 placeholder="Price"
-                value={FormState.price}
+                value={formState.price}
                 onChange={handleChange}
                 required
               />
@@ -107,7 +107,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
             id="image"
             type="file"
             name="image"
-            value={FormState.image}
+            value={formState.image}
             onChange={handleChange}
             required
           />
@@ -117,15 +117,15 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
             id="comments"
             name="comments"
             placeholder="Type breed"
-            value={FormState.comments}
+            value={formState.comments}
             onChange={handleChange}
             type="textarea"
             required
           />
-          <button type="button" onClick={handleBack}>
+          {/* <button type="button" onClick={handleBack}>
             back
-          </button>
-          <ButtonPet step={step} />
+          </button> */}
+          <ButtonPet step={step} setStep={setStep} />
         </Form>
       </Formik>
     </>
