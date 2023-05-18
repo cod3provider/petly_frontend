@@ -14,7 +14,7 @@ const ModalNotice = ({details, close}) => {
                 <ModalNoticeCloseIcon></ModalNoticeCloseIcon>
             </ModalNoticeCloseButton>
             <ModalNoticePhotoContainer>
-                <img src={details.largeImageUrl} alt="pet photo" />
+                <img src={details.img} alt="pet photo" />
                 <ModalNoticeCategoryContainer>
                     <ModalNoticeCategoryText>{details.category}</ModalNoticeCategoryText>
                 </ModalNoticeCategoryContainer>

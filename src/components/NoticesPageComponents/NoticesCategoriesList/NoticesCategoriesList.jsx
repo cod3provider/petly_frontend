@@ -5,7 +5,7 @@ import {NoticesCategoriesListList} from "./NoticesCategoriesList.styled"
 const NoticesCategoriesList = ({ items, openModal }) => {
     return <NoticesCategoriesListList>
         {items.map(item => (<NoticeCategoryItem
-            key={item.id}
+            key={item._id}
             data={item}
             openModal={openModal}
         />))}

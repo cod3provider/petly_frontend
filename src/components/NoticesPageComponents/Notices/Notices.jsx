@@ -6,17 +6,53 @@ import AddPetButton from "../AddPetButton/AddPetButton";
 import NoticesTitle from "../NoticesTitle/NoticesTitle";
 import ModalNotice from "../ModalNotice/ModalNotice";
 
-import { test } from "./test";
+import { searchNoticesByName, searchNoticesByCategory } from "../../../services/noticesApi";
 
-import { useState } from "react";
+// import { test } from "./test";
+
+import { useState, useEffect } from "react";
 
 const NoticesPage = () => {
-    const searchPets = (query) => {
-        console.log(query);
-    }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalInfo, setModalInfo] = useState(null);
+    const [query, setQuery] = useState('');
+    const [category, setCategory] = useState('sell');
+    const [notices, setNotices] = useState([]);
+
+    const searchNotices = (query) => {
+        setQuery(query);
+    }
+
+    useEffect(() => {
+        const fetchNoticesByName = async () => {
+            try {
+                const data = await searchNoticesByName(query);
+                setNotices(data);
+            }
+            catch (error) {
+                alert(error.message);
+            }
+        }
+        if (query !== '') {
+            fetchNoticesByName();
+        }
+    }, [query]);
+
+    useEffect(() => {
+        const fetchNoticesByCategory = async (category) => {
+            try {
+                const data = await searchNoticesByCategory(category);
+                setNotices(data);
+            }
+            catch (error) {
+                alert(error.message);
+            }
+        }
+            fetchNoticesByCategory();
+    }, [category]);
+
+    
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -30,9 +66,9 @@ const NoticesPage = () => {
 
     return <div>
         <NoticesTitle/>
-        <NoticesSearch onSubmit={searchPets} />
+        <NoticesSearch onSubmit={searchNotices} />
         <NoticesCategoriesNav />
-        <NoticesCategoriesList items={test} openModal={openModal} />
+        <NoticesCategoriesList items={notices} openModal={openModal} />
         {isModalOpen && <ModalNotice close={closeModal} details={modalInfo} />}
             
     </div>;
