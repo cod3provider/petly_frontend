@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import {
   Wrapper,
@@ -18,7 +18,8 @@ import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 const AddPet2 = () => {
   const [state, setState] = useState({ type: 'your pet' });
   const [step, setStep] = useState('first');
-  console.log(state);
+  const isFirstRender = useRef(true);
+
   let text = '';
 
   switch (state.type) {
@@ -37,6 +38,27 @@ const AddPet2 = () => {
     default:
       'Oops, this not a category.';
   }
+  useEffect(() => {
+    const localStoragePet = localStorage.getItem('addPetState');
+    const parsedAddPet = JSON.parse(localStoragePet);
+    const localStoragePetStep = localStorage.getItem('addPetStep');
+    const parsedAddPetStep = JSON.parse(localStoragePetStep);
+
+    if (parsedAddPet && parsedAddPetStep) {
+      setState(parsedAddPet);
+      setStep(parsedAddPetStep);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    localStorage.setItem('addPetState', JSON.stringify(state));
+    localStorage.setItem('addPetStep', JSON.stringify(step));
+  }, [state, step]);
 
   return (
     <Container>
