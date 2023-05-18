@@ -11,9 +11,7 @@ const RegisterPage = lazy(() =>
 );
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.jsx'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage.jsx'));
-const OurFriendsPage = lazy(() =>
-  import('./pages/OurFriendsPage/OurFriendsPage.jsx')
-);
+const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage.jsx'));
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage.jsx'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage.jsx'));
 const NotFoundPage = lazy(() =>
