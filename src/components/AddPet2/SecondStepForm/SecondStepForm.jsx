@@ -13,13 +13,13 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
   // function goBack() {
   //   history.back();
   // }
-  const handleBack = () => {
-    setStep('first');
-    setState(prev => ({
-      ...prev,
-      ...FormState,
-    }));
-  };
+  // const handleBack = () => {
+  //   setStep('first');
+  //   setState(prev => ({
+  //     ...prev,
+  //     ...FormState,
+  //   }));
+  // };
   const handleChange = e => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -83,10 +83,10 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
           required
         />
 
-        <button type="button" onClick={handleBack}>
+        {/* <button type="button" onClick={handleBack}>
           back
-        </button>
-        <ButtonPet step={step} />
+        </button> */}
+        <ButtonPet step={step} setStep={setStep} />
       </Form>
     </Formik>
   );

@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
 
 const FirsStepForm = ({ setStep, setState, step }) => {
-  const handleBack = () => {
-    setState({ type: 'your pet' });
-  };
   const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
   return (
     <Formik
@@ -37,10 +34,8 @@ const FirsStepForm = ({ setStep, setState, step }) => {
               </label>
             ))}
           </div>
-          <button type="button" onClick={handleBack}>
-            back
-          </button>
-          <ButtonPet step={step} />
+
+          <ButtonPet step={step} setStep={setStep} />
         </Form>
       )}
     </Formik>
