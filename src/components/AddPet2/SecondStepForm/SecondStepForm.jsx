@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Formik, Field, Form } from 'formik';
 import { useState } from 'react';
+import * as yup from 'yup';
 import ButtonPet from '../ButtonPet/ButtonPet';
 const SecondStepForm = ({ setStep, setState, type, step }) => {
   const [FormState, setFormState] = useState({
@@ -33,8 +34,36 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
     }));
   };
 
+  const secondStepValidationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Enter the pet's name")
+      // .name('Invalid name format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(16),
+    data: yup
+      .string()
+      .required('Enter a date of birth')
+      .matches(
+        /^\d{2}\.\d{2}\.\d{4}$/,
+        'The date must be in the format DD.MM.YYYY'
+      ),
+    breed: yup
+      .string()
+      .required('Enter the breed of the pet')
+      // .breed('Invalid breed format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(16),
+  });
+
   return (
-    <Formik initialValues={FormState} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={FormState}
+      onSubmit={handleSubmit}
+      validationSchema={secondStepValidationSchema}
+    >
       <Form>
         {(type === 'sell' ||
           type === 'lost/found' ||

@@ -3,6 +3,7 @@ import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import * as yup from 'yup';
 import ButtonPet from '../ButtonPet/ButtonPet';
 
 const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
@@ -58,8 +59,40 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     }
   };
 
+  const thirdStepValidationSchema = yup.object().shape({
+    location: yup
+      .string()
+      .required('Enter a location')
+      // .location('Invalid location format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(168),
+    price: yup
+      .number()
+      .required('Enter the price of the pet')
+      // .price('Price location format')
+      .positive('The price must be greater than 0')
+      .test(value => {
+        if (value !== undefined) {
+          const decimalRegex = /^\d+(\.\d{1,2})?$/;
+          return decimalRegex.test(value.toString());
+        }
+        return true;
+      }),
+    comments: yup
+      .string()
+      // .comments('Invalid comments format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(120),
+  });
+
   return (
-    <Formik initialValues={formState} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={formState}
+      onSubmit={handleSubmit}
+      validationSchema={thirdStepValidationSchema}
+    >
       <Form>
         {(type === 'sell' ||
           type === 'lost/found' ||
@@ -138,7 +171,6 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
           value={formState.comments}
           onChange={handleChange}
           type="textarea"
-          required
         />
 
         <ButtonPet step={step} setStep={setStep} />
