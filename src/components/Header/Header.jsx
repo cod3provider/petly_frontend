@@ -16,21 +16,25 @@ import { getCurrentUser } from '../../redux/auth/authOperations.js';
 export default function Header() {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const isLoggedIn = useSelector(getIsLoggedIn);
   const userName = useSelector(getName);
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getCurrentUser());
+      setIsLoading(true);
+      dispatch(getCurrentUser()).finally(() => {
+        setIsLoading(false);
+      });
     }
   }, [dispatch, isLoggedIn]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setShowModal(false);
-    };
+  const handleResize = () => {
+    setShowModal(false);
+  };
 
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -59,7 +63,7 @@ export default function Header() {
       <NavStyled>
         <Logo onClick={handleClick} />
         {showModal && <TfiClose color="#FFC107" onClick={handleCloseModal} />}
-        {isLoggedIn && (
+        {isLoggedIn && !isLoading && (
           <>
             {isMobile && <UserPageLogo iconSize="40" userName={userName} />}
             {isTablet && <UserPageLogo iconSize="20" userName={userName} />}
