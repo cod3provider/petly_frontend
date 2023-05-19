@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import { Formik, Field, Form } from 'formik';
 import { useState } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
-const SecondStepForm = ({ setStep, setState, type, step }) => {
+const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [FormState, setFormState] = useState({
-    namePet: '',
-    birth: '',
-    breed: '',
-    titlePet: '',
+    namePet: state.namePet,
+    birth: state.birth,
+    breed: state.breed,
+    titlePet: state.titlePet,
   });
 
   // function goBack() {
@@ -99,4 +99,5 @@ SecondStepForm.propTypes = {
   setState: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
+  state: PropTypes.object.isRequired,
 };

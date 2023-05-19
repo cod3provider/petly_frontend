@@ -7,11 +7,11 @@ import ButtonPet from '../ButtonPet/ButtonPet';
 
 const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   const [formState, setFormState] = useState({
-    location: '',
-    price: '',
-    comments: '',
-    image: '',
-    sex: '',
+    location: state.location,
+    price: state.price,
+    comments: state.comments,
+    image: state.image,
+    sex: state.sex,
   });
   const [file, setFile] = useState(null); // Значення file початково встановлено як null
 
@@ -22,14 +22,14 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     console.log(e.target.name);
     if (e.target.name === 'image') {
       const selectedFile = e.target.files[0];
-      console.log(selectedFile);
+      // console.log(selectedFile);
       setFile(URL.createObjectURL(selectedFile));
       setFormState(prev => ({
         ...prev,
         image: selectedFile,
       }));
     } else {
-      setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+      setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
   };
 
@@ -122,6 +122,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
               type="file"
               name="image"
               onChange={handleChange}
+              value={formState.image}
               required
             />
           )}

@@ -16,7 +16,9 @@ import SecondStepForm from './SecondStepForm/SecondStepForm';
 import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 
 const AddPet2 = () => {
-  const [state, setState] = useState({ type: 'your pet' });
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem('addPetState'))
+  );
   const [step, setStep] = useState('first');
   const isFirstRender = useRef(true);
 
@@ -77,7 +79,12 @@ const AddPet2 = () => {
         </StepList>
 
         {step === 'first' && (
-          <FirsStepForm setStep={setStep} setState={setState} step={step} />
+          <FirsStepForm
+            setStep={setStep}
+            setState={setState}
+            step={step}
+            state={state}
+          />
         )}
         {step === 'second' && (
           <SecondStepForm
@@ -85,6 +92,7 @@ const AddPet2 = () => {
             setState={setState}
             type={state.type}
             step={step}
+            state={state}
           />
         )}
         {step === 'third' && (
