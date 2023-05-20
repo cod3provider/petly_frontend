@@ -15,7 +15,7 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     sex: '',
   });
   const [file, setFile] = useState(null); // Значення file початково встановлено як null
-
+  const genders = ['Female', 'Male'];
   axios.defaults.baseURL =
     'https://your-pet-backend-jfrs.onrender.com/api-docs';
 
@@ -66,7 +66,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
       // .location('Invalid location format')
       .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
       .min(2)
-      .max(168),
+      .max(168)
+      .label('Location'),
     price: yup
       .number()
       .required('Enter the price of the pet')
@@ -78,103 +79,109 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
           return decimalRegex.test(value.toString());
         }
         return true;
-      }),
+      })
+      .label('Price'),
     comments: yup
       .string()
       // .comments('Invalid comments format')
       .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
       .min(2)
-      .max(120),
+      .max(120)
+      .label('Comments'),
   });
 
   return (
     <Formik
       initialValues={formState}
-      onSubmit={handleSubmit}
+      onSubmit={values => {
+        setState(prev => ({
+          ...prev,
+          type: values.sex,
+        }));
+        handleSubmit();
+      }}
       validationSchema={thirdStepValidationSchema}
     >
-      <Form>
-        {(type === 'sell' ||
-          type === 'lost/found' ||
-          type === 'in good hands') && (
-          <>
-            <p>The Sex</p>
-            <div id="my-radio-group">
-              <label htmlFor="sex">Female</label>
+      {({ values }) => (
+        <Form>
+          {(type === 'sell' ||
+            type === 'lost/found' ||
+            type === 'in good hands') && (
+            <>
+              <p>The Sex</p>
+              <div id="my-radio-group">
+                {genders.map(gander => (
+                  <label key={gander}>
+                    <input
+                      type="radio"
+                      name="sex"
+                      value={gander}
+                      required
+                      checked={values.sex === gander}
+                      onChange={handleChange}
+                    />
+                    {'Female' === <BsGenderFemale /> &&
+                      'Male' === <BsGenderMale />}
+                    {gander}
+                  </label>
+                ))}
+              </div>
+
+              <label htmlFor="location">Location</label>
               <Field
-                id="sex"
-                name="sex"
-                type="radio"
-                value={(formState.sex = 'Female')}
+                id="location"
+                name="location"
+                placeholder="Location"
+                value={formState.location}
+                onChange={handleChange}
                 required
               />
-              <BsGenderFemale />
-
-              <label htmlFor="sex">Male</label>
-              <Field
-                id="sex"
-                name="sex"
-                type="radio"
-                value={(formState.sex = 'Male')}
-                required
-              />
-              <BsGenderMale />
-            </div>
-
-            <label htmlFor="location">Location</label>
-            <Field
-              id="location"
-              name="location"
-              placeholder="Location"
-              value={formState.location}
-              onChange={handleChange}
-              required
-            />
-          </>
-        )}
-
-        {type === 'sell' && (
-          <>
-            <label htmlFor="price">Price</label>
-            <Field
-              id="price"
-              name="price"
-              placeholder="Price"
-              value={formState.price}
-              onChange={handleChange}
-              required
-            />
-          </>
-        )}
-
-        <div>
-          <label htmlFor="image">Load the pet&#39;s image:</label>
-          {!file && (
-            <Field
-              id="image"
-              type="file"
-              name="image"
-              onChange={handleChange}
-              required
-            />
+            </>
           )}
-          {file && <img src={file} alt="Preview image" />}
 
-          {/* Показати попередній перегляд зображення */}
-        </div>
+          {type === 'sell' && (
+            <>
+              <label htmlFor="price">Price</label>
+              <Field
+                id="price"
+                name="price"
+                placeholder="Price"
+                value={formState.price}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
 
-        <label htmlFor="Comments">Comments</label>
-        <Field
-          id="comments"
-          name="comments"
-          placeholder="Type breed"
-          value={formState.comments}
-          onChange={handleChange}
-          type="textarea"
-        />
+          <div>
+            <label htmlFor="image">Load the pet&#39;s image:</label>
+            {!file && (
+              <Field
+                id="image"
+                type="file"
+                name="image"
+                onChange={handleChange}
+                required
+              />
+            )}
+            {file && <img src={file} alt="Preview image" />}
 
-        <ButtonPet step={step} setStep={setStep} />
-      </Form>
+            {/* Показати попередній перегляд зображення */}
+          </div>
+
+          <label htmlFor="Comments">Comments</label>
+          <Field
+            id="comments"
+            name="comments"
+            placeholder="Type breed"
+            value={formState.comments}
+            onChange={handleChange}
+            type="textarea"
+          />
+
+          <ButtonPet step={step} setStep={setStep} />
+        </Form>
+      )}
     </Formik>
   );
 };

@@ -77,7 +77,12 @@ const AddPet2 = () => {
         </StepList>
 
         {step === 'first' && (
-          <FirsStepForm setStep={setStep} setState={setState} step={step} />
+          <FirsStepForm
+            setStep={setStep}
+            setState={setState}
+            step={step}
+            state={state}
+          />
         )}
         {step === 'second' && (
           <SecondStepForm
@@ -85,6 +90,7 @@ const AddPet2 = () => {
             setState={setState}
             type={state.type}
             step={step}
+            state={state}
           />
         )}
         {step === 'third' && (

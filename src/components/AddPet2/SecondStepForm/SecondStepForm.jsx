@@ -38,13 +38,14 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
     name: yup
       .string()
       .required("Enter the pet's name")
-      // .name('Invalid name format')
+      .label('Name')
       .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
       .min(2)
       .max(16),
     data: yup
       .string()
       .required('Enter a date of birth')
+      .label('Data')
       .matches(
         /^\d{2}\.\d{2}\.\d{4}$/,
         'The date must be in the format DD.MM.YYYY'
@@ -52,7 +53,7 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
     breed: yup
       .string()
       .required('Enter the breed of the pet')
-      // .breed('Invalid breed format')
+      .label('Breed')
       .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
       .min(2)
       .max(16),
