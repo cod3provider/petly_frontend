@@ -1,4 +1,6 @@
 // import React, { useState } from 'react';
+import { theme } from '../../utils/theme';
+
 import {
   UserTitle,
   PetsWrapper,
@@ -7,20 +9,40 @@ import {
   UserPetWrap,
   PetCardText,
   PetText,
+  DeletePet,
 } from './UserProfile.styled';
+
+import { AiOutlinePlus, RiDeleteBin6Line } from 'react-icons/all';
 
 const UserPets = () => {
   return (
     <div>
       <PetsWrapper>
         <UserTitle>My Pets:</UserTitle>
-        <AddMyPetBtn>Add Pet +</AddMyPetBtn>
+        <AddMyPetBtn type="button">
+          Add Pet{' '}
+          <AiOutlinePlus
+            style={{
+              marginLeft: '8px',
+            }}
+            size="15px"
+            color={theme.baseColors.buttonTextColor}
+          />
+        </AddMyPetBtn>
       </PetsWrapper>
 
       <UserPetWrap>
         <PetImg></PetImg>
         <PetText>
-          <PetCardText>Name: </PetCardText>Jack
+          <PetCardText>Name: </PetCardText>
+          Jack
+          <DeletePet>
+            <RiDeleteBin6Line
+              style={{ outline: 'none' }}
+              size="20px"
+              color={theme.baseColors.accentButtonColor}
+            />
+          </DeletePet>
         </PetText>
         <PetText>
           <PetCardText>Date of birth: </PetCardText>22.04.2018
