@@ -2,13 +2,12 @@ import { FaUser } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function UserPageLogo({ iconSize }) {
-  // const displayName = userName || 'User';
+export default function UserPageLogo({ iconSize, userName }) {
+  const displayName = userName || 'User';
   return (
     <div>
       <Link to="/">
-        <h3>User</h3>
-        {/*<h3>{displayName}</h3>*/}
+        <span>{displayName}</span>
         <FaUser color="#FFC107" size={iconSize} />
       </Link>
     </div>
@@ -16,5 +15,6 @@ export default function UserPageLogo({ iconSize }) {
 }
 
 UserPageLogo.propTypes = {
+  userName: PropTypes.string,
   iconSize: PropTypes.string,
 };

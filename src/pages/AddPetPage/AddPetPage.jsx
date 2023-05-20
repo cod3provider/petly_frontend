@@ -1,9 +1,9 @@
-import AddPet from '../../components/AddPet/AddPet';
+import AddPet2 from '../../components/AddPet2/AddPet2';
 
 const AddPetPage = () => {
   return (
     <>
-      <AddPet />
+      <AddPet2 />
     </>
   );
 };

@@ -6,13 +6,17 @@ import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage.jsx'));
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage/RegisterPage.jsx')
+);
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.jsx'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage.jsx'));
 const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage.jsx'));
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage.jsx'));
-const UserPage = lazy(() => import('./components/UserPage/UserPage.jsx'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage.jsx'));
+const UserPage = lazy(() => import('./pages/UserPage/UserPage.jsx'));
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage/NotFoundPage.jsx')
+);
 
 // import HomePage from './pages/HomePage/HomePage.jsx';
 // import RegisterPage from './pages/RegisterPage/RegisterPage.jsx';
@@ -23,9 +27,11 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage.jsx'))
 // import UserPage from './components/UserPage/UserPage.jsx';
 // import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 
-// import AddPet from './components/AddPet/AddPet.jsx';
+import AddPet from './components/AddPet2/AddPet2.jsx';
 
 import { ROUTES } from './utils/keys.js';
+
+// import Spinner from './pages/Spinner/Spinner';
 
 import './App.css';
 
@@ -54,7 +60,7 @@ function App() {
           <Route path={ROUTES.NEWS} element={<NewsPage />} />
           <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
           <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
-          {/*// <Route path={ROUTES.ADDPET} element={<AddPet />} />*/}
+          <Route path={ROUTES.ADDPET} element={<AddPet />} />
           <Route
             path={ROUTES.USER}
             element={

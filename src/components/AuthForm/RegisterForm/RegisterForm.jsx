@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../../redux/auth/authOperations';
 import AuthFormButton from '../../Buttons/AuthFormButton/AuthFormButton';
-// import { SectionStyled } from '../../common/Section/Section.styled';
 import {
   AuthForm,
   ButtonIcon,
@@ -21,6 +20,33 @@ import {
 
 function RegisterForm() {
   const dispatch = useDispatch();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordSecure, setIsPasswordSecure] = useState(false);
+  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
+  const [pass, setPass] = useState('');
+
+  const handleEmailChange = event => {
+    const { value } = event.target;
+    const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+      value
+    );
+    setIsEmailValid(isValidEmail);
+  };
+
+  const handlePasswordChange = event => {
+    const { value } = event.target;
+    const isValidPassword =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/.test(value);
+    setIsPasswordSecure(isValidPassword);
+    setPass(value);
+  };
+
+  const handleConfirmPasswordChange = event => {
+    const { value } = event.target;
+    setIsConfirmPassword(value === pass);
+  };
+
   //  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const openModal = () => {
@@ -48,8 +74,6 @@ function RegisterForm() {
       .oneOf([Yup.ref('password'), null], 'Passwords must match!'),
   });
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
   return (
     <>
       <Formik
@@ -71,8 +95,8 @@ function RegisterForm() {
       >
         {({
           values,
-          // errors,
-          // touched,
+          errors,
+          touched,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -84,12 +108,21 @@ function RegisterForm() {
                 type="email"
                 name="email"
                 placeholder="Email"
-                onChange={handleChange}
+                onChange={event => {
+                  handleChange(event);
+                  handleEmailChange(event);
+                }}
                 onBlur={handleBlur}
                 value={values.email}
+                error={touched.email && errors.email}
               />
-              {/* {errors.email && touched.email && errors.email} */}
-              <ErrorMessage component="div" name="email" />
+              {touched.email && errors.email ? (
+                <ErrorMessage name="email" />
+              ) : isEmailValid ? (
+                'Email is valid'
+              ) : (
+                ' '
+              )}
             </label>
 
             <label htmlFor="password">
@@ -98,9 +131,13 @@ function RegisterForm() {
                   type={passwordVisible ? 'text' : 'password'}
                   name="password"
                   placeholder="Password"
-                  onChange={handleChange}
+                  onChange={event => {
+                    handleChange(event);
+                    handlePasswordChange(event);
+                  }}
                   onBlur={handleBlur}
                   value={values.password}
+                  error={touched.password && errors.password}
                 />
                 <ButtonIcon
                   type="button"
@@ -109,8 +146,13 @@ function RegisterForm() {
                   {passwordVisible ? <StyledEyeIconOff /> : <StyledEyeIcon />}
                 </ButtonIcon>
               </InputWrapper>
-              {/* {errors.password && touched.password && errors.password} */}
-              <ErrorMessage component="div" name="password" />
+              {touched.password && errors.password ? (
+                <ErrorMessage name="password" />
+              ) : isPasswordSecure ? (
+                'Password is secure'
+              ) : (
+                ' '
+              )}
             </label>
 
             <label htmlFor="passwordRepeat">
@@ -119,9 +161,13 @@ function RegisterForm() {
                   type={passwordVisible ? 'text' : 'password'}
                   name="confirmPassword"
                   placeholder="Confirm password"
-                  onChange={handleChange}
+                  onChange={event => {
+                    handleChange(event);
+                    handleConfirmPasswordChange(event);
+                  }}
                   onBlur={handleBlur}
                   value={values.confirmPassword}
+                  error={touched.confirmPassword && errors.confirmPassword}
                 />
                 <ButtonIcon
                   type="button"
@@ -130,9 +176,13 @@ function RegisterForm() {
                   {passwordVisible ? <StyledEyeIconOff /> : <StyledEyeIcon />}
                 </ButtonIcon>
               </InputWrapper>
-
-              {/* {errors.password && touched.password && errors.password} */}
-              <ErrorMessage component="div" name="confirmPassword" />
+              {touched.confirmPassword && errors.confirmPassword ? (
+                <ErrorMessage name="confirmPassword" />
+              ) : isConfirmPassword ? (
+                'Passwords match'
+              ) : (
+                ' '
+              )}
             </label>
 
             <AuthFormButton
