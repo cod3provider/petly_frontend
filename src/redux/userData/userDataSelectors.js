@@ -1,4 +1,4 @@
-export const getUserData = state => state.user.data;
+export const getUserData = state => state.user;
 
 export const getIsLoading = state => state.user.isLoading;
 

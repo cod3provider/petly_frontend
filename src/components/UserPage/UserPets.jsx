@@ -11,6 +11,7 @@ import {
   PetText,
   DeletePet,
 } from './UserProfile.styled';
+// import AddPetButton from '../NoticesPageComponents/AddPetButton/AddPetButton';
 
 import { AiOutlinePlus, RiDeleteBin6Line } from 'react-icons/all';
 
