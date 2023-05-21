@@ -15,7 +15,7 @@ import './styles.css';
  * @param {selectedDay} state selected day state
  * @param {setSelectedDay} setState day selection function
  */
-const DatePicker = ({ setSelectedDay, selectedDay }) => {
+const DatePicker = ({ setSelectedDay }) => {
   const [Day, setDay] = useState();
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const DatePicker = ({ setSelectedDay, selectedDay }) => {
     setSelectedDay(format(Day, 'yyyy-MM-dd'));
   }, [Day, setSelectedDay]);
 
-  const footer = selectedDay ? (
-    <p>Selected {format(selectedDay, 'PPP')}.</p>
+  const footer = Day ? (
+    <p>Selected {format(Day, 'PPP')}.</p>
   ) : (
     <p>Please pick a day.</p>
   );

@@ -4,8 +4,16 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
+import { useNavigate } from 'react-router-dom';
 
-const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
+const ThirdStepForm = ({
+  setStep,
+  state,
+  setState,
+  type,
+  step,
+  backLinkHref,
+}) => {
   const [formState, setFormState] = useState({
     location: state.location,
     price: state.price,
@@ -13,17 +21,16 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     image: state.image,
     sex: state.sex,
   });
-  const [file, setFile] = useState(null); // Значення file початково встановлено як null
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
   const genders = ['female', 'male'];
 
   axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com';
 
   const handleChange = e => {
-    console.log(e.target.value);
     if (e.target.name === 'image') {
       const selectedFile = e.target.files[0];
-      // console.log(selectedFile);
       setFile(URL.createObjectURL(selectedFile));
       setFormState(prev => ({
         ...prev,
@@ -32,32 +39,34 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
     } else {
       setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
       setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
-      console.log(formState);
     }
   };
 
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
-      formData.append('category', state.type);
-      formData.append('title', state.titlePet);
-      formData.append('name', state.namePet);
-      formData.append('birthday', state.birth);
-      formData.append('breed', state.breed);
-      formData.append('location', formState.location);
-      formData.append('price', formState.price);
-      formData.append('comment', formState.comments);
-      formData.append('noticeImage', formState.image);
-      formData.append('sex', formState.sex);
 
       let postLine;
 
       if (state.type === 'your pet') {
         postLine = '/pets';
+        formData.append('name', state.namePet);
         formData.append('comments', formState.comments);
+        formData.append('birthday', state.birth);
+        formData.append('breed', state.breed);
+        formData.append('petsImage', formState.image);
       } else {
         postLine = '/notices';
         formData.append('comment', formState.comments);
+        formData.append('category', state.type);
+        formData.append('title', state.titlePet);
+        formData.append('name', state.namePet);
+        formData.append('birthday', state.birth);
+        formData.append('breed', state.breed);
+        formData.append('location', formState.location);
+        formData.append('price', formState.price || 0);
+        formData.append('noticeImage', formState.image);
+        formData.append('sex', formState.sex);
       }
 
       await axios
@@ -65,6 +74,10 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
           headers: { 'Content-type': 'multipart/form-data' },
         })
         .then(res => {
+          setState({});
+          navigate(backLinkHref, { replace: true });
+          localStorage.setItem('addPetState', JSON.stringify(''));
+          localStorage.setItem('addPetStep', JSON.stringify(''));
           console.log('Success' + res.data);
         })
         .catch(err => {
@@ -81,8 +94,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
       {() => (
         <Form>
           {(type === 'sell' ||
-            type === 'lost/found' ||
-            type === 'in good hands') && (
+            type === 'lostFound' ||
+            type === 'inGoodHands') && (
             <>
               <p>The Sex</p>
               <div id="my-radio-group">
@@ -172,4 +185,5 @@ ThirdStepForm.propTypes = {
   state: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
+  backLinkHref: PropTypes.string.isRequired,
 };

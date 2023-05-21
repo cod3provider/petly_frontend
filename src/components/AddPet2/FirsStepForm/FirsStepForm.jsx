@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
 
 const FirsStepForm = ({ setStep, setState, step, state }) => {
-  const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
+  const categories = ['your pet', 'sell', 'lostFound', 'inGoodHands'];
   return (
     <Formik
       initialValues={{
