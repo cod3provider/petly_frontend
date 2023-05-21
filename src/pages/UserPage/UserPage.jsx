@@ -5,7 +5,7 @@ import { SectionStyled } from '../../components/common/Section/Section.styled';
 
 export default function UserPage() {
   return (
-    <ContainerStyled>
+    <ContainerStyled style={{ background: '#FEF9F9' }}>
       <SectionStyled>
         <UserData />
         <UserPets />
