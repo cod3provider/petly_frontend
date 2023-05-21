@@ -41,5 +41,15 @@ export const theme = {
 			media: '(min-width: 1280px)',
 			width: '1280px',
 		},
-	}
+	},
+
+	fonts: {
+		main: 'Manrope',
+		secondary: 'Inter',
+		logo: 'Poppins',
+	},
+
+	transition: {
+		main: 'color 250ms linear',
+	},
 }

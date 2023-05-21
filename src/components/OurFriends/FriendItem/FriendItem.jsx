@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
-import { Tooltip } from 'react-tooltip'
+import { Tooltip } from 'react-tooltip';
 // import { Link } from 'react-router-dom';
-import LinesEllipsis from 'react-lines-ellipsis'
+import LinesEllipsis from 'react-lines-ellipsis';
+
+import { useState } from 'react';
+
 import {
   Card,
   CardImage,
@@ -9,10 +12,15 @@ import {
   FriendName,
   FriendLink,
   ContactsList,
-  ContactText, ContactsItem,
+  ContactText, ContactsItem, SpanHours,
 } from './FriendItem.styled.js';
 
 import defaultImg from '../../../assets/defaultFriend.png';
+// import PopupDays from './PopupDays.jsx';
+import WorkingHours from './WorkingHours/WorkingHours.jsx';
+// import Popup from 'reactjs-popup';
+// import WorkingHours from './WorkingHours.jsx';
+// import Popup from './PopupDays.jsx';
 
 const FriendItem = ({
   _id,
@@ -25,20 +33,53 @@ const FriendItem = ({
   phone,
   email,
 }) => {
-  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const weekDays = ['MN', 'TU', 'WD', 'TH', 'FR', 'ST', 'SN'];
+
 
   const workingDays =
-    workDays &&
-    workDays.map((day, idx) => {
-      return {day: weekDays[idx], ...day};
-    });
+          workDays &&
+          workDays.map((day, idx) => {
+            return {day: weekDays[idx], ...day};
+          });
 
-  // console.log(workingDays);
+  const [isVisible, setIsVisible] = useState(true);
+  // const Tooltip = () => (
+  //   <Popup
+  //     trigger={open => (
+  //       <button className="button">Trigger - {open ? 'Opened' : 'Closed'}</button>
+  //     )}
+  //     position="right center"
+  //     closeOnDocumentClick
+  //   >
+  //     <span> <WorkingHours workingDays={workingDays} /> </span>
+  //   </Popup>
+  // );
+
+  // const workingHours = (workingDays) => {
+  //   return (
+  //     <ul>
+  //       {workingDays.map((day, idx) => {
+  //         return (
+  //           <li key={idx}>
+  //             {day?.isOpen ? (
+  //               <p>
+  //                 {day.day} {day.from} - {day.to}
+  //               </p>
+  //             ) : (
+  //               <p>{day.day} closed</p>
+  //             )}
+  //           </li>
+  //         );
+  //       })}
+  //     </ul>
+  //   )
+  // }
+
 
   return (
     <>
       <Card key={_id}>
-        <FriendName href={url} data-tooltip="text">
+        <FriendName href={url}>
           {title}
         </FriendName>
 
@@ -46,46 +87,55 @@ const FriendItem = ({
           <CardImage src={imageUrl ?? defaultImg} alt="Logo" />
           {/*<LinkWrap>*/}
             <ContactsList>
-              <ContactsItem>
+              {/*{workDays ? (*/}
+              {/*  <div data-tooltip-id="test-tooltip"*/}
+              {/*              data-tooltip-content={workDays.from}*/}
+              {/*              data-tooltip-place="top">*/}
+              {/*    <Tooltip id="test-tooltip" />*/}
+              {/*    19*/}
+              {/*  </div>*/}
+              {/*) : (*/}
+              {/*  <ContactText>website only</ContactText>*/}
+              {/*)}*/}
+
+              <ContactsItem
+                // target='_blank' data-tooltip-id="my-tooltip"
+                // data-tooltip-content={workDays}
+                // data-tooltip-place="top"
+
+                onClick={() => {
+                if (workingDays) setIsVisible(!isVisible);
+              }}
+                            // onMouseLeave={() => {
+                            //   setTimeout(() => {
+                            //     setIsVisible(true);
+                            //   }, 1000);
+                            // }}
+              >
                 <ContactText>Time:</ContactText>
-                {/*{workDays === undefined || workDays === null ? (*/}
+                <SpanHours>{workDays === undefined || workDays === null ? (
+                  <>
+                    <ContactText>day and night</ContactText>
+                  </>
+                ) : (
+                  <>
+                  {workDays[0]?.isOpen ? (
+                      <>
+                        <p>
+                          {workDays[0].from} - {workDays[0].to}
+                        </p>
+                      </>
+                  ) : (
+                      <>
+                        <p>
+                          closed
+                        </p>
+                      </>
+                    )}
+                    {isVisible || <WorkingHours workingDays={workingDays} />}
+                  </>
+                )}</SpanHours>
 
-                {/*  <>*/}
-                {/*  {workDays && workDays[0].isOpen ? (*/}
-                {/*      <>*/}
-                {/*        <ContactText>*/}
-                {/*          /!*{t('friends.time')}*!/*/}
-                {/*          Time*/}
-                {/*        </ContactText>*/}
-                {/*        <p>*/}
-                {/*          {workDays[0].from}-{workDays[0].to}*/}
-                {/*        </p>*/}
-                {/*      </>*/}
-                {/*    ) : (*/}
-                {/*      <>*/}
-                {/*        <ContactText>*/}
-                {/*          /!*{t('friends.time')}*!/*/}
-                {/*          Time*/}
-                {/*        </ContactText>*/}
-                {/*        <p>*/}
-                {/*          /!*{t('friends.closed')}*!/*/}
-                {/*          closed*/}
-                {/*        </p>*/}
-                {/*      </>*/}
-                {/*    )}*/}
-                {/*  </>*/}
-
-                {/*) : (*/}
-                {/*      <ContactText>day and night</ContactText>*/}
-                {/*  )}*/}
-
-                  {/*<LinesEllipsis*/}
-                  {/*  text={workDays}*/}
-                  {/*  maxLine='1'*/}
-                  {/*  ellipsis='...'*/}
-                  {/*  trimRight*/}
-                  {/*  basedOn='letters'*/}
-                  {/*/>*/}
               </ContactsItem>
 
               <ContactsItem>
@@ -106,19 +156,6 @@ const FriendItem = ({
                 ) : (
                   <ContactText>website only</ContactText>
                 )}
-                  {/*<ContactText>*/}
-                  {/*  Address:*/}
-                  {/*</ContactText>*/}
-                  {/*{address}*/}
-                  {/*<LinesEllipsis*/}
-                  {/*  text={address}*/}
-                  {/*  maxLine='1'*/}
-                  {/*  ellipsis='...'*/}
-                  {/*  trimRight*/}
-                  {/*  basedOn='letters'*/}
-                  {/*/>*/}
-                  {/*<EllipsisText text={address} length={"5"} />*/}
-                {/*</FriendLink>*/}
               </ContactsItem>
 
               <ContactsItem>
