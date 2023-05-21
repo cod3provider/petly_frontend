@@ -49,8 +49,19 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
       formData.append('comment', formState.comments);
       formData.append('noticeImage', formState.image);
       formData.append('sex', formState.sex);
+
+      let postLine;
+
+      if (state.type === 'your pet') {
+        postLine = '/pets';
+        formData.append('comments', formState.comments);
+      } else {
+        postLine = '/notices';
+        formData.append('comment', formState.comments);
+      }
+
       await axios
-        .post('/notices', formData, {
+        .post(postLine, formData, {
           headers: { 'Content-type': 'multipart/form-data' },
         })
         .then(res => {
@@ -59,16 +70,6 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
         .catch(err => {
           console.log(err);
         });
-      // const response = await axios.post('/', formData);
-      // console.log(response.data);
-
-      // setState(prev => ({
-      //   ...prev,
-      //   ...formState,
-      // }));
-
-      // console.log('Отправляем запрос на сервер с карточкой:', state);
-
       setStep('first');
     } catch (error) {
       console.log(error.message);
