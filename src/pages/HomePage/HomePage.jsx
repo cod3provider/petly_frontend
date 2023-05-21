@@ -7,9 +7,9 @@ import { theme } from '../../utils/theme.jsx';
 
 import HeroMobileImage from './img/hero/hero-mobile.png';
 import HeroTabletAndDeskImage from './img/hero/hero-tablet-desk.png';
-import bgImageMobile from './img/background/bg_mobile.jpg';
-import bgImageTablet from './img/background/bg_tablet.jpg';
-import bgImageDesktop from './img/background/bg_desktop.jpg';
+import bgImageMobile from './img/background/bg_mobile.png';
+import bgImageTablet from './img/background/bg_tablet.png';
+import bgImageDesktop from './img/background/bg_desktop.png';
 
 const HomePage = () => {
   const isMobile = useMedia(theme.breakpoints.mobile.media);

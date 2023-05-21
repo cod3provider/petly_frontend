@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Manrope', sans-serif;
+    background: #FEF9F9;
   }
 
   img {
