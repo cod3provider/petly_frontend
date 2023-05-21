@@ -1,12 +1,9 @@
-import { AiOutlineCamera } from 'react-icons/ai';
-import { CiLogout } from 'react-icons/ci';
-import { BiPencil } from 'react-icons/bi';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
-// ErrorMessage;
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { theme } from '../../utils/theme';
+import { AiOutlineCamera } from 'react-icons/ai';
+import { BiPencil } from 'react-icons/bi';
+import { CiLogout } from 'react-icons/ci';
 import {
   UserTitle,
   UserDataWrap,
@@ -20,36 +17,61 @@ import {
   EditBtn,
 } from './UserProfile.styled';
 
-import { logout } from '../../redux/auth/authOperations';
-// import photo from '../../../images/avat.jpg';
+import { logout, getCurrentUser } from '../../redux/auth/authOperations';
+import { getIsLoggedIn, getUser } from '../../redux/auth/authSelectors.js';
+import { theme } from '../../utils/theme';
 
 const initialState = {
-  name: 'asd',
+  name: '',
   email: '',
   birthday: '',
   phone: '',
   city: '',
 };
 
-import { getUserData } from '../../redux/userData/userDataSelectors';
-
 const UserData = () => {
-  const [user, setUser] = useState({ ...initialState });
+  const dispatch = useDispatch();
+  const [userProf, setUserProf] = useState(initialState);
   const [avatar, setAvatar] = useState();
 
-  const userData = useSelector(getUserData);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const userInfo = useSelector(getUser);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      if (isLoggedIn) {
+        setIsLoading(true);
+        await dispatch(getCurrentUser());
+        setIsLoading(false);
+      }
+    };
+    getUserProfile();
+  }, [dispatch, isLoggedIn]);
+
+  useEffect(() => {
+    setUserProf(userInfo);
+  }, [userInfo]);
+
+  console.log(userProf);
 
   const onLogout = () => {
     localStorage.removeItem('persist:auth');
     dispatch(logout());
   };
 
-  const { name, email, birthday, phone, city } = user;
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setUserProf(prevState => ({ ...prevState, [name]: value }));
+  };
 
-  // console.log(name);
-  console.log(userData);
+  const handleSubmit = e => {
+    e.preventDefault();
 
-  const handleChange = () => {};
+    console.log('here');
+  };
 
   return (
     <div>
@@ -58,59 +80,100 @@ const UserData = () => {
         <UserImg></UserImg>
         <PhotoBtn>
           <AiOutlineCamera
-            style={{
-              marginRight: '11px',
-            }}
+            style={{ marginRight: '11px' }}
             size="24px"
             color={theme.baseColors.accentButtonColor}
           />
           Edit photo
         </PhotoBtn>
-        <Formik>
+        <Formik
+          initialValues={{
+            picked: 'user profile',
+          }}
+        >
           <UserForm>
             <UserLabel htmlFor="name">
               <UserDataSpan>Name:</UserDataSpan>
               <UserInput
                 type="text"
                 name="name"
-                value={name}
+                value={userProf.name}
                 onChange={handleChange}
-                placeholder="Book title"
+                placeholder="Your name"
               />
               <EditBtn>
-                <BiPencil color={theme.baseColors.accentButtonColor} />
+                <BiPencil
+                  color={theme.baseColors.accentButtonColor}
+                  onClick={handleSubmit}
+                />
               </EditBtn>
             </UserLabel>
             <UserLabel>
               <UserDataSpan>Email:</UserDataSpan>
 
-              <UserInput type="email" name="email" />
+              <UserInput
+                type="email"
+                name="email"
+                value={userProf.email}
+                onChange={handleChange}
+                placeholder="Your email"
+              />
               <EditBtn>
-                <BiPencil color={theme.baseColors.accentButtonColor} />
+                <BiPencil
+                  color={theme.baseColors.accentButtonColor}
+                  onClick={handleSubmit}
+                />
               </EditBtn>
             </UserLabel>
             <UserLabel>
               <UserDataSpan>Birthday:</UserDataSpan>
 
-              <UserInput type="date" name="birthday" />
-              {/* <EditBtn>
-                <BiPencil color={theme.baseColors.accentButtonColor} />
-              </EditBtn> */}
+              <UserInput
+                type="text"
+                name="birthday"
+                value={userProf.birthday.slice(0, 10)}
+                onChange={handleChange}
+                placeholder="Your birthday"
+              />
+              <EditBtn>
+                <BiPencil
+                  color={theme.baseColors.accentButtonColor}
+                  onClick={handleSubmit}
+                />
+              </EditBtn>
             </UserLabel>
             <UserLabel>
               <UserDataSpan>Phone:</UserDataSpan>
 
-              <UserInput type="tel" name="tel" />
+              <UserInput
+                type="phone"
+                name="phone"
+                value={userProf.phone}
+                onChange={handleChange}
+                placeholder="Your phone"
+              />
               <EditBtn>
-                <BiPencil color={theme.baseColors.accentButtonColor} />
+                <BiPencil
+                  color={theme.baseColors.accentButtonColor}
+                  onClick={handleSubmit}
+                />
               </EditBtn>
             </UserLabel>
             <UserLabel>
               <UserDataSpan>City:</UserDataSpan>
 
-              <UserInput type="text" name="city" />
+              <UserInput
+                type="text"
+                name="city"
+                value={userProf.city}
+                onChange={handleChange}
+                placeholder="Your city"
+              />
               <EditBtn>
-                <BiPencil color={theme.baseColors.accentButtonColor} />
+                <BiPencil
+                  color={theme.baseColors.accentButtonColor}
+                  onClick={handleSubmit}
+                />
               </EditBtn>
             </UserLabel>
             <LogOutBtn type="submit" onClick={onLogout}>
