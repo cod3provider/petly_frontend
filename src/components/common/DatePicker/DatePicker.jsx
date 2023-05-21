@@ -26,8 +26,8 @@ const DatePicker = ({ setSelectedDay }) => {
     setSelectedDay(format(Day, 'yyyy-MM-dd'));
   }, [Day, setSelectedDay]);
 
-  const footer = selectedDay ? (
-    <p>Selected {format(selectedDay, 'PPP')}.</p>
+  const footer = Day ? (
+    <p>Selected {format(Day, 'PPP')}.</p>
   ) : (
     <p>Please pick a day.</p>
   );
