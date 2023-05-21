@@ -8,7 +8,7 @@ import {
   ImageNotFound,
   Title,
 } from './NotFound.styled.js';
-import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
+import { BackgroundImage, BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
 
 import { theme } from '../../utils/theme.jsx';
 
@@ -24,29 +24,31 @@ const NotFoundPage = () => {
 
   return (
     <>
-      {isMobile && (
-        <BackgroundImage
-          src={bgImageMobile}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isMobile && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageMobile}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {isTablet && (
-        <BackgroundImage
-          src={bgImageTablet}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isTablet && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageTablet}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {isDesktop && (
-        <BackgroundImage
-          src={bgImageDesktop}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isDesktop && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageDesktop}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
+
+      <BackgroundImageDiv />
 
       <Container>
         <Title>Ooops! This page not found :(</Title>

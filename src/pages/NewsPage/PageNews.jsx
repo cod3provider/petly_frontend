@@ -14,7 +14,7 @@ const App = () => {
   const fetchNews = async () => {
     
     try {
-      const response = await fetch('/api/news');
+      const response = await fetch('/news');
       const data = await response.json();
       setNews(data);
     } catch (error) {
