@@ -136,6 +136,7 @@ function LoginForm() {
             <LinkWraper>
               <p>Don&#39;t have an account?</p>
               <Link to="/register">Register</Link>
+              <Link to="http://localhost:8989/users/google">Google</Link>
             </LinkWraper>
           </AuthForm>
         )}

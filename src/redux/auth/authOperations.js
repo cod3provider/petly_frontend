@@ -4,6 +4,30 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
+axios.interceptors.response.use(
+  response => response,
+  async error => {
+    if (error.response.status === 401) {
+      // нужно получить рефреш токен из стейта
+      const refreshToken = useSelector(getRefreshToken);
+
+      try {
+        const { data } = await axios.post('users/refresh', { refreshToken });
+
+        token.set(data.accesToken);
+
+        //тут обновить стейт с новыми токенами
+
+        return axios(error.config);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
