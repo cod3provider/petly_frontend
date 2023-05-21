@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 // import { getCurrentUser } from 'redux/user/userOperations';
 
-axios.defaults.baseURL = 'https://3001/api';
+axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
 export const token = {
   set(token) {
@@ -14,10 +14,10 @@ export const token = {
 };
 
 export const register = createAsyncThunk(
-  'auth/register',
+  'users/register',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      await axios.post('auth/register', credentials);
+      await axios.post('users/register', credentials);
       const { email, password } = credentials;
       await dispatch(
         login({
@@ -25,6 +25,7 @@ export const register = createAsyncThunk(
           password,
         })
       );
+      console.log(credentials);
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.message);
@@ -33,15 +34,13 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  'auth/login',
+  'users/login',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      const { data } = await axios.post('auth/login', credentials);
+      const { data } = await axios.post('users/login', credentials);
       console.log(data);
       token.set(data.token);
-      dispatch(
-        // getCurrentUser()
-      );
+
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -51,12 +50,12 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  'auth/logout',
+  'users/logout',
   async (_, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.token;
       token.set(value);
-      await axios.post('auth/logout');
+      await axios.post('users/logout');
       token.unset();
     } catch (error) {
       console.log(error.response.data);
@@ -65,11 +64,28 @@ export const logout = createAsyncThunk(
   }
 );
 
+export const getCurrentUser = createAsyncThunk(
+  'auth/getCurrentUser',
+  async (_, { rejectWithValue, getState }) => {
+    const value = getState().auth.token;
+    if (value) {
+      token.set(value);
+    }
+    try {
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {
+      console.log(error.response.data);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // export const refreshThunk = createAsyncThunk(
-//   'user/refresh',
+//   'users/refresh',
 //   async (credentials, { rejectWithValue }) => {
 //     try {
-//       const { data } = await axios.get('user/', credentials);
+//       const { data } = await axios.get('users/', credentials);
 //       token.set(data.data.user.token);
 //       return data;
 //     } catch (error) {

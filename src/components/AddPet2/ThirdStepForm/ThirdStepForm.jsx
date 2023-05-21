@@ -1,69 +1,158 @@
 import { Formik, Field, Form } from 'formik';
+import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import ButtonPet from '../ButtonPet/ButtonPet';
 
-const ThirdStepForm = ({ setStep, State, setState }) => {
-  const [FormState, setFormState] = useState({
+const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
+  const [formState, setFormState] = useState({
     location: '',
     price: '',
     comments: '',
+    image: '',
+    sex: '',
   });
+  const [file, setFile] = useState(null); // Значення file початково встановлено як null
 
-  const handleBack = () => {
-    setStep('first');
-  };
+  axios.defaults.baseURL =
+    'https://your-pet-backend-jfrs.onrender.com/api-docs';
 
   const handleChange = e => {
-    setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(e.target.name);
+    if (e.target.name === 'image') {
+      const selectedFile = e.target.files[0];
+      console.log(selectedFile);
+      setFile(URL.createObjectURL(selectedFile));
+      setFormState(prev => ({
+        ...prev,
+        image: selectedFile,
+      }));
+    } else {
+      setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
-  const handleSubmit = () => {
-    setState(prev => ({
-      ...prev,
-      ...FormState,
-    }));
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('location', formState.location);
+      formData.append('price', formState.price);
+      formData.append('comments', formState.comments);
+      formData.append('image', formState.image);
+      formData.append('sex', formState.sex);
 
-    console.log('Отправляем запрос на сервер с карточкой:', State);
+      // const response = await axios.post('/', formData);
+      // console.log(response.data);
 
-    setStep('first');
+      setState(prev => ({
+        ...prev,
+        ...formState,
+      }));
+
+      console.log('Отправляем запрос на сервер с карточкой:', state);
+
+      setStep('first');
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <Formik initialValues={FormState} onSubmit={handleSubmit}>
+    <Formik initialValues={formState} onSubmit={handleSubmit}>
       <Form>
-        <label htmlFor="location">Location</label>
-        <Field
-          id="location"
-          name="location"
-          placeholder="Location"
-          value={FormState.location}
-          onChange={handleChange}
-        />
+        {(type === 'sell' ||
+          type === 'lost/found' ||
+          type === 'in good hands') && (
+          <>
+            <p>The Sex</p>
+            <div id="my-radio-group">
+              <label htmlFor="sex">Female</label>
+              <Field
+                id="sex"
+                name="sex"
+                type="radio"
+                value={(formState.sex = 'Female')}
+                required
+              />
+              <BsGenderFemale />
 
-        <label htmlFor="price">Price</label>
-        <Field
-          id="price"
-          name="price"
-          placeholder="Price"
-          value={FormState.price}
-          onChange={handleChange}
-        />
+              <label htmlFor="sex">Male</label>
+              <Field
+                id="sex"
+                name="sex"
+                type="radio"
+                value={(formState.sex = 'Male')}
+                required
+              />
+              <BsGenderMale />
+            </div>
 
-        <label htmlFor="Comments">Breed</label>
+            <label htmlFor="location">Location</label>
+            <Field
+              id="location"
+              name="location"
+              placeholder="Location"
+              value={formState.location}
+              onChange={handleChange}
+              required
+            />
+          </>
+        )}
+
+        {type === 'sell' && (
+          <>
+            <label htmlFor="price">Price</label>
+            <Field
+              id="price"
+              name="price"
+              placeholder="Price"
+              value={formState.price}
+              onChange={handleChange}
+              required
+            />
+          </>
+        )}
+
+        <div>
+          <label htmlFor="image">Load the pet&#39;s image:</label>
+          {!file && (
+            <Field
+              id="image"
+              type="file"
+              name="image"
+              onChange={handleChange}
+              required
+            />
+          )}
+          {file && <img src={file} alt="Preview image" />}
+
+          {/* Показати попередній перегляд зображення */}
+        </div>
+
+        <label htmlFor="Comments">Comments</label>
         <Field
           id="comments"
           name="comments"
-          placeholder="Comments"
-          value={FormState.comments}
+          placeholder="Type breed"
+          value={formState.comments}
           onChange={handleChange}
+          type="textarea"
+          required
         />
 
-        <button type="button" onClick={handleBack}>
-          back
-        </button>
-        <button type="submit">Done</button>
+        <ButtonPet step={step} setStep={setStep} />
       </Form>
     </Formik>
   );
 };
 
 export default ThirdStepForm;
+
+ThirdStepForm.propTypes = {
+  setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
+  step: PropTypes.string.isRequired,
+};

@@ -1,48 +1,41 @@
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
+import PropTypes from 'prop-types';
+import ButtonPet from '../ButtonPet/ButtonPet.jsx';
 
-const FirsStepForm = ({ setStep, setState }) => {
-  const handleBack = () => {
-    console.log('go back');
-  };
-
+const FirsStepForm = ({ setStep, setState, step }) => {
+  const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: '',
+        picked: 'your pet',
       }}
       onSubmit={values => {
         setStep('second');
-        setState(prev => ({ ...prev, type: values.picked }));
+        setState(prev => ({
+          ...prev,
+          type: values.picked,
+        }));
       }}
     >
-      {({ values }) => (
+      {({ values, handleChange }) => (
         <Form>
-          <div id="my-radio-group">Picked</div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field type="radio" name="picked" value="your pet" />
-              your pet
-            </label>
-            <label>
-              <Field type="radio" name="picked" value="sell" />
-              sell
-            </label>
-            <label>
-              <Field type="radio" name="picked" value="lost/found" />
-              lost/found
-            </label>
-            <label>
-              <Field type="radio" name="picked" value="in good hands" />
-              in good hands
-            </label>
-            <div>Picked: {values.picked}</div>
+          <div id="my-radio-group">
+            {categories.map(categorie => (
+              <label key={categorie}>
+                <input
+                  type="radio"
+                  name="picked"
+                  value={categorie}
+                  required
+                  checked={values.picked === categorie}
+                  onChange={handleChange}
+                />
+                {categorie}
+              </label>
+            ))}
           </div>
 
-          <button type="button" onClick={handleBack}>
-            back
-          </button>
-          <button type="submit">Next step</button>
+          <ButtonPet step={step} setStep={setStep} />
         </Form>
       )}
     </Formik>
@@ -50,3 +43,9 @@ const FirsStepForm = ({ setStep, setState }) => {
 };
 
 export default FirsStepForm;
+
+FirsStepForm.propTypes = {
+  setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+  step: PropTypes.string.isRequired,
+};

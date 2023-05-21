@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { login, logout, register } from './authOperations';
+import { login, logout, register, getCurrentUser } from './authOperations';
 
 const authInitialState = {
   user: {},
@@ -81,6 +81,21 @@ const authSlice = createSlice({
       })
       .addCase(addAccessToken, (state, { payload }) => {
         state.token = payload;
+      })
+
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        state.user = payload;
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       });
   },
 });

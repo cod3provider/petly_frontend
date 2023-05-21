@@ -1,17 +1,15 @@
-import {
-  BackgroundImage,
-  MainTitle, MobileHero, Wrap,
-} from './HomePage.styled.js';
 import { useMedia } from 'react-use';
+
+import { HeroImage, MainTitle, Wrap } from './HomePage.styled.js';
+import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
+
 import { theme } from '../../utils/theme.jsx';
 
 import HeroMobileImage from './img/hero/hero-mobile.png';
 import HeroTabletAndDeskImage from './img/hero/hero-tablet-desk.png';
-
-import bgImageMobile from './img/background/bg_mobile.jpg';
-// import bgImageTablet from './img/background/bg_tablet.jpg';
-// import bgImageDesktop from './img/background/bg_desktop.jpg';
-
+import bgImageMobile from './img/background/bg_mobile.png';
+import bgImageTablet from './img/background/bg_tablet.png';
+import bgImageDesktop from './img/background/bg_desktop.png';
 
 const HomePage = () => {
   const isMobile = useMedia(theme.breakpoints.mobile.media);
@@ -20,56 +18,40 @@ const HomePage = () => {
 
   return (
     <>
-      {/*{isMobile && (*/}
-      {/*  <BackgroundImage src={bgImageMobile} />*/}
-      {/*)}*/}
+      {isMobile && (
+        <BackgroundImage
+          src={bgImageMobile}
+          alt="image hero: two dogs and one cat"
+          loading="lazy"
+        />
+      )}
 
-      {/*{isTablet && (*/}
-      {/*	<BackgroundImage src={bgImageTablet} />*/}
-      {/*)}*/}
+      {isTablet && (
+        <BackgroundImage
+          src={bgImageTablet}
+          alt="image hero: two dogs and one cat"
+          loading="lazy"
+        />
+      )}
 
-      {/*{isDesktop && (*/}
-      {/*	<BackgroundImage src={bgImageDesktop} />*/}
-      {/*)}*/}
+      {isDesktop && (
+        <BackgroundImage
+          src={bgImageDesktop}
+          alt="image hero: two dogs and one cat"
+          loading="lazy"
+        />
+      )}
 
-      {/*{isMobile && (*/}
-      {/*  <>*/}
-
-      {/*    <MobileHero src={HeroMobileImage} />*/}
-      {/*    <ImagesWrap />*/}
-      {/*  </>*/}
-      {/*)}*/}
-
-      {/*{isTablet && (*/}
-      {/*  <>*/}
-      {/*    <BackgroundImage src={bgImageTablet} />*/}
-      {/*    <MobileHero src={HeroMobileImage} />*/}
-      {/*  </>*/}
-      {/*)}*/}
-
-      {/*{isDesktop && (*/}
-      {/*  <>*/}
-      {/*    <BackgroundImage src={bgImageDesktop} />*/}
-      {/*    <MobileHero src={HeroMobileImage} />*/}
-      {/*  </>*/}
-      {/*)}*/}
-      {/*</ImagesWrap>*/}
-
-      <BackgroundImage
-        src={bgImageMobile}
-        alt="image hero: two dogs and one cat"
-        loading="lazy"
-      />
       <Wrap>
         <MainTitle>Take good care of your small pets</MainTitle>
         {isMobile && (
-          <MobileHero src={HeroMobileImage} alt="pets" loading="lazy" />
+          <HeroImage src={HeroMobileImage} alt="pets" loading="lazy" />
         )}
         {isTablet && (
-          <MobileHero src={HeroTabletAndDeskImage} alt="pets" loading="lazy" />
+          <HeroImage src={HeroTabletAndDeskImage} alt="pets" loading="lazy" />
         )}
         {isDesktop && (
-          <MobileHero src={HeroTabletAndDeskImage} alt="pets" loading="lazy" />
+          <HeroImage src={HeroTabletAndDeskImage} alt="pets" loading="lazy" />
         )}
       </Wrap>
     </>

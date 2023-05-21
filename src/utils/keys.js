@@ -6,6 +6,7 @@ const ROUTES = {
   FRIENDS: '/friends',
   USER: '/user',
   ADDPET: '/AddPet',
+  HOMEPAGE: '/',
 };
 
 const BACKEND_ENDPOINTS = {
@@ -16,5 +17,7 @@ const BACKEND_ENDPOINTS = {
   AVATARS: 'users/avatars',
   LOGOUT: 'users/logout',
 };
+
+export const BASE_URL = 'https://your-pet-backend-jfrs.onrender.com';
 
 export { ROUTES, BACKEND_ENDPOINTS };
