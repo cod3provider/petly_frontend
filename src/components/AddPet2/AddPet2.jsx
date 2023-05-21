@@ -17,7 +17,7 @@ import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 
 const AddPet2 = () => {
   const [state, setState] = useState(
-    JSON.parse(localStorage.getItem('addPetState'))
+    JSON.parse(localStorage.getItem('addPetState')) || { type: 'your pet' }
   );
   const [step, setStep] = useState('first');
   const isFirstRender = useRef(true);
