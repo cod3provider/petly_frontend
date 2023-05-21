@@ -1,15 +1,19 @@
 import { useMedia } from 'react-use';
 
 import { HeroImage, MainTitle, Wrap } from './HomePage.styled.js';
-import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
+import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
 
 import { theme } from '../../utils/theme.jsx';
 
 import HeroMobileImage from './img/hero/hero-mobile.png';
+// import HeroMobileImage2 from './img/hero/hero-mobile@2x.png';
+// import HeroMobileImageWebp from './img/hero/hero-mobile.webp';
 import HeroTabletAndDeskImage from './img/hero/hero-tablet-desk.png';
-import bgImageMobile from './img/background/bg_mobile.png';
-import bgImageTablet from './img/background/bg_tablet.png';
-import bgImageDesktop from './img/background/bg_desktop.png';
+// import HeroTabletAndDeskImage2 from './img/hero/hero-tablet-desk@2x.png';
+// import HeroTabletAndDeskImageWebp from './img/hero/hero-tablet-desk.webp';
+// import bgImageMobile from '../../assets/img/background/bg_mobile.png';
+// import bgImageTablet from '../../assets/img/background/bg_tablet.png';
+// import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
 
 const HomePage = () => {
   const isMobile = useMedia(theme.breakpoints.mobile.media);
@@ -18,29 +22,30 @@ const HomePage = () => {
 
   return (
     <>
-      {isMobile && (
-        <BackgroundImage
-          src={bgImageMobile}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isMobile && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageMobile}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {isTablet && (
-        <BackgroundImage
-          src={bgImageTablet}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+        <BackgroundImageDiv />
+      {/*{isTablet && (*/}
+      {/*  // <BackgroundImage*/}
+      {/*  //   src={bgImageTablet}*/}
+      {/*  //   alt="image hero: two dogs and one cat"*/}
+      {/*  //   loading="lazy"*/}
+      {/*  // />*/}
+      {/*)}*/}
 
-      {isDesktop && (
-        <BackgroundImage
-          src={bgImageDesktop}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isDesktop && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageDesktop}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
       <Wrap>
         <MainTitle>Take good care of your small pets</MainTitle>
