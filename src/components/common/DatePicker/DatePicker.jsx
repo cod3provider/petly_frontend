@@ -26,11 +26,11 @@ const DatePicker = ({ setSelectedDay }) => {
     setSelectedDay(format(Day, 'yyyy-MM-dd'));
   }, [Day, setSelectedDay]);
 
-  // const footer = selectedDay ? (
-  //   <p>Selected {format(selectedDay, 'PPP')}.</p>
-  // ) : (
-  //   <p>Please pick a day.</p>
-  // );
+  const footer = selectedDay ? (
+    <p>Selected {format(selectedDay, 'PPP')}.</p>
+  ) : (
+    <p>Please pick a day.</p>
+  );
 
   const today = new Date();
 
@@ -54,7 +54,7 @@ const DatePicker = ({ setSelectedDay }) => {
         mode="single"
         selected={Day}
         onSelect={setDay}
-        // footer={footer}
+        footer={footer}
         hidden={disabledDays}
         fromYear={1900}
         toDate={today}
