@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Tooltip } from 'react-tooltip'
 // import { Link } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis'
 // import EllipsisText from "react-ellipsis-text";
@@ -50,17 +51,19 @@ const FriendItem = ({
               </ContactsItem>
 
               <ContactsItem>
-                <FriendLink
-                  href={map}
-                  target="_blank"
-                >
+                {/*<FriendLink*/}
+                {/*  href={map}*/}
+                {/*  target="_blank"*/}
+                {/*>*/}
                   <ContactText>Address:</ContactText>
                   {map ? (
-                    <FriendLink href={map} target='_blank'>{address}</FriendLink>
+                    <FriendLink href={map} target='_blank' data-tooltip-id="my-tooltip"
+                                data-tooltip-content={address}
+                                data-tooltip-place="top">{address}</FriendLink>
                   ) : (
                     <ContactText>website only</ContactText>
                   )}
-
+                  <Tooltip id="my-tooltip" />
                   {/*<ContactText>*/}
                   {/*  Address:*/}
                   {/*</ContactText>*/}
@@ -73,11 +76,12 @@ const FriendItem = ({
                   {/*  basedOn='letters'*/}
                   {/*/>*/}
                   {/*<EllipsisText text={address} length={"5"} />*/}
-                </FriendLink>
+                {/*</FriendLink>*/}
               </ContactsItem>
 
               <ContactsItem>
                   <ContactText>Email:</ContactText>
+
                   {email ? (
                     <FriendLink href={`mailto:${email}`}>{email}</FriendLink>
                   ) : (
