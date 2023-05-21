@@ -112,10 +112,13 @@ export const FriendLink = styled.a`
   // font-size: 12px;
   // line-height: 16px;
   color: #111111;
-  //text-align: start;
-  //
-  //
-  //
+  //cursor: pointer;
+  transition: color 250ms linear;
+  
+  &:hover {
+    color: #54ADFF;
+  }
+  
   // @media ${p => p.theme.breakpoints.tablet.media} {
   //   font-size: 14px;
   //   line-height: 19px;
@@ -132,6 +135,7 @@ export const ContactLinks = styled.div`
   //justify-content: space-around;
   margin-top: 10px;
   color: #111111;
+  gap: 20px;
 `;
 
 export const ContactsList = styled.ul`
