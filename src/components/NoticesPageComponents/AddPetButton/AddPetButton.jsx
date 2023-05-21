@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
-import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+import { AddPetButtonIcon, AddPetButtonLink } from "./AddPetButton.styled";
 
 const AddPetButton = ({ isAuth }) => {
-    return isAuth ? <NavLink>Add pet</NavLink> : <button type='button'>Add pet</button>;
+    const location = useLocation();
+    return isAuth ? <AddPetButtonLink to='/add-pet' state={{from: location}}>
+        <AddPetButtonIcon />Add pet
+    </AddPetButtonLink> : <button type='button'>Add pet</button>;
 }
 
 AddPetButton.propTypes = {

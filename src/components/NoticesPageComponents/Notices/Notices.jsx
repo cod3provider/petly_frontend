@@ -65,7 +65,8 @@ const NoticesPage = () => {
     };
 
     return <div>
-        <NoticesTitle/>
+        <NoticesTitle />
+        <AddPetButton isAuth={true} />
         <NoticesSearch onSubmit={searchNotices} />
         <NoticesCategoriesNav />
         <NoticesCategoriesList items={notices} openModal={openModal} />
