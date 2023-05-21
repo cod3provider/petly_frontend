@@ -5,19 +5,35 @@ import NoticesCategoriesList from "../NoticesCategoriesList/NoticesCategoriesLis
 import AddPetButton from "../AddPetButton/AddPetButton";
 import NoticesTitle from "../NoticesTitle/NoticesTitle";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import { NoticesContainer, NoticesContentBox } from "../NoticesContainers/NoticesContainers.styled";
 
 import { searchNoticesByName, searchNoticesByCategory } from "../../../services/noticesApi";
 
-// import { test } from "./test";
-
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const NoticesPage = () => {
+    const { categoryName } = useParams();
 
+    let category;
+
+    switch (categoryName) {
+        case "sell":
+            category = "sell";
+            break;
+        case "lost-found":
+            category = "lostFound";
+            break;
+        case "for-free":
+            category = "inGoodHands";
+            break;
+        default:
+            category = null;
+    }
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalInfo, setModalInfo] = useState(null);
     const [query, setQuery] = useState('');
-    const [category, setCategory] = useState('sell');
     const [notices, setNotices] = useState([]);
 
     const searchNotices = (query) => {
@@ -25,9 +41,9 @@ const NoticesPage = () => {
     }
 
     useEffect(() => {
-        const fetchNoticesByName = async () => {
+        const fetchNoticesByName = async (category) => {
             try {
-                const data = await searchNoticesByName(query);
+                const data = await searchNoticesByName(category, query);
                 setNotices(data);
             }
             catch (error) {
@@ -35,9 +51,9 @@ const NoticesPage = () => {
             }
         }
         if (query !== '') {
-            fetchNoticesByName();
+            fetchNoticesByName(category);
         }
-    }, [query]);
+    }, [query, category]);
 
     useEffect(() => {
         const fetchNoticesByCategory = async (category) => {
@@ -49,10 +65,8 @@ const NoticesPage = () => {
                 alert(error.message);
             }
         }
-            fetchNoticesByCategory();
+        fetchNoticesByCategory(category);
     }, [category]);
-
-    
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -65,12 +79,16 @@ const NoticesPage = () => {
     };
 
     return <div>
-        <NoticesTitle />
-        <AddPetButton isAuth={true} />
-        <NoticesSearch onSubmit={searchNotices} />
-        <NoticesCategoriesNav />
-        <NoticesCategoriesList items={notices} openModal={openModal} />
-        {isModalOpen && <ModalNotice close={closeModal} details={modalInfo} />}
+        <NoticesContainer>
+                <NoticesContentBox>
+                <NoticesTitle />
+                <AddPetButton isAuth={true} />
+                <NoticesSearch onSubmit={searchNotices} />
+                <NoticesCategoriesNav/>
+                <NoticesCategoriesList items={notices} openModal={openModal} />
+                {isModalOpen && <ModalNotice close={closeModal} details={modalInfo} />}
+            </NoticesContentBox>
+        </NoticesContainer>
             
     </div>;
 }
