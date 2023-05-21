@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Tooltip } from 'react-tooltip'
 // import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis'
-// import EllipsisText from "react-ellipsis-text";
 import {
   Card,
   CardImage,
@@ -34,7 +33,7 @@ const FriendItem = ({
       return {day: weekDays[idx], ...day};
     });
 
-  console.log(workingDays);
+  // console.log(workingDays);
 
   return (
     <>
