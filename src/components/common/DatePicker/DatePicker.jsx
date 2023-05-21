@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -15,14 +15,22 @@ import './styles.css';
  * @param {selectedDay} state selected day state
  * @param {setSelectedDay} setState day selection function
  */
-const DatePicker = ({ selectedDay, setSelectedDay }) => {
-  // const [selectedDay, setSelectedDay] = useState();
+const DatePicker = ({ setSelectedDay }) => {
+  const [Day, setDay] = useState();
 
-  const footer = selectedDay ? (
-    <p>Selected {format(selectedDay, 'PPP')}.</p>
-  ) : (
-    <p>Please pick a day.</p>
-  );
+  useEffect(() => {
+    if (!Day) {
+      return;
+    }
+
+    setSelectedDay(format(Day, 'yyyy-MM-dd'));
+  }, [Day, setSelectedDay]);
+
+  // const footer = selectedDay ? (
+  //   <p>Selected {format(selectedDay, 'PPP')}.</p>
+  // ) : (
+  //   <p>Please pick a day.</p>
+  // );
 
   const today = new Date();
 
@@ -44,9 +52,9 @@ const DatePicker = ({ selectedDay, setSelectedDay }) => {
     >
       <DayPicker
         mode="single"
-        selected={selectedDay}
-        onSelect={setSelectedDay}
-        footer={footer}
+        selected={Day}
+        onSelect={setDay}
+        // footer={footer}
         hidden={disabledDays}
         fromYear={1900}
         toDate={today}

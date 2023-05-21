@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import { Formik, Field, Form } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
+
+import DatePicker from '../../common/DatePicker';
+
 const SecondStepForm = ({ setStep, setState, type, step }) => {
   const [FormState, setFormState] = useState({
     namePet: '',
@@ -9,6 +12,20 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
     breed: '',
     titlePet: '',
   });
+
+  // ===============================================================
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isDateOpen, setIsDateOpen] = useState(false);
+
+  useEffect(() => {
+    if (!selectedDay) {
+      return;
+    }
+    setFormState(prev => ({ ...prev, birth: selectedDay }));
+    setSelectedDay(null);
+    setIsDateOpen(false);
+  }, [FormState, selectedDay]);
+  // ===============================================================
 
   // function goBack() {
   //   history.back();
@@ -25,7 +42,6 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
   };
 
   const handleSubmit = () => {
-    console.log(FormState);
     setStep('third');
     setState(prev => ({
       ...prev,
@@ -51,7 +67,6 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
             />
           </>
         )}
-
         <label htmlFor="namePet">Name pet</label>
         <Field
           id="namePet"
@@ -61,17 +76,26 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
           onChange={handleChange}
           required
         />
-
         <label htmlFor="birth">Date of birth</label>
-
         <Field
           id="birth"
           name="birth"
           placeholder="Date of birth"
           value={FormState.birth}
           onChange={handleChange}
+          onFocus={() => setIsDateOpen(true)}
           required
         />
+
+        {/* // =============================================================== */}
+        {isDateOpen && (
+          <DatePicker
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+          />
+        )}
+
+        {/* // =============================================================== */}
 
         <label htmlFor="breed">Breed</label>
         <Field
@@ -82,7 +106,6 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
           onChange={handleChange}
           required
         />
-
         {/* <button type="button" onClick={handleBack}>
           back
         </button> */}
