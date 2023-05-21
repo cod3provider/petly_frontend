@@ -10,7 +10,7 @@ import getFriends from '../../utils/getFriends.js';
 
 
 
-// const Title = styled.h1`
+// const TitleStyled = styled.h1`
 //   margin: 40px 0 25px;
 //
 //   @media ${theme.breakpoints.tablet.media} {
@@ -107,46 +107,6 @@ const Friends = () => {
   return (
     <ContainerStyled>
       <FriendList partners={partners} />
-      {/*<Title>Our friends</Title>*/}
-      {/*<CardContainer>*/}
-      {/*  {partners.map(*/}
-      {/*    ({*/}
-      {/*       _id,*/}
-      {/*       imageUrl,*/}
-      {/*       title,*/}
-      {/*       address,*/}
-      {/*       email,*/}
-      {/*       phone,*/}
-      {/*      addressUrl,*/}
-      {/*      workDays*/}
-      {/*    }) => (*/}
-      {/*      <Card key={_id}>*/}
-      {/*        <FriendLink>{title}</FriendLink>*/}
-      {/*        <CardImage src={imageUrl ?? defaultImg} alt="Logo" />*/}
-      {/*        /!*<p>Час роботи: {partner.workDays}</p>*!/*/}
-      {/*        <ContactLinks>*/}
-      {/*          <Link*/}
-      {/*            to={`/map?address=${encodeURIComponent(address)}`}*/}
-      {/*            target="_blank"*/}
-      {/*          >*/}
-      {/*            Address: {address}*/}
-      {/*          </Link>*/}
-      {/*          <a href={`mailto:${email}`}>*/}
-      {/*            Email:*/}
-      {/*            <span> {email}</span>*/}
-      {/*          </a>*/}
-      {/*          <a href={`tel:${phone}`}>*/}
-      {/*            Телефон:*/}
-      {/*            <span> {phone}</span>*/}
-      {/*          </a>*/}
-      {/*        </ContactLinks>*/}
-      {/*        /!*<button onClick={() => handleWorkingHoursClick(partner.workingHours)}>*!/*/}
-      {/*        /!*  Робочі години*!/*/}
-      {/*        /!*</button>*!/*/}
-      {/*      </Card>*/}
-      {/*    )*/}
-      {/*  )}*/}
-      {/*</CardContainer>*/}
     </ContainerStyled>
   );
 };

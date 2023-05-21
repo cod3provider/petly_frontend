@@ -1,14 +1,15 @@
 // import defaultImg from '../../../assets/defaultFriend.png';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { CardContainer, Title } from './FriendList.styled.js';
+import { CardContainer } from './FriendList.styled.js';
 import FriendItem from '../FriendItem/FriendItem.jsx';
+import { TitleStyled } from '../../Title/Title.styled.js';
 
 
 const FriendList = ({partners}) => {
   return(
     <>
-      <Title>Our friends</Title>
+      <TitleStyled>Our friends</TitleStyled>
       <CardContainer>
         {partners.map(
           ({
@@ -32,32 +33,6 @@ const FriendList = ({partners}) => {
                          phone={phone}
                          email={email}
              />
-
-            // <Card key={_id}>
-            //   <FriendLink>{title}</FriendLink>
-            //   <CardImage src={imageUrl ?? defaultImg} alt="Logo" />
-            //   {/*<p>Час роботи: {partner.workDays}</p>*/}
-            //   <ContactLinks>
-            //     <Link
-            //       to={`/map?address=${encodeURIComponent(address)}`}
-            //       target="_blank"
-            //     >
-            //       Address: {address}
-            //     </Link>
-            //     <a href={`mailto:${email}`}>
-            //       Email:
-            //       <span> {email}</span>
-            //     </a>
-            //     <a href={`tel:${phone}`}>
-            //       Телефон:
-            //       <span> {phone}</span>
-            //     </a>
-            //   </ContactLinks>
-            //   {/*<button onClick={() => handleWorkingHoursClick(partner.workingHours)}>*/}
-            //   {/*  Робочі години*/}
-            //   {/*</button>*/}
-            // </Card>
-
           )
         )}
       </CardContainer>
