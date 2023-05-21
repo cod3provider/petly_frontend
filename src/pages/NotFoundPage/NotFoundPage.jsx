@@ -12,9 +12,9 @@ import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.
 
 import { theme } from '../../utils/theme.jsx';
 
-import bgImageMobile from '../../pages/HomePage/img/background/bg_mobile.jpg';
-import bgImageTablet from '../HomePage/img/background/bg_tablet.jpg';
-import bgImageDesktop from '../HomePage/img/background/bg_desktop.jpg';
+import bgImageMobile from '../../assets/img/background/bg_mobile.png';
+import bgImageTablet from '../../assets/img/background/bg_tablet.png';
+import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
 import notFoundImg from './img/notfound.png';
 
 const NotFoundPage = () => {
