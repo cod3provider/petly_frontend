@@ -26,6 +26,16 @@ const FriendItem = ({
   phone,
   email,
 }) => {
+  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  const workingDays =
+    workDays &&
+    workDays.map((day, idx) => {
+      return {day: weekDays[idx], ...day};
+    });
+
+  console.log(workingDays);
+
   return (
     <>
       <Card key={_id}>
@@ -38,8 +48,38 @@ const FriendItem = ({
           {/*<LinkWrap>*/}
             <ContactsList>
               <ContactsItem>
-                <ContactText data-tooltip='Helper text'>Time:</ContactText>
-                {/*<p>Час роботи: {workDays}*/}
+                <ContactText>Time:</ContactText>
+                {workDays === undefined || workDays === null ? (
+
+                  <>
+                  {workDays && workDays[0].isOpen ? (
+                      <>
+                        <ContactText>
+                          {/*{t('friends.time')}*/}
+                          Time
+                        </ContactText>
+                        <p>
+                          {workDays[0].from}-{workDays[0].to}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <ContactText>
+                          {/*{t('friends.time')}*/}
+                          Time
+                        </ContactText>
+                        <p>
+                          {/*{t('friends.closed')}*/}
+                          closed
+                        </p>
+                      </>
+                    )}
+                  </>
+
+                ) : (
+                      <ContactText>day and night</ContactText>
+                  )}
+
                   {/*<LinesEllipsis*/}
                   {/*  text={workDays}*/}
                   {/*  maxLine='1'*/}
@@ -47,7 +87,6 @@ const FriendItem = ({
                   {/*  trimRight*/}
                   {/*  basedOn='letters'*/}
                   {/*/>*/}
-                {/*</p>*/}
               </ContactsItem>
 
               <ContactsItem>
