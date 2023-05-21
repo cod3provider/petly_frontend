@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.ul`
+export const NewsCardContainer = styled.ul`
   display: grid;
   //grid-template-columns: repeat(3, 1fr);
   grid-template-columns: 1fr;
@@ -20,3 +20,15 @@ export const CardContainer = styled.ul`
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
+
+export const NewsItem = styled.div`
+  padding: 10px;
+`;
+
+export const NewsTitle = styled.h2`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: -0.01em;
+  color: #111111;
+`
