@@ -7,17 +7,17 @@ export default function Navigation({ onClick }) {
       <StyledUl>
         <StyledLi>
           <StyledNavLink to="/news" onClick={onClick}>
-            NewsPage
+            News
           </StyledNavLink>
         </StyledLi>
         <StyledLi>
           <StyledNavLink to="/notices" onClick={onClick}>
-            NoticesPage
+            Find pet
           </StyledNavLink>
         </StyledLi>
         <StyledLi>
           <StyledNavLink to="/friends" onClick={onClick}>
-            OurFriendPage
+            Our friends
           </StyledNavLink>
         </StyledLi>
       </StyledUl>

@@ -1,14 +1,21 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { theme } from '../../../utils/theme.jsx';
 
 export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   font-weight: 500;
-  font-size: ${theme.fontSizes.x};
+  font-size: ${theme.fontSizes.xl};
   line-height: 1.38;
   color: #111111;
+  text-decoration: none;
+  gap: 20px;
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.baseColors.accentYellow};
+  }
 
   @media (${theme.breakpoints.tablet.media}) {
     font-size: ${theme.fontSizes.xxl};
@@ -40,4 +47,8 @@ export const StyledUl = styled.ul`
 export const StyledLi = styled.li`
   padding: 0;
   margin: 0;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
