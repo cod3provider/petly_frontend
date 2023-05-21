@@ -49,36 +49,36 @@ const FriendItem = ({
             <ContactsList>
               <ContactsItem>
                 <ContactText>Time:</ContactText>
-                {workDays === undefined || workDays === null ? (
+                {/*{workDays === undefined || workDays === null ? (*/}
 
-                  <>
-                  {workDays && workDays[0].isOpen ? (
-                      <>
-                        <ContactText>
-                          {/*{t('friends.time')}*/}
-                          Time
-                        </ContactText>
-                        <p>
-                          {workDays[0].from}-{workDays[0].to}
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <ContactText>
-                          {/*{t('friends.time')}*/}
-                          Time
-                        </ContactText>
-                        <p>
-                          {/*{t('friends.closed')}*/}
-                          closed
-                        </p>
-                      </>
-                    )}
-                  </>
+                {/*  <>*/}
+                {/*  {workDays && workDays[0].isOpen ? (*/}
+                {/*      <>*/}
+                {/*        <ContactText>*/}
+                {/*          /!*{t('friends.time')}*!/*/}
+                {/*          Time*/}
+                {/*        </ContactText>*/}
+                {/*        <p>*/}
+                {/*          {workDays[0].from}-{workDays[0].to}*/}
+                {/*        </p>*/}
+                {/*      </>*/}
+                {/*    ) : (*/}
+                {/*      <>*/}
+                {/*        <ContactText>*/}
+                {/*          /!*{t('friends.time')}*!/*/}
+                {/*          Time*/}
+                {/*        </ContactText>*/}
+                {/*        <p>*/}
+                {/*          /!*{t('friends.closed')}*!/*/}
+                {/*          closed*/}
+                {/*        </p>*/}
+                {/*      </>*/}
+                {/*    )}*/}
+                {/*  </>*/}
 
-                ) : (
-                      <ContactText>day and night</ContactText>
-                  )}
+                {/*) : (*/}
+                {/*      <ContactText>day and night</ContactText>*/}
+                {/*  )}*/}
 
                   {/*<LinesEllipsis*/}
                   {/*  text={workDays}*/}
