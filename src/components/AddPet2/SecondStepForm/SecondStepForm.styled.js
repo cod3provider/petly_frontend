@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
-import { IoPawOutline } from 'react-icons/io5';
+// import { IoPawOutline } from 'react-icons/io5';
 
 export const LabelStyle = styled(`label`)`
   display: block;
