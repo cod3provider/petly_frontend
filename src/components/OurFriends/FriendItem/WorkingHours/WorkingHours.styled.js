@@ -12,7 +12,6 @@ export const WorkList = styled.ul`
   border-radius: 10px;
   gap: 5px;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-  border-radius: 8px;
   background: #ffffff;
   z-index: 1;
 `;
