@@ -156,33 +156,33 @@ export const SpanHours = styled.span`
   }
 `;
 
-export const Button = styled.button`
-  font: inherit;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  border: none;
-  background-color: inherit;
-  outline: none;
-  transition: ${theme.transition.color};
-
-  @media ${theme.breakpoints.tablet.media} {
-    font-size: 14px;
-    line-height: 19px;
-  }
-  
-  @media ${theme.breakpoints.desktop.media} {
-    font-size: 16px;
-    line-height: 22px;
-  }
-  
-  &:hover {
-    color: ${theme.baseColors.accentColor};
-  }
-  `;
+// export const Button = styled.button`
+//   font: inherit;
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: 16px;
+//   display: flex;
+//   align-items: center;
+//   padding: 0;
+//   border: none;
+//   background-color: inherit;
+//   outline: none;
+//   transition: ${theme.transition.color};
+//
+//   @media ${theme.breakpoints.tablet.media} {
+//     font-size: 14px;
+//     line-height: 19px;
+//   }
+//
+//   @media ${theme.breakpoints.desktop.media} {
+//     font-size: 16px;
+//     line-height: 22px;
+//   }
+//
+//   &:hover {
+//     color: ${theme.baseColors.accentColor};
+//   }
+//   `;
 
 export const HoveredSpan = styled(ContactSpan)`
   transition: ${theme.transition.color};
