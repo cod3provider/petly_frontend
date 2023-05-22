@@ -2,6 +2,7 @@ import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
 
+
 import {
   CheckBox,
   CheckboxSpan,
@@ -11,10 +12,11 @@ import {
 
 const FirsStepForm = ({ setStep, setState, step, state }) => {
   const categories = ['your pet', 'sell', 'lostFound', 'inGoodHands'];
+
   return (
     <Formik
       initialValues={{
-        picked: state.type,
+        picked: 'your pet',
       }}
       onSubmit={values => {
         setStep('second');
@@ -55,5 +57,4 @@ FirsStepForm.propTypes = {
   setStep: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   step: PropTypes.string.isRequired,
-  state: PropTypes.object.isRequired,
 };

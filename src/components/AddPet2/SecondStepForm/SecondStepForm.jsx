@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+
+import { InputStyle, LabelStyle, DataPickercontainer } from './SecondStepForm.styled';
 import { Formik, Field, Form } from 'formik';
 import { useState, useEffect } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
-import { DataPickercontainer } from './SecondStepForm.styled';
-
 import DatePicker from '../../common/DatePicker';
+
 
 const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [FormState, setFormState] = useState({
@@ -47,8 +48,8 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           type === 'lost/found' ||
           type === 'in good hands') && (
           <>
-            <label htmlFor="titlePet">Title of add</label>
-            <Field
+            <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
+            <InputStyle
               id="titlePet"
               name="titlePet"
               placeholder="Title pet"
@@ -58,8 +59,10 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
             />
           </>
         )}
-        <label htmlFor="namePet">Name pet</label>
-        <Field
+
+
+        <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
+        <InputStyle
           id="namePet"
           name="namePet"
           placeholder="Name pet"
@@ -67,10 +70,10 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           onChange={handleChange}
           required
         />
+
         {/* оберни вдів і додай позишн реатів */}
-        <label htmlFor="birth">Date of birth</label>
-        <DataPickercontainer>
-          <Field
+<LabelStyle htmlFor="birth">Date of birth</LabelStyle>        <DataPickercontainer>
+          <InputStyle
             id="birth"
             name="birth"
             placeholder="Date of birth"
@@ -87,8 +90,9 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           )}
         </DataPickercontainer>
 
-        <label htmlFor="breed">Breed</label>
-        <Field
+
+        <LabelStyle htmlFor="breed">Breed</LabelStyle>
+        <InputStyle
           id="breed"
           name="breed"
           placeholder="Breed"

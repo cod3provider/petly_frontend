@@ -4,6 +4,18 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
+
+import {
+  LabelStyle,
+  InputStyle,
+} from '../SecondStepForm/SecondStepForm.styled';
+import {
+  TextareaStyle,
+  BoxImage,
+  IconPlus,
+  InputImage,
+} from './ThirdStepForm.styled';
+
 import { useNavigate } from 'react-router-dom';
 
 const ThirdStepForm = ({
@@ -14,6 +26,7 @@ const ThirdStepForm = ({
   step,
   backLinkHref,
 }) => {
+
   const [formState, setFormState] = useState({
     location: state.location,
     price: state.price,
@@ -139,13 +152,56 @@ const ThirdStepForm = ({
                 onChange={handleChange}
                 required
               />
-            </>
-          )}
 
-          <div>
-            <label htmlFor="image">Load the pet&#39;s image:</label>
-            {!file && (
-              <Field
+              <BsGenderMale />
+            </div>
+
+            <LabelStyle htmlFor="location">Location</LabelStyle>
+            <InputStyle
+              id="location"
+              name="location"
+              placeholder="Location"
+              value={formState.location}
+              onChange={handleChange}
+              required
+            />
+          </>
+        )}
+
+        {type === 'sell' && (
+          <>
+            <LabelStyle htmlFor="price">Price</LabelStyle>
+            <InputStyle
+              id="price"
+              name="price"
+              placeholder="Price"
+              value={formState.price}
+              onChange={handleChange}
+              required
+            />
+          </>
+        )}
+
+        <label htmlFor="image">Load the pet&#39;s image:</label>
+        <BoxImage>
+          {/* {!file && (
+            <Field
+              id="image"
+              type="file"
+              name="image"
+              onChange={handleChange}
+              value={formState.image}
+              required
+            />
+            
+          )} */}
+          {/* {file && <img src={file} alt="Preview image" />} */}
+
+          {file ? (
+            <img src={file} alt="Preview image" />
+          ) : (
+            <>
+              <InputImage
                 id="image"
                 type="file"
                 name="image"
@@ -153,26 +209,25 @@ const ThirdStepForm = ({
                 value={formState.image}
                 required
               />
-            )}
-            {file && <img src={file} alt="Preview image" />}
+              <IconPlus />
+            </>
+          )}
+          {/* Показати попередній перегляд зображення */}
+        </BoxImage>
 
-            {/* Показати попередній перегляд зображення */}
-          </div>
+        <LabelStyle htmlFor="Comments">Comments</LabelStyle>
+        <TextareaStyle
+          id="comments"
+          name="comments"
+          placeholder="Type breed"
+          value={formState.comments}
+          onChange={handleChange}
+          type="textarea"
+          required
+        />
 
-          <label htmlFor="Comments">Comments</label>
-          <Field
-            id="comments"
-            name="comments"
-            placeholder="Type breed"
-            value={formState.comments}
-            onChange={handleChange}
-            type="textarea"
-            required
-          />
-
-          <ButtonPet step={step} setStep={setStep} />
-        </Form>
-      )}
+        <ButtonPet step={step} setStep={setStep} />
+      </Form>
     </Formik>
   );
 };
