@@ -18,7 +18,7 @@ export const AddPetButtonLink = styled(NavLink)`
     color: #ffffff;
     position: fixed;
     right: calc(50vw - 140px);
-    top: 460px;
+    bottom: 50px;
     z-index: 2;
     border-radius: 50%;
     width: 80px;

@@ -5,6 +5,7 @@ import NoticesCategoriesList from "../NoticesCategoriesList/NoticesCategoriesLis
 import AddPetButton from "../AddPetButton/AddPetButton";
 import NoticesTitle from "../NoticesTitle/NoticesTitle";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import NoticesPaginationButtons from "../NoticesPaginationButtons/NoticesPaginationButtons";
 import { NoticesContainer, NoticesContentBox } from "../NoticesContainers/NoticesContainers.styled";
 
 import { searchNoticesByName, searchNoticesByCategory } from "../../../services/noticesApi";
@@ -35,15 +36,16 @@ const NoticesPage = () => {
     const [modalInfo, setModalInfo] = useState(null);
     const [query, setQuery] = useState('');
     const [notices, setNotices] = useState([]);
+    const [page, setPage] = useState(1);
 
     const searchNotices = (query) => {
         setQuery(query);
     }
 
     useEffect(() => {
-        const fetchNoticesByName = async (category) => {
+        const fetchNoticesByName = async (category, query, page) => {
             try {
-                const data = await searchNoticesByName(category, query);
+                const data = await searchNoticesByName(category, query, page);
                 setNotices(data);
             }
             catch (error) {
@@ -53,20 +55,20 @@ const NoticesPage = () => {
         if (query !== '') {
             fetchNoticesByName(category);
         }
-    }, [query, category]);
+    }, [query, category, page]);
 
     useEffect(() => {
-        const fetchNoticesByCategory = async (category) => {
+        const fetchNoticesByCategory = async (category, page) => {
             try {
-                const data = await searchNoticesByCategory(category);
+                const data = await searchNoticesByCategory(category, page);
                 setNotices(data);
             }
             catch (error) {
                 alert(error.message);
             }
         }
-        fetchNoticesByCategory(category);
-    }, [category]);
+        fetchNoticesByCategory(category, page);
+    }, [category, page]);
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -78,7 +80,7 @@ const NoticesPage = () => {
         setModalInfo(null);
     };
 
-    return <div>
+    return <main>
         <NoticesContainer>
                 <NoticesContentBox>
                 <NoticesTitle />
@@ -86,11 +88,12 @@ const NoticesPage = () => {
                 <NoticesSearch onSubmit={searchNotices} />
                 <NoticesCategoriesNav/>
                 <NoticesCategoriesList items={notices} openModal={openModal} />
+                <NoticesPaginationButtons currentPage={page} totalPages={5} onPageChange={setPage}/>
                 {isModalOpen && <ModalNotice close={closeModal} details={modalInfo} />}
             </NoticesContentBox>
         </NoticesContainer>
             
-    </div>;
+    </main>;
 }
 
 export default NoticesPage;
