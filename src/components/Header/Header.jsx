@@ -65,9 +65,27 @@ export default function Header() {
         {showModal && <CloseIcons onClick={handleCloseModal} />}
         {isLoggedIn && !isLoading && (
           <>
-            {isMobile && <UserPageLogo iconSize="20" userName={userName} />}
-            {isTablet && <UserPageLogo iconSize="28" userName={userName} />}
-            {isDesktop && <UserPageLogo iconSize="28" userName={userName} />}
+            {isMobile && (
+              <UserPageLogo
+                iconSize="28"
+                userName={isMobile && showModal ? userName : null}
+                inModal={isMobile && showModal}
+              />
+            )}
+            {isTablet && (
+              <UserPageLogo
+                iconSize="28"
+                userName={userName}
+                inModal={showModal}
+              />
+            )}
+            {isDesktop && (
+              <UserPageLogo
+                iconSize="28"
+                userName={userName}
+                inModal={showModal}
+              />
+            )}
           </>
         )}
         {isTablet && !showModal && !isLoggedIn && (

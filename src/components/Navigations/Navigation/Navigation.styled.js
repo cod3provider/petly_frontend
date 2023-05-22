@@ -27,28 +27,51 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const StyledUl = styled.ul`
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+
   list-style: none;
   padding: 0;
-  margin: 0;
 
   @media (${theme.breakpoints.tablet.media}) {
-    gap: 60px;
+    matgin-top: 92px;
+    font-size: ${theme.fontSizes.xxl};
   }
 
   @media (${theme.breakpoints.desktop.media}) {
     flex-direction: row;
-    gap: 40px;
+    margin-left: 40px;
+    margin-top: 0px;
   }
 `;
 
 export const StyledLi = styled.li`
+  font-size: ${theme.fontSizes.x};
   padding: 0;
-  margin: 0;
-  gap: 20px;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (${theme.breakpoints.tablet.media}) {
+    font-size: ${theme.fontSizes.xxl};
+    &:not(:first-child) {
+      margin-top: 60px;
+    }
+  }
+
+  @media (${theme.breakpoints.desktop.media}) {
+    &:not(:first-child) {
+      margin-left: 40px;
+      margin-top: 0px;
+    }
+    &:last-child {
+      margin-right: 488px;
+    }
+  }
 `;

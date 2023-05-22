@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import { BurgerIcons } from './BurgerMenu.styled.js';
+import { BurgerIcons, BurgerWrapper } from './BurgerMenu.styled.js';
 
 export default function BurgerMenu({ onClick }) {
   return (
-    <div onClick={onClick}>
+    <BurgerWrapper onClick={onClick}>
       <BurgerIcons />
-    </div>
+    </BurgerWrapper>
   );
 }
 

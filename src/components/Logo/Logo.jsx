@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
 import { LogoContainer } from './Logo.styled.js';
+import PropTypes from 'prop-types';
 
-export default function Logo() {
+export default function Logo({ isMobile }) {
+  const height = isMobile ? '20px' : '28px';
+
   return (
     <Link to="/">
       <LogoContainer>
         <svg
           width={162}
-          height={20}
+          height={height}
           viewBox="0 0 162 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -71,3 +74,7 @@ export default function Logo() {
     </Link>
   );
 }
+
+Logo.prototype = {
+  isMobile: PropTypes.string,
+};
