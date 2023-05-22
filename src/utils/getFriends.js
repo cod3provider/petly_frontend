@@ -8,7 +8,7 @@ const instance = axios.create({
 
 export const getFriends = async () => {
   const { data } = await instance.get('/partners');
-  console.log(data);
+  // console.log(data);
   return data;
 };
 

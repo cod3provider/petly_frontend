@@ -8,13 +8,13 @@ import {
   ImageNotFound,
   Title,
 } from './NotFound.styled.js';
-import { BackgroundImage } from '../../components/common/BgImage/BgImage.styled.js';
+import { BackgroundImage, BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
 
 import { theme } from '../../utils/theme.jsx';
 
-import bgImageMobile from '../../pages/HomePage/img/background/bg_mobile.jpg';
-import bgImageTablet from '../HomePage/img/background/bg_tablet.jpg';
-import bgImageDesktop from '../HomePage/img/background/bg_desktop.jpg';
+import bgImageMobile from '../../assets/img/background/bg_mobile.png';
+import bgImageTablet from '../../assets/img/background/bg_tablet.png';
+import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
 import notFoundImg from './img/notfound.png';
 
 const NotFoundPage = () => {
@@ -24,29 +24,31 @@ const NotFoundPage = () => {
 
   return (
     <>
-      {isMobile && (
-        <BackgroundImage
-          src={bgImageMobile}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isMobile && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageMobile}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {isTablet && (
-        <BackgroundImage
-          src={bgImageTablet}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isTablet && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageTablet}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {isDesktop && (
-        <BackgroundImage
-          src={bgImageDesktop}
-          alt="image hero: two dogs and one cat"
-          loading="lazy"
-        />
-      )}
+      {/*{isDesktop && (*/}
+      {/*  <BackgroundImage*/}
+      {/*    src={bgImageDesktop}*/}
+      {/*    alt="image hero: two dogs and one cat"*/}
+      {/*    loading="lazy"*/}
+      {/*  />*/}
+      {/*)}*/}
+
+      <BackgroundImageDiv />
 
       <Container>
         <Title>Ooops! This page not found :(</Title>

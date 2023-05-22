@@ -7,12 +7,17 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Manrope', sans-serif;
+    background: #FEF9F9;
   }
 
   img {
     display: block;
     width: 100%;
     height: auto;
+  }
+  
+  a {
+    text-decoration: none;
   }
 
   h1,
