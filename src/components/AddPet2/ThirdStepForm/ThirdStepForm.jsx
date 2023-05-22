@@ -120,8 +120,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
                       checked={values.sex === gander}
                       onChange={handleChange}
                     />
-                    {'Female' === <BsGenderFemale /> &&
-                      'Male' === <BsGenderMale />}
+                    {'female' === <BsGenderFemale /> &&
+                      'male' === <BsGenderMale />}
                     {gander}
                   </label>
                 ))}
