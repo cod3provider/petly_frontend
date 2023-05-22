@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 // import { Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import { ToastContainer } from 'react-toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 

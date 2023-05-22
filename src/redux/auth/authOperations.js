@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 // import { getCurrentUser } from 'redux/user/userOperations';
-import { toast } from 'react-toast';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
@@ -28,6 +28,7 @@ export const register = createAsyncThunk(
       );
       console.log(credentials);
     } catch (error) {
+      toast.error('Email is invalid or it is used');
       console.log(error.response.data);
       return rejectWithValue(error.message);
     }
@@ -60,6 +61,7 @@ export const logout = createAsyncThunk(
       await axios.post('users/logout');
       token.unset();
     } catch (error) {
+      toast.error(error.response.data);
       console.log(error.response.data);
       return rejectWithValue(error.message);
     }
