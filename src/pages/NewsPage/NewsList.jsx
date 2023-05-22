@@ -98,7 +98,7 @@ const [newsPerPage] = useState(6);
       <div className="search-container">
         <input
           type="text"
-          placeholder="Search news..."
+          placeholder="Search"
           value={searchKeyword}
           onChange={handleSearchInputChange}
         />
