@@ -20,22 +20,30 @@ export const InputStyle = styled('input')`
 
   padding: 10px 16px;
   border-radius: 40px;
+  border: 1px solid;
   border-color: ${props =>
     props.error ? 'red' : props.success ? '#54ADFF' : '#54ADFF'};
   background-color: ${theme.baseColors.filterActiveTextColor};
   font-size: ${theme.fontSizes.s};
   cursor: pointer;
 
-  :hover:not(:disabled) {
-    background-color: ${theme.baseColors.filterActiveTextColor};
+  outline: none;
+
+  &:hover,
+  &:focus {
+    border-color: #ffc107;
   }
+
+  /* &:hover:not(:disabled) {
+    background-color: ${theme.baseColors.filterActiveTextColor};
+  } */
 
   @media screen and (min-width: 768px) {
     margin-top: 32px;
     font-size: ${theme.fontSizes.m};
   }
+`;
 
 export const DataPickercontainer = styled.div`
   position: relative;
-
 `;

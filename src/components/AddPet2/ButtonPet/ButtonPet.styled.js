@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
 import { IoPawOutline } from 'react-icons/io5';
 import { FiArrowLeft } from 'react-icons/fi';
+import { NavLink } from 'react-router-dom';
 
 export const ButtonNext = styled.button`
   font-family: 'Manrope';
@@ -24,6 +25,10 @@ export const IconButton = styled(IoPawOutline)`
   transform: rotate(40deg);
 `;
 export const ButtonBack = styled.button`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+
   font-family: 'Manrope';
 
   font-weight: 700;
@@ -42,7 +47,16 @@ export const ArrowButtonIcon = styled(FiArrowLeft)`
   margin-right: 12px;
   align-items: center;
   letter-spacing: 0.04em;
+  /* background-color: #54adff; */
   color: #54adff;
-  color: ${theme.baseColors.buttonTextColor};
-  transform: rotate(40deg);
+  /* transform: rotate(40deg); */
+`;
+
+export const LinkStyled = styled(NavLink)`
+  font-weight: 700;
+  font-size: 16px;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: ${theme.baseColors.accentButtonColor};
 `;

@@ -5,6 +5,7 @@ import {
   IconButton,
   ButtonBack,
   ArrowButtonIcon,
+  LinkStyled,
 } from './ButtonPet.styled';
 
 export const ButtonPet = ({ step, setStep }) => {
@@ -28,15 +29,18 @@ export const ButtonPet = ({ step, setStep }) => {
 
   return (
     <>
-
       <ButtonNext type="submit">
         {step === 'third' ? 'Done' : 'Next'}
         <IconButton />
       </ButtonNext>
       <ButtonBack type="button" onClick={handleBack}>
-        {step === 'first' ? <Link to={backLinkHref}> <ArrowButtonIcon /> Cancel</Link> : 'Back'}
+        <ArrowButtonIcon />
+        {step === 'first' ? (
+          <LinkStyled to={backLinkHref}>Cancel</LinkStyled>
+        ) : (
+          'Back'
+        )}
       </ButtonBack>
-
     </>
   );
 };

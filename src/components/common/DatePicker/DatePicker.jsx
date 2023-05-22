@@ -74,5 +74,5 @@ const DatePicker = ({ setSelectedDay }) => {
 export default DatePicker;
 
 DatePicker.propTypes = {
-  setSelectedDay: PropTypes.object.isRequired,
+  setSelectedDay: PropTypes.func.isRequired,
 };
