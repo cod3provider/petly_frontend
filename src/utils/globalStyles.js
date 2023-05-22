@@ -15,6 +15,10 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     height: auto;
   }
+  
+  a {
+    text-decoration: none;
+  }
 
   h1,
   h2,
