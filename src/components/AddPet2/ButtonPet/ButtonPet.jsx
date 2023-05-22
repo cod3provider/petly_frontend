@@ -24,7 +24,7 @@ export const ButtonPet = ({ step, setStep }) => {
   return (
     <>
       <button type="submit">
-        {step === 'third' ? <>Done</> : 'Next'}
+        {step === 'third' ? 'Done' : 'Next'}
         <IoPawOutline />
       </button>
       <button type="button" onClick={handleBack}>
