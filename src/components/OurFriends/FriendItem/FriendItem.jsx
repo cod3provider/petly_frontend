@@ -6,21 +6,19 @@ import LinesEllipsis from 'react-lines-ellipsis';
 import { useState } from 'react';
 
 import {
+  // Button,
   Card,
   CardImage,
   ContactLinks,
   FriendName,
   FriendLink,
   ContactsList,
-  ContactText, ContactsItem, SpanHours,
+  ContactText, ContactsItem, SpanHours, ContactSpan, HoveredSpan,
 } from './FriendItem.styled.js';
 
 import defaultImg from '../../../assets/defaultFriend.png';
-// import PopupDays from './PopupDays.jsx';
+
 import WorkingHours from './WorkingHours/WorkingHours.jsx';
-// import Popup from 'reactjs-popup';
-// import WorkingHours from './WorkingHours.jsx';
-// import Popup from './PopupDays.jsx';
 
 const FriendItem = ({
   _id,
@@ -99,43 +97,33 @@ const FriendItem = ({
               {/*)}*/}
 
               <ContactsItem
-                // target='_blank' data-tooltip-id="my-tooltip"
-                // data-tooltip-content={workDays}
-                // data-tooltip-place="top"
-
                 onClick={() => {
                 if (workingDays) setIsVisible(!isVisible);
               }}
-                            // onMouseLeave={() => {
-                            //   setTimeout(() => {
-                            //     setIsVisible(true);
-                            //   }, 1000);
-                            // }}
               >
                 <ContactText>Time:</ContactText>
                 <SpanHours>{workDays === undefined || workDays === null ? (
                   <>
-                    <ContactText>day and night</ContactText>
+                    <ContactSpan>day and night</ContactSpan>
                   </>
                 ) : (
                   <>
                   {workDays[0]?.isOpen ? (
                       <>
-                        <p>
+                        <HoveredSpan>
                           {workDays[0].from} - {workDays[0].to}
-                        </p>
+                        </HoveredSpan>
                       </>
                   ) : (
                       <>
-                        <p>
+                        <HoveredSpan>
                           closed
-                        </p>
+                        </HoveredSpan>
                       </>
                     )}
                     {isVisible || <WorkingHours workingDays={workingDays} />}
                   </>
                 )}</SpanHours>
-
               </ContactsItem>
 
               <ContactsItem>
@@ -144,7 +132,7 @@ const FriendItem = ({
                   <FriendLink href={map} target='_blank' data-tooltip-id="my-tooltip"
                               data-tooltip-content={address}
                               data-tooltip-place="top">
-                    <Tooltip id="my-tooltip" />
+                    <Tooltip id="my-tooltip" style={{ backgroundColor: "#54ADFF", color: "#FFF" }} />
                     <LinesEllipsis
                       text={address}
                       maxLine='1'
@@ -154,7 +142,7 @@ const FriendItem = ({
                     />
                   </FriendLink>
                 ) : (
-                  <ContactText>website only</ContactText>
+                  <ContactSpan>website only</ContactSpan>
                 )}
               </ContactsItem>
 
@@ -164,7 +152,7 @@ const FriendItem = ({
                   {email ? (
                     <FriendLink href={`mailto:${email}`}>{email}</FriendLink>
                   ) : (
-                    <ContactText>website only</ContactText>
+                    <ContactSpan>website only</ContactSpan>
                   )}
               </ContactsItem>
 
@@ -173,15 +161,12 @@ const FriendItem = ({
                   {phone ? (
                     <FriendLink href={`tel:${phone}`}>{phone}</FriendLink>
                   ) : (
-                    <ContactText>email only</ContactText>
+                    <ContactSpan>email only</ContactSpan>
                   )}
               </ContactsItem>
             </ContactsList>
           {/*</LinkWrap>*/}
         </ContactLinks>
-        {/*<button onClick={() => handleWorkingHoursClick(partner.workingHours)}>*/}
-        {/*  Робочі години*/}
-        {/*</button>*/}
       </Card></>
   )
 }

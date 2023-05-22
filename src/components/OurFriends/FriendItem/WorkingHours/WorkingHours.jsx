@@ -4,15 +4,15 @@ import { WorkList, WorkSpan, WorkText } from './WorkingHours.styled.js';
 export const WorkingHours = ({ workingDays }) => {
   return (
     <WorkList>
-      {workingDays.map((item, idx) => (
+      {workingDays.map((workDay, idx) => (
         <li key={idx}>
-          {item?.isOpen ? (
+          {workDay?.isOpen ? (
             <WorkText>
-              <WorkSpan>{item.day}</WorkSpan> <WorkSpan>{item.from}-{item.to}</WorkSpan>
+              <WorkSpan>{workDay.day}</WorkSpan> <WorkSpan>{workDay.from}-{workDay.to}</WorkSpan>
             </WorkText>
           ) : (
             <WorkText>
-              <WorkSpan>{item.day}</WorkSpan> <WorkSpan>closed</WorkSpan>
+              <WorkSpan>{workDay.day}</WorkSpan> <WorkSpan>closed</WorkSpan>
             </WorkText>
           )}
         </li>

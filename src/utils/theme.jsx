@@ -50,6 +50,7 @@ export const theme = {
 	},
 
 	transition: {
-		main: 'color 250ms linear',
+		color: 'color 250ms linear',
+		bg: 'background 250ms linear',
 	},
 }
