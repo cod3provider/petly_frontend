@@ -13,12 +13,6 @@ export const Span = styled.span`
   }
 `;
 
-export const CheckIcon = styled.div`
-  fill: none;
-  width: 24px;
-  height: 24px;
-`;
-
 export const EditButton = styled.button`
   cursor: pointer;
   position: absolute;
@@ -33,12 +27,6 @@ export const EditButton = styled.button`
   margin: 0px;
   background: transparent;
   border: none;
-`;
-
-export const Edit = styled.div`
-  width: 24px;
-  height: 24px;
-  fill: #54adff;
 `;
 
 export const Input = styled.input`

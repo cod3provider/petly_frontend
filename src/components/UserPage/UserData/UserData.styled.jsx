@@ -14,7 +14,7 @@ export const MainWrap = styled.div`
 `;
 
 export const Confirm = styled.div`
-  fill: none;
+  background-color: #bf342a;
   width: 24px;
   height: 24px;
 `;
@@ -41,7 +41,7 @@ export const ErrorWrap = styled.div`
 `;
 
 export const CrossIcon = styled.div`
-  fill: none;
+  background-color: #bf342a;
   width: 24px;
   height: 24px;
   stroke: #bf342a;
@@ -151,9 +151,11 @@ export const Label = styled.label`
 `;
 
 export const CameraIcon = styled.div`
+  background-color: #bf342a;
+
   width: 24px;
   height: 24px;
-  fill: none;
+  background-color: blue;
 `;
 
 export const Wrapper = styled.div``;

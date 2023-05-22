@@ -10,8 +10,6 @@ import { ContainerStyled } from '../../components/common/Container/Container.sty
 import { SectionStyled } from '../../components/common/Section/Section.styled';
 import { Wrap, UserDiv, Title } from './UserPage.styled';
 
-// import { ErrorBoundary } from 'react-error-boundary';
-
 function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
@@ -21,7 +19,6 @@ function UserPage() {
   }, [dispatch]);
 
   return (
-    // <ErrorBoundary fallback={<div>Something went wrong</div>}>
     <ContainerStyled style={{ background: '#FEF9F9' }}>
       <SectionStyled>
         <UserDiv>
@@ -36,7 +33,6 @@ function UserPage() {
         </UserDiv>
       </SectionStyled>
     </ContainerStyled>
-    // </ErrorBoundary>
   );
 }
 export default UserPage;

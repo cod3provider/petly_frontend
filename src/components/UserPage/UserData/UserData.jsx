@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-// import { AiOutlineCamera } from 'react-icons/ai';
-// import { BiPencil } from 'react-icons/bi';
+import { AiOutlineCamera } from 'react-icons/ai';
+import { BiPencil } from 'react-icons/bi';
+import { CiLogout } from 'react-icons/ci';
+import { theme } from '../../../utils/theme';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -46,9 +48,10 @@ const UserData = () => {
 
   const fileRef = useRef(null);
   const userData = useSelector(getUser);
-  console.log(userData.avatar);
+  // console.log(userData);
+  // console.log(avatarUser);
 
-  const { avatar } = userData;
+  const { avatarUrl } = userData;
 
   // const [showModal, setShowModal] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -60,12 +63,12 @@ const UserData = () => {
 
   useEffect(() => {
     const updateAvatar = () => {
-      if (avatar) {
-        setAvatarUser({ avatar });
+      if (avatarUrl) {
+        setAvatarUser({ avatarUrl });
       }
     };
     updateAvatar();
-  }, [avatar]);
+  }, [avatarUrl]);
 
   // const handleChangeAvatar = event => {
   //   event.preventDefault();
@@ -87,7 +90,7 @@ const UserData = () => {
     <MainWrap>
       <FormThumb onSubmit={handleChangeFile}>
         {avatarUser ? (
-          <ImageDef src={avatarUser} alt="User Avatar" />
+          <ImageDef src={avatarUser.avatarUrl} alt="User Avatar" />
         ) : (
           <ImageDef
             src={defaultUserImg}
@@ -112,7 +115,11 @@ const UserData = () => {
             />
             <Label htmlFor="input__file">
               <IconWrap>
-                <CameraIcon />
+                <AiOutlineCamera
+                  style={{ marginRight: '11px' }}
+                  size="24px"
+                  color={theme.baseColors.accentButtonColor}
+                />
               </IconWrap>
               <InputText>Edit photo</InputText>
             </Label>
