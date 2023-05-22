@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
 
-import { ReactComponent as DeleteIcon } from '../../../icons/trash.svg';
+// import { ReactComponent as DeleteIcon } from '../../../icons/trash.svg';
 
 export const Text = styled.p`
   font-weight: 700;
@@ -35,7 +35,7 @@ export const Image = styled.img`
   }
 `;
 
-export const Icon = styled(DeleteIcon)`
+export const Icon = styled.div`
   fill: none;
   stroke: rgb(84, 173, 255);
   width: 24px;

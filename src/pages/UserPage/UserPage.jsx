@@ -12,7 +12,7 @@ import { Wrap, UserDiv, Title } from './UserPage.styled';
 
 // import { ErrorBoundary } from 'react-error-boundary';
 
-export default function UserPage() {
+function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
 
@@ -28,14 +28,15 @@ export default function UserPage() {
           <div>
             <Title>My information:</Title>
             <Wrap>
-              {/* <UserData /> */}
+              <UserData />
               {/* <Logout onClick={} /> */}
             </Wrap>
           </div>
-          {/* <UserPets /> */}
+          <UserPets />
         </UserDiv>
       </SectionStyled>
     </ContainerStyled>
     // </ErrorBoundary>
   );
 }
+export default UserPage;

@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
 
-import { ReactComponent as Camera } from '../../../icons/camera.svg';
-import { ReactComponent as Cross } from '../../../icons/cross-small-2.svg';
-import { ReactComponent as ConfirmIcon } from '../../../icons/check.svg';
-
 export const MainWrap = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
@@ -17,7 +13,7 @@ export const MainWrap = styled.div`
   }
 `;
 
-export const Confirm = styled(ConfirmIcon)`
+export const Confirm = styled.div`
   fill: none;
   width: 24px;
   height: 24px;
@@ -44,7 +40,7 @@ export const ErrorWrap = styled.div`
   color: #f43f5e;
 `;
 
-export const CrossIcon = styled(Cross)`
+export const CrossIcon = styled.div`
   fill: none;
   width: 24px;
   height: 24px;
@@ -154,7 +150,7 @@ export const Label = styled.label`
   }
 `;
 
-export const CameraIcon = styled(Camera)`
+export const CameraIcon = styled.div`
   width: 24px;
   height: 24px;
   fill: none;

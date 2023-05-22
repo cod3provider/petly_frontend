@@ -4,18 +4,19 @@ import { useSelector } from 'react-redux';
 import { refreshThunk, getIsLoggedIn } from '../../redux/auth/authSelectors.js';
 
 const PrivateRoute = ({ children }) => {
+  console.log(children);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isRefreshing = useSelector(refreshThunk);
-
   if (isRefreshing) {
     return null;
   }
 
-  return !isLoggedIn ? <Navigate to="/login" /> : children;
+  // const responce = !isLoggedIn ? <Navigate to="/login" /> : children;
+  return children;
 };
 
-PrivateRoute.propTypes = {
-  children: PropTypes.node,
-};
+// PrivateRoute.propTypes = {
+//   children: PropTypes.node,
+// };
 
 export default PrivateRoute;
