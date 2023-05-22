@@ -16,7 +16,7 @@ import {
   ContactText, ContactsItem, SpanHours, ContactSpan, HoveredSpan,
 } from './FriendItem.styled.js';
 
-import defaultImg from '../../../assets/defaultFriend.png';
+import defaultImg from '../../../assets/img/defaultFriend.png';
 
 import WorkingHours from './WorkingHours/WorkingHours.jsx';
 

@@ -21,7 +21,7 @@ import {
 const NoticeCategoryItem = ({ data, openModal }) => {
     return <NoticeCategoryItemItem>
         <NoticeCategoryItemPhotoContainer>
-            <img src={data.img} alt="pet photo" />
+            <img src={data.noticeImage} alt="pet photo" />
             <NoticeCategoryItemCategoryContainer>
                 <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
             </NoticeCategoryItemCategoryContainer>

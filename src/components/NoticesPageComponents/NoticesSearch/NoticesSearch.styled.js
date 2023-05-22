@@ -29,6 +29,7 @@ export const NoticesSearchForm = styled.form`
     overflow: hidden;
     box-shadow: 3px 8px 14px 0px #88C6FD30;
     margin-top: 24px;
+    background: #ffffff;
 
     &:focus,
     &:hover {

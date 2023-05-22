@@ -5,17 +5,14 @@ const instance = axios.create({
 })
 
 export const searchNoticesByCategory = async (category) => {
-    const { data } = await instance.get(`category/sell`, {
-        // params: {
-        //     category,
-        // }
-    });
+    const { data } = await instance.get(`category/${category}`, {});
     return data;
 }
 
-export const searchNoticesByName = async (query) => {
+export const searchNoticesByName = async (category, query) => {
     const { data } = await instance.get(`find/`, {
         params: {
+            category,
             query,
         }
     });

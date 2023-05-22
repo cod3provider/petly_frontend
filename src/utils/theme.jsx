@@ -13,7 +13,7 @@ export const theme = {
 		filterNonActiveTextColor: '#54ADFF',
 		filterActiveBgColor: '#54ADFF',
 		filterActiveTextColor: '#FEF9F9',
-	},
+	}, 
 
 	fontSizes: {
 		xs: '12px',

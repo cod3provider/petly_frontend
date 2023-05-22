@@ -1,25 +1,32 @@
 import PropTypes from 'prop-types';
 import { Formik, Field, Form } from 'formik';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
-const SecondStepForm = ({ setStep, setState, type, step }) => {
+import { DataPickercontainer } from './SecondStepForm.styled';
+
+import DatePicker from '../../common/DatePicker';
+
+const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [FormState, setFormState] = useState({
-    namePet: '',
-    birth: '',
-    breed: '',
-    titlePet: '',
+    namePet: state.namePet,
+    birth: state.birth,
+    breed: state.breed,
+    titlePet: state.titlePet,
   });
 
-  // function goBack() {
-  //   history.back();
-  // }
-  // const handleBack = () => {
-  //   setStep('first');
-  //   setState(prev => ({
-  //     ...prev,
-  //     ...FormState,
-  //   }));
-  // };
+  const [isDateOpen, setIsDateOpen] = useState(false);
+
+  const [selectedDay, setSelectedDay] = useState(null);
+
+  useEffect(() => {
+    if (!selectedDay) {
+      return;
+    }
+    setFormState(prev => ({ ...prev, birth: selectedDay }));
+    setSelectedDay(null);
+    setIsDateOpen(false);
+  }, [FormState, selectedDay]);
+
   const handleChange = e => {
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -51,7 +58,6 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
             />
           </>
         )}
-
         <label htmlFor="namePet">Name pet</label>
         <Field
           id="namePet"
@@ -61,17 +67,25 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
           onChange={handleChange}
           required
         />
-
+        {/* оберни вдів і додай позишн реатів */}
         <label htmlFor="birth">Date of birth</label>
-
-        <Field
-          id="birth"
-          name="birth"
-          placeholder="Date of birth"
-          value={FormState.birth}
-          onChange={handleChange}
-          required
-        />
+        <DataPickercontainer>
+          <Field
+            id="birth"
+            name="birth"
+            placeholder="Date of birth"
+            value={FormState.birth}
+            onChange={handleChange}
+            onFocus={() => setIsDateOpen(true)}
+            required
+          />
+          {isDateOpen && (
+            <DatePicker
+              selectedDay={selectedDay}
+              setSelectedDay={setSelectedDay}
+            />
+          )}
+        </DataPickercontainer>
 
         <label htmlFor="breed">Breed</label>
         <Field
@@ -83,9 +97,6 @@ const SecondStepForm = ({ setStep, setState, type, step }) => {
           required
         />
 
-        {/* <button type="button" onClick={handleBack}>
-          back
-        </button> */}
         <ButtonPet step={step} setStep={setStep} />
       </Form>
     </Formik>
@@ -99,4 +110,5 @@ SecondStepForm.propTypes = {
   setState: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
+  state: PropTypes.object.isRequired,
 };
