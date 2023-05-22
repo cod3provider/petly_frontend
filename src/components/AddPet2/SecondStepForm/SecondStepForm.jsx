@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 
 import { InputStyle, LabelStyle, DataPickercontainer } from './SecondStepForm.styled';
 import { Formik, Field, Form } from 'formik';
+
+import * as yup from 'yup';
+
 import { useState, useEffect } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
 import DatePicker from '../../common/DatePicker';
@@ -41,8 +44,37 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
     }));
   };
 
+  const secondStepValidationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Enter the pet's name")
+      .label('Name')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(16),
+    data: yup
+      .string()
+      .required('Enter a date of birth')
+      .label('Data')
+      .matches(
+        /^\d{2}\.\d{2}\.\d{4}$/,
+        'The date must be in the format DD.MM.YYYY'
+      ),
+    breed: yup
+      .string()
+      .required('Enter the breed of the pet')
+      .label('Breed')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(16),
+  });
+
   return (
-    <Formik initialValues={FormState} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={FormState}
+      onSubmit={handleSubmit}
+      validationSchema={secondStepValidationSchema}
+    >
       <Form>
         {(type === 'sell' ||
           type === 'lost/found' ||

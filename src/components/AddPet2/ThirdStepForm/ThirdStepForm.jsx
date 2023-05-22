@@ -3,6 +3,7 @@ import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import * as yup from 'yup';
 import ButtonPet from '../ButtonPet/ButtonPet';
 
 import {
@@ -34,12 +35,14 @@ const ThirdStepForm = ({
     image: state.image,
     sex: state.sex,
   });
+
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
   const genders = ['female', 'male'];
 
   axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com';
+
 
   const handleChange = e => {
     if (e.target.name === 'image') {
@@ -102,13 +105,53 @@ const ThirdStepForm = ({
     }
   };
 
+  const thirdStepValidationSchema = yup.object().shape({
+    location: yup
+      .string()
+      .required('Enter a location')
+      // .location('Invalid location format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(168)
+      .label('Location'),
+    price: yup
+      .number()
+      .required('Enter the price of the pet')
+      // .price('Price location format')
+      .positive('The price must be greater than 0')
+      .test(value => {
+        if (value !== undefined) {
+          const decimalRegex = /^\d+(\.\d{1,2})?$/;
+          return decimalRegex.test(value.toString());
+        }
+        return true;
+      })
+      .label('Price'),
+    comments: yup
+      .string()
+      // .comments('Invalid comments format')
+      .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+      .min(2)
+      .max(120)
+      .label('Comments'),
+  });
+
   return (
-    <Formik initialValues={formState} onSubmit={handleSubmit}>
+
+    <Formik
+      initialValues={formState}
+      onSubmit={
+        handleSubmit();
+      }}
+      validationSchema={thirdStepValidationSchema}
+    >
+  
       {() => (
         <Form>
           {(type === 'sell' ||
             type === 'lostFound' ||
             type === 'inGoodHands') && (
+
             <>
               <p>The Sex</p>
               <div id="my-radio-group">
@@ -119,7 +162,9 @@ const ThirdStepForm = ({
                       name="sex"
                       value={gander}
                       required
+
                       checked={formState.sex === gander}
+
                       onChange={handleChange}
                     />
                     {'female' === <BsGenderFemale /> &&

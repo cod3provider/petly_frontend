@@ -16,7 +16,7 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
   return (
     <Formik
       initialValues={{
-        picked: 'your pet',
+        picked: state.type,
       }}
       onSubmit={values => {
         setStep('second');
@@ -57,4 +57,5 @@ FirsStepForm.propTypes = {
   setStep: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   step: PropTypes.string.isRequired,
+  state: PropTypes.object.isRequired,
 };
