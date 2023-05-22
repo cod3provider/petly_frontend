@@ -11,7 +11,7 @@ export default function Navigation({ onClick }) {
           </StyledNavLink>
         </StyledLi>
         <StyledLi>
-          <StyledNavLink to="/notices" onClick={onClick}>
+          <StyledNavLink to="/notices/sell" onClick={onClick}>
             NoticesPage
           </StyledNavLink>
         </StyledLi>
