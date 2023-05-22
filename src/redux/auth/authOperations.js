@@ -1,36 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import localStorage from 'redux-persist/es/storage';
 // import { getCurrentUser } from 'redux/user/userOperations';
 
-axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
+// axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
+axios.defaults.baseURL = 'http://localhost:8989';
 
 axios.interceptors.response.use(
   response => response,
   async error => {
     if (error.response.status === 401) {
       // нужно получить рефреш токен из стейта
-      const refreshToken = useSelector(getRefreshToken);
-
+      const refreshToken = localStorage.getItem("refreshToken");
       try {
         const { data } = await axios.post('users/refresh', { refreshToken });
-
         token.set(data.accesToken);
-
+        localStorage.setItem("refreshToken", data.refreshToken)
         //тут обновить стейт с новыми токенами
-
         return axios(error.config);
       } catch (error) {
         return Promise.reject(error);
       }
     }
-
     return Promise.reject(error);
   }
 );
 
 export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  set(accesToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accesToken}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
@@ -59,12 +57,12 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'users/login',
-  async (credentials, { rejectWithValue, dispatch }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
-      token.set(data.token);
-
+      token.set(data.accessToken);
+      localStorage.getItem('accessToken');
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -77,7 +75,7 @@ export const logout = createAsyncThunk(
   'users/logout',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accesToken;
       token.set(value);
       await axios.post('users/logout');
       token.unset();
@@ -91,7 +89,7 @@ export const logout = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue, getState }) => {
-    const value = getState().auth.token;
+    const value = getState().auth.accesToken;
     if (value) {
       token.set(value);
     }
