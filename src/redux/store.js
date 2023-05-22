@@ -12,9 +12,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/authSlice';
+import { petsReducer } from './petsData/petsDataSlice';
 
 // сюди доімпортувати свої редюсери
-
 
 const authPersistConfig = {
   key: 'auth',
@@ -32,7 +32,8 @@ const rootRersistConfig = {
 
 const rootReducer = combineReducers({
   auth: authPersistedReducer,
-//
+  pets: petsReducer,
+  //
 });
 
 const rootPersistedReducer = persistReducer(rootRersistConfig, rootReducer);
@@ -46,7 +47,7 @@ export const store = configureStore({
       },
     }),
   logger,
-//   devTools: process.env.NODE_ENV === 'development',
+  //   devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

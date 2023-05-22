@@ -28,11 +28,11 @@ export default function UserPage() {
           <div>
             <Title>My information:</Title>
             <Wrap>
-              {/* <UserData /> */}
+              <UserData />
               {/* <Logout onClick={} /> */}
             </Wrap>
           </div>
-          {/* <UserPets /> */}
+          <UserPets />
         </UserDiv>
       </SectionStyled>
     </ContainerStyled>

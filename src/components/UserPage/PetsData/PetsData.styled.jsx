@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
-import { ReactComponent as AddIcon } from '../../../icons/plus-small-user.svg';
+// import { ReactComponent as AddIcon } from '../../../icons/plus-small-user.svg';
 
-export const PlusIcon = styled(AddIcon)`
+export const PlusIcon = styled.div`
   width: 24px;
   height: 24px;
   margin-left: 8px;

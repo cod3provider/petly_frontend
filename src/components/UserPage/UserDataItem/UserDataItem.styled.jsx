@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
 
-import { ReactComponent as EditIcon } from '../../../icons/edit-2.svg';
-import { ReactComponent as Check } from '../../../icons/check.svg';
+// import { ReactComponent as EditIcon } from '../../../icons/edit-2.svg';
+// import { ReactComponent as Check } from '../../../icons/check.svg';
 
 export const Span = styled.span`
   min-width: 0px;
@@ -16,7 +16,7 @@ export const Span = styled.span`
   }
 `;
 
-export const CheckIcon = styled(Check)`
+export const CheckIcon = styled.div`
   fill: none;
   width: 24px;
   height: 24px;
@@ -38,7 +38,7 @@ export const EditButton = styled.button`
   border: none;
 `;
 
-export const Edit = styled(EditIcon)`
+export const Edit = styled.div`
   width: 24px;
   height: 24px;
   fill: #54adff;
