@@ -1,6 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 // import { getCurrentUser } from 'redux/user/userOperations';
+import { toast } from 'react-toast';
 
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
@@ -40,10 +41,11 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
       token.set(data.token);
-
+      dispatch(getCurrentUser());
       return data;
     } catch (error) {
       console.log(error.response.data);
+      toast.error('Email or password is wrong');
       return rejectWithValue(error.message);
     }
   }
@@ -65,7 +67,7 @@ export const logout = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'auth/getCurrentUser',
+  'users/getCurrentUser',
   async (_, { rejectWithValue, getState }) => {
     const value = getState().auth.token;
     if (value) {

@@ -90,6 +90,9 @@ function RegisterForm() {
           };
           dispatch(register(newUser));
           resetForm();
+                      setIsPasswordSecure(false);
+                      setIsEmailValid(false);
+                      setIsConfirmPassword(false);
           console.log(newUser);
         }}
       >
