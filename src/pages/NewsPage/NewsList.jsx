@@ -6,9 +6,14 @@ import getNews from '../../utils/getNews.js';
 
 import { TitleStyled } from '../../components/Title/Title.styled.js';
 import { NewsCardContainer } from '../../components/News/News.styled.js';
+import Pagination from '../../components/common/Pagination';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
+  const [page, setPage] = useState(1);
+
+  console.log(page);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
   const [search, setSearch] = useState(query);
@@ -27,7 +32,7 @@ const NewsList = () => {
     fetchNews();
   }, []);
 
-  const handleInputChange = (evt) => {
+  const handleInputChange = evt => {
     setSearchParams({ query: evt.currentTarget.value.toLowerCase().trim() });
     setSearch(evt.currentTarget.value.toLowerCase());
   };
@@ -66,13 +71,21 @@ const NewsList = () => {
         {/*</button>*/}
       </div>
       <NewsCardContainer className="news-container">
-        {news.map((newsItem) => (
+        {news.map(newsItem => (
           <NewsCard key={newsItem.id} news={newsItem} />
         ))}
       </NewsCardContainer>
       {/*{search !== '' && query && news.length === 0 && (*/}
       {/*    <p>not found</p>*/}
       {/*)}*/}
+
+      <Pagination
+        setPage={setPage}
+        page={page}
+        count={news.length}
+        mt={20}
+        mb={20}
+      />
     </>
   );
 };
