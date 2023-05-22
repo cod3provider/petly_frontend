@@ -12,10 +12,9 @@ axios.interceptors.response.use(
     if (error.response.status === 401) {
       // нужно получить рефреш токен из стейта
       const refreshToken = await localStorage.getItem('refreshToken');
+
       try {
         const { data } = await axios.post('users/refresh', { refreshToken });
-
-        console.log('data: ', data);
 
         token.set(data.accesToken);
 
@@ -95,6 +94,7 @@ export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue, getState }) => {
     const value = await localStorage.getItem('accesToken');
+
     if (value) {
       token.set(value);
     }
