@@ -1,21 +1,22 @@
 import { NoticesCategoriesNavLink, NoticesCategoriesNavUl } from "./NoticesCategoriesNav.styled";
+import styles from "./NoticesCategoriesNav.module.css"
 
 const NoticesCategoriesNav = () => {
     return <NoticesCategoriesNavUl>
         <li>
-            <NoticesCategoriesNavLink to="/notices/sell">sell</NoticesCategoriesNavLink>
+            <NoticesCategoriesNavLink to="/notices/sell" className={styles.link}>sell</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NoticesCategoriesNavLink to="/notices/lost-found">lost/found</NoticesCategoriesNavLink>
+            <NoticesCategoriesNavLink to="/notices/lost-found" className={styles.link}>lost/found</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NoticesCategoriesNavLink to="/notices/for-free">in good hands</NoticesCategoriesNavLink>
+            <NoticesCategoriesNavLink to="/notices/for-free" className={styles.link}>in good hands</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NoticesCategoriesNavLink to="/notices/favorite">favorite ads</NoticesCategoriesNavLink>
+            <NoticesCategoriesNavLink to="/notices/favorite" className={styles.link}>favorite ads</NoticesCategoriesNavLink>
         </li>
         <li>
-            <NoticesCategoriesNavLink to="/notices/own">my ads</NoticesCategoriesNavLink>
+            <NoticesCategoriesNavLink to="/notices/own" className={styles.link}>my ads</NoticesCategoriesNavLink>
         </li>
     </NoticesCategoriesNavUl>;
 }
