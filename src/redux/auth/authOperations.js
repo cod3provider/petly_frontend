@@ -6,8 +6,8 @@ import { toast } from 'react-toast';
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
 export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  set(accessToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
@@ -28,7 +28,7 @@ export const register = createAsyncThunk(
       );
       console.log(credentials);
     } catch (error) {
-      console.log(error.response.data);
+      toast.error('Email is invalid or it is used');
       return rejectWithValue(error.message);
     }
   }
@@ -36,12 +36,12 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'users/login',
-  async (credentials, { rejectWithValue, dispatch }) => {
+  async (credentials, { rejectWithValue,   }) => {
     try {
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
-      token.set(data.token);
-      dispatch(getCurrentUser());
+      token.set(data.accessToken);
+      // dispatch(getCurrentUser());
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -60,38 +60,40 @@ export const logout = createAsyncThunk(
       await axios.post('users/logout');
       token.unset();
     } catch (error) {
-      console.log(error.response.data);
+      toast.error(error.response.data);
       return rejectWithValue(error.message);
     }
   }
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'users/getCurrentUser',
+  'users/current',
   async (_, { rejectWithValue, getState }) => {
-    const value = getState().auth.token;
-    if (value) {
-      token.set(value);
-    }
     try {
-      const { data } = await axios.get('/users/current');
+      const value = getState().auth.accessToken;
+      if (value === null) {
+        return rejectWithValue('Unable to fetch user');
+      }
+      token.set(value);
+      const { data } = await axios.get('users/current');
       return data;
-    } catch (error) {
-      console.log(error.response.data);
-      return rejectWithValue(error.message);
+    } catch (e) {
+      return rejectWithValue(e.message);
     }
   }
 );
 
-// export const refreshThunk = createAsyncThunk(
-//   'users/refresh',
-//   async (credentials, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get('users/', credentials);
-//       token.set(data.data.user.token);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+//
+export const refreshToken = createAsyncThunk(
+  'users/refresh',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('users/refresh', credentials);
+      token.set(data.accessToken);
+      return data;
+    } catch (error) {
+      token.unset();
+      return rejectWithValue(error.message);
+    }
+  }
+);
