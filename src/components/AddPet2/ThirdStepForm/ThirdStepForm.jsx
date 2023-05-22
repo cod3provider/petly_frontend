@@ -4,6 +4,11 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
+import {
+  LabelStyle,
+  InputStyle,
+} from '../SecondStepForm/SecondStepForm.styled';
+import { TextareaStyle } from './ThirdStepForm.styled';
 
 const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   const [formState, setFormState] = useState({
@@ -88,8 +93,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
               <BsGenderMale />
             </div>
 
-            <label htmlFor="location">Location</label>
-            <Field
+            <LabelStyle htmlFor="location">Location</LabelStyle>
+            <InputStyle
               id="location"
               name="location"
               placeholder="Location"
@@ -102,8 +107,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
 
         {type === 'sell' && (
           <>
-            <label htmlFor="price">Price</label>
-            <Field
+            <LabelStyle htmlFor="price">Price</LabelStyle>
+            <InputStyle
               id="price"
               name="price"
               placeholder="Price"
@@ -131,8 +136,8 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
           {/* Показати попередній перегляд зображення */}
         </div>
 
-        <label htmlFor="Comments">Comments</label>
-        <Field
+        <LabelStyle htmlFor="Comments">Comments</LabelStyle>
+        <TextareaStyle
           id="comments"
           name="comments"
           placeholder="Type breed"

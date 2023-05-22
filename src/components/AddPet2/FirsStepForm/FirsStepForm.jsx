@@ -1,13 +1,13 @@
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
-
-const FirsStepForm = ({ setStep, setState, step, state }) => {
+import { LabelRadioBtn, RadioBtnStyle } from './FirsStepForm.styled.js';
+const FirsStepForm = ({ setStep, setState, step }) => {
   const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
   return (
     <Formik
       initialValues={{
-        picked: state.type,
+        picked: 'your pet',
       }}
       onSubmit={values => {
         setStep('second');
@@ -21,8 +21,8 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
         <Form>
           <div id="my-radio-group">
             {categories.map(categorie => (
-              <label key={categorie}>
-                <input
+              <labLabelRadioBtnel key={categorie}>
+                <RadioBtnStyle
                   type="radio"
                   name="picked"
                   value={categorie}
@@ -31,7 +31,7 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
                   onChange={handleChange}
                 />
                 {categorie}
-              </label>
+              </labLabelRadioBtnel>
             ))}
           </div>
 
@@ -48,5 +48,4 @@ FirsStepForm.propTypes = {
   setStep: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   step: PropTypes.string.isRequired,
-  state: PropTypes.object.isRequired,
 };

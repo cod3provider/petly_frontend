@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import { useState } from 'react';
 import ButtonPet from '../ButtonPet/ButtonPet';
+import { InputStyle, LabelStyle } from './SecondStepForm.styled';
+
 const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [FormState, setFormState] = useState({
     namePet: state.namePet,
@@ -40,8 +42,8 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           type === 'lost/found' ||
           type === 'in good hands') && (
           <>
-            <label htmlFor="titlePet">Title of add</label>
-            <Field
+            <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
+            <InputStyle
               id="titlePet"
               name="titlePet"
               placeholder="Title pet"
@@ -52,8 +54,8 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           </>
         )}
 
-        <label htmlFor="namePet">Name pet</label>
-        <Field
+        <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
+        <InputStyle
           id="namePet"
           name="namePet"
           placeholder="Name pet"
@@ -62,9 +64,9 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           required
         />
 
-        <label htmlFor="birth">Date of birth</label>
+        <LabelStyle htmlFor="birth">Date of birth</LabelStyle>
 
-        <Field
+        <InputStyle
           id="birth"
           name="birth"
           placeholder="Date of birth"
@@ -73,8 +75,8 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
           required
         />
 
-        <label htmlFor="breed">Breed</label>
-        <Field
+        <LabelStyle htmlFor="breed">Breed</LabelStyle>
+        <InputStyle
           id="breed"
           name="breed"
           placeholder="Breed"
