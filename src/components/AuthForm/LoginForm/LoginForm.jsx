@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/auth/authOperations';
@@ -17,23 +17,26 @@ import {
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordSecure, setIsPasswordSecure] = useState(false);
 
-const handleEmailChange = event => {
-  const { value } = event.target;
-  const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
-  setIsEmailValid(isValidEmail);
-};
+  const handleEmailChange = event => {
+    const { value } = event.target;
+    const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+      value
+    );
+    setIsEmailValid(isValidEmail);
+  };
 
-const handlePasswordChange = event => {
-  const { value } = event.target;
-  const isValidPassword =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/.test(value);
-  setIsPasswordSecure(isValidPassword);
-};
-
+  const handlePasswordChange = event => {
+    const { value } = event.target;
+    const isValidPassword =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/.test(value);
+    setIsPasswordSecure(isValidPassword);
+  };
 
   const logValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -54,10 +57,14 @@ const handlePasswordChange = event => {
           password: '',
         }}
         validationSchema={logValidationSchema}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
           console.log(values);
-          dispatch(login(values));
+          const action = await dispatch(login(values)); // add await before dispatch and save result to a variable
+          if (login.fulfilled.match(action)) {
+            navigate('/user');
+          }
           resetForm();
+          +setSubmitting(false);
           console.log(values);
         }}
       >

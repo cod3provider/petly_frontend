@@ -72,7 +72,7 @@ export const HeroImage = styled.img`
   @media (${theme.breakpoints.desktop.media}) {
     width: 900px;
     top: 305px;
-    top: 30px;
+    //top: 30px;
     left: 365px;
   }
 `;

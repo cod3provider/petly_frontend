@@ -30,7 +30,7 @@ export const Title = styled.h2`
 export const StepList = styled.ul`
   display: flex;
   margin: -6px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 `;
 export const StepLi = styled.li`
   margin: 6px;

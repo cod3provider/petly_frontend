@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   Wrapper,
@@ -16,9 +17,14 @@ import SecondStepForm from './SecondStepForm/SecondStepForm';
 import ThirdStepForm from './ThirdStepForm/ThirdStepForm';
 
 const AddPet2 = () => {
-  const [state, setState] = useState({ type: 'your pet' });
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem('addPetState')) || { type: 'your pet' }
+  );
   const [step, setStep] = useState('first');
   const isFirstRender = useRef(true);
+
+  const location = useLocation;
+  const backLinkHref = location.state?.from ?? '/';
 
   let text = '';
 
@@ -29,10 +35,10 @@ const AddPet2 = () => {
     case 'sell':
       text = 'Add pet for sell';
       break;
-    case 'lost/found':
+    case 'lostFound':
       text = 'Add lost pet';
       break;
-    case 'in good hands':
+    case 'inGoodHands':
       text = 'Add pet in good hands';
       break;
     default:
@@ -100,8 +106,10 @@ const AddPet2 = () => {
             setState={setState}
             type={state.type}
             step={step}
+            backLinkHref={backLinkHref}
           />
         )}
+        {/* <ButtonPet backLinkHref={backLinkHref} step={step} setStep={setStep} /> */}
       </Wrapper>
     </Container>
   );
