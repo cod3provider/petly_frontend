@@ -7,16 +7,18 @@ export const LabelRadioBtn = styled('label')`
   justify-content: left;
   align-items: center;
   padding: 8px 16px;
-  gap: 8px;
+
+  /* gap: 8px;
   color: #54adff;
   width: 91px;
-  height: 35px;
+  height: 35px; */
 
   background: rgba(140, 200, 253, 0.44);
   border-radius: 40px;
 `;
 export const RadioBtnStyle = styled.input`
   padding: 8px 16px;
+  display: none;
   /* display: flex;
   flex-direction: column;
   justify-content: left; */

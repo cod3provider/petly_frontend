@@ -8,7 +8,12 @@ import {
   LabelStyle,
   InputStyle,
 } from '../SecondStepForm/SecondStepForm.styled';
-import { TextareaStyle } from './ThirdStepForm.styled';
+import {
+  TextareaStyle,
+  BoxImage,
+  IconPlus,
+  InputImage,
+} from './ThirdStepForm.styled';
 
 const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
   const [formState, setFormState] = useState({
@@ -119,9 +124,9 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
           </>
         )}
 
-        <div>
-          <label htmlFor="image">Load the pet&#39;s image:</label>
-          {!file && (
+        <label htmlFor="image">Load the pet&#39;s image:</label>
+        <BoxImage>
+          {/* {!file && (
             <Field
               id="image"
               type="file"
@@ -130,11 +135,27 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
               value={formState.image}
               required
             />
-          )}
-          {file && <img src={file} alt="Preview image" />}
+            
+          )} */}
+          {/* {file && <img src={file} alt="Preview image" />} */}
 
+          {file ? (
+            <img src={file} alt="Preview image" />
+          ) : (
+            <>
+              <InputImage
+                id="image"
+                type="file"
+                name="image"
+                onChange={handleChange}
+                value={formState.image}
+                required
+              />
+              <IconPlus />
+            </>
+          )}
           {/* Показати попередній перегляд зображення */}
-        </div>
+        </BoxImage>
 
         <LabelStyle htmlFor="Comments">Comments</LabelStyle>
         <TextareaStyle
