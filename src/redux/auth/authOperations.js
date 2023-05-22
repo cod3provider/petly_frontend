@@ -11,11 +11,16 @@ axios.interceptors.response.use(
   async error => {
     if (error.response.status === 401) {
       // нужно получить рефреш токен из стейта
-      const refreshToken = localStorage.getItem("refreshToken");
+      const refreshToken = await localStorage.getItem('refreshToken');
       try {
         const { data } = await axios.post('users/refresh', { refreshToken });
+
+        console.log('data: ', data);
+
         token.set(data.accesToken);
-        localStorage.setItem("refreshToken", data.refreshToken)
+
+        localStorage.setItem('refreshToken', data.refreshToken);
+        localStorage.setItem('accesToken', data.accesToken);
         //тут обновить стейт с новыми токенами
         return axios(error.config);
       } catch (error) {
@@ -61,8 +66,8 @@ export const login = createAsyncThunk(
     try {
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
-      token.set(data.accessToken);
-      localStorage.getItem('accessToken');
+      token.set(data.accesToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -89,7 +94,7 @@ export const logout = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue, getState }) => {
-    const value = getState().auth.accesToken;
+    const value = await localStorage.getItem('accesToken');
     if (value) {
       token.set(value);
     }
