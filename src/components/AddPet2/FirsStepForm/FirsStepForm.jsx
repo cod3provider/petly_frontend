@@ -1,9 +1,18 @@
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
-import { RadioBtnStyle } from './FirsStepForm.styled.js';
-const FirsStepForm = ({ setStep, setState, step }) => {
-  const categories = ['your pet', 'sell', 'lost/found', 'in good hands'];
+
+
+import {
+  CheckBox,
+  CheckboxSpan,
+  CheckboxContainer,
+  Label,
+} from './FirsStepForm.styled.js';
+
+const FirsStepForm = ({ setStep, setState, step, state }) => {
+  const categories = ['your pet', 'sell', 'lostFound', 'inGoodHands'];
+
   return (
     <Formik
       initialValues={{
@@ -19,10 +28,10 @@ const FirsStepForm = ({ setStep, setState, step }) => {
     >
       {({ values, handleChange }) => (
         <Form>
-          <div id="my-radio-group">
+          <CheckboxContainer id="my-radio-group">
             {categories.map(categorie => (
-              <labLabelRadioBtnel key={categorie}>
-                <RadioBtnStyle
+              <Label key={categorie}>
+                <CheckBox
                   type="radio"
                   name="picked"
                   value={categorie}
@@ -30,10 +39,10 @@ const FirsStepForm = ({ setStep, setState, step }) => {
                   checked={values.picked === categorie}
                   onChange={handleChange}
                 />
-                {categorie}
-              </labLabelRadioBtnel>
+                <CheckboxSpan>{categorie}</CheckboxSpan>
+              </Label>
             ))}
-          </div>
+          </CheckboxContainer>
 
           <ButtonPet step={step} setStep={setStep} />
         </Form>

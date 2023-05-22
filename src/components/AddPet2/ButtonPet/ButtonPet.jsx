@@ -28,19 +28,15 @@ export const ButtonPet = ({ step, setStep }) => {
 
   return (
     <>
+
       <ButtonNext type="submit">
-        {step === 'third' ? <NavLink to={backLinkHref}>Done</NavLink> : 'Next'}
-        <IconButton></IconButton>
+        {step === 'third' ? 'Done' : 'Next'}
+        <IconButton />
       </ButtonNext>
       <ButtonBack type="button" onClick={handleBack}>
-        {step === 'first' ? (
-          <NavLink to={backLinkHref}>
-            <ArrowButtonIcon /> Cancel
-          </NavLink>
-        ) : (
-          'Back'
-        )}
+        {step === 'first' ? <Link to={backLinkHref}> <ArrowButtonIcon /> Cancel</Link> : 'Back'}
       </ButtonBack>
+
     </>
   );
 };

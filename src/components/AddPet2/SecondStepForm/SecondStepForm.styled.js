@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { theme } from '../../../utils/theme';
 // import { IoPawOutline } from 'react-icons/io5';
 
@@ -33,4 +34,8 @@ export const InputStyle = styled('input')`
     margin-top: 32px;
     font-size: ${theme.fontSizes.m};
   }
+
+export const DataPickercontainer = styled.div`
+  position: relative;
+
 `;

@@ -93,3 +93,21 @@ export const getCurrentUser = createAsyncThunk(
 //     }
 //   }
 // );
+
+export const updateCurrentUser = createAsyncThunk(
+  'auth/updateCurrentUser',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const value = getState().auth.token;
+      if (value) {
+        token.set(value);
+      }
+      const { data } = await axios.patch('users/update');
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
