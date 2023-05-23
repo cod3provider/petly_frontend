@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
@@ -70,3 +72,7 @@ const DatePicker = ({ setSelectedDay }) => {
 };
 
 export default DatePicker;
+
+DatePicker.propTypes = {
+  setSelectedDay: PropTypes.func.isRequired,
+};

@@ -23,7 +23,7 @@ const AddPet2 = () => {
   const [step, setStep] = useState('first');
   const isFirstRender = useRef(true);
 
-  const location = useLocation;
+  const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
 
   let text = '';
