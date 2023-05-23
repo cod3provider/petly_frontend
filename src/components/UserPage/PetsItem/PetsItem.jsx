@@ -5,7 +5,6 @@ import {
   DeleteBtn,
   Span,
   BtnWrap,
-  Icon,
   Image,
   TextWrap,
   Text,
@@ -14,9 +13,13 @@ import {
 import { TbTrash } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
 import { deletePetsData } from '../../../redux/petsData/petsDataOperations';
+import ModalDeletePets from '../../Modals/ModalDeletePets/ModalDeletePets';
+import ModalBack from '../../Modals/ModalBack';
+import { useToggle } from '../../../hooks/useToggle';
 
 const PetsItem = ({ pet }) => {
   const [setIsModalOpen] = useState(false);
+  const { isOpen, open, close } = useToggle();
 
   const dispatch = useDispatch();
 
@@ -42,10 +45,17 @@ const PetsItem = ({ pet }) => {
                 Name: <Span>{pet.name}</Span>
               </Text>
             </TextWrap>
-            <DeleteBtn type="button" onClick={onDeleteBtn}>
+            <DeleteBtn type="button" onClick={open}>
               <TbTrash size={24} />
             </DeleteBtn>
-            {/* {isModalOpen && <ModalDelete onClick={onDeleteBtn}/> } */}
+            {isOpen && (
+              <ModalBack onClose={close}>
+                <ModalDeletePets
+                  onClick={onDeleteBtn}
+                  onClose={close}
+                ></ModalDeletePets>
+              </ModalBack>
+            )}
           </BtnWrap>
           <TextWrap>
             <Text>

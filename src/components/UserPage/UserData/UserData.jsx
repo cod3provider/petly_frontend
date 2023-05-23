@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { BiPencil } from 'react-icons/bi';
-import { CiLogout } from 'react-icons/ci';
 import { theme } from '../../../utils/theme';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +14,6 @@ import {
   IconWrap,
   InputText,
   Label,
-  CameraIcon,
   FormThumb,
   CrossIcon,
   Wrapper,
