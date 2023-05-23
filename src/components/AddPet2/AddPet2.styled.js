@@ -1,19 +1,43 @@
 import styled from 'styled-components';
+import { theme } from '../../utils/theme';
 
 export const Container = styled.div`
-  background-color: #fef9f9;
-  width: 320px;
-  padding: 20px;
+  margin: 24px auto;
+  width: 300px;
+  @media (${theme.breakpoints.mobile.media}) {
+    width: ${theme.breakpoints.mobile.width};
+  }
+  @media ${theme.breakpoints.tablet.media} {
+    width: 460px;
+  }
+  @media ${theme.breakpoints.desktop.media} {
+    width: 460px;
+  }
 `;
 
 export const Wrapper = styled.div`
-  width: 280px;
-  padding: 20px 8px;
+  min-height: 496px;
   background-color: white;
   color: black;
 
+  margin: 0 auto;
+
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    width: 280px;
+    padding: 20px 8px;
+    /* width: ${theme.breakpoints.mobile.width}; */
+  }
+  @media ${theme.breakpoints.tablet.media} {
+    padding: 20px 32px;
+    width: 460px;
+  }
+  @media ${theme.breakpoints.desktop.media} {
+    padding: 20px 32px;
+    width: 460px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -43,11 +67,16 @@ export const StepLi = styled.li`
 
   font-weight: 500;
   font-size: 10px;
-  line-height: 14px;
+  line-height: 1.4;
   align-items: center;
 `;
 
 export const StepLiFirst = styled.span`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.4;
+  align-items: center;
+
   color: ${props => {
     switch (props.step) {
       case 'first':

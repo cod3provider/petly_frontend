@@ -114,7 +114,7 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
             onChange={handleChange}
             onFocus={() => setIsDateOpen(true)}
             // onBlur={() => setIsDateOpen(false)}
-            autocomplete="off"
+            autoComplete="off"
             required
           />
           {isDateOpen && (

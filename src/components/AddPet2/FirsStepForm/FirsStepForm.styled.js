@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
+import { Form } from 'formik';
+
+export const FormContainer = styled(Form)`
+  height: 347px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+`;
 
 export const CheckboxContainer = styled.div`
   margin: -6px 0;

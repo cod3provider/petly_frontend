@@ -8,6 +8,7 @@ import {
   CheckboxSpan,
   CheckboxContainer,
   Label,
+  FormContainer,
 } from './FirsStepForm.styled.js';
 
 const FirsStepForm = ({ setStep, setState, step, state }) => {
@@ -46,7 +47,7 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
       }}
     >
       {() => (
-        <Form>
+        <FormContainer>
           <CheckboxContainer id="my-radio-group">
             {categories.map(categorie => (
               <Label key={categorie} state={state}>
@@ -66,7 +67,7 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
           </CheckboxContainer>
 
           <ButtonPet step={step} setStep={setStep} setState={setState} />
-        </Form>
+        </FormContainer>
       )}
     </Formik>
   );
