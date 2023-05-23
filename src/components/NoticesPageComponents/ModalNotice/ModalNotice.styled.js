@@ -26,10 +26,19 @@ export const ModalNoticeOverlay= styled.div`
 export const ModalNoticeModal= styled.div`
     position: relative;
     width: 280px;
-    // height: 786px;
     padding: 44px 12px 16px;
     background: #FFFFFF;
     border-radius: 20px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 681px;
+        padding: 32px 32px 24px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 681px;
+        padding: 32px 32px 24px;
+    }
 `;
 
 export const ModalNoticeCloseButton= styled.button`
@@ -44,18 +53,51 @@ export const ModalNoticeCloseButton= styled.button`
     &:focus{
         outline: none;
     }
+
+    @media(${theme.breakpoints.tablet.media}){
+        top: 23px;
+        right: 26px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        top: 23px;
+        right: 26px;
+    }
 `;
 
 export const ModalNoticePhotoContainer= styled.div`
     position: relative;
     padding-right: 8px;
     padding-left: 8px;
+    margin-bottom: 12px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        padding: 0;
+        margin-right: 24px;
+        margin-bottom: 0px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        padding: 0;
+        margin-right: 24px;
+        margin-bottom: 0px;
+    }
 `;
 
 export const ModalNoticePhoto= styled.img`
     border-radius: 0px 0px 40px 40px;
     overflow: hidden;
     width: 240px;
+    height: 240px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 262px;
+        height: 298px;
+    }
+    @media(${theme.breakpoints.desktop.media}){
+        width: 262px;
+        height: 298px;
+    }
 `;
 
 export const ModalNoticeCategoryContainer= styled.div`
@@ -80,7 +122,6 @@ export const ModalNoticeCategoryText= styled.p`
 `;
 
 export const ModalNoticeTitle = styled.h2`
-    margin-top: 12px;
     width: 198px;
     text-align: left;
     font-size: ${theme.fontSizes.s};
@@ -89,6 +130,17 @@ export const ModalNoticeTitle = styled.h2`
     line-height: 33px;
     letter-spacing: -0.01em;
     color: ${theme.baseColors.titleColor};
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 321px;
+        font-size: ${theme.fontSizes.lx};
+        line-height: 38px;
+    }
+    @media(${theme.breakpoints.desktop.media}){
+        width: 321px;
+        font-size: ${theme.fontSizes.lx};
+        line-height: 38px;
+    }
 `;
 
 export const ModalNoticeList = styled.dl`
@@ -96,6 +148,7 @@ export const ModalNoticeList = styled.dl`
     margin-bottom: 0;
     display: flex;
     flex-wrap: wrap;
+    gap: 8px 0px;
 `;
 
 export const ModalNoticeListTitle = styled.dt`
@@ -107,6 +160,18 @@ export const ModalNoticeListTitle = styled.dt`
     font-size: ${theme.fontSizes.s};
     line-height: 19px;
     color: ${theme.baseColors.titleColor};
+
+    @media(${theme.breakpoints.tablet.media}){
+        flex-basis: 120px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        flex-basis: 120px;
+        font-size: 16px;
+        line-height: 22px;
+    }
 `;
 
 export const ModalNoticeListDetails = styled.dd`
@@ -119,6 +184,16 @@ export const ModalNoticeListDetails = styled.dd`
     font-size: ${theme.fontSizes.xs};
     line-height: 16px;
     color: ${theme.baseColors.titleColor};
+
+    @media(${theme.breakpoints.tablet.media}){
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        font-size: 16px;
+        line-height: 22px;
+    }
 `;
 
 export const ModalNoticeComment = styled.p`
@@ -129,16 +204,41 @@ export const ModalNoticeComment = styled.p`
     line-height: 19px;
     color: ${theme.baseColors.titleColor};
     letter-spacing: 0.04em;
+
+    @media(${theme.breakpoints.tablet.media}){
+        margin-top: 28px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        margin-top: 28px;
+        font-size: 16px;
+        line-height: 24px;
+    }
 `;
 
-export const ModalNoticeButtonList = styled.p`
+export const ModalNoticeButtonList = styled.ul`
     margin-top: 12px;
     display: flex;
     flex-direction: column;
+
+    @media(${theme.breakpoints.tablet.media}){
+        flex-direction: row-reverse;
+        justify-content: end;
+        margin-top: 70px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        flex-direction: row-reverse;
+        justify-content: end;
+        margin-top: 70px;
+    }
 `;
 
 export const ModalNoticePhoneLink = styled.a`
     display: flex;
+    width: 256px;
     justify-content: center;
     align-items: center;
     height: 40px;
@@ -149,6 +249,14 @@ export const ModalNoticePhoneLink = styled.a`
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0.04em;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 129px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 129px;
+    }
 `;
 
 export const ModalNoticeFavoriteButton = styled.button`
@@ -165,6 +273,14 @@ export const ModalNoticeFavoriteButton = styled.button`
     line-height: 22px;
     letter-spacing: 0.04em;
     cursor: pointer;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 129px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 129px;
+    }
 `;
 
 export const ModalNoticeHeartIcon = styled(FiHeart)`
@@ -176,8 +292,38 @@ export const ModalNoticeHeartIcon = styled(FiHeart)`
 
 export const ModalNoticeButtonItem = styled.li`
     margin-top: 8px;
+    display: flex;
+    align-items: center;
 
     &:first-child{
         margin-top: 0;
+    }
+
+    @media(${theme.breakpoints.tablet.media}){
+        margin-top: 0;
+        margin-left: 17px;
+
+        &:last-child{
+            margin-left: 0;
+        }
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        margin-top: 0;
+        margin-left: 17px;
+
+        &:last-child{
+            margin-left: 0;
+        }
+    }
+`;
+
+export const ModalNoticePhotoListContainer = styled.div`
+    @media(${theme.breakpoints.tablet.media}){
+        display: flex;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        display: flex;
     }
 `;

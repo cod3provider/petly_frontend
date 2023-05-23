@@ -12,6 +12,16 @@ export const NoticesPaginationList= styled.ul`
     box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
     border-radius: 45px;
     background: #FEF9F9;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 310px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 310px;
+    }
 `;
 
 export const NoticesPaginationIconRight= styled(HiOutlineArrowNarrowRight)`
