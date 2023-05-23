@@ -1,7 +1,6 @@
 import { useMedia } from 'react-use';
 import { theme } from '../../../utils/theme';
-import { Formik, Field, Form } from 'formik';
-import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
+import { Formik, Form } from 'formik';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -21,6 +20,7 @@ import {
   WrapperImage,
   LabelImage,
   MaleIcon,
+  FemaleIcon,
 } from './ThirdStepForm.styled';
 
 const ThirdStepForm = ({
@@ -32,11 +32,11 @@ const ThirdStepForm = ({
   backLinkHref,
 }) => {
   const [formState, setFormState] = useState({
-    location: state.location,
-    price: state.price,
-    comments: state.comments,
-    image: state.image,
-    sex: state.sex,
+    location: state.location || '',
+    price: state.price || '',
+    comments: state.comments || '',
+    image: state.image || '',
+    sex: state.sex || '',
   });
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
@@ -140,29 +140,17 @@ const ThirdStepForm = ({
                       checked={formState.sex === gender}
                       onChange={handleChange}
                     />
-                    {gender === 'female' ? <BsGenderFemale /> : <MaleIcon />}
-                    <GenderLabel>{genderTitile(gender)}</GenderLabel>
+                    {gender === 'female' ? (
+                      <FemaleIcon state={formState} />
+                    ) : (
+                      <MaleIcon state={formState} />
+                    )}
+                    <GenderLabel gender={gender} state={formState}>
+                      {genderTitile(gender)}
+                    </GenderLabel>
                   </label>
                 ))}
               </GenderContainer>
-
-              {/* <div>
-                <LabelStyle htmlFor="image">
-                  Load the pet&#39;s image:
-                </LabelStyle>
-                {!file && (
-                  <Field
-                    id="image"
-                    type="file"
-                    name="image"
-                    onChange={handleChange}
-                    value={formState.image}
-                    required
-                  />
-                )}
-                {file && <img src={file} alt="Preview image" />}
-
-              </div> */}
             </>
           )}
           <WrapperImage>
@@ -220,24 +208,8 @@ const ThirdStepForm = ({
             </>
           )}
 
-          {/* <div>
-            <LabelStyle htmlFor="image">Load the pet&#39;s image:</LabelStyle>
-            {!file && (
-              <Field
-                id="image"
-                type="file"
-                name="image"
-                onChange={handleChange}
-                value={formState.image}
-                required
-              />
-            )}
-            {file && <img src={file} alt="Preview image" />}
-
-          </div> */}
-
           <LabelStyle htmlFor="Comments">Comments</LabelStyle>
-          <InputStyle
+          <TextareaStyle
             id="comments"
             name="comments"
             placeholder="Type breed"
@@ -262,5 +234,5 @@ ThirdStepForm.propTypes = {
   state: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
-  backLinkHref: PropTypes.string.isRequired,
+  backLinkHref: PropTypes.object.isRequired,
 };
