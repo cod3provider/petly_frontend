@@ -1,28 +1,67 @@
+import { useMedia } from 'react-use';
+import { theme } from '../../../utils/theme';
 import { Formik, Field, Form } from 'formik';
 import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
+import { useNavigate } from 'react-router-dom';
+import {
+  GenderLabel,
+  LabelStyle,
+  InputStyle,
+  CheckBoxHidden,
+  GenderContainer,
+  TextareaStyle,
+  BoxImage,
+  IconPlus,
+  InputImage,
+  ImagePetStyle,
+  WrapperImage,
+  LabelImage,
+  MaleIcon,
+} from './ThirdStepForm.styled';
 
-const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
+const ThirdStepForm = ({
+  setStep,
+  state,
+  setState,
+  type,
+  step,
+  backLinkHref,
+}) => {
   const [formState, setFormState] = useState({
-    location: '',
-    price: '',
-    comments: '',
-    image: '',
-    sex: '',
+    location: state.location,
+    price: state.price,
+    comments: state.comments,
+    image: state.image,
+    sex: state.sex,
   });
-  const [file, setFile] = useState(null); // Значення file початково встановлено як null
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
-  axios.defaults.baseURL =
-    'https://your-pet-backend-jfrs.onrender.com/api-docs';
+  const isMobile = useMedia(theme.breakpoints.mobile.media);
+  const isTablet = useMedia(theme.breakpoints.tablet.media);
+  const isDesktop = useMedia(theme.breakpoints.desktop.media);
+
+  const genders = ['female', 'male'];
+
+  const genderTitile = gender => {
+    switch (gender) {
+      case 'female':
+        return 'Female';
+
+      case 'male':
+        return 'Male';
+    }
+  };
+
+  axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com';
 
   const handleChange = e => {
-    console.log(e.target.name);
     if (e.target.name === 'image') {
       const selectedFile = e.target.files[0];
-      console.log(selectedFile);
       setFile(URL.createObjectURL(selectedFile));
       setFormState(prev => ({
         ...prev,
@@ -30,28 +69,51 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
       }));
     } else {
       setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+      setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
   };
 
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
-      formData.append('location', formState.location);
-      formData.append('price', formState.price);
-      formData.append('comments', formState.comments);
-      formData.append('image', formState.image);
-      formData.append('sex', formState.sex);
 
-      // const response = await axios.post('/', formData);
-      // console.log(response.data);
+      let postLine;
 
-      setState(prev => ({
-        ...prev,
-        ...formState,
-      }));
+      if (state.type === 'your pet') {
+        postLine = '/pets';
+        formData.append('name', state.namePet);
+        formData.append('comments', formState.comments);
+        formData.append('birthday', state.birth);
+        formData.append('breed', state.breed);
+        formData.append('petsImage', formState.image);
+      } else {
+        postLine = '/notices';
+        formData.append('comment', formState.comments);
+        formData.append('category', state.type);
+        formData.append('title', state.titlePet);
+        formData.append('name', state.namePet);
+        formData.append('birthday', state.birth);
+        formData.append('breed', state.breed);
+        formData.append('location', formState.location);
+        formData.append('price', formState.price || 0);
+        formData.append('noticeImage', formState.image);
+        formData.append('sex', formState.sex);
+      }
 
-      console.log('Отправляем запрос на сервер с карточкой:', state);
-
+      await axios
+        .post(postLine, formData, {
+          headers: { 'Content-type': 'multipart/form-data' },
+        })
+        .then(res => {
+          setState({});
+          navigate(backLinkHref, { replace: true });
+          localStorage.setItem('addPetState', JSON.stringify(''));
+          localStorage.setItem('addPetStep', JSON.stringify(''));
+          console.log('Success' + res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       setStep('first');
     } catch (error) {
       console.log(error.message);
@@ -60,89 +122,134 @@ const ThirdStepForm = ({ setStep, state, setState, type, step }) => {
 
   return (
     <Formik initialValues={formState} onSubmit={handleSubmit}>
-      <Form>
-        {(type === 'sell' ||
-          type === 'lost/found' ||
-          type === 'in good hands') && (
-          <>
-            <p>The Sex</p>
-            <div id="my-radio-group">
-              <label htmlFor="sex">Female</label>
-              <Field
-                id="sex"
-                name="sex"
-                type="radio"
-                value={(formState.sex = 'Female')}
-                required
-              />
-              <BsGenderFemale />
+      {() => (
+        <Form>
+          {(type === 'sell' ||
+            type === 'lostFound' ||
+            type === 'inGoodHands') && (
+            <>
+              <LabelStyle>The Sex</LabelStyle>
+              <GenderContainer id="my-radio-group">
+                {genders.map(gender => (
+                  <label key={gender}>
+                    <CheckBoxHidden
+                      type="radio"
+                      name="sex"
+                      value={gender}
+                      required
+                      checked={formState.sex === gender}
+                      onChange={handleChange}
+                    />
+                    {gender === 'female' ? <BsGenderFemale /> : <MaleIcon />}
+                    <GenderLabel>{genderTitile(gender)}</GenderLabel>
+                  </label>
+                ))}
+              </GenderContainer>
 
-              <label htmlFor="sex">Male</label>
-              <Field
-                id="sex"
-                name="sex"
-                type="radio"
-                value={(formState.sex = 'Male')}
-                required
-              />
-              <BsGenderMale />
-            </div>
+              {/* <div>
+                <LabelStyle htmlFor="image">
+                  Load the pet&#39;s image:
+                </LabelStyle>
+                {!file && (
+                  <Field
+                    id="image"
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                    value={formState.image}
+                    required
+                  />
+                )}
+                {file && <img src={file} alt="Preview image" />}
 
-            <label htmlFor="location">Location</label>
-            <Field
-              id="location"
-              name="location"
-              placeholder="Location"
-              value={formState.location}
-              onChange={handleChange}
-              required
-            />
-          </>
-        )}
-
-        {type === 'sell' && (
-          <>
-            <label htmlFor="price">Price</label>
-            <Field
-              id="price"
-              name="price"
-              placeholder="Price"
-              value={formState.price}
-              onChange={handleChange}
-              required
-            />
-          </>
-        )}
-
-        <div>
-          <label htmlFor="image">Load the pet&#39;s image:</label>
-          {!file && (
-            <Field
-              id="image"
-              type="file"
-              name="image"
-              onChange={handleChange}
-              required
-            />
+              </div> */}
+            </>
           )}
-          {file && <img src={file} alt="Preview image" />}
+          <WrapperImage>
+            {isMobile && <LabelImage htmlFor="image">Add photo</LabelImage>}
 
-          {/* Показати попередній перегляд зображення */}
-        </div>
+            {isTablet && (
+              <label htmlFor="image">Load the pet&#39;s image:</label>
+            )}
+            {isDesktop && (
+              <label htmlFor="image">Load the pet&#39;s image:</label>
+            )}
+            <BoxImage>
+              {file ? (
+                <ImagePetStyle src={file} alt="Preview image" />
+              ) : (
+                <>
+                  <InputImage
+                    id="image"
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                    value={formState.image}
+                    required
+                  />
+                  <IconPlus />
+                </>
+              )}
+            </BoxImage>
+          </WrapperImage>
+          {type !== 'your pet' && (
+            <>
+              <LabelStyle htmlFor="location">Location</LabelStyle>
+              <InputStyle
+                id="location"
+                name="location"
+                placeholder="Location"
+                value={formState.location}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
 
-        <label htmlFor="Comments">Comments</label>
-        <Field
-          id="comments"
-          name="comments"
-          placeholder="Type breed"
-          value={formState.comments}
-          onChange={handleChange}
-          type="textarea"
-          required
-        />
+          {type === 'sell' && (
+            <>
+              <LabelStyle htmlFor="price">Price</LabelStyle>
+              <InputStyle
+                id="price"
+                name="price"
+                placeholder="Price"
+                value={formState.price}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
 
-        <ButtonPet step={step} setStep={setStep} />
-      </Form>
+          {/* <div>
+            <LabelStyle htmlFor="image">Load the pet&#39;s image:</LabelStyle>
+            {!file && (
+              <Field
+                id="image"
+                type="file"
+                name="image"
+                onChange={handleChange}
+                value={formState.image}
+                required
+              />
+            )}
+            {file && <img src={file} alt="Preview image" />}
+
+          </div> */}
+
+          <LabelStyle htmlFor="Comments">Comments</LabelStyle>
+          <InputStyle
+            id="comments"
+            name="comments"
+            placeholder="Type breed"
+            value={formState.comments}
+            onChange={handleChange}
+            type="textarea"
+            required
+          />
+
+          <ButtonPet step={step} setStep={setStep} />
+        </Form>
+      )}
     </Formik>
   );
 };
@@ -155,4 +262,5 @@ ThirdStepForm.propTypes = {
   state: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   step: PropTypes.string.isRequired,
+  backLinkHref: PropTypes.string.isRequired,
 };

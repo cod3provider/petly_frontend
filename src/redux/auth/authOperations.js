@@ -1,6 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 // import { getCurrentUser } from 'redux/user/userOperations';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
 
@@ -27,6 +28,7 @@ export const register = createAsyncThunk(
       );
       console.log(credentials);
     } catch (error) {
+      toast.error('Email is invalid or it is used');
       console.log(error.response.data);
       return rejectWithValue(error.message);
     }
@@ -40,10 +42,11 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('users/login', credentials);
       console.log(data);
       token.set(data.token);
-
+      dispatch(getCurrentUser());
       return data;
     } catch (error) {
       console.log(error.response.data);
+      toast.error('Email or password is wrong');
       return rejectWithValue(error.message);
     }
   }
@@ -58,6 +61,7 @@ export const logout = createAsyncThunk(
       await axios.post('users/logout');
       token.unset();
     } catch (error) {
+      toast.error(error.response.data);
       console.log(error.response.data);
       return rejectWithValue(error.message);
     }
@@ -65,14 +69,14 @@ export const logout = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'auth/getCurrentUser',
+  'users/getCurrentUser',
   async (_, { rejectWithValue, getState }) => {
     const value = getState().auth.token;
     if (value) {
       token.set(value);
     }
     try {
-      const { data } = await axios.get('/users/current');
+      const { data } = await axios.get('users/current');
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -93,3 +97,21 @@ export const getCurrentUser = createAsyncThunk(
 //     }
 //   }
 // );
+
+export const updateCurrentUser = createAsyncThunk(
+  'auth/updateCurrentUser',
+  async (credentials, { rejectWithValue, getState }) => {
+    try {
+      const value = getState().auth.token;
+      if (value) {
+        token.set(value);
+      }
+      const { data } = await axios.patch('users/update', credentials);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

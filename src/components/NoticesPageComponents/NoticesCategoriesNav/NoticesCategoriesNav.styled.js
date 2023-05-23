@@ -13,7 +13,8 @@ export const NoticesCategoriesNavLink= styled(NavLink)`
     letter-spacing: 0.04em;
     color: ${theme.baseColors.filterNonActiveTextColor};
     &:focus,
-    &:hover {
+    &:hover,
+    &:global(.active) {
        color: ${theme.baseColors.filterActiveTextColor};
        background: ${theme.baseColors.filterActiveBgColor};
     }

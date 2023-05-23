@@ -2,7 +2,7 @@ const ROUTES = {
   REGISTER: '/register',
   LOGIN: '/login',
   NEWS: '/news',
-  NOTICES: '/notices',
+  NOTICES: '/notices/:categoryName',
   FRIENDS: '/friends',
   USER: '/user',
   ADDPET: '/AddPet',

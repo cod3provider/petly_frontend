@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 // import { Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 
@@ -47,32 +48,35 @@ const Spinner = () => {
 
 function App() {
   return (
-    <Suspense fallback={<Spinner />}>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          {/*<Route*/}
-          {/*  path={ROUTES.HOMEPAGE}*/}
-          {/*  element={<Navigate to={ROUTES.HOMEPAGE} />}*/}
-          {/*/>*/}
-          <Route index element={<HomePage />} />
-          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.NEWS} element={<NewsPage />} />
-          <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
-          <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
-          <Route path={ROUTES.ADDPET} element={<AddPet />} />
-          <Route
-            path={ROUTES.USER}
-            element={
-              <PrivateRoute>
-                <UserPage />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            {/*<Route*/}
+            {/*  path={ROUTES.HOMEPAGE}*/}
+            {/*  element={<Navigate to={ROUTES.HOMEPAGE} />}*/}
+            {/*/>*/}
+            <Route index element={<HomePage />} />
+            <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.NEWS} element={<NewsPage />} />
+            <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
+            <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
+            <Route path={ROUTES.ADDPET} element={<AddPet />} />
+            <Route
+              path={ROUTES.USER}
+              element={
+                <PrivateRoute>
+                  <UserPage />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+      <ToastContainer />
+    </>
   );
 }
 

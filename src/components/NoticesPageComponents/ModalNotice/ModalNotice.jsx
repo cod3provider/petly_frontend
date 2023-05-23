@@ -4,7 +4,10 @@ import {
     ModalNoticeCloseButton, ModalNoticeCategoryContainer,
     ModalNoticePhotoContainer, ModalNoticeCategoryText,
     ModalNoticeTitle, ModalNoticeList,
-    ModalNoticeListTitle, ModalNoticeListDetails
+    ModalNoticeListTitle, ModalNoticeListDetails,
+    ModalNoticePhoto, ModalNoticeComment, ModalNoticeButtonList,
+    ModalNoticeHeartIcon, ModalNoticePhoneLink, ModalNoticeFavoriteButton,
+    ModalNoticeButtonItem
 } from "./ModalNotice.styled"
 
 const ModalNotice = ({details, close}) => {
@@ -14,7 +17,7 @@ const ModalNotice = ({details, close}) => {
                 <ModalNoticeCloseIcon></ModalNoticeCloseIcon>
             </ModalNoticeCloseButton>
             <ModalNoticePhotoContainer>
-                <img src={details.img} alt="pet photo" />
+                <ModalNoticePhoto src={details.noticeImage} alt="pet photo" />
                 <ModalNoticeCategoryContainer>
                     <ModalNoticeCategoryText>{details.category}</ModalNoticeCategoryText>
                 </ModalNoticeCategoryContainer>
@@ -42,11 +45,15 @@ const ModalNotice = ({details, close}) => {
                     </ModalNoticeListDetails>
                 </ModalNoticeList>
             </div>
-            <p>Comments:{details.comments}</p>
-            <ul>
-                <a href="">Contact</a>
-                <button type='button'>Add to</button>
-            </ul>
+            <ModalNoticeComment>Comments:{details.comment}</ModalNoticeComment>
+            <ModalNoticeButtonList>
+                <ModalNoticeButtonItem>
+                    <ModalNoticePhoneLink href={`tel:${details.phone}`}>Contact</ModalNoticePhoneLink>
+                </ModalNoticeButtonItem>
+                <ModalNoticeButtonItem>
+                   <ModalNoticeFavoriteButton type='button'>Add to <ModalNoticeHeartIcon/></ModalNoticeFavoriteButton> 
+                </ModalNoticeButtonItem>
+            </ModalNoticeButtonList>
         </ModalNoticeModal>
     </ModalNoticeOverlay>;
 }

@@ -32,18 +32,29 @@ export const theme = {
     MainTitle: '68px',
   },
 
-  breakpoints: {
-    mobile: {
-      media: '(max-width: 767px)',
-      width: '320px',
-    },
-    tablet: {
-      media: '(min-width: 768px) and (max-width: 1279px)',
-      width: '768px',
-    },
-    desktop: {
-      media: '(min-width: 1280px)',
-      width: '1280px',
-    },
-  },
-};
+	breakpoints: {
+		mobile: {
+			media: '(max-width: 767px)',
+			width: '320px',
+		},
+		tablet: {
+			media: '(min-width: 768px) and (max-width: 1279px)',
+			width: '768px',
+		},
+		desktop: {
+			media: '(min-width: 1280px)',
+			width: '1280px',
+		},
+	},
+
+	fonts: {
+		main: 'Manrope',
+		secondary: 'Inter',
+		logo: 'Poppins',
+	},
+
+	transition: {
+		color: 'color 250ms linear',
+		bg: 'background 250ms linear',
+	},
+}
