@@ -8,19 +8,19 @@ import {
   ImageNotFound,
   Title,
 } from './NotFound.styled.js';
-import { BackgroundImage, BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
+import {  BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
 
 import { theme } from '../../utils/theme.jsx';
 
-import bgImageMobile from '../../assets/img/background/bg_mobile.png';
-import bgImageTablet from '../../assets/img/background/bg_tablet.png';
-import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
+// import bgImageMobile from '../../assets/img/background/bg_mobile.png';
+// import bgImageTablet from '../../assets/img/background/bg_tablet.png';
+// import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
 import notFoundImg from './img/notfound.png';
 
 const NotFoundPage = () => {
-  const isMobile = useMedia(theme.breakpoints.mobile.media);
-  const isTablet = useMedia(theme.breakpoints.tablet.media);
-  const isDesktop = useMedia(theme.breakpoints.desktop.media);
+  // const isMobile = useMedia(theme.breakpoints.mobile.media);
+  // const isTablet = useMedia(theme.breakpoints.tablet.media);
+  // const isDesktop = useMedia(theme.breakpoints.desktop.media);
 
   return (
     <>
