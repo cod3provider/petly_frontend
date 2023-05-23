@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
+import { Link } from 'react-router-dom';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
+
+export const LinkStyle = styled(Link)`
+  color: ${theme.baseColors.accentButtonColor};
+  text-decoration-line: revert;
+`;
 
 export const StyledEyeIcon = styled(FiEye)`
   color: ${theme.baseColors.accentButtonColor}; /* Customize the color */
@@ -15,9 +21,10 @@ export const StyledEyeIconOff = styled(FiEyeOff)`
 export const AuthWraper = styled.div`
   max-width: 608px;
   margin: 0 auto;
-  background-color: lightgrey;
-  border: 2px;
-  border-color: black;
+  background: #ffffff;
+  /* border: 2px; */
+  /* border-color: 1px colid black; */
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
   padding: 40px 0;
 
@@ -42,7 +49,12 @@ export const AuthForm = styled('form')`
 
   @media screen and (min-width: 768px) {
     width: 608px;
-    padding: 0 25px;
+    padding: 0 91px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 608px;
+    padding: 0 75px;
   }
 `;
 
@@ -56,23 +68,24 @@ export const ButtonIcon = styled.button`
   right: 10px;
   height: 30px;
   border: 0px;
-  background-color: ${theme.baseColors.filterActiveTextColor};
+  background-color: #ffffff;
 `;
 
 export const InputStyle = styled('input')`
   position: relative;
   width: 100%;
   margin-top: 24px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 40px;
   border-color: ${props =>
     props.error ? 'red' : props.success ? '#54ADFF' : '#54ADFF'};
-  background-color: ${theme.baseColors.filterActiveTextColor};
-  font-size: ${theme.fontSizes.s};
+  background-color: #ffffff;
+  font-size: 16px;
+  outline: none;
   cursor: pointer;
 
   :hover:not(:disabled) {
-    background-color: ${theme.baseColors.filterActiveTextColor};
+    /* background-color: ${theme.baseColors.filterActiveTextColor}; */
   }
 
   @media screen and (min-width: 768px) {

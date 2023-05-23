@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/auth/authOperations';
@@ -10,6 +10,7 @@ import {
   ButtonIcon,
   InputStyle,
   InputWrapper,
+  LinkStyle,
   LinkWraper,
   StyledEyeIcon,
   StyledEyeIconOff,
@@ -135,7 +136,7 @@ function LoginForm() {
             </AuthFormButton>
             <LinkWraper>
               <p>Don&#39;t have an account?</p>
-              <Link to="/register">Register</Link>
+              <LinkStyle to="/register">Register</LinkStyle>
             </LinkWraper>
           </AuthForm>
         )}
