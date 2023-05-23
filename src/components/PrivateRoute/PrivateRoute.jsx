@@ -6,11 +6,9 @@ import { refreshThunk, getIsLoggedIn } from '../../redux/auth/authSelectors.js';
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isRefreshing = useSelector(refreshThunk);
-
   if (isRefreshing) {
     return null;
   }
-
   return !isLoggedIn ? <Navigate to="/login" /> : children;
 };
 

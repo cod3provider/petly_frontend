@@ -34,6 +34,7 @@ export const ImageNotFound = styled.img`
 export const Button = styled.button`
   display: flex;
   gap: 12px;
+  align-items: center;
   padding: 10px 50px;
   color: ${theme.baseColors.buttonTextColor};
   background: #54adff;

@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
+import { BiPencil } from 'react-icons/bi';
+import { MdDone } from 'react-icons/md';
 
 import { getUser, getIsLoggedIn } from '../../../redux/auth/authSelectors.js';
 
 // import { selectUser, selectIsRegistered } from 'redux/auth/auth-selector';
 import { updateCurrentUser } from '../../../redux/auth/authOperations';
 import {
-  Edit,
   EditButton,
   Input,
   ItemWrap,
@@ -16,7 +17,6 @@ import {
   Label,
   InputWrap,
   Span,
-  CheckIcon,
 } from './UserDataItem.styled';
 
 const initialState = {
@@ -36,46 +36,46 @@ const UserDataItem = () => {
   const [data, setData] = useState(initialState);
   const id = useMemo(() => nanoid(), []);
 
+  console.log(data);
+
   const onEditBtn = () => {
+    if (isEdit) {
+      setIsEdit(false);
+      return;
+    }
     setIsEdit(true);
   };
 
   const handleNameSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userName = form.elements.name.value;
-
+    const userName = event.target.name.value;
     dispatch(updateCurrentUser({ name: userName }));
   };
 
   const handleEmailSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userEmail = form.elements.email.value;
+    const userEmail = event.target.email.value;
 
     dispatch(updateCurrentUser({ email: userEmail }));
   };
 
   const handleBirthdaySubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userBirthday = form.elements.birthday.value;
+    const userBirthday = event.target.birthday.value;
 
     dispatch(updateCurrentUser({ birthday: userBirthday }));
   };
 
   const handlePhoneSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userPhone = form.elements.phone.value;
+    const userPhone = event.target.phone.value;
 
     dispatch(updateCurrentUser({ phone: userPhone }));
   };
 
   const handleCitySubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userCity = form.elements.city.value;
+    const userCity = event.target.city.value;
 
     dispatch(updateCurrentUser({ city: userCity }));
   };
@@ -89,7 +89,7 @@ const UserDataItem = () => {
           {!isEdit && (
             <>
               <EditButton type="button" onClick={onEditBtn}>
-                <Edit />
+                <BiPencil />
               </EditButton>
               <Input readOnly defaultValue={name} />
             </>
@@ -97,7 +97,7 @@ const UserDataItem = () => {
           {isEdit && (
             <>
               <EditButton type="submit">
-                <CheckIcon />
+                <MdDone />
               </EditButton>
               <Input
                 type="text"
@@ -118,7 +118,7 @@ const UserDataItem = () => {
           {!isEdit && (
             <>
               <EditButton type="button" onClick={onEditBtn}>
-                <Edit />
+                <BiPencil />
               </EditButton>{' '}
               <Input readOnly defaultValue={email} />
             </>
@@ -126,7 +126,7 @@ const UserDataItem = () => {
           {isEdit && (
             <>
               <EditButton type="submit">
-                <CheckIcon />
+                <MdDone />
               </EditButton>
               <Input
                 type="email"
@@ -147,7 +147,7 @@ const UserDataItem = () => {
           {!isEdit && (
             <>
               <EditButton type="button" onClick={onEditBtn}>
-                <Edit />
+                <BiPencil />
               </EditButton>
               <Input readOnly defaultValue={birthday} />
             </>
@@ -155,7 +155,7 @@ const UserDataItem = () => {
           {isEdit && (
             <>
               <EditButton type="submit">
-                <CheckIcon />
+                <MdDone />
               </EditButton>
               <Input
                 type="text"
@@ -170,15 +170,14 @@ const UserDataItem = () => {
           )}
         </InputWrap>
       </ItemWrap>
-
       <ItemWrap onSubmit={handlePhoneSubmit}>
         <InputWrap>
           <Span>Phone: </Span>
           <Label htmlFor={id}></Label>
           {!isEdit && (
             <>
-              <EditButton type="button">
-                <Edit onClick={onEditBtn} />
+              <EditButton type="button" onClick={onEditBtn}>
+                <BiPencil />
               </EditButton>
               <Input readOnly defaultValue={phone} />
             </>
@@ -186,7 +185,7 @@ const UserDataItem = () => {
           {isEdit && (
             <>
               <EditButton type="submit">
-                <CheckIcon />
+                <MdDone />
               </EditButton>
               <Input
                 type="phone"
@@ -209,7 +208,7 @@ const UserDataItem = () => {
           {!isEdit && (
             <>
               <EditButton type="button" onClick={onEditBtn}>
-                <Edit />
+                <BiPencil />
               </EditButton>
               <Input readOnly defaultValue={city} />
             </>
@@ -217,7 +216,7 @@ const UserDataItem = () => {
           {isEdit && (
             <>
               <EditButton type="submit">
-                <CheckIcon />
+                <MdDone />
               </EditButton>
               <Input
                 type="text"

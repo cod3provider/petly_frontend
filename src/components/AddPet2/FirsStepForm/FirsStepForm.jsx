@@ -1,39 +1,54 @@
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
+import { useState } from 'react';
+
+import {
+  CheckBox,
+  CheckboxSpan,
+  CheckboxContainer,
+  Label,
+} from './FirsStepForm.styled.js';
 
 const FirsStepForm = ({ setStep, setState, step, state }) => {
   const categories = ['your pet', 'sell', 'lostFound', 'inGoodHands'];
+
+  const [formState, setFormState] = useState({
+    type: state.type,
+  });
+
+  const handleChange = e => {
+    setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <Formik
-      initialValues={{
-        picked: state.type,
-      }}
-      onSubmit={values => {
+      initialValues={formState}
+      onSubmit={() => {
         setStep('second');
         setState(prev => ({
           ...prev,
-          type: values.picked,
         }));
       }}
     >
-      {({ values, handleChange }) => (
+      {() => (
         <Form>
-          <div id="my-radio-group">
+          <CheckboxContainer id="my-radio-group">
             {categories.map(categorie => (
-              <label key={categorie}>
-                <input
+              <Label key={categorie}>
+                <CheckBox
                   type="radio"
-                  name="picked"
+                  name="type"
                   value={categorie}
                   required
-                  checked={values.picked === categorie}
+                  checked={formState.type === categorie}
                   onChange={handleChange}
                 />
-                {categorie}
-              </label>
+                <CheckboxSpan>{categorie}</CheckboxSpan>
+              </Label>
             ))}
-          </div>
+          </CheckboxContainer>
 
           <ButtonPet step={step} setStep={setStep} />
         </Form>

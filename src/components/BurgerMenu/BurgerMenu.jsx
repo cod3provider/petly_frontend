@@ -1,12 +1,11 @@
-// import burgermenu from '../../images/menu-hamburger.jpg';
 import PropTypes from 'prop-types';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { BurgerIcons, BurgerWrapper } from './BurgerMenu.styled.js';
 
 export default function BurgerMenu({ onClick }) {
   return (
-    <div onClick={onClick}>
-      <AiOutlineMenu size={20} color="#FFC107" />
-    </div>
+    <BurgerWrapper onClick={onClick}>
+      <BurgerIcons />
+    </BurgerWrapper>
   );
 }
 
