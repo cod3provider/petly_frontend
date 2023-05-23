@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
 
+// import { ReactComponent as EditIcon } from '../../../icons/edit-2.svg';
+// import { ReactComponent as Check } from '../../../icons/check.svg';
+
 export const Span = styled.span`
   min-width: 0px;
   font-weight: 600;
@@ -11,6 +14,12 @@ export const Span = styled.span`
   @media screen and (min-width: 768px) {
     font-size: 18px;
   }
+`;
+
+export const CheckIcon = styled.div`
+  fill: none;
+  width: 24px;
+  height: 24px;
 `;
 
 export const EditButton = styled.button`
@@ -27,6 +36,12 @@ export const EditButton = styled.button`
   margin: 0px;
   background: transparent;
   border: none;
+`;
+
+export const Edit = styled.div`
+  width: 24px;
+  height: 24px;
+  fill: #54adff;
 `;
 
 export const Input = styled.input`

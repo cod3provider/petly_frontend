@@ -11,12 +11,20 @@ import {
   Text,
 } from './PetsItem.styled';
 
+import { TbTrash } from 'react-icons/tb';
+import { useDispatch } from 'react-redux';
+import { deletePetsData } from '../../../redux/petsData/petsDataOperations';
+
 const PetsItem = ({ pet }) => {
   const [setIsModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const onDeleteBtn = () => {
-    setIsModalOpen(true);
+    dispatch(deletePetsData(pet._id));
   };
+
+  const date = new Date(pet.birthday).toLocaleDateString();
 
   return (
     <>
@@ -35,13 +43,13 @@ const PetsItem = ({ pet }) => {
               </Text>
             </TextWrap>
             <DeleteBtn type="button" onClick={onDeleteBtn}>
-              <Icon />
+              <TbTrash size={24} />
             </DeleteBtn>
             {/* {isModalOpen && <ModalDelete onClick={onDeleteBtn}/> } */}
           </BtnWrap>
           <TextWrap>
             <Text>
-              Date of birth: <Span>{pet.birthday}</Span>
+              Date of birth: <Span>{date}</Span>
             </Text>
           </TextWrap>
           <TextWrap>

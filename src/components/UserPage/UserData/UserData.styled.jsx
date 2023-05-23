@@ -14,7 +14,8 @@ export const MainWrap = styled.div`
 `;
 
 export const Confirm = styled.div`
-  background-color: #bf342a;
+  fill: none;
+//   background-color: #bf342a;
   width: 24px;
   height: 24px;
 `;
@@ -41,7 +42,8 @@ export const ErrorWrap = styled.div`
 `;
 
 export const CrossIcon = styled.div`
-  background-color: #bf342a;
+  fill: none;
+//   background-color: #bf342a;
   width: 24px;
   height: 24px;
   stroke: #bf342a;
