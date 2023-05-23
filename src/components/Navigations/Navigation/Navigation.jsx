@@ -11,10 +11,10 @@ export default function Navigation({ onClick }) {
           </StyledNavLink>
         </StyledLi>
         <StyledLi>
-//           <StyledNavLink to="/notices" onClick={onClick}>
-//             Find pet
-          <StyledNavLink to="/notices/sell" onClick={onClick}>
-            NoticesPage
+           <StyledNavLink to="/notices/sell" onClick={onClick}>
+             Find pet
+          {/*<StyledNavLink to="/notices/sell" onClick={onClick}>*/}
+          {/*  NoticesPage*/}
           </StyledNavLink>
         </StyledLi>
         <StyledLi>
