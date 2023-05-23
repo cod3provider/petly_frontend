@@ -27,7 +27,7 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const StyledUl = styled.ul`
-  margin-top: 80px;
+  margin-top: 140px;
   display: flex;
   flex-direction: column;
 
@@ -35,7 +35,7 @@ export const StyledUl = styled.ul`
   padding: 0;
 
   @media (${theme.breakpoints.tablet.media}) {
-    matgin-top: 92px;
+    margin-top: 92px;
     font-size: ${theme.fontSizes.xxl};
   }
 
@@ -48,6 +48,7 @@ export const StyledUl = styled.ul`
 
 export const StyledLi = styled.li`
   font-size: ${theme.fontSizes.x};
+  
   padding: 0;
 
   &:not(:first-child) {
@@ -71,7 +72,11 @@ export const StyledLi = styled.li`
       margin-top: 0px;
     }
     &:last-child {
-      margin-right: 488px;
+      margin-right: 270px;
+    }
+
+    &:first-child {
+      left: 160px;
     }
   }
 `;
