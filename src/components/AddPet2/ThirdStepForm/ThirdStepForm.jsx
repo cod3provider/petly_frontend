@@ -1,3 +1,5 @@
+import { useMedia } from 'react-use';
+import { theme } from '../../../utils/theme';
 import { Formik, Field, Form } from 'formik';
 import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { useState } from 'react';
@@ -5,6 +7,21 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import ButtonPet from '../ButtonPet/ButtonPet';
 import { useNavigate } from 'react-router-dom';
+import {
+  GenderLabel,
+  LabelStyle,
+  InputStyle,
+  CheckBoxHidden,
+  GenderContainer,
+  TextareaStyle,
+  BoxImage,
+  IconPlus,
+  InputImage,
+  ImagePetStyle,
+  WrapperImage,
+  LabelImage,
+  MaleIcon,
+} from './ThirdStepForm.styled';
 
 const ThirdStepForm = ({
   setStep,
@@ -24,7 +41,21 @@ const ThirdStepForm = ({
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
+  const isMobile = useMedia(theme.breakpoints.mobile.media);
+  const isTablet = useMedia(theme.breakpoints.tablet.media);
+  const isDesktop = useMedia(theme.breakpoints.desktop.media);
+
   const genders = ['female', 'male'];
+
+  const genderTitile = gender => {
+    switch (gender) {
+      case 'female':
+        return 'Female';
+
+      case 'male':
+        return 'Male';
+    }
+  };
 
   axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com';
 
@@ -97,27 +128,74 @@ const ThirdStepForm = ({
             type === 'lostFound' ||
             type === 'inGoodHands') && (
             <>
-              <p>The Sex</p>
-              <div id="my-radio-group">
-                {genders.map(gander => (
-                  <label key={gander}>
-                    <input
+              <LabelStyle>The Sex</LabelStyle>
+              <GenderContainer id="my-radio-group">
+                {genders.map(gender => (
+                  <label key={gender}>
+                    <CheckBoxHidden
                       type="radio"
                       name="sex"
-                      value={gander}
+                      value={gender}
                       required
-                      checked={formState.sex === gander}
+                      checked={formState.sex === gender}
                       onChange={handleChange}
                     />
-                    {'female' === <BsGenderFemale /> &&
-                      'male' === <BsGenderMale />}
-                    {gander}
+                    {gender === 'female' ? <BsGenderFemale /> : <MaleIcon />}
+                    <GenderLabel>{genderTitile(gender)}</GenderLabel>
                   </label>
                 ))}
-              </div>
+              </GenderContainer>
 
-              <label htmlFor="location">Location</label>
-              <Field
+              {/* <div>
+                <LabelStyle htmlFor="image">
+                  Load the pet&#39;s image:
+                </LabelStyle>
+                {!file && (
+                  <Field
+                    id="image"
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                    value={formState.image}
+                    required
+                  />
+                )}
+                {file && <img src={file} alt="Preview image" />}
+
+              </div> */}
+            </>
+          )}
+          <WrapperImage>
+            {isMobile && <LabelImage htmlFor="image">Add photo</LabelImage>}
+
+            {isTablet && (
+              <label htmlFor="image">Load the pet&#39;s image:</label>
+            )}
+            {isDesktop && (
+              <label htmlFor="image">Load the pet&#39;s image:</label>
+            )}
+            <BoxImage>
+              {file ? (
+                <ImagePetStyle src={file} alt="Preview image" />
+              ) : (
+                <>
+                  <InputImage
+                    id="image"
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                    value={formState.image}
+                    required
+                  />
+                  <IconPlus />
+                </>
+              )}
+            </BoxImage>
+          </WrapperImage>
+          {type !== 'your pet' && (
+            <>
+              <LabelStyle htmlFor="location">Location</LabelStyle>
+              <InputStyle
                 id="location"
                 name="location"
                 placeholder="Location"
@@ -130,8 +208,8 @@ const ThirdStepForm = ({
 
           {type === 'sell' && (
             <>
-              <label htmlFor="price">Price</label>
-              <Field
+              <LabelStyle htmlFor="price">Price</LabelStyle>
+              <InputStyle
                 id="price"
                 name="price"
                 placeholder="Price"
@@ -142,8 +220,8 @@ const ThirdStepForm = ({
             </>
           )}
 
-          <div>
-            <label htmlFor="image">Load the pet&#39;s image:</label>
+          {/* <div>
+            <LabelStyle htmlFor="image">Load the pet&#39;s image:</LabelStyle>
             {!file && (
               <Field
                 id="image"
@@ -156,11 +234,10 @@ const ThirdStepForm = ({
             )}
             {file && <img src={file} alt="Preview image" />}
 
-            {/* Показати попередній перегляд зображення */}
-          </div>
+          </div> */}
 
-          <label htmlFor="Comments">Comments</label>
-          <Field
+          <LabelStyle htmlFor="Comments">Comments</LabelStyle>
+          <InputStyle
             id="comments"
             name="comments"
             placeholder="Type breed"
