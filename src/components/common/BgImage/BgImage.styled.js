@@ -6,15 +6,6 @@ import bgImageMobile from '../../../assets/img/background/bg_mobile.png';
 import bgImageTablet from '../../../assets/img/background/bg_tablet.png';
 import bgImageDesktop from '../../../assets/img/background/bg_desktop.png';
 
-export const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100vh;
-  object-fit: contain;
-`;
-
 export const BackgroundImageDiv = styled.div`
   position: absolute;
   top: 0;
