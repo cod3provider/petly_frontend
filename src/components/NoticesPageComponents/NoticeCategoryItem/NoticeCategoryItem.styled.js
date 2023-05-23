@@ -8,19 +8,23 @@ import { BsGenderFemale, BsGenderMale} from 'react-icons/bs';
 
 export const NoticeCategoryItemItem= styled.li`
     width: 280px;
-    margin-top: 24px;
     box-shadow: 3px 8px 14px 0px #88C6FD30;
     border-radius: 0px 0px 40px 40px;
     overflow: hidden;
 
-    &:first-child{
-        margin-top: 0;
+    @media(${theme.breakpoints.tablet.media}){
+        width: 336px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 288px;
     }
 `;
 
 export const NoticeCategoryItemPhotoContainer= styled.div`
     position: relative;
-    height: 288px
+    height: 288px;
+    overflow: hidden;
 `;
 
 export const NoticeCategoryItemCategoryContainer= styled.div`
@@ -60,6 +64,14 @@ export const NoticeCategoryItemInfoList= styled.ul`
     justify-content: center;
     bottom: 12px;
     left: 8px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        left: 24px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        left: 12px;
+    }
 `;
 
 export const NoticeCategoryItemInfoItem = styled.li`
@@ -76,12 +88,20 @@ export const NoticeCategoryItemInfoItem = styled.li`
     &:first-child{
         margin-left: 0;
     }
+
+    @media(${theme.breakpoints.tablet.media}){
+        margin-left: 24px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        margin-left: 12px;
+    }
 `;
 
 export const NoticeCategoryItemInfoText = styled.p`
     margin-left: 4px;
     font-weight: 600;
-    font-size: ${theme.fontSizes.xs};
+    font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.04em;
     color: ${theme.baseColors.textColor};
@@ -128,6 +148,8 @@ export const NoticeCategoryItemMoreButton = styled.button`
     letter-spacing: 0.04em;
     color: ${theme.baseColors.accentButtonColor};
     background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
 
 `;
 

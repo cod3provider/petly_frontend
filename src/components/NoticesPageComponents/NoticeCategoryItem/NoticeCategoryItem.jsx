@@ -16,9 +16,44 @@ import {
     NoticeCategoryItemFemaleIcon,
     NoticeCategoryItemMaleIcon,
     NoticeCategoryItemHeartIcon
-} from "./NoticeCategoryItem.styled"
+} from "./NoticeCategoryItem.styled";
+
 
 const NoticeCategoryItem = ({ data, openModal }) => {
+    const getAge = (birthday) => {
+        const currentDate = new Date();
+        const birthdayDate = new Date(birthday);
+        const timeDifference = currentDate.getTime() - birthdayDate.getTime();
+        // Розрахунок різниці у роках
+        const yearsDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+
+        if (yearsDifference > 1) {
+            return yearsDifference + " years";
+        }
+
+        if (yearsDifference === 1) {
+            return yearsDifference + " year";
+        }
+
+        // Розрахунок різниці у місяцях
+        var monthsDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
+
+        if (monthsDifference > 1) {
+            return monthsDifference + " months";
+        }
+
+        if (monthsDifference === 1) {
+            return monthsDifference + " month";
+        }
+
+        // Розрахунок різниці у днях
+        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+        return daysDifference + " days";
+    }
+    
+    const age = getAge(data.birthday);
+
     return <NoticeCategoryItemItem>
         <NoticeCategoryItemPhotoContainer>
             <img src={data.noticeImage} alt="pet photo" />
@@ -35,7 +70,7 @@ const NoticeCategoryItem = ({ data, openModal }) => {
                 </NoticeCategoryItemInfoItem>
                 <NoticeCategoryItemInfoItem>
                     <NoticeCategoryItemClockIcon></NoticeCategoryItemClockIcon>
-                    <NoticeCategoryItemInfoText>{data.age}</NoticeCategoryItemInfoText>
+                    <NoticeCategoryItemInfoText>{age}</NoticeCategoryItemInfoText>
                 </NoticeCategoryItemInfoItem>
                 <NoticeCategoryItemInfoItem>
                     {data.sex==="female"?<NoticeCategoryItemFemaleIcon/>:<NoticeCategoryItemMaleIcon/>}
