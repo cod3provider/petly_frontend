@@ -48,41 +48,34 @@ const UserDataItem = () => {
 
   const handleNameSubmit = event => {
     event.preventDefault();
-    const form = event.target;
     const userName = event.target.name.value;
-    const data = { name: userName };
-    console.log(data);
-    dispatch(updateCurrentUser(data));
+    dispatch(updateCurrentUser({ name: userName }));
   };
 
   const handleEmailSubmit = event => {
     event.preventDefault();
-    // const form = event.target;
-    const userEmail = email.value;
+    const userEmail = event.target.email.value;
 
     dispatch(updateCurrentUser({ email: userEmail }));
   };
 
   const handleBirthdaySubmit = event => {
     event.preventDefault();
-    // const form = event.target;
-    const userBirthday = birthday.value;
+    const userBirthday = event.target.birthday.value;
 
     dispatch(updateCurrentUser({ birthday: userBirthday }));
   };
 
   const handlePhoneSubmit = event => {
     event.preventDefault();
-    // const form = event.target;
-    const userPhone = phone.value;
+    const userPhone = event.target.phone.value;
 
     dispatch(updateCurrentUser({ phone: userPhone }));
   };
 
   const handleCitySubmit = event => {
     event.preventDefault();
-    // const form = event.target;
-    const userCity = city.value;
+    const userCity = event.target.city.value;
 
     dispatch(updateCurrentUser({ city: userCity }));
   };
@@ -103,7 +96,7 @@ const UserDataItem = () => {
           )}
           {isEdit && (
             <>
-              <EditButton type="submit" onClick={onEditBtn}>
+              <EditButton type="submit">
                 <MdDone />
               </EditButton>
               <Input
@@ -132,7 +125,7 @@ const UserDataItem = () => {
           )}
           {isEdit && (
             <>
-              <EditButton type="submit" onClick={onEditBtn}>
+              <EditButton type="submit">
                 <MdDone />
               </EditButton>
               <Input
@@ -161,7 +154,7 @@ const UserDataItem = () => {
           )}
           {isEdit && (
             <>
-              <EditButton type="submit" onClick={onEditBtn}>
+              <EditButton type="submit">
                 <MdDone />
               </EditButton>
               <Input
@@ -191,7 +184,7 @@ const UserDataItem = () => {
           )}
           {isEdit && (
             <>
-              <EditButton type="submit" onClick={onEditBtn}>
+              <EditButton type="submit">
                 <MdDone />
               </EditButton>
               <Input
@@ -222,7 +215,7 @@ const UserDataItem = () => {
           )}
           {isEdit && (
             <>
-              <EditButton type="submit" onClick={onEditBtn}>
+              <EditButton type="submit">
                 <MdDone />
               </EditButton>
               <Input
