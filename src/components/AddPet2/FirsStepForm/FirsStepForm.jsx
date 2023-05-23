@@ -22,6 +22,19 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
     setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const categoriesText = categorie => {
+    switch (categorie) {
+      case 'your pet':
+        return 'your pet';
+      case 'sell':
+        return 'sell';
+      case 'lostFound':
+        return 'lost/found';
+      case 'inGoodHands':
+        return 'in good hands';
+    }
+  };
+
   return (
     <Formik
       initialValues={formState}
@@ -36,7 +49,7 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
         <Form>
           <CheckboxContainer id="my-radio-group">
             {categories.map(categorie => (
-              <Label key={categorie}>
+              <Label key={categorie} state={state}>
                 <CheckBox
                   type="radio"
                   name="type"
@@ -45,12 +58,14 @@ const FirsStepForm = ({ setStep, setState, step, state }) => {
                   checked={formState.type === categorie}
                   onChange={handleChange}
                 />
-                <CheckboxSpan>{categorie}</CheckboxSpan>
+                <CheckboxSpan state={formState} categorie={categorie}>
+                  {categoriesText(categorie)}
+                </CheckboxSpan>
               </Label>
             ))}
           </CheckboxContainer>
 
-          <ButtonPet step={step} setStep={setStep} />
+          <ButtonPet step={step} setStep={setStep} setState={setState} />
         </Form>
       )}
     </Formik>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
 import { BsPlusLg } from 'react-icons/bs';
-import { BsGenderMale } from 'react-icons/bs';
+import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 
 export const LabelStyle = styled(`label`)`
   display: block;
@@ -13,14 +13,22 @@ export const LabelStyle = styled(`label`)`
   margin-bottom: 4px;
   color: #111111;
 `;
-export const TextareaStyle = styled('input')`
+export const TextareaStyle = styled('textarea')`
   width: 100%;
   height: 92px;
   padding: 8px 16px;
   resize: none;
   border: 1px solid #54adff;
   border-radius: 20px;
-  ::placeholder {
+  color: #888888;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    border-color: #ffc107;
+  }
+
+  &::placeholder {
     display: flex;
     align-items: start;
     justify-content: left;
@@ -88,21 +96,12 @@ export const ImagePetStyle = styled.img`
   background-position: left;
 `;
 
-export const GenderLabel = styled.span`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  /* align-items: center; */
-  letter-spacing: 0.04em;
-  margin: 12px;
-
-  color: #888888;
-`;
-
 export const InputStyle = styled('input')`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+
+  color: #888888;
 
   padding: 10px 16px;
   border-radius: 40px;
@@ -120,10 +119,6 @@ export const InputStyle = styled('input')`
     border-color: #ffc107;
   }
 
-  /* &:hover:not(:disabled) {
-    background-color: ${theme.baseColors.filterActiveTextColor};
-  } */
-
   @media screen and (min-width: 768px) {
     margin-top: 32px;
     font-size: ${theme.fontSizes.m};
@@ -134,6 +129,32 @@ export const CheckBoxHidden = styled.input`
   display: none;
 `;
 
+export const GenderLabel = styled.span`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  /* align-items: center; */
+  letter-spacing: 0.04em;
+  margin: 12px;
+
+  color: #888888;
+
+  color: ${props => {
+    if (props.state.sex === props.gender) {
+      switch (props.gender) {
+        case 'female':
+          return '#F43F5E';
+
+        case 'male':
+          return '#00C3AD';
+
+        default:
+          return '#888888';
+      }
+    }
+  }};
+`;
+
 export const GenderContainer = styled.div`
   margin: 4px -12px 16px 0px;
   text-align: left;
@@ -142,4 +163,37 @@ export const GenderContainer = styled.div`
 export const MaleIcon = styled(BsGenderMale)`
   margin-left: 16px;
   transform: rotate(-45deg);
+  /* color: ${theme.baseColors.accentButtonColor}; */
+
+  color: ${props => {
+    switch (props.state.sex) {
+      case 'female':
+        return '#888888';
+
+      case 'male':
+        return `${theme.baseColors.accentButtonColor}`;
+
+      default:
+        return `${theme.baseColors.accentButtonColor}`;
+    }
+  }};
+`;
+
+export const FemaleIcon = styled(BsGenderFemale)`
+  /* margin-left: 16px; */
+  /* transform: rotate(-45deg); */
+  /* color: ${theme.baseColors.accentButtonColor}; */
+
+  color: ${props => {
+    switch (props.state.sex) {
+      case 'female':
+        return '#F43F5E';
+
+      case 'male':
+        return '#888888';
+
+      default:
+        return '#F43F5E';
+    }
+  }};
 `;

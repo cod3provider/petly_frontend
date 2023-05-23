@@ -6,11 +6,20 @@ import { NavLink } from 'react-router-dom';
 
 export const ButtonNext = styled.button`
   font-family: 'Manrope';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.38;
+
+  letter-spacing: 0.04em;
+
+  color: #fef9f9;
   display: flex;
   color: ${theme.baseColors.buttonTextColor};
   width: 100%;
   padding: 8px 87px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   color: #fef9f9;
   background: #54adff;
   border-radius: 40px;

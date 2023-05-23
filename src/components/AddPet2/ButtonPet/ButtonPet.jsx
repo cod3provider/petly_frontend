@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ButtonNext,
   IconButton,
@@ -8,12 +8,20 @@ import {
   LinkStyled,
 } from './ButtonPet.styled';
 
-export const ButtonPet = ({ step, setStep }) => {
-  const location = useLocation;
+export const ButtonPet = ({ step, setStep, setState }) => {
+  const navigate = useNavigate();
+
+  const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
 
   const handleBack = () => {
     switch (step) {
+      case 'first':
+        setState({});
+        localStorage.setItem('addPetState', JSON.stringify(''));
+        localStorage.setItem('addPetStep', JSON.stringify(''));
+        navigate(backLinkHref, { replace: true });
+        break;
       case 'second':
         setStep('first');
         break;
@@ -50,4 +58,5 @@ export default ButtonPet;
 ButtonPet.propTypes = {
   step: PropTypes.string.isRequired,
   setStep: PropTypes.func.isRequired,
+  setState: PropTypes.func,
 };

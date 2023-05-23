@@ -10,6 +10,7 @@ import { PetsWrap, BtnWrap, PlusIcon, Title, Button } from './PetsData.styled';
 
 const PetsData = () => {
   const location = useLocation();
+  console.log(location);
 
   const dispatch = useDispatch();
 

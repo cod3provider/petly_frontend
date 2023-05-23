@@ -17,6 +17,7 @@ export const InputStyle = styled('input')`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+  color: #888888;
 
   padding: 10px 16px;
   border-radius: 40px;

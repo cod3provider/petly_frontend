@@ -22,12 +22,24 @@ export const CheckboxSpan = styled.span`
   line-height: 1.36;
   letter-spacing: 0.04em;
 
-  color: ${theme.baseColors.accentColor};
+  /* color: ${theme.baseColors.accentColor}; */
 
   padding: 8px 16px;
 
   background: rgba(140, 200, 253, 0.44);
   border-radius: 40px;
+
+  color: ${props => {
+    if (props.state.type === props.categorie) {
+      return `${theme.baseColors.buttonTextColor}`;
+    }
+  }};
+  background-color: ${props => {
+    if (props.state.type === props.categorie) {
+      return `${theme.baseColors.accentColor}`;
+    }
+  }};
+
   &:hover,
   &:focus,
   &:checked {
