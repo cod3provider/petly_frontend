@@ -65,7 +65,7 @@ function LoginForm() {
             navigate('/user');
           }
           resetForm();
-          +setSubmitting(false);
+          setSubmitting(false);
           console.log(values);
         }}
       >
