@@ -69,6 +69,7 @@ export const ButtonIcon = styled.button`
   height: 30px;
   border: 0px;
   background-color: #ffffff;
+  outline: none;
 `;
 
 export const InputStyle = styled('input')`
