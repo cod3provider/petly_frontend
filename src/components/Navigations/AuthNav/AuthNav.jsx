@@ -1,22 +1,19 @@
-import { Link } from './AuthNav.styled.js';
+import { IconLink, Link, WrapDivAuthNav, WrapNav } from './AuthNav.styled.js';
 import PropTypes from 'prop-types';
 
 export default function AuthNav({ onClick }) {
   return (
-    <div>
-      <nav style={{ display: 'block' }}>
-        <Link to="/login" style={{ textDecoration: 'none' }} onClick={onClick}>
-          Login
+    <WrapDivAuthNav>
+      <WrapNav>
+        <Link to="/login" onClick={onClick}>
+          Log IN
+          <IconLink />
         </Link>
-        <Link
-          to="/register"
-          style={{ textDecoration: 'none' }}
-          onClick={onClick}
-        >
+        <Link to="/register" onClick={onClick}>
           Registration
         </Link>
-      </nav>
-    </div>
+      </WrapNav>
+    </WrapDivAuthNav>
   );
 }
 
