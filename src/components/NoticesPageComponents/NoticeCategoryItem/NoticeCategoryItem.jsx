@@ -21,7 +21,7 @@ import {
 
 import { useDispatch } from 'react-redux';
 
-import { getFavorite, addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
+import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
 
 import { useState, useEffect } from 'react';
 

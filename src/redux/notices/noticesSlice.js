@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFavorite, addFavorite, removeFavorite } from './noticesOperations';
+import { getNoticesByPrivateCategory, addFavorite, removeFavorite } from './noticesOperations';
 
 const initialState = {
   notices: [],
@@ -13,14 +13,14 @@ const noticesSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(getFavorite.pending, store => {
+      .addCase(getNoticesByPrivateCategory.pending, store => {
         store.loading = true;
       })
-      .addCase(getFavorite.fulfilled, (store, { payload }) => {
+      .addCase(getNoticesByPrivateCategory.fulfilled, (store, { payload }) => {
         store.loading = false;
         store.notices = payload;
       })
-      .addCase(getFavorite.rejected, (store, { payload }) => {
+      .addCase(getNoticesByPrivateCategory.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       })

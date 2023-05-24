@@ -4,13 +4,13 @@ import {NoticesCategoriesListList} from "./NoticesCategoriesList.styled"
 
 const NoticesCategoriesList = ({ items, openModal, user, isLoggedIn }) => {
     return <NoticesCategoriesListList>
-        {items.map(item => (<NoticeCategoryItem
+        {items.length != 0 ? items.map(item => (<NoticeCategoryItem
             key={item._id}
             data={item}
             openModal={openModal}
             user={user}
             isLoggedIn={isLoggedIn}
-        />))}
+        />)) : <li><h2>No pets added</h2></li>}
     </NoticesCategoriesListList>;
 }
 

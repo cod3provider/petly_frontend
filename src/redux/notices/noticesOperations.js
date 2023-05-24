@@ -38,16 +38,21 @@ export const removeFavorite = createAsyncThunk(
     }
 );
 
-export const getFavorite = createAsyncThunk(
-    '/getFavorite',
-    async (_, { rejectWithValue, getState }) => {
+export const getNoticesByPrivateCategory = createAsyncThunk(
+    '/getNoticesByPrivateCategory',
+    async (credentials, { rejectWithValue, getState }) => {
         try {
             const value = getState().auth.token;
             if (value) {
                 token.set(value);
             }
-            const { data } = await axios.get(`/notices/my/favorite`);
-            return data;
+            const response = await axios.get(`/notices/my/${credentials.category}`, {
+                params: {
+                    page: credentials.page,
+                    limit: credentials.limit,
+                }
+            });
+            return response.data;
         } catch (error) {
             console.log(error.response.data);
             return rejectWithValue(error.message);
