@@ -24,6 +24,7 @@ export const Backdrop = styled.div`
 
   background-color: rgba(43, 43, 43, 0.6);
   backdrop-filter: blur(10px);
+  z-index: 200;
 `;
 
 export const Wrapper = styled.div`
