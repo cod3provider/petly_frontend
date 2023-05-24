@@ -1,39 +1,144 @@
 import styled from 'styled-components';
+import { theme } from '../../utils/theme';
 
 export const Container = styled.div`
-  background-color: #fef9f9;
-  width: 320px;
-  padding: 20px;
+  margin: 24px auto;
+  /* width: 300px; */
+  @media (${theme.breakpoints.mobile.media}) {
+    width: ${theme.breakpoints.mobile.width};
+  }
+  @media ${theme.breakpoints.tablet.media} {
+    width: 460px;
+    width: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return '460px';
+
+          default:
+            return '704px';
+        }
+      }
+    }};
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    width: 460px;
+    width: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return '460px';
+
+          default:
+            return '822px';
+        }
+      }
+    }};
+  }
 `;
 
 export const Wrapper = styled.div`
-  width: 280px;
-  padding: 20px 8px;
+  min-height: 496px;
   background-color: white;
   color: black;
 
+  margin: 0 auto;
+
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    width: 280px;
+    padding: 20px 8px;
+    /* width: ${theme.breakpoints.mobile.width}; */
+  }
+  @media ${theme.breakpoints.tablet.media} {
+    padding: 20px 32px;
+    width: 460px;
+    width: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return '460px';
+
+          default:
+            return '704px';
+        }
+      }
+    }};
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    padding: 20px 32px;
+    width: 460px;
+    width: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return '460px';
+
+          default:
+            return '822px';
+        }
+      }
+    }};
+  }
 `;
 
 export const Title = styled.h2`
-  text-align: left;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
-  margin-left: 12px;
+  line-height: 1.35;
+
   margin-bottom: 24px;
 
   color: #111111;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    text-align: left;
+    font-size: 20px;
+    margin-left: 12px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    font-size: 28px;
+    text-align: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return 'left';
+
+          default:
+            return 'center';
+        }
+      }
+    }};
+  }
 `;
 
 export const StepList = styled.ul`
   display: flex;
-  margin: -6px;
-  margin-bottom: 24px;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    margin: -6px;
+    margin-bottom: 24px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    margin: -11px;
+    justify-content: ${({ type, step }) => {
+      if (step === 'third') {
+        switch (type) {
+          case 'your pet':
+            return 'start';
+
+          default:
+            return 'center';
+        }
+      }
+    }};
+    margin-bottom: 40px;
+  }
 `;
 export const StepLi = styled.li`
-  margin: 6px;
   min-width: 80px;
   padding-bottom: 20px;
 
@@ -42,12 +147,24 @@ export const StepLi = styled.li`
   color: #888888;
 
   font-weight: 500;
-  font-size: 10px;
-  line-height: 14px;
+
   align-items: center;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    margin: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    margin: 11px;
+    font-size: 16px;
+    line-height: 1.66;
+  }
 `;
 
 export const StepLiFirst = styled.span`
+  align-items: center;
+
   color: ${props => {
     switch (props.step) {
       case 'first':
