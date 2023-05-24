@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getIsNewUser, getUser } from '../../redux/auth/authSelectors';
+// import { getIsNewUser, getUser } from '../../redux/auth/authSelectors';
 import { getCurrentUser } from '../../redux/auth/authOperations';
 
 import UserData from '../../components/UserPage/UserData/UserData';
@@ -12,26 +12,26 @@ import { SectionStyled } from '../../components/common/Section/Section.styled';
 import { Wrap, UserDiv, Title, UserWrapper } from './UserPage.styled';
 import { useToggle } from '../../hooks/useToggle';
 import { PetWrapper } from '../../components/UserPage/PetsData/PetsData.styled.jsx';
-import { setIsNewUser } from '../../redux/auth/authSlice';
-import ModalBack from '../../components/Modals/ModalBack';
-import ModalCongrats from '../../components/Modals/ModalCongrats/ModalCongrats';
+// import { setIsNewUser } from '../../redux/auth/authSlice';
+// import ModalBack from '../../components/Modals/ModalBack';
+// import ModalCongrats from '../../components/Modals/ModalCongrats/ModalCongrats';
 
 function UserPage() {
   const dispatch = useDispatch();
   const { isOpen, open, close } = useToggle();
 
-  const user = useSelector(getUser);
+  // const user = useSelector(getUser);
 
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-    const isNewUser = useSelector(getIsNewUser);
-    const [isModalOpen, setIsModalOpen] = useState(true);
-    const onClose = () => {
-      setIsModalOpen(!isModalOpen);
-      dispatch(setIsNewUser(!isNewUser));
-    };
+    // const isNewUser = useSelector(getIsNewUser);
+    // const [isModalOpen, setIsModalOpen] = useState(true);
+    // const onClose = () => {
+    //   setIsModalOpen(!isModalOpen);
+    //   dispatch(setIsNewUser(!isNewUser));
+    // };
 
   return (
     <ContainerStyled style={{ background: '#FEF9F9' }}>
@@ -47,12 +47,11 @@ function UserPage() {
           <PetWrapper>
             <UserPets />
           </PetWrapper>
-
-          {isNewUser ? (
-            <ModalBack onClose={onClose}>
-              <ModalCongrats onClose={onClose} />
-            </ModalBack>
-          ) : null}
+          {/*{isNewUser ? (*/}
+          {/*  <ModalBack onClose={onClose}>*/}
+          {/*    <ModalCongrats onClose={onClose} />*/}
+          {/*  </ModalBack>*/}
+          {/*) : null}*/}
           {/*<UserPets />*/}
         </UserDiv>
       </SectionStyled>
