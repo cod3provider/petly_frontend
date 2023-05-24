@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { theme } from "../../../utils/theme.jsx";
+import { theme } from '../../../utils/theme.jsx';
 
 export const ContainerStyled = styled.div`
   margin: 0 auto;
   padding: 0 20px;
-  
+
   @media (${theme.breakpoints.mobile.media}) {
     min-width: ${theme.breakpoints.mobile.width};
   }

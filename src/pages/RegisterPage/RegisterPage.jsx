@@ -8,6 +8,7 @@ import { getIsLoggedIn, getLoading } from '../../redux/auth/authSelectors';
 import { useEffect } from 'react';
 
 import Loader from '../../components/Loader/Loader';
+import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function RegisterPage() {
           <TitleH1>Registration</TitleH1>
           <RegisterForm />
           {isLoading && <Loader />}
+          <BackgroundImageDiv />
         </AuthWraper>
       </SectionStyled>
     </ContainerStyled>
