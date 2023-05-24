@@ -21,10 +21,7 @@ import {
 } from './UserData.styled';
 import UserDataItem from '../UserDataItem/UserDataItem';
 
-import {
-  getCurrentUser,
-  updateCurrentUser,
-} from '../../../redux/auth/authOperations';
+import { updateCurrentUser } from '../../../redux/auth/authOperations';
 import { getUser } from '../../../redux/auth/authSelectors.js';
 
 import defaultUserImg from '../../../images/default-user-img.jpg';
@@ -45,9 +42,7 @@ const UserData = () => {
 
   const fileRef = useRef(null);
   const userData = useSelector(getUser);
-  // console.log(userData);
-  // console.log(avatarUser);
-
+  
   const { avatarUrl } = userData;
 
   // const [showModal, setShowModal] = useState(false);
