@@ -7,9 +7,7 @@ import { getPetsData } from '../../../redux/petsData/petsDataOperations';
 import { getPets } from '../../../redux/petsData/petsDataSelectors';
 
 import PetsList from '../PetsList/PetsList';
-import { PetsWrap, BtnWrap, Button } from './PetsData.styled';
-import { Title } from '../../../pages/UserPage/UserPage.styled';
-
+import { PetsWrap, BtnWrap, Title, Button } from './PetsData.styled';
 
 const PetsData = () => {
   const location = useLocation();

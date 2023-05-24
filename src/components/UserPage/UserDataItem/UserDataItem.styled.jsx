@@ -45,8 +45,7 @@ export const Edit = styled.div`
 `;
 
 export const Input = styled.input`
-  //width: calc(60vw);
-  width: 190px;
+  width: calc(60vw);
   height: 28px;
   padding: 4px 12px;
   background: transparent;
@@ -60,21 +59,18 @@ export const Input = styled.input`
 `;
 
 export const Wrapper = styled.div`
-  //@media screen and (min-width: 768px) {
-  //  width: 355px;
-  //  margin: 0px;
-  //  padding: 0px;
-  //}
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  @media screen and (min-width: 768px) {
+    width: 355px;
+    margin: 0px;
+    padding: 0px;
+  }
 `;
 
 export const ItemWrap = styled.form`
   &:not(:last-child) {
-    //margin-bottom: 12px;
+    margin-bottom: 12px;
     @media screen and (min-width: 768px) {
-      //margin-bottom: 8px;
+      margin-bottom: 8px;
     }
   }
 `;
