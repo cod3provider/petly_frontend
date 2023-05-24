@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CloseIcons, HeaderStyled, NavStyled } from './Header.styled.js';
+import {CloseIcons, HeaderStyled, NavStyled, PaddingWrapper} from './Header.styled.js';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import Logo from '../Logo/Logo.jsx';
 import AuthNav from '../Navigations/AuthNav/AuthNav.jsx';
@@ -18,8 +18,11 @@ export default function Header() {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+
+
   const isLoggedIn = useSelector(getIsLoggedIn);
   const userName = useSelector(getName);
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -45,8 +48,8 @@ export default function Header() {
   const handleClick = () => {
     setShowModal(!showModal);
     !showModal
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = 'unset');
+        ? (document.body.style.overflow = 'hidden')
+        : (document.body.style.overflow = 'unset');
   };
 
   const handleCloseModal = () => {
@@ -58,69 +61,58 @@ export default function Header() {
   const isTablet = useMedia(theme.breakpoints.tablet.media);
   const isDesktop = useMedia(theme.breakpoints.desktop.media);
 
+
+
   return (
-    <HeaderStyled>
-      <NavStyled>
-        <Logo onClick={handleClick} />
-        {showModal && <CloseIcons onClick={handleCloseModal} />}
-        {isLoggedIn && !isLoading && (
-          <>
-            {isMobile && (
-              <UserPageLogo
-                iconSize="28"
-                userName={isMobile && showModal ? userName : null}
-                inModal={isMobile && showModal}
-              />
+      <PaddingWrapper>
+        <HeaderStyled>
+          <NavStyled>
+            <Logo onClick={handleClick} />
+            {showModal && <CloseIcons onClick={handleCloseModal} />}
+            {isLoggedIn && !isLoading && (
+                <UserPageLogo
+                    iconSize="28"
+                    userName={userName}
+                    isMobile={isMobile}
+                    showModal={showModal}
+                />
             )}
-            {isTablet && (
-              <UserPageLogo
-                iconSize="28"
-                userName={userName}
-                inModal={showModal}
-              />
+            {isTablet && !showModal && !isLoggedIn && (
+                <AuthNav onClick={handleCloseModal} />
             )}
-            {isDesktop && (
-              <UserPageLogo
-                iconSize="28"
-                userName={userName}
-                inModal={showModal}
-              />
+            {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
+            {isLoggedIn && isMobile && showModal && (
+                <ModalStyled>
+                  <Navigation onClick={handleCloseModal} />
+                </ModalStyled>
             )}
-          </>
-        )}
-        {isTablet && !showModal && !isLoggedIn && (
-          <AuthNav onClick={handleCloseModal} />
-        )}
-        {!isDesktop && !showModal && <BurgerMenu onClick={handleClick} />}
-        {isLoggedIn && isMobile && showModal && (
-          <ModalStyled>
-            <Navigation onClick={handleCloseModal} />
-          </ModalStyled>
-        )}
-        {!isLoggedIn && isMobile && showModal && (
-          <ModalStyled>
-            <AuthNav onClick={handleCloseModal} />
-            <Navigation onClick={handleCloseModal} />
-          </ModalStyled>
-        )}
-        {isLoggedIn && isTablet && showModal && (
-          <ModalStyled>
-            <Navigation onClick={handleCloseModal} />
-          </ModalStyled>
-        )}
-        {!isLoggedIn && isTablet && showModal && (
-          <ModalStyled>
-            <Navigation onClick={handleCloseModal} />
-          </ModalStyled>
-        )}
-        {isLoggedIn && isDesktop && <Navigation onClick={handleCloseModal} />}
-        {!isLoggedIn && isDesktop && (
-          <>
-            <Navigation onClick={handleCloseModal} />
-            <AuthNav onClick={handleCloseModal} />
-          </>
-        )}
-      </NavStyled>
-    </HeaderStyled>
+            {!isLoggedIn && isMobile && showModal && (
+                <ModalStyled>
+                  <AuthNav onClick={handleCloseModal} />
+                  <Navigation onClick={handleCloseModal} />
+                </ModalStyled>
+            )}
+            {isLoggedIn && isTablet && showModal && (
+                <ModalStyled>
+                  <Navigation onClick={handleCloseModal} />
+                </ModalStyled>
+            )}
+            {!isLoggedIn && isTablet && showModal && (
+                <ModalStyled>
+                  <Navigation onClick={handleCloseModal} />
+                </ModalStyled>
+            )}
+            {isLoggedIn && isDesktop && <Navigation onClick={handleCloseModal} />}
+            {!isLoggedIn && isDesktop && (
+                <>
+                  <Navigation onClick={handleCloseModal} />
+                  <AuthNav onClick={handleCloseModal} />
+                </>
+            )}
+          </NavStyled>
+        </HeaderStyled>
+
+      </PaddingWrapper>
+
   );
 }

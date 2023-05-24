@@ -61,4 +61,8 @@ export const WrapNav = styled.nav`
     display: flex;
     margin-right: ${theme.fontSizes.l};
   }
+
+  @media (${theme.breakpoints.desktop.media}) {
+    display: flex;
+  }
 `;
