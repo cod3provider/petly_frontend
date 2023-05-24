@@ -8,6 +8,7 @@ import bgImageDesktop from '../../../assets/img/background/bg_desktop.png';
 
 export const BackgroundImageDiv = styled.div`
   position: absolute;
+  z-index: -999;
   top: 0;
   right: 0;
   width: 100%;
@@ -20,7 +21,7 @@ export const BackgroundImageDiv = styled.div`
   @media (min-width: ${theme.breakpoints.mobile.width}) {
     background-position: inherit;
   }
-  
+
   @media (min-width: ${theme.breakpoints.tablet.width}) {
     background-image: url(${bgImageTablet});
   }
