@@ -6,6 +6,7 @@ import { TitleH1 } from '../../components/AuthForm/LoginForm/LoginForm.style';
 import Loader from '../../components/Loader/Loader';
 import { getLoading } from '../../redux/auth/authSelectors';
 import { useSelector } from 'react-redux';
+import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled';
 
 
 function LoginPage() {
@@ -19,6 +20,7 @@ function LoginPage() {
           <TitleH1>Login</TitleH1>
           <LoginForm />
           {isLoading && <Loader />}
+          <BackgroundImageDiv />
         </AuthWraper>
       </SectionStyled>
     </ContainerStyled>

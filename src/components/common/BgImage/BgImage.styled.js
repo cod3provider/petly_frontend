@@ -17,6 +17,7 @@ export const BackgroundImageDiv = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  z-index: -1;
 
   @media (min-width: ${theme.breakpoints.mobile.width}) {
     background-position: inherit;
