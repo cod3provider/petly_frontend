@@ -1,31 +1,68 @@
 import styled from 'styled-components';
+import { Form } from 'formik';
 
 import { theme } from '../../../utils/theme';
 // import { IoPawOutline } from 'react-icons/io5';
 
+export const FormContainer = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 347px;
+`;
+
+export const FormStyledBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  @media (${theme.breakpoints.mobile.media}) {
+    margin: -10px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    margin: -12px;
+  }
+`;
+
+export const InputBox = styled.div`
+  width: 100%;
+  @media (${theme.breakpoints.mobile.media}) {
+    margin: 10px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    margin: 12px;
+  }
+`;
+
 export const LabelStyle = styled(`label`)`
   display: block;
-  font-family: 'Manrope';
   font-weight: 500;
   text-align: left;
-  font-size: ${theme.fontSizes.l};
   line-height: 1.35;
-  margin-bottom: 4px;
   color: #111111;
+
+  @media (${theme.breakpoints.mobile.media}) {
+    font-size: ${theme.fontSizes.s};
+    margin-bottom: 4px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    font-size: ${theme.fontSizes.ml};
+    margin-bottom: 8px;
+  }
 `;
 export const InputStyle = styled('input')`
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+
   color: #888888;
 
   padding: 10px 16px;
   border-radius: 40px;
+
   border: 1px solid;
   border-color: ${props =>
     props.error ? 'red' : props.success ? '#54ADFF' : '#54ADFF'};
   background-color: ${theme.baseColors.filterActiveTextColor};
-  font-size: ${theme.fontSizes.s};
+  line-height: 1.5;
+
   cursor: pointer;
 
   outline: none;
@@ -34,14 +71,13 @@ export const InputStyle = styled('input')`
   &:focus {
     border-color: #ffc107;
   }
-
-  /* &:hover:not(:disabled) {
-    background-color: ${theme.baseColors.filterActiveTextColor};
-  } */
-
-  @media screen and (min-width: 768px) {
-    margin-top: 32px;
-    font-size: ${theme.fontSizes.m};
+  @media (${theme.breakpoints.mobile.media}) {
+    font-size: ${theme.fontSizes.s};
+    margin-bottom: 4px;
+  }
+  @media ${theme.breakpoints.tablet.media}, ${theme.breakpoints.desktop.media} {
+    font-size: ${theme.fontSizes.sm};
+    margin-bottom: 8px;
   }
 `;
 

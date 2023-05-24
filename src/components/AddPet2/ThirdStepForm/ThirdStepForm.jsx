@@ -1,6 +1,6 @@
 import { useMedia } from 'react-use';
 import { theme } from '../../../utils/theme';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -21,6 +21,12 @@ import {
   LabelImage,
   MaleIcon,
   FemaleIcon,
+  FormStyledBox,
+  FormContainer,
+  InputBox,
+  StyledFileBox,
+  StyledBox,
+  GenderBox,
 } from './ThirdStepForm.styled';
 
 const ThirdStepForm = ({
@@ -123,104 +129,122 @@ const ThirdStepForm = ({
   return (
     <Formik initialValues={formState} onSubmit={handleSubmit}>
       {() => (
-        <Form>
-          {(type === 'sell' ||
-            type === 'lostFound' ||
-            type === 'inGoodHands') && (
-            <>
-              <LabelStyle>The Sex</LabelStyle>
-              <GenderContainer id="my-radio-group">
-                {genders.map(gender => (
-                  <label key={gender}>
-                    <CheckBoxHidden
-                      type="radio"
-                      name="sex"
-                      value={gender}
-                      required
-                      checked={formState.sex === gender}
-                      onChange={handleChange}
-                    />
-                    {gender === 'female' ? (
-                      <FemaleIcon state={formState} />
-                    ) : (
-                      <MaleIcon state={formState} />
-                    )}
-                    <GenderLabel gender={gender} state={formState}>
-                      {genderTitile(gender)}
-                    </GenderLabel>
-                  </label>
-                ))}
-              </GenderContainer>
-            </>
-          )}
-          <WrapperImage>
-            {isMobile && <LabelImage htmlFor="image">Add photo</LabelImage>}
-
-            {isTablet && (
-              <label htmlFor="image">Load the pet&#39;s image:</label>
-            )}
-            {isDesktop && (
-              <label htmlFor="image">Load the pet&#39;s image:</label>
-            )}
-            <BoxImage>
-              {file ? (
-                <ImagePetStyle src={file} alt="Preview image" />
-              ) : (
-                <>
-                  <InputImage
-                    id="image"
-                    type="file"
-                    name="image"
-                    onChange={handleChange}
-                    value={formState.image}
-                    required
-                  />
-                  <IconPlus />
-                </>
+        <FormContainer>
+          <FormStyledBox type={state.type}>
+            <StyledFileBox>
+              {(type === 'sell' ||
+                type === 'lostFound' ||
+                type === 'inGoodHands') && (
+                <GenderBox type={state.type}>
+                  <LabelStyle>The Sex</LabelStyle>
+                  <GenderContainer id="my-radio-group">
+                    {genders.map(gender => (
+                      <label key={gender}>
+                        <CheckBoxHidden
+                          type="radio"
+                          name="sex"
+                          value={gender}
+                          required
+                          checked={formState.sex === gender}
+                          onChange={handleChange}
+                        />
+                        {gender === 'female' ? (
+                          <FemaleIcon state={formState} />
+                        ) : (
+                          <MaleIcon state={formState} />
+                        )}
+                        <GenderLabel gender={gender} state={formState}>
+                          {genderTitile(gender)}
+                        </GenderLabel>
+                      </label>
+                    ))}
+                  </GenderContainer>
+                </GenderBox>
               )}
-            </BoxImage>
-          </WrapperImage>
-          {type !== 'your pet' && (
-            <>
-              <LabelStyle htmlFor="location">Location</LabelStyle>
-              <InputStyle
-                id="location"
-                name="location"
-                placeholder="Location"
-                value={formState.location}
-                onChange={handleChange}
-                required
-              />
-            </>
-          )}
 
-          {type === 'sell' && (
-            <>
-              <LabelStyle htmlFor="price">Price</LabelStyle>
-              <InputStyle
-                id="price"
-                name="price"
-                placeholder="Price"
-                value={formState.price}
-                onChange={handleChange}
-                required
-              />
-            </>
-          )}
+              <WrapperImage type={state.type}>
+                {isMobile && <LabelImage htmlFor="image">Add photo</LabelImage>}
 
-          <LabelStyle htmlFor="Comments">Comments</LabelStyle>
-          <TextareaStyle
-            id="comments"
-            name="comments"
-            placeholder="Type breed"
-            value={formState.comments}
-            onChange={handleChange}
-            type="textarea"
-            required
-          />
+                {isTablet && (
+                  <LabelImage htmlFor="image">
+                    Load the pet&#39;s image:
+                  </LabelImage>
+                )}
+                {isDesktop && (
+                  <LabelImage htmlFor="image">
+                    Load the pet&#39;s image:
+                  </LabelImage>
+                )}
+                <BoxImage>
+                  {file ? (
+                    <ImagePetStyle src={file} alt="Preview image" />
+                  ) : (
+                    <>
+                      <InputImage
+                        id="image"
+                        type="file"
+                        name="image"
+                        onChange={handleChange}
+                        value={formState.image}
+                        required
+                      />
+                      <IconPlus />
+                    </>
+                  )}
+                </BoxImage>
+              </WrapperImage>
+            </StyledFileBox>
+
+            <StyledBox>
+              <InputBox>
+                {type !== 'your pet' && (
+                  <>
+                    <LabelStyle htmlFor="location">Location</LabelStyle>
+                    <InputStyle
+                      id="location"
+                      name="location"
+                      placeholder="Location"
+                      value={formState.location}
+                      onChange={handleChange}
+                      required
+                    />
+                  </>
+                )}
+              </InputBox>
+
+              <InputBox>
+                {type === 'sell' && (
+                  <>
+                    <LabelStyle htmlFor="price">Price</LabelStyle>
+                    <InputStyle
+                      id="price"
+                      name="price"
+                      placeholder="Price"
+                      value={formState.price}
+                      onChange={handleChange}
+                      required
+                    />
+                  </>
+                )}
+              </InputBox>
+
+              <InputBox>
+                <LabelStyle htmlFor="Comments">Comments</LabelStyle>
+                <TextareaStyle
+                  id="comments"
+                  name="comments"
+                  placeholder="Type breed"
+                  value={formState.comments}
+                  onChange={handleChange}
+                  type="textarea"
+                  required
+                />
+              </InputBox>
+            </StyledBox>
+          </FormStyledBox>
 
           <ButtonPet step={step} setStep={setStep} />
-        </Form>
+        </FormContainer>
       )}
     </Formik>
   );

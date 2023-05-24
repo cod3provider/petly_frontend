@@ -7,9 +7,11 @@ const authInitialState = {
   isLoggedIn: false,
   isLoading: false,
   error: null,
+  isNewUser: false,
 };
 
 function registerFulfilled(state) {
+  state.isNewUser = true;
   state.isLoading = false;
   state.error = null;
 }
@@ -98,6 +100,12 @@ const authSlice = createSlice({
         state.error = payload;
       });
   },
+  reducers: {
+    setIsNewUser: (state, { payload }) => {
+      state.isNewUser = payload;
+    },
+  },
 });
 
+export const { setIsNewUser } =  authSlice.actions;
 export const authReducer = authSlice.reducer;

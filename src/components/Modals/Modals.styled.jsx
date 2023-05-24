@@ -10,7 +10,7 @@ letter-spacing: -0.01em;
 
 @media (min-width: 767px) {
   font-size: 28px;
-`;
+}`;
 
 export const ContainerButton = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ export const ContainerButton = styled.div`
 gap:9;
     @media ${theme.breakpoints.tablet.media} {
         align-items: center;
-
+    }
 
   @media (min-width: 767px) {
     flex-direction: row;
@@ -57,5 +57,5 @@ width:256px;
   }
     @media ${theme.breakpoints.tablet.media} {
  
-`;
+    }`;
 // buttonBgTransparent;
