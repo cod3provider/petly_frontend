@@ -34,9 +34,8 @@ const NoticesPage = () => {
             category = null;
     }
 
-    const isLoggedIn = useSelector(getIsLoggedIn);
-
-    const user = useSelector(getUser);
+    let isLoggedIn = useSelector(getIsLoggedIn);
+    let user = useSelector(getUser);
   
     
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -119,15 +118,15 @@ const NoticesPage = () => {
                 <NoticesSearch onSubmit={searchNotices} />
                 <NoticesNavBox>
                     <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
-                    <AddPetButton isAuth={true} />
+                    <AddPetButton isAuth={isLoggedIn} />
                 </NoticesNavBox>
-                <NoticesCategoriesList items={notices} openModal={openModal} />
+                <NoticesCategoriesList items={notices} openModal={openModal} user={user} isLoggedIn={isLoggedIn} />
                 <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage}/>
                 {isModalOpen && <ModalNotice
                     close={closeModal}
                     details={modalInfo}
                     isLoggedIn={isLoggedIn}
-                    user={user||{}}
+                    user={user}
                 />}
             </NoticesContentBox>
         </NoticesContainer>

@@ -15,11 +15,75 @@ import {
     NoticeCategoryItemClockIcon,
     NoticeCategoryItemFemaleIcon,
     NoticeCategoryItemMaleIcon,
-    NoticeCategoryItemHeartIcon
+    NoticeCategoryItemHeartIcon,
+    NoticeCategoryItemFillHeartIcon
 } from "./NoticeCategoryItem.styled";
 
+import { useDispatch } from 'react-redux';
 
-const NoticeCategoryItem = ({ data, openModal }) => {
+import { getFavorite, addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
+
+import { useState, useEffect } from 'react';
+
+
+const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+    const dispatch = useDispatch();
+
+    const checkFavorite = (user, id) => {
+        if (user.favorite) {
+            for (let i = 0; i < user.favorite.length; i++) {
+                if (user.favorite[i]._id === id) {
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
+
+    useEffect(() => {
+        setIsFavorite(checkFavorite(user, data._id));
+    }, [user, data]);
+
+    const handleFavoriteBtnClick = () => {
+        if (isLoggedIn) {
+            const fetchAddFavorite = async (id) => {
+                try {
+                    console.log("adding");
+                    const response = await dispatch(addFavorite(id));
+                    console.log(response);
+                    if (response.type === '/addFavorite/fulfilled') {
+                        setIsFavorite(true);
+                    }
+
+                }
+                catch (error) {
+                    console.log(error);
+                    alert(error.message);
+                }
+            }
+            const fetchRemoveFavorite = async (id) => {
+                try {
+                    console.log("removing");
+                    const response = await dispatch(removeFavorite(id));
+                    console.log(response);
+                    if (response.type === '/removeFavorite/fulfilled') {
+                        setIsFavorite(false);
+                    }
+                }
+                catch (error) {
+                    alert(error.message);
+                }
+            }
+            if (isFavorite) {
+                fetchRemoveFavorite(data._id);
+            }
+            else {
+                fetchAddFavorite(data._id);
+            }
+        }
+    }
+
     const getAge = (birthday) => {
         const currentDate = new Date();
         const birthdayDate = new Date(birthday);
@@ -60,8 +124,8 @@ const NoticeCategoryItem = ({ data, openModal }) => {
             <NoticeCategoryItemCategoryContainer>
                 <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
             </NoticeCategoryItemCategoryContainer>
-            <NoticeCategoryItemFavoriteButton type='button'>
-                <NoticeCategoryItemHeartIcon></NoticeCategoryItemHeartIcon>
+            <NoticeCategoryItemFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
+                {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
             </NoticeCategoryItemFavoriteButton>
             <NoticeCategoryItemInfoList>
                 <NoticeCategoryItemInfoItem>
@@ -73,7 +137,7 @@ const NoticeCategoryItem = ({ data, openModal }) => {
                     <NoticeCategoryItemInfoText>{age}</NoticeCategoryItemInfoText>
                 </NoticeCategoryItemInfoItem>
                 <NoticeCategoryItemInfoItem>
-                    {data.sex==="female"?<NoticeCategoryItemFemaleIcon/>:<NoticeCategoryItemMaleIcon/>}
+                    {data.sex === "female" ? <NoticeCategoryItemFemaleIcon /> : <NoticeCategoryItemMaleIcon />}
                     <NoticeCategoryItemInfoText>{data.sex}</NoticeCategoryItemInfoText>
                 </NoticeCategoryItemInfoItem>
             </NoticeCategoryItemInfoList>
@@ -88,6 +152,8 @@ const NoticeCategoryItem = ({ data, openModal }) => {
 NoticeCategoryItem.propTypes = {
     data: PropTypes.object.isRequired,
     openModal: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
 }
 
 export default NoticeCategoryItem;
