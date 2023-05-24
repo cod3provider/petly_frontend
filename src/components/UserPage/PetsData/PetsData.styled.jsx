@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { theme } from '../../../utils/theme';
+import { theme } from '../../../utils/theme';
 
 export const Button = styled.button`
   position: relative;
@@ -9,7 +9,7 @@ export const Button = styled.button`
   gap: 8px;
   min-width: 129px;
   max-height: 40px;
-  padding: 8px 0px;
+  padding: 5px 16px;
   font-family: Manrope-SemiBold;
   font-size: 16px;
   color: rgb(253, 247, 242);
@@ -50,24 +50,33 @@ export const Button = styled.button`
   }
 `;
 
-export const PetsWrap = styled.div``;
+export const PetsWrap = styled.div`
+  //width: 280px;
+  width: 100%;
+  //margin: 0 auto;
+
+  @media ${theme.breakpoints.desktop.media} {
+    //width: 700px;
+  }
+`;
 
 export const BtnWrap = styled.div`
   display: flex;
   -webkit-box-align: center;
-  align-items: center;
+  align-items: baseline;
   -webkit-box-pack: justify;
   justify-content: space-between;
   height: 40px;
-  margin: 40px 0px 24px;
+  margin-bottom: 10px;
+  //margin: 40px 0px 24px;
 
-  @media screen and (min-width: 768px) {
-    margin: 40px 0px 20px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    margin: 60px 0px 24px;
-  }
+  //@media screen and (min-width: 768px) {
+  //  margin: 40px 0px 20px;
+  //}
+  //
+  //@media screen and (min-width: 1280px) {
+  //  margin: 60px 0px 24px;
+  //}
 `;
 
 export const Title = styled.h2`
@@ -78,5 +87,24 @@ export const Title = styled.h2`
 
   @media screen and (min-width: 768px) {
     font-size: 28px;
+  }
+`;
+
+export const PetWrapper = styled.div`
+  width: 280px;
+  margin: 0 auto;
+  
+  @media ${theme.breakpoints.mobile.media} {
+    //margin: 0 auto;
+  }
+  
+  @media ${theme.breakpoints.tablet.media} {
+    //margin: 0 auto;
+    width: 100%;
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    //width: 395px;
+    flex-grow: 1;
   }
 `;
