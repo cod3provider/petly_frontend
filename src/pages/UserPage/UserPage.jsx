@@ -47,13 +47,13 @@ function UserPage() {
           <PetWrapper>
             <UserPets />
           </PetWrapper>
-          </div>
+
           {isNewUser ? (
             <ModalBack onClose={onClose}>
               <ModalCongrats onClose={onClose} />
             </ModalBack>
           ) : null}
-          <UserPets />
+          {/*<UserPets />*/}
         </UserDiv>
       </SectionStyled>
     </ContainerStyled>
