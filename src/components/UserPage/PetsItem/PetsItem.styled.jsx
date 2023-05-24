@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
 
-// import { ReactComponent as DeleteIcon } from '../../../icons/trash.svg';
-
 export const Text = styled.p`
   font-weight: 700;
   font-size: 14px;

@@ -1,22 +1,10 @@
 import styled from 'styled-components';
 // import { theme } from '../../../utils/theme';
-// import { ReactComponent as AddIcon } from '../../../icons/plus-small-user.svg';
-
-export const PlusIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  margin-left: 8px;
-  stroke: rgb(253, 247, 242);
-  fill: rgb(253, 247, 242);
-  transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
-`;
 
 export const Button = styled.button`
   position: relative;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   gap: 8px;
   min-width: 129px;
@@ -30,7 +18,6 @@ export const Button = styled.button`
   border-color: rgb(84, 173, 255);
   border-style: solid;
   border-radius: 40px;
-  z-index: 2;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s,
     border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s,
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s;

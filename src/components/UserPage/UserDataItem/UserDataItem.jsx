@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import { BiPencil } from 'react-icons/bi';
 import { MdDone } from 'react-icons/md';
+import { theme } from '../../../utils/theme.jsx';
 
-import { getUser, getIsLoggedIn } from '../../../redux/auth/authSelectors.js';
+import { getUser } from '../../../redux/auth/authSelectors.js';
 
-// import { selectUser, selectIsRegistered } from 'redux/auth/auth-selector';
 import { updateCurrentUser } from '../../../redux/auth/authOperations';
 import {
   EditButton,
@@ -31,39 +31,36 @@ const UserDataItem = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const { name, email, phone, birthday, city } = user;
-  const isLogin = useSelector(getIsLoggedIn);
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEditName, setIsEditName] = useState(false);
+  const [isEditEmail, setIsEditEmail] = useState(false);
+  const [isEditBirthday, setIsEditBirthday] = useState(false);
+  const [isEditPhone, setIsEditPhone] = useState(false);
+  const [isEditCity, setIsEditCity] = useState(false);
   const [data, setData] = useState(initialState);
   const id = useMemo(() => nanoid(), []);
-
-  console.log(data);
-
-  const onEditBtn = () => {
-    if (isEdit) {
-      setIsEdit(false);
-      return;
-    }
-    setIsEdit(true);
-  };
 
   const handleNameSubmit = event => {
     event.preventDefault();
     const userName = event.target.name.value;
     dispatch(updateCurrentUser({ name: userName }));
+    setData({ ...data, name: userName });
+    setIsEditName(false);
   };
 
   const handleEmailSubmit = event => {
     event.preventDefault();
     const userEmail = event.target.email.value;
-
     dispatch(updateCurrentUser({ email: userEmail }));
+    setData({ ...data, email: userEmail });
+    setIsEditEmail(false);
   };
 
   const handleBirthdaySubmit = event => {
     event.preventDefault();
     const userBirthday = event.target.birthday.value;
-
     dispatch(updateCurrentUser({ birthday: userBirthday }));
+    setData({ ...data, birthday: userBirthday });
+    setIsEditBirthday(false);
   };
 
   const handlePhoneSubmit = event => {
@@ -71,6 +68,8 @@ const UserDataItem = () => {
     const userPhone = event.target.phone.value;
 
     dispatch(updateCurrentUser({ phone: userPhone }));
+    setData({ ...data, phone: userPhone });
+    setIsEditPhone(false);
   };
 
   const handleCitySubmit = event => {
@@ -78,6 +77,8 @@ const UserDataItem = () => {
     const userCity = event.target.city.value;
 
     dispatch(updateCurrentUser({ city: userCity }));
+    setData({ ...data, city: userCity });
+    setIsEditCity(false);
   };
 
   return (
@@ -86,18 +87,18 @@ const UserDataItem = () => {
         <InputWrap>
           <Span>Name: </Span>
           <Label htmlFor={id}></Label>
-          {!isEdit && (
+          {!isEditName && (
             <>
-              <EditButton type="button" onClick={onEditBtn}>
-                <BiPencil />
+              <EditButton type="button" onClick={() => setIsEditName(true)}>
+                <BiPencil size={20} color={theme.baseColors.accentColor} />
               </EditButton>
               <Input readOnly defaultValue={name} />
             </>
           )}
-          {isEdit && (
+          {isEditName && (
             <>
               <EditButton type="submit">
-                <MdDone />
+                <MdDone size={20} color="#00C3AD" />
               </EditButton>
               <Input
                 type="text"
@@ -115,18 +116,18 @@ const UserDataItem = () => {
         <InputWrap>
           <Span>Email: </Span>
           <Label htmlFor={id}></Label>
-          {!isEdit && (
+          {!isEditEmail && (
             <>
-              <EditButton type="button" onClick={onEditBtn}>
-                <BiPencil />
-              </EditButton>{' '}
+              <EditButton type="button" onClick={() => setIsEditEmail(true)}>
+                <BiPencil size={20} color={theme.baseColors.accentColor} />
+              </EditButton>
               <Input readOnly defaultValue={email} />
             </>
           )}
-          {isEdit && (
+          {isEditEmail && (
             <>
               <EditButton type="submit">
-                <MdDone />
+                <MdDone size={20} color="#00C3AD" />
               </EditButton>
               <Input
                 type="email"
@@ -144,18 +145,18 @@ const UserDataItem = () => {
         <InputWrap>
           <Span>Birthday: </Span>
           <Label htmlFor={id}></Label>
-          {!isEdit && (
+          {!isEditBirthday && (
             <>
-              <EditButton type="button" onClick={onEditBtn}>
-                <BiPencil />
+              <EditButton type="button" onClick={() => setIsEditBirthday(true)}>
+                <BiPencil size={20} color={theme.baseColors.accentColor} />
               </EditButton>
               <Input readOnly defaultValue={birthday} />
             </>
           )}
-          {isEdit && (
+          {isEditBirthday && (
             <>
               <EditButton type="submit">
-                <MdDone />
+                <MdDone size={20} color="#00C3AD" />
               </EditButton>
               <Input
                 type="text"
@@ -174,26 +175,26 @@ const UserDataItem = () => {
         <InputWrap>
           <Span>Phone: </Span>
           <Label htmlFor={id}></Label>
-          {!isEdit && (
+          {!isEditPhone && (
             <>
-              <EditButton type="button" onClick={onEditBtn}>
-                <BiPencil />
+              <EditButton type="button" onClick={() => setIsEditPhone(true)}>
+                <BiPencil size={20} color={theme.baseColors.accentColor} />
               </EditButton>
               <Input readOnly defaultValue={phone} />
             </>
           )}
-          {isEdit && (
+          {isEditPhone && (
             <>
               <EditButton type="submit">
-                <MdDone />
+                <MdDone size={20} color="#00C3AD" />
               </EditButton>
               <Input
                 type="phone"
                 name="phone"
                 id={id}
                 defaultValue={phone}
-                minlength="12"
-                maxlength="12"
+                minlength="13"
+                maxlength="13"
                 placeholder="+380XXXXXXXXX"
               />
             </>
@@ -205,18 +206,18 @@ const UserDataItem = () => {
         <InputWrap>
           <Span>City:</Span>
           <Label htmlFor={id}></Label>
-          {!isEdit && (
+          {!isEditCity && (
             <>
-              <EditButton type="button" onClick={onEditBtn}>
-                <BiPencil />
+              <EditButton type="button" onClick={() => setIsEditCity(true)}>
+                <BiPencil size={20} color={theme.baseColors.accentColor} />
               </EditButton>
               <Input readOnly defaultValue={city} />
             </>
           )}
-          {isEdit && (
+          {isEditCity && (
             <>
               <EditButton type="submit">
-                <MdDone />
+                <MdDone size={20} color="#00C3AD" />
               </EditButton>
               <Input
                 type="text"

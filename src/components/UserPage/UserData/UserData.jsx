@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { BiPencil } from 'react-icons/bi';
-import { CiLogout } from 'react-icons/ci';
 import { theme } from '../../../utils/theme';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +14,6 @@ import {
   IconWrap,
   InputText,
   Label,
-  CameraIcon,
   FormThumb,
   CrossIcon,
   Wrapper,
@@ -24,10 +21,7 @@ import {
 } from './UserData.styled';
 import UserDataItem from '../UserDataItem/UserDataItem';
 
-import {
-  getCurrentUser,
-  updateCurrentUser,
-} from '../../../redux/auth/authOperations';
+import { updateCurrentUser } from '../../../redux/auth/authOperations';
 import { getUser } from '../../../redux/auth/authSelectors.js';
 
 import defaultUserImg from '../../../images/default-user-img.jpg';
@@ -48,9 +42,7 @@ const UserData = () => {
 
   const fileRef = useRef(null);
   const userData = useSelector(getUser);
-  // console.log(userData);
-  // console.log(avatarUser);
-
+  
   const { avatarUrl } = userData;
 
   // const [showModal, setShowModal] = useState(false);

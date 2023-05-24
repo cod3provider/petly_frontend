@@ -1,12 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import { getPetsData } from '../../../redux/petsData/petsDataOperations';
 import { getPets } from '../../../redux/petsData/petsDataSelectors';
 
 import PetsList from '../PetsList/PetsList';
-import { PetsWrap, BtnWrap, PlusIcon, Title, Button } from './PetsData.styled';
+import { PetsWrap, BtnWrap, Title, Button } from './PetsData.styled';
 
 const PetsData = () => {
   const location = useLocation();
@@ -29,7 +30,7 @@ const PetsData = () => {
         <Link to="/AddPet" state={{ from: location }}>
           <Button type="button">
             Add Pet
-            <PlusIcon />
+            <AiOutlinePlusCircle size={24} />
           </Button>
         </Link>
       </BtnWrap>
