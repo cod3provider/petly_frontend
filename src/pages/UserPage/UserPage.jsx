@@ -9,8 +9,9 @@ import UserPets from '../../components/UserPage/PetsData/PetsData';
 import Logout from '../../components/Logout/Logout';
 import { ContainerStyled } from '../../components/common/Container/Container.styled';
 import { SectionStyled } from '../../components/common/Section/Section.styled';
-import { Wrap, UserDiv, Title } from './UserPage.styled';
+import { Wrap, UserDiv, Title, UserWrapper } from './UserPage.styled';
 import { useToggle } from '../../hooks/useToggle';
+import { PetWrapper } from '../../components/UserPage/PetsData/PetsData.styled.jsx';
 import { setIsNewUser } from '../../redux/auth/authSlice';
 import ModalBack from '../../components/Modals/ModalBack';
 import ModalCongrats from '../../components/Modals/ModalCongrats/ModalCongrats';
@@ -36,12 +37,16 @@ function UserPage() {
     <ContainerStyled style={{ background: '#FEF9F9' }}>
       <SectionStyled>
         <UserDiv>
-          <div>
+          <UserWrapper>
             <Title>My information:</Title>
             <Wrap>
               <UserData />
               <Logout onClick={open} />
             </Wrap>
+          </UserWrapper>
+          <PetWrapper>
+            <UserPets />
+          </PetWrapper>
           </div>
           {isNewUser ? (
             <ModalBack onClose={onClose}>
