@@ -36,7 +36,6 @@ export const Button = styled.button`
   gap: 12px;
   align-items: center;
   padding: 10px 50px;
-  font-size: 16px;
   color: ${theme.baseColors.buttonTextColor};
   background: #54adff;
   border-radius: 40px;
@@ -48,3 +47,16 @@ export const IconButton = styled(IoPawOutline)`
   color: ${theme.baseColors.buttonTextColor};
   transform: rotate(45deg);
 `;
+
+// export const BgImageStyled = styled.div`
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 100%;
+//   height: 100vh;
+//   background-image: url(${BG});
+//   background-size: contain;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   object-fit: contain;
+// `;
