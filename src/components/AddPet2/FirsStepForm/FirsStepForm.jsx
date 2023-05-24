@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import ButtonPet from '../ButtonPet/ButtonPet.jsx';
 import { useState } from 'react';

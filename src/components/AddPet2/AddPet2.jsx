@@ -70,10 +70,12 @@ const AddPet2 = () => {
 
   return (
     <ContainerStyled>
-      <Container>
-        <Wrapper>
-          <Title>{text}</Title>
-          <StepList>
+      <Container type={state.type} step={step}>
+        <Wrapper type={state.type} step={step}>
+          <Title type={state.type} step={step}>
+            {text}
+          </Title>
+          <StepList type={state.type} step={step}>
             <StepLi>
               <StepLiFirst step={step}>Choose option</StepLiFirst>
             </StepLi>
