@@ -8,6 +8,7 @@ export const WorkList = styled.ul`
   flex-direction: column;
   justify-content: center;
   padding: 10px;
+  width: 125px;
   border: 1px solid #54ADFF;
   border-radius: 10px;
   gap: 5px;

@@ -17,6 +17,16 @@ export const NoticesSearchInput= styled.input`
         line-height: 17px;
         letter-spacing: 0.04em;
         color: #888888;
+
+        @media(${theme.breakpoints.tablet.media}){
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        @media(${theme.breakpoints.desktop.media}){
+            font-size: 20px;
+            line-height: 24px;
+        }
     }
 `;
 
@@ -30,10 +40,22 @@ export const NoticesSearchForm = styled.form`
     box-shadow: 3px 8px 14px 0px #88C6FD30;
     margin-top: 24px;
     background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
 
     &:focus,
     &:hover {
        box-shadow: 0px 4px 4px 0px #00000040; 
+    }
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 608px;
+        margin-top: 40px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 608px;
+        margin-top: 40px;
     }
 `;
 

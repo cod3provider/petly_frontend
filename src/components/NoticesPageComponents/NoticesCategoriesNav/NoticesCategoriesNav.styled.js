@@ -22,9 +22,18 @@ export const NoticesCategoriesNavLink= styled(NavLink)`
 
 export const NoticesCategoriesNavUl = styled.ul`
     width: 232px;
-    margin-top:20px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 8px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        width: 319px;
+        gap: 12px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        width: 608px;
+        gap: 12px;
+    }
 `;

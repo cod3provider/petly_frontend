@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../../redux/auth/authOperations';
@@ -11,6 +11,7 @@ import {
   ButtonIcon,
   InputStyle,
   InputWrapper,
+  LinkStyle,
   LinkWraper,
   StyledEyeIcon,
   StyledEyeIconOff,
@@ -197,7 +198,7 @@ function RegisterForm() {
             {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
             <LinkWraper>
               <p>Already have an account?</p>
-              <Link to="/login">Login</Link>
+              <LinkStyle to="/login">Login</LinkStyle>
             </LinkWraper>
           </AuthForm>
         )}
