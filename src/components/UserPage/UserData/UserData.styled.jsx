@@ -88,7 +88,7 @@ export const Icon = styled.img`
 
 export const Input = styled.input`
   opacity: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
   position: absolute;
 `;
 
@@ -96,7 +96,7 @@ export const InputWrap = styled.div`
   display: flex;
   width: 100%;
   position: relative;
-  align-items: center;
+  /* align-items: center; */
   text-align: center;
   margin-bottom: 22px;
 
@@ -145,7 +145,7 @@ export const Label = styled.label`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   cursor: pointer;
   margin: 0 auto;
 

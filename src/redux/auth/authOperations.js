@@ -95,3 +95,27 @@ export const updateCurrentUser = createAsyncThunk(
     }
   }
 );
+
+
+export const updateAvatar = createAsyncThunk(
+  'users/updateAvatar',
+  async (avatarUrl, { rejectWithValue, getState }) => {
+    const formData = new FormData();
+    formData.append('avatar', avatarUrl);
+    try {
+      const value = getState().auth.token;
+      if (value === null) {
+        return rejectWithValue('Unable to patch user');
+      }
+      token.set(value);
+      const { data } = await axios.patch('/users/avatars', avatarUrl, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

@@ -47,6 +47,7 @@ export const FriendName = styled.a`
   transition: all 250ms linear;
   
   &:hover {
+    color: #111;
     text-decoration: underline;
   }
 `;

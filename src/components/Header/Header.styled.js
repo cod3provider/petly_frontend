@@ -3,6 +3,7 @@ import { TfiClose } from 'react-icons/tfi';
 import { theme } from '../../utils/theme.jsx';
 
 export const CloseIcons = styled(TfiClose)`
+  padding: 20px 0;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -61,7 +62,7 @@ export const NavStyled = styled.nav`
 `;
 
 export const PaddingWrapper = styled.div`
-  padding: 20px 20px 0 20px;
+  padding: 20px 15px;
 
   @media (${theme.breakpoints.tablet.media}) {
 
