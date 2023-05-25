@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
-import { FaHeart } from 'react-icons/fa';
 import { RxClock } from 'react-icons/rx';
 import { BsGenderFemale, BsGenderMale} from 'react-icons/bs';
 
@@ -179,12 +178,6 @@ export const NoticeCategoryItemMaleIcon = styled(BsGenderMale)`
 `;
 
 export const NoticeCategoryItemHeartIcon = styled(FiHeart)`
-    color: ${theme.baseColors.accentColor};
-    width: 24px;
-    height: 24px;
-`;
-
-export const NoticeCategoryItemFillHeartIcon = styled(FaHeart)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;

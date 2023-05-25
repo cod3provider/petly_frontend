@@ -41,38 +41,6 @@ const FriendItem = ({
           });
 
   const [isVisible, setIsVisible] = useState(true);
-  // const Tooltip = () => (
-  //   <Popup
-  //     trigger={open => (
-  //       <button className="button">Trigger - {open ? 'Opened' : 'Closed'}</button>
-  //     )}
-  //     position="right center"
-  //     closeOnDocumentClick
-  //   >
-  //     <span> <WorkingHours workingDays={workingDays} /> </span>
-  //   </Popup>
-  // );
-
-  // const workingHours = (workingDays) => {
-  //   return (
-  //     <ul>
-  //       {workingDays.map((day, idx) => {
-  //         return (
-  //           <li key={idx}>
-  //             {day?.isOpen ? (
-  //               <p>
-  //                 {day.day} {day.from} - {day.to}
-  //               </p>
-  //             ) : (
-  //               <p>{day.day} closed</p>
-  //             )}
-  //           </li>
-  //         );
-  //       })}
-  //     </ul>
-  //   )
-  // }
-
 
   return (
     <>
@@ -83,18 +51,7 @@ const FriendItem = ({
 
         <ContactLinks>
           <CardImage src={imageUrl ?? defaultImg} alt="Logo" />
-          {/*<LinkWrap>*/}
             <ContactsList>
-              {/*{workDays ? (*/}
-              {/*  <div data-tooltip-id="test-tooltip"*/}
-              {/*              data-tooltip-content={workDays.from}*/}
-              {/*              data-tooltip-place="top">*/}
-              {/*    <Tooltip id="test-tooltip" />*/}
-              {/*    19*/}
-              {/*  </div>*/}
-              {/*) : (*/}
-              {/*  <ContactText>website only</ContactText>*/}
-              {/*)}*/}
 
               <ContactsItem
                 onClick={() => {
@@ -165,7 +122,6 @@ const FriendItem = ({
                   )}
               </ContactsItem>
             </ContactsList>
-          {/*</LinkWrap>*/}
         </ContactLinks>
       </Card></>
   )

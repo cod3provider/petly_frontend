@@ -79,7 +79,7 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
     <Formik
       initialValues={formState}
       onSubmit={handleSubmit}
-      validationSchema={secondStepValidationSchema}
+      // validationSchema={secondStepValidationSchema}
     >
       <FormContainer>
         <FormStyledBox>

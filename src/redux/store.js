@@ -13,7 +13,6 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/authSlice';
 import { petsReducer } from './petsData/petsDataSlice';
-import { noticesReducer } from './notices/noticesSlice';
 
 // сюди доімпортувати свої редюсери
 
@@ -23,13 +22,7 @@ const authPersistConfig = {
   whitelist: ['token', 'isLoggedIn'],
 };
 
-const noticesPersistConfig = {
-  key: 'notices',
-  storage,
-};
-
 const authPersistedReducer = persistReducer(authPersistConfig, authReducer);
-const noticesPersistedReducer = persistReducer(authPersistConfig, authReducer);
 
 const rootRersistConfig = {
   key: 'root',
@@ -40,7 +33,6 @@ const rootRersistConfig = {
 const rootReducer = combineReducers({
   auth: authPersistedReducer,
   pets: petsReducer,
-  notices: noticesPersistedReducer,
   //
 });
 
