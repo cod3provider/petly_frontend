@@ -5,6 +5,7 @@ import NoticesCategoriesList from "../NoticesCategoriesList/NoticesCategoriesLis
 import AddPetButton from "../AddPetButton/AddPetButton";
 import NoticesTitle from "../NoticesTitle/NoticesTitle";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import NoticesDeleteModal from "../NoticesDeleteModal/NoticesDeleteModal";
 import NoticesPaginationButtons from "../NoticesPaginationButtons/NoticesPaginationButtons";
 import { NoticesContainer, NoticesContentBox, NoticesNavBox } from "../NoticesContainers/NoticesContainers.styled";
 
@@ -28,12 +29,14 @@ const NoticesPage = () => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalInfo, setModalInfo] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [deleteModalInfo, setDeleteModalInfo] = useState(null);
     const [query, setQuery] = useState('');
     const [notices, setNotices] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [isWideScreen, setIsWideScreen] = useState(false);
-    const [limit, setLimit] = useState("10");
+    const [isWideScreen, setIsWideScreen] = useState(window.width > 1280);
+    const [limit, setLimit] = useState(isWideScreen? "10": "12" );
     const [category, setCategory] = useState("sell");
 
     const dispatch = useDispatch();
@@ -58,6 +61,7 @@ const NoticesPage = () => {
             default:
                 setCategory(null);
         }
+        setPage(1);
     }, [categoryName])
 
     useEffect(() => {
@@ -66,6 +70,7 @@ const NoticesPage = () => {
         };
 
         resizeHandler();
+
         if (isWideScreen) {
             setLimit("12");
         } else {
@@ -98,7 +103,7 @@ const NoticesPage = () => {
         if (query !== '') {
             fetchNoticesByName(category, query, page, limit);
         }
-    }, [query, category, page, limit]);
+    }, [query, category, page, limit, isWideScreen]);
 
     useEffect(() => {
         const fetchNoticesByCategory = async () => {
@@ -123,7 +128,7 @@ const NoticesPage = () => {
             }
         }
         fetchNoticesByCategory();
-    }, [category, page, limit]);
+    }, [category, page, limit, isWideScreen]);
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -135,6 +140,16 @@ const NoticesPage = () => {
         setModalInfo(null);
     };
 
+    const openDeleteModal = (data) => {
+        setIsDeleteModalOpen(true);
+        setDeleteModalInfo({ ...data});
+    }
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setDeleteModalInfo(null);
+    };
+
     return <main>
         <NoticesContainer>
                 <NoticesContentBox>
@@ -144,13 +159,17 @@ const NoticesPage = () => {
                     <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
                     <AddPetButton isAuth={isLoggedIn} />
                 </NoticesNavBox>
-                <NoticesCategoriesList items={notices} openModal={openModal} user={user} isLoggedIn={isLoggedIn} />
-                <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage}/>
+                <NoticesCategoriesList items={notices} openModal={openModal} openDeleteModal={openDeleteModal} user={user} isLoggedIn={isLoggedIn} />
+                {!notices.length || <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
                 {isModalOpen && <ModalNotice
                     close={closeModal}
                     details={modalInfo}
                     isLoggedIn={isLoggedIn}
                     user={user}
+                />}
+                {isDeleteModalOpen && <NoticesDeleteModal
+                    close={closeDeleteModal}
+                    details={deleteModalInfo}
                 />}
             </NoticesContentBox>
         </NoticesContainer>

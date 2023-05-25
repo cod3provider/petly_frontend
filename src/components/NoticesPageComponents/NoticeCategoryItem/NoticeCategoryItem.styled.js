@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { FiHeart } from 'react-icons/fi';
+import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import { RxClock } from 'react-icons/rx';
 import { BsGenderFemale, BsGenderMale} from 'react-icons/bs';
@@ -41,13 +41,10 @@ export const NoticeCategoryItemCategoryContainer= styled.div`
 `;
 
 export const NoticeCategoryItemFavoriteButton= styled.button`
-    position: absolute;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 12px;
-    right: 12px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -188,4 +185,26 @@ export const NoticeCategoryItemFillHeartIcon = styled(FaHeart)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+`;
+
+export const NoticeCategoryItemTrashIcon = styled(FiTrash2)`
+    color: ${theme.baseColors.accentColor};
+    width: 24px;
+    height: 24px;
+`;
+
+export const NoticeCategoryItemButtonList = styled.ul`
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 12px;
+    right: 12px;
+`;
+
+export const NoticeCategoryItemButtonItem = styled.li`
+    margin-top: 16px;
+
+    &:first-child{
+        margin-top: 0;
+    }
 `;

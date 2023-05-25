@@ -16,7 +16,10 @@ import {
     NoticeCategoryItemFemaleIcon,
     NoticeCategoryItemMaleIcon,
     NoticeCategoryItemHeartIcon,
-    NoticeCategoryItemFillHeartIcon
+    NoticeCategoryItemFillHeartIcon,
+    NoticeCategoryItemButtonList,
+    NoticeCategoryItemTrashIcon,
+    NoticeCategoryItemButtonItem
 } from "./NoticeCategoryItem.styled";
 
 import { useDispatch } from 'react-redux';
@@ -26,7 +29,7 @@ import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOpera
 import { useState, useEffect } from 'react';
 
 
-const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
+const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const dispatch = useDispatch();
 
@@ -124,9 +127,18 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
             <NoticeCategoryItemCategoryContainer>
                 <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
             </NoticeCategoryItemCategoryContainer>
-            <NoticeCategoryItemFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
-                {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
-            </NoticeCategoryItemFavoriteButton>
+            <NoticeCategoryItemButtonList>
+                <NoticeCategoryItemButtonItem>
+                    <NoticeCategoryItemFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
+                        {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
+                    </NoticeCategoryItemFavoriteButton>
+                </NoticeCategoryItemButtonItem>
+                {data.owner === user._id && <NoticeCategoryItemButtonItem>
+                    <NoticeCategoryItemFavoriteButton type='button' onClick={()=>openDeleteModal(data)}>
+                        <NoticeCategoryItemTrashIcon />
+                    </NoticeCategoryItemFavoriteButton>
+                </NoticeCategoryItemButtonItem>}
+            </NoticeCategoryItemButtonList>
             <NoticeCategoryItemInfoList>
                 <NoticeCategoryItemInfoItem>
                     <NoticeCategoryItemLocationIcon></NoticeCategoryItemLocationIcon>
@@ -152,6 +164,7 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
 NoticeCategoryItem.propTypes = {
     data: PropTypes.object.isRequired,
     openModal: PropTypes.func.isRequired,
+    openDeleteModal: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
 }
