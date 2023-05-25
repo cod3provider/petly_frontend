@@ -12,7 +12,9 @@ const RegisterPage = lazy(() =>
 );
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.jsx'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage.jsx'));
-const OurFriendsPage = lazy(() => import('./pages/OurFriendsPage/OurFriendsPage.jsx'));
+const OurFriendsPage = lazy(() =>
+  import('./pages/OurFriendsPage/OurFriendsPage.jsx')
+);
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage.jsx'));
 const UserPage = lazy(() => import('./pages/UserPage/UserPage.jsx'));
 const NotFoundPage = lazy(() =>
@@ -62,7 +64,15 @@ function App() {
             <Route path={ROUTES.NEWS} element={<NewsPage />} />
             <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
             <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
-            <Route path={ROUTES.ADDPET} element={<AddPet />} />
+            <Route
+              path={ROUTES.ADDPET}
+              element={
+                <PrivateRoute>
+                  <AddPet />
+                </PrivateRoute>
+              }
+            />
+
             <Route
               path={ROUTES.USER}
               element={

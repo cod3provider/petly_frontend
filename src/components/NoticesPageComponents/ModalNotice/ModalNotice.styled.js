@@ -327,3 +327,8 @@ export const ModalNoticePhotoListContainer = styled.div`
         display: flex;
     }
 `;
+
+export const ModalNoticeContactLink = styled.a`
+    text-decoration-line: underline;
+    color: ${theme.baseColors.accentYellow};
+`;

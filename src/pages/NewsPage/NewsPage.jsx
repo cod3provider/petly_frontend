@@ -1,17 +1,17 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-{/*import News from '../../components/News/News.jsx';*/}
-import PageNews from './NewsList.jsx';
+
+import NewsList from './NewsList/NewsList.jsx';
+import { ContainerStyled } from '../../components/common/Container/Container.styled.jsx';
 
 export default function NewsPage() {
   return (
     <HelmetProvider>
-      <div>
+      <ContainerStyled>
         {/*<Helmet>*/}
         {/*  <title>NewsPage</title>*/}
         {/*</Helmet>*/}
-        <PageNews />
-        {/*<News />*/}
-      </div>
+        <NewsList />
+      </ContainerStyled>
     </HelmetProvider>
   );
 }

@@ -85,8 +85,9 @@ export const InputStyle = styled('input')`
   outline: none;
   cursor: pointer;
 
-  :hover:not(:disabled) {
-    /* background-color: ${theme.baseColors.filterActiveTextColor}; */
+  &:hover,
+  &:focus {
+    background-color: ${theme.baseColors.filterActiveTextColor};
   }
 
   @media screen and (min-width: 768px) {

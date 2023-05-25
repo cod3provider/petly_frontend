@@ -5,7 +5,15 @@ export const NoticesContainer= styled.div`
     display: flex;
     justify-content: center;
     padding-bottom: 100px;
-    padding-top: 20px;
+    padding-top: 40px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        padding-top: 80px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        padding-top: 80px;
+    }
 `;
 
 export const NoticesContentBox= styled.div`

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify"
 import {
     NoticeCategoryItemItem,
     NoticeCategoryItemPhotoContainer,
@@ -16,7 +17,10 @@ import {
     NoticeCategoryItemFemaleIcon,
     NoticeCategoryItemMaleIcon,
     NoticeCategoryItemHeartIcon,
-    NoticeCategoryItemFillHeartIcon
+    NoticeCategoryItemFillHeartIcon,
+    NoticeCategoryItemButtonList,
+    NoticeCategoryItemTrashIcon,
+    NoticeCategoryItemButtonItem
 } from "./NoticeCategoryItem.styled";
 
 import { useDispatch } from 'react-redux';
@@ -26,8 +30,11 @@ import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOpera
 import { useState, useEffect } from 'react';
 
 
-const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
+const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const [category, setCategory] = useState(data.category);
+    const notify = () => toast.info("You need to be logged in for this action");
+
     const dispatch = useDispatch();
 
     const checkFavorite = (user, id) => {
@@ -59,7 +66,7 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
                 }
                 catch (error) {
                     console.log(error);
-                    alert(error.message);
+                    toast.error(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
@@ -72,7 +79,7 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
                     }
                 }
                 catch (error) {
-                    alert(error.message);
+                    toast.error(error.message);
                 }
             }
             if (isFavorite) {
@@ -81,6 +88,8 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
             else {
                 fetchAddFavorite(data._id);
             }
+        }else {
+            notify();
         }
     }
 
@@ -118,15 +127,46 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
     
     const age = getAge(data.birthday);
 
+    useEffect(() => {
+        switch (data.category) {
+            case "sell":
+                setCategory("sell");
+                break;
+            case "lostFound":
+                setCategory("lost-found");
+                break;
+            case "inGoodHands":
+                setCategory("for-free");
+                break;
+            case "favorite":
+                setCategory("favorite");
+                break;
+            case "created":
+                setCategory("own");
+                break;
+            default:
+                setCategory("sell");
+        }
+    },[])
+
     return <NoticeCategoryItemItem>
         <NoticeCategoryItemPhotoContainer>
             <img src={data.noticeImage} alt="pet photo" />
             <NoticeCategoryItemCategoryContainer>
-                <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
+                <NoticeCategoryItemCategoryText>{category}</NoticeCategoryItemCategoryText>
             </NoticeCategoryItemCategoryContainer>
-            <NoticeCategoryItemFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
-                {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
-            </NoticeCategoryItemFavoriteButton>
+            <NoticeCategoryItemButtonList>
+                <NoticeCategoryItemButtonItem>
+                    <NoticeCategoryItemFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
+                        {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
+                    </NoticeCategoryItemFavoriteButton>
+                </NoticeCategoryItemButtonItem>
+                {data.owner === user._id && <NoticeCategoryItemButtonItem>
+                    <NoticeCategoryItemFavoriteButton type='button' onClick={()=>openDeleteModal(data)}>
+                        <NoticeCategoryItemTrashIcon />
+                    </NoticeCategoryItemFavoriteButton>
+                </NoticeCategoryItemButtonItem>}
+            </NoticeCategoryItemButtonList>
             <NoticeCategoryItemInfoList>
                 <NoticeCategoryItemInfoItem>
                     <NoticeCategoryItemLocationIcon></NoticeCategoryItemLocationIcon>
@@ -152,6 +192,7 @@ const NoticeCategoryItem = ({ data, openModal, user, isLoggedIn }) => {
 NoticeCategoryItem.propTypes = {
     data: PropTypes.object.isRequired,
     openModal: PropTypes.func.isRequired,
+    openDeleteModal: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
 }
