@@ -9,45 +9,56 @@ import {
     ModalNoticeHeartIcon, ModalNoticePhoneLink, ModalNoticeFavoriteButton,
     ModalNoticeButtonItem, ModalNoticePhotoListContainer
 } from "./ModalNotice.styled";
-import { addNoticeToFavorite, removeNoticeFromFavorite } from "../../../services/noticesApi";
+
+import { useDispatch } from 'react-redux';
+
+import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
+
 import { useState, useEffect } from 'react';
 import React from 'react';
 
 
 const ModalNotice = ({ details, close, isLoggedIn, user }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const dispatch = useDispatch();
 
     const checkFavorite = (user, id) => {
-        for (let i = 0; i < user.favorite.length; i++) {
-            if (user.favorite[i]._id === id) {
-                return true; 
+        if (user.favorite) {
+            for (let i = 0; i < user.favorite.length; i++) {
+                if (user.favorite[i]._id === id) {
+                    return true; 
+                }
             }
         }
         return false; 
     }
 
-    if (checkFavorite(user, details._id)) {
-        setIsFavorite(true);
-    }
+    useEffect(() => {
+        setIsFavorite(checkFavorite(user, details._id));
+    }, [user, details]);
     
-    const handleFavoriteBtnClick = (isLoggedIn, isFavorite) => {
+    const handleFavoriteBtnClick = () => {
         if (isLoggedIn) {
             const fetchAddFavorite = async (id) => {
                 try {
-                    const response = await addNoticeToFavorite(id);
-                    console.log(response);
-                    alert(response.message);
-                    setIsFavorite(true);
+                    console.log("adding");
+                    const response = await dispatch(addFavorite(id));
+                    if (response.type === '/addFavorite/fulfilled') {
+                        setIsFavorite(true);
+                    }
                 }
                 catch (error) {
+                    console.log(error);
                     alert(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
                 try {
-                    const response = await removeNoticeFromFavorite(id);
-                    alert(response.message);
-                    setIsFavorite(false);
+                    console.log("removing");
+                    const response = await dispatch(removeFavorite(id));
+                    if (response.type === '/removeFavorite/fulfilled') {
+                        setIsFavorite(false);
+                    }
                 }
                 catch (error) {
                     alert(error.message);

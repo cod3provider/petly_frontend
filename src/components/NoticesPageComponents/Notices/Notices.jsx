@@ -14,29 +14,16 @@ import { getIsLoggedIn, getUser } from "../../../redux/auth/authSelectors";
 import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+
+import { getNoticesByPrivateCategory } from '../../../redux/notices/noticesOperations';
+import { getNotices } from "../../../redux/notices/noticesSelectors";
 
 const NoticesPage = () => {
     const { categoryName } = useParams();
 
-    let category;
-
-    switch (categoryName) {
-        case "sell":
-            category = "sell";
-            break;
-        case "lost-found":
-            category = "lostFound";
-            break;
-        case "for-free":
-            category = "inGoodHands";
-            break;
-        default:
-            category = null;
-    }
-
-    const isLoggedIn = useSelector(getIsLoggedIn);
-
-    const user = useSelector(getUser);
+    let isLoggedIn = useSelector(getIsLoggedIn);
+    let user = useSelector(getUser);
   
     
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,25 +34,50 @@ const NoticesPage = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [isWideScreen, setIsWideScreen] = useState(false);
     const [limit, setLimit] = useState("10");
+    const [category, setCategory] = useState("sell");
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        function handleResize() {
-            setIsWideScreen(window.innerWidth > 1280);
+        switch (categoryName) {
+            case "sell":
+                setCategory("sell");
+                break;
+            case "lost-found":
+                setCategory("lostFound");
+                break;
+            case "for-free":
+                setCategory("inGoodHands");
+                break;
+            case "favorite":
+                setCategory("favorite");
+                break;
+            case "own":
+                setCategory("created");
+                break;
+            default:
+                setCategory(null);
         }
+    }, [categoryName])
 
-        handleResize();
+    useEffect(() => {
+        const resizeHandler = () => {
+            setIsWideScreen(window.innerWidth > 1280);
+        };
+
+        resizeHandler();
         if (isWideScreen) {
             setLimit("12");
         } else {
             setLimit("10");
         }
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', resizeHandler);
 
         return () => {
-            window.removeEventListener('resize', handleResize); 
+            window.removeEventListener('resize', resizeHandler);
         };
-    }, []);
+    }, [isWideScreen]);
 
 
     const searchNotices = (query) => {
@@ -89,17 +101,28 @@ const NoticesPage = () => {
     }, [query, category, page, limit]);
 
     useEffect(() => {
-        const fetchNoticesByCategory = async (category, page, limit) => {
+        const fetchNoticesByCategory = async () => {
             try {
-                const response = await searchNoticesByCategory(category, page, limit);
-                setNotices(response.data);
-                setTotalPages(response.totalPages);
+                if (category === "sell" || category === "lostFound" || category === "inGoodHands") {
+                    const response = await searchNoticesByCategory(category, page, limit);
+                    setNotices(response.data);
+                    setTotalPages(response.totalPages);
+                }
+                if (category === "favorite" || category === "created") {
+                    const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
+                    if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
+                        setNotices(response.payload);
+                        setTotalPages(4); 
+                    } else {
+                        setNotices([]);
+                    }
+                }
             }
             catch (error) {
                 alert(error.message);
             }
         }
-        fetchNoticesByCategory(category, page, limit);
+        fetchNoticesByCategory();
     }, [category, page, limit]);
 
     const openModal = (data) => {
@@ -119,15 +142,15 @@ const NoticesPage = () => {
                 <NoticesSearch onSubmit={searchNotices} />
                 <NoticesNavBox>
                     <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
-                    <AddPetButton isAuth={true} />
+                    <AddPetButton isAuth={isLoggedIn} />
                 </NoticesNavBox>
-                <NoticesCategoriesList items={notices} openModal={openModal} />
+                <NoticesCategoriesList items={notices} openModal={openModal} user={user} isLoggedIn={isLoggedIn} />
                 <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage}/>
                 {isModalOpen && <ModalNotice
                     close={closeModal}
                     details={modalInfo}
                     isLoggedIn={isLoggedIn}
-                    user={user||{}}
+                    user={user}
                 />}
             </NoticesContentBox>
         </NoticesContainer>
