@@ -42,6 +42,7 @@ export const NoticesSearchForm = styled.form`
     background: #ffffff;
     margin-left: auto;
     margin-right: auto;
+    transition: box-shadow 250ms linear;
 
     &:focus,
     &:hover {

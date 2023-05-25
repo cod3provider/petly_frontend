@@ -51,9 +51,7 @@ const NewsList = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    // fetchNews(search);
     setSearchParams({ query: search });
-    // console.log('Search keyword:', searchKeyword);
   };
 
   const getFilteredNews = () => {

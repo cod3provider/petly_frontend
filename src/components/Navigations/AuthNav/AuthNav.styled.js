@@ -14,7 +14,7 @@ export const IconLink = styled(FaPaw)`
 export const Link = styled(NavLink)`
   display: flex;
   text-decoration: none;
-  text-align: center;
+  align-items: center;
   justify-content: center;
 
   border-radius: 40px;
@@ -24,6 +24,7 @@ export const Link = styled(NavLink)`
 
   padding: 7px 20px 7px 20px;
   width: 165px;
+    transition: all 250ms linear;
 
   &:hover,
   &:focus {
@@ -37,8 +38,8 @@ export const Link = styled(NavLink)`
 `;
 
 export const WrapDivAuthNav = styled.div`
-  margin-top: 40px;
-  margin-bottom: 40px;
+  //margin-top: 40px;
+  //margin-bottom: 40px;
 
   @media (${theme.breakpoints.mobile.media}) {
     display: grid;

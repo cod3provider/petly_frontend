@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { theme } from '../../../utils/theme.jsx';
 
 export const StyledNavLink = styled(NavLink)`
+  padding: 10px 0;
   text-decoration: none;
   font-weight: 500;
   font-size: ${theme.fontSizes.xl};
@@ -11,6 +12,7 @@ export const StyledNavLink = styled(NavLink)`
   color: #111111;
   text-decoration: none;
   gap: 20px;
+  transition: ${theme.transition.color};
 
   &:hover,
   &:focus {

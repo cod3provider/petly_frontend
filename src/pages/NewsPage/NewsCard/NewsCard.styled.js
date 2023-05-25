@@ -56,7 +56,7 @@ export const NewsTitle = styled.h2`
   text-align: left;
 `;
 
-export const NewsText = styled.p`
+export const NewsText = styled.div`
   margin-bottom: 40px;
   font-weight: 400;
   font-size: 16px;
@@ -76,8 +76,13 @@ export const Button = styled.button`
   font-size: 16px;
   line-height: 22px;
   font-family: 'Manrope';
-
-  //text-align: right;
+  
   color: #54ADFF;
   background: transparent;
+  transition: all 250ms linear;
+  
+  &:hover {
+    text-decoration: underline;
+    color: #000;
+  }
 `
