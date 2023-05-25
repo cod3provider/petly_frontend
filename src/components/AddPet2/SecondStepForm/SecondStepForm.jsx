@@ -26,14 +26,12 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
 
   const [isDateOpen, setIsDateOpen] = useState(false);
 
-  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedDay, setSelectedDay] = useState('');
 
   useEffect(() => {
     if (!selectedDay) {
       return;
     }
-    setFormState(prev => ({ ...prev, birth: selectedDay }));
-    setSelectedDay(null);
     setIsDateOpen(false);
   }, [formState, selectedDay]);
 
@@ -42,12 +40,9 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   };
 
   const handleSubmit = () => {
-    // console.log(FormState);
+    console.log(formState);
+    setFormState(prev => ({ ...prev, birth: selectedDay }));
     setStep('third');
-    setState(prev => ({
-      ...prev,
-      ...formState,
-    }));
   };
 
   const secondStepValidationSchema = yup.object().shape({
@@ -58,14 +53,7 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
       .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
       .min(2)
       .max(16),
-    // birth: yup
-    //   .string()
-    //   .required('Enter a date of birth')
-    //   .label('birth')
-    //   .matches(
-    //     /^\d{4}\-\d{2}\-\d{2}$/,
-    //     'The date must be in the format DD.MM.YYYY'
-    //   ),
+    birth: yup.string().required('Enter a date of birth').label('birth'),
     breed: yup
       .string()
       .required('Enter the breed of the pet')
@@ -81,72 +69,76 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
       onSubmit={handleSubmit}
       validationSchema={secondStepValidationSchema}
     >
-      <FormContainer>
-        <FormStyledBox>
-          {(type === 'sell' ||
-            type === 'lost/found' ||
-            type === 'in good hands') && (
-            <InputBox>
-              <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
-              <InputStyle
-                id="titlePet"
-                name="titlePet"
-                placeholder="Title pet"
-                value={formState.titlePet}
-                onChange={handleChange}
-                required
-              />
-            </InputBox>
-          )}
-          <InputBox>
-            <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
-            <InputStyle
-              id="namePet"
-              name="namePet"
-              placeholder="Name pet"
-              value={formState.namePet}
-              onChange={handleChange}
-              required
-            />
-          </InputBox>
-
-          <InputBox>
-            <LabelStyle htmlFor="birth">Date of birth</LabelStyle>{' '}
-            <DataPickercontainer>
-              <InputStyle
-                id="birth"
-                name="birth"
-                placeholder="Date of birth"
-                value={formState.birth}
-                onChange={handleChange}
-                onFocus={() => setIsDateOpen(true)}
-                // onBlur={() => setIsDateOpen(false)}
-                autoComplete="off"
-                required
-              />
-              {isDateOpen && (
-                <DatePicker
-                  selectedDay={selectedDay}
-                  setSelectedDay={setSelectedDay}
+      {({ errors, touched, setFieldValue }) => (
+        <FormContainer>
+          <FormStyledBox>
+            {(type === 'sell' ||
+              type === 'lost/found' ||
+              type === 'in good hands') && (
+              <InputBox>
+                <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
+                <InputStyle
+                  id="titlePet"
+                  name="titlePet"
+                  placeholder="Title pet"
+                  required
                 />
-              )}
-            </DataPickercontainer>
-          </InputBox>
-          <InputBox>
-            <LabelStyle htmlFor="breed">Breed</LabelStyle>
-            <InputStyle
-              id="breed"
-              name="breed"
-              placeholder="Breed"
-              value={formState.breed}
-              onChange={handleChange}
-              required
-            />
-          </InputBox>
-        </FormStyledBox>
+                {errors.titlePet && touched.titlePet ? (
+                  <div>{errors.titlePet}</div>
+                ) : null}
+              </InputBox>
+            )}
+            <InputBox>
+              <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
+              <InputStyle
+                id="namePet"
+                name="namePet"
+                placeholder="Name pet"
+                required
+              />
+              {errors.namePet && touched.namePet ? (
+                <div>{errors.namePet}</div>
+              ) : null}
+            </InputBox>
 
-        <ButtonPet step={step} setStep={setStep} />
-      </FormContainer>
+            <InputBox>
+              <LabelStyle htmlFor="birth">Date of birth</LabelStyle>{' '}
+              <DataPickercontainer>
+                <InputStyle
+                  id="birth"
+                  name="birth"
+                  value={selectedDay}
+                  placeholder="Date of birth"
+                  onFocus={() => setIsDateOpen(true)}
+                  autoComplete="off"
+                  required
+                />
+                {errors.birth && touched.birth ? (
+                  <div>{errors.birth}</div>
+                ) : null}
+                {isDateOpen && (
+                  <DatePicker
+                    selectedDay={selectedDay}
+                    setSelectedDay={setSelectedDay}
+                  />
+                )}
+              </DataPickercontainer>
+            </InputBox>
+            <InputBox>
+              <LabelStyle htmlFor="breed">Breed</LabelStyle>
+              <InputStyle
+                id="breed"
+                name="breed"
+                placeholder="Breed"
+                required
+              />
+              {errors.breed && touched.breed ? <div>{errors.breed}</div> : null}
+            </InputBox>
+          </FormStyledBox>
+
+          <ButtonPet step={step} setStep={setStep} />
+        </FormContainer>
+      )}
     </Formik>
   );
 };
