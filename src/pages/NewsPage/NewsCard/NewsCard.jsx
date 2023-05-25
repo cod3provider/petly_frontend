@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { NewsItem, Image, TextWrap, FlexWrap, NewsTitle, NewsText } from './NewsCard.styled.js';
+import { NewsItem, Image, TextWrap, FlexWrap, NewsTitle, NewsText, Button } from './NewsCard.styled.js';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 const NewsCard = ({ news }) => {
@@ -24,7 +24,6 @@ const NewsCard = ({ news }) => {
             trimRight
             basedOn='letters'
           />
-          {/*{title}*/}
         </NewsTitle>
         <NewsText>
           <LinesEllipsis
@@ -34,13 +33,12 @@ const NewsCard = ({ news }) => {
             trimRight
             basedOn='letters'
           />
-          {/*{text}*/}
         </NewsText>
         <FlexWrap>
           <p>{formatDate}</p>
-          <button className="read-more-button" onClick={handleReadMore}>
+          <Button className="read-more-button" onClick={handleReadMore}>
             Read more
-          </button>
+          </Button>
         </FlexWrap>
       </TextWrap>
     </NewsItem>
