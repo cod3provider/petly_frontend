@@ -32,8 +32,20 @@ const NoticesDeleteModal = ({ details, close }) => {
         fetchDeleteNotice(details._id);
     }
 
-    return <NoticesDeleteModalOverlay>
-        <NoticesDeleteModalModal>
+    const handleOverlayClick = (event) => {
+        if (event.target === event.currentTarget) {
+            close();
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            close();
+        }
+    };
+
+    return <NoticesDeleteModalOverlay onClick={handleOverlayClick}>
+        <NoticesDeleteModalModal onKeyDown={handleKeyDown}>
             <NoticesDeleteModalCloseButton type='button' onClick={close}>
                 <NoticesDeleteModalCloseIcon/>
             </NoticesDeleteModalCloseButton>

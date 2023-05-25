@@ -7,7 +7,7 @@ import {
     ModalNoticeListTitle, ModalNoticeListDetails,
     ModalNoticePhoto, ModalNoticeComment, ModalNoticeButtonList,
     ModalNoticeHeartIcon, ModalNoticePhoneLink, ModalNoticeFavoriteButton,
-    ModalNoticeButtonItem, ModalNoticePhotoListContainer
+    ModalNoticeButtonItem, ModalNoticePhotoListContainer, ModalNoticeContactLink
 } from "./ModalNotice.styled";
 
 import { useDispatch } from 'react-redux';
@@ -89,8 +89,20 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
     }
     const birthday = getBirthday(details.birthday);
 
-    return <ModalNoticeOverlay>
-        <ModalNoticeModal>
+    const handleOverlayClick = (event) => {
+        if (event.target === event.currentTarget) {
+            close();
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            close();
+        }
+    };
+
+    return <ModalNoticeOverlay onClick={handleOverlayClick}>
+        <ModalNoticeModal onKeyDown={handleKeyDown}>
             <ModalNoticeCloseButton type='button' onClick={close}>
                 <ModalNoticeCloseIcon></ModalNoticeCloseIcon>
             </ModalNoticeCloseButton>
@@ -116,11 +128,11 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
                         <ModalNoticeListDetails>{details.sex}</ModalNoticeListDetails>
                         <ModalNoticeListTitle>Email:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
-                            <a href={`mailto:${details.email}`} >{details.email}</a>
+                            <ModalNoticeContactLink href={`mailto:${details.email}`} >{details.email}</ModalNoticeContactLink>
                         </ModalNoticeListDetails>
                         <ModalNoticeListTitle>Phone:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
-                            <a href={`tel:${details.phone}`} >{details.phone}</a>
+                            <ModalNoticeContactLink href={`tel:${details.phone}`} >{details.phone}</ModalNoticeContactLink>
                         </ModalNoticeListDetails>
                     </ModalNoticeList>
                 </div>    

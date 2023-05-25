@@ -35,8 +35,8 @@ const NoticesPage = () => {
     const [notices, setNotices] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [isWideScreen, setIsWideScreen] = useState(false);
-    const [limit, setLimit] = useState("10");
+    const [isWideScreen, setIsWideScreen] = useState(window.width > 1280);
+    const [limit, setLimit] = useState(isWideScreen? "10": "12" );
     const [category, setCategory] = useState("sell");
 
     const dispatch = useDispatch();
@@ -70,6 +70,7 @@ const NoticesPage = () => {
         };
 
         resizeHandler();
+
         if (isWideScreen) {
             setLimit("12");
         } else {
@@ -159,7 +160,7 @@ const NoticesPage = () => {
                     <AddPetButton isAuth={isLoggedIn} />
                 </NoticesNavBox>
                 <NoticesCategoriesList items={notices} openModal={openModal} openDeleteModal={openDeleteModal} user={user} isLoggedIn={isLoggedIn} />
-                <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage}/>
+                {!notices.length || <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
                 {isModalOpen && <ModalNotice
                     close={closeModal}
                     details={modalInfo}

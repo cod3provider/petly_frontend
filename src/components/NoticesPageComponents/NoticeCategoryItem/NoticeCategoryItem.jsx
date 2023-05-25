@@ -133,7 +133,7 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
                         {isFavorite ? <NoticeCategoryItemFillHeartIcon /> : <NoticeCategoryItemHeartIcon />}
                     </NoticeCategoryItemFavoriteButton>
                 </NoticeCategoryItemButtonItem>
-                {data.owner != user._id && <NoticeCategoryItemButtonItem>
+                {data.owner === user._id && <NoticeCategoryItemButtonItem>
                     <NoticeCategoryItemFavoriteButton type='button' onClick={()=>openDeleteModal(data)}>
                         <NoticeCategoryItemTrashIcon />
                     </NoticeCategoryItemFavoriteButton>
