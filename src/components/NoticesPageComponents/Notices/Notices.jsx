@@ -36,8 +36,8 @@ const NoticesPage = () => {
     const [notices, setNotices] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [isWideScreen, setIsWideScreen] = useState(window.width > 1280);
-    const [limit, setLimit] = useState(isWideScreen? "10": "12" );
+    const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1280);
+    const [limit, setLimit] = useState(isWideScreen ? "12" : "10" );
     const [category, setCategory] = useState("sell");
 
     const dispatch = useDispatch();
