@@ -32,3 +32,16 @@ export const NewsTitle = styled.h2`
   letter-spacing: -0.01em;
   color: #111111;
 `
+export const NewsSearch = styled.input`
+  width: 608px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+  background: #FFFFFF;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 20px;
+`
+export const MoreReadButton = styled.button`
+  background: #54ADFF;
+  color: #FFFFFF;
+`;

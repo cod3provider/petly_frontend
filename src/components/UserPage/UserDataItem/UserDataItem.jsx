@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+// import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
@@ -117,9 +118,47 @@ const UserDataItem = () => {
     setIsEditCity(false);
   };
 
+  // const userDataValidationSchema = yup.object().shape({
+  //   name: yup
+  //     .string()
+  //     .required('Enter the your name')
+  //     .label('name')
+  //     .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+  //     .min(2)
+  //     .max(16),
+  //   birthday: yup
+  //     .string()
+  //     .required('Enter a date of birth')
+  //     .name('birthday')
+  //     .matches(
+  //       /^\d{2}-\d{2}-\d{4}$/,
+  //       'The date must be in the format DD.MM.YYYY'
+  //     ),
+  //   email: yup
+  //     .string()
+  //     .required('Enter the valid email')
+  //     .name('email')
+  //     .transform(value => value.charAt(0).toUpperCase() + value.slice(1))
+  //     .min(2)
+  //     .max(16),
+  //   phone: yup
+  //     .number()
+  //     .required('Enter the valid phone')
+  //     .name(phone)
+  //     .matches(/^\+380\d{2}-\d{3}-\d{4}$/, 'Invalid phone number'),
+  //   city: yup
+  //     .string()
+  //     .required('Enter the valid city')
+  //     .name(city)
+  //     .matches(/^[A-Za-z\s]+$/, 'Incorrect city format'),
+  // });
+
   return (
     <Wrapper>
-      <ItemWrap onSubmit={handleNameSubmit}>
+      <ItemWrap
+        onSubmit={handleNameSubmit}
+        // validationSchema={userDataValidationSchema}
+      >
         <InputWrap>
           <Span>Name: </Span>
           <Label htmlFor={id}></Label>
@@ -141,6 +180,7 @@ const UserDataItem = () => {
                 defaultValue={state.name || name}
                 name="name"
                 id={id}
+                required
                 pattern="[A-Za-z]{1,32}"
               />
             </>
@@ -170,6 +210,7 @@ const UserDataItem = () => {
                 defaultValue={state.email || email}
                 name="email"
                 id={id}
+                required
                 pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
               />
             </>
@@ -242,6 +283,7 @@ const UserDataItem = () => {
                 defaultValue={state.phone || phone}
                 minlength="13"
                 maxlength="13"
+                required
                 placeholder="+380XXXXXXXXX"
               />
             </>
@@ -270,6 +312,7 @@ const UserDataItem = () => {
                 type="text"
                 name="city"
                 id={id}
+                required
                 defaultValue={city}
                 placeholder="Kyiv"
               />

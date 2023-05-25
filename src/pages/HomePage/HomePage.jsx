@@ -5,15 +5,9 @@ import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styl
 
 import { theme } from '../../utils/theme.jsx';
 
+
 import HeroMobileImage from './img/hero/hero-mobile.png';
-// import HeroMobileImage2 from './img/hero/hero-mobile@2x.png';
-// import HeroMobileImageWebp from './img/hero/hero-mobile.webp';
 import HeroTabletAndDeskImage from './img/hero/hero-tablet-desk.png';
-// import HeroTabletAndDeskImage2 from './img/hero/hero-tablet-desk@2x.png';
-// import HeroTabletAndDeskImageWebp from './img/hero/hero-tablet-desk.webp';
-// import bgImageMobile from '../../assets/img/background/bg_mobile.png';
-// import bgImageTablet from '../../assets/img/background/bg_tablet.png';
-// import bgImageDesktop from '../../assets/img/background/bg_desktop.png';
 
 const HomePage = () => {
   const isMobile = useMedia(theme.breakpoints.mobile.media);
@@ -22,31 +16,7 @@ const HomePage = () => {
 
   return (
     <>
-      {/*{isMobile && (*/}
-      {/*  <BackgroundImage*/}
-      {/*    src={bgImageMobile}*/}
-      {/*    alt="image hero: two dogs and one cat"*/}
-      {/*    loading="lazy"*/}
-      {/*  />*/}
-      {/*)}*/}
-
-        <BackgroundImageDiv />
-      {/*{isTablet && (*/}
-      {/*  // <BackgroundImage*/}
-      {/*  //   src={bgImageTablet}*/}
-      {/*  //   alt="image hero: two dogs and one cat"*/}
-      {/*  //   loading="lazy"*/}
-      {/*  // />*/}
-      {/*)}*/}
-
-      {/*{isDesktop && (*/}
-      {/*  <BackgroundImage*/}
-      {/*    src={bgImageDesktop}*/}
-      {/*    alt="image hero: two dogs and one cat"*/}
-      {/*    loading="lazy"*/}
-      {/*  />*/}
-      {/*)}*/}
-
+      <BackgroundImageDiv />
       <Wrap>
         <MainTitle>Take good care of your small pets</MainTitle>
         {isMobile && (

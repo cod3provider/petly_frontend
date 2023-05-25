@@ -15,7 +15,7 @@ export const MainWrap = styled.div`
 
 export const Confirm = styled.div`
   fill: none;
-//   background-color: #bf342a;
+  //   background-color: #bf342a;
   width: 24px;
   height: 24px;
 `;
@@ -43,7 +43,7 @@ export const ErrorWrap = styled.div`
 
 export const CrossIcon = styled.div`
   fill: none;
-//   background-color: #bf342a;
+  //   background-color: #bf342a;
   width: 24px;
   height: 24px;
   stroke: #bf342a;
@@ -68,6 +68,7 @@ export const ImageDef = styled.img`
   height: 182px;
   border-radius: 40px;
   overflow: hidden;
+  object-fit: cover;
 `;
 
 export const UserImage = styled.img`
@@ -75,6 +76,7 @@ export const UserImage = styled.img`
   height: 182px;
   border-radius: 40px;
   margin-bottom: 15px;
+  object-fit: cover;
 `;
 
 export const Icon = styled.img`

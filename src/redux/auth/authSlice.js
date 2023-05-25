@@ -7,9 +7,11 @@ const authInitialState = {
   isLoggedIn: false,
   isLoading: false,
   error: null,
+  isNewUser: false,
 };
 
 function registerFulfilled(state) {
+  state.isNewUser = true;
   state.isLoading = false;
   state.error = null;
 }
@@ -28,22 +30,6 @@ function logOutFulfilled(state) {
   state.user = {};
   state.token = null;
 }
-
-// function getUserFulfilled(state, { payload }) {
-//   state.user = payload;
-//   state.isLoading = false;
-//   state.isLoggedIn = true;
-//   state.error = null;
-// }
-//       .addCase(getCurrentUser.pending, state => {
-//         state.isLoading = true;
-//         state.error = null;
-//       })
-//       .addCase(getCurrentUser.fulfilled, getUserFulfilled)
-//       .addCase(getCurrentUser.rejected, (state, { payload }) => {
-//         state.isLoading = false;
-//         state.error = payload;
-//       })
 
 export const addAccessToken = createAction('auth/token');
 
@@ -98,6 +84,12 @@ const authSlice = createSlice({
         state.error = payload;
       });
   },
+  reducers: {
+    setIsNewUser: (state, { payload }) => {
+      state.isNewUser = payload;
+    },
+  },
 });
 
+export const { setIsNewUser } =  authSlice.actions;
 export const authReducer = authSlice.reducer;

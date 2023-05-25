@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify";
 import {
     ModalNoticeCloseIcon, ModalNoticeOverlay, ModalNoticeModal,
     ModalNoticeCloseButton, ModalNoticeCategoryContainer,
@@ -7,50 +8,63 @@ import {
     ModalNoticeListTitle, ModalNoticeListDetails,
     ModalNoticePhoto, ModalNoticeComment, ModalNoticeButtonList,
     ModalNoticeHeartIcon, ModalNoticePhoneLink, ModalNoticeFavoriteButton,
-    ModalNoticeButtonItem, ModalNoticePhotoListContainer
+    ModalNoticeButtonItem, ModalNoticePhotoListContainer, ModalNoticeContactLink
 } from "./ModalNotice.styled";
-import { addNoticeToFavorite, removeNoticeFromFavorite } from "../../../services/noticesApi";
+
+import { useDispatch } from 'react-redux';
+
+import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
+
 import { useState, useEffect } from 'react';
 import React from 'react';
 
 
 const ModalNotice = ({ details, close, isLoggedIn, user }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const [category, setCategory] = useState(details.category);
+    const dispatch = useDispatch();
+    const notify = () => toast.info("You need to be logged in for this action");
 
     const checkFavorite = (user, id) => {
-        for (let i = 0; i < user.favorite.length; i++) {
-            if (user.favorite[i]._id === id) {
-                return true; 
+        if (user.favorite) {
+            for (let i = 0; i < user.favorite.length; i++) {
+                if (user.favorite[i]._id === id) {
+                    return true; 
+                }
             }
         }
         return false; 
     }
 
-    if (checkFavorite(user, details._id)) {
-        setIsFavorite(true);
-    }
+    useEffect(() => {
+        setIsFavorite(checkFavorite(user, details._id));
+    }, [user, details]);
     
-    const handleFavoriteBtnClick = (isLoggedIn, isFavorite) => {
+    const handleFavoriteBtnClick = () => {
         if (isLoggedIn) {
             const fetchAddFavorite = async (id) => {
                 try {
-                    const response = await addNoticeToFavorite(id);
-                    console.log(response);
-                    alert(response.message);
-                    setIsFavorite(true);
+                    console.log("adding");
+                    const response = await dispatch(addFavorite(id));
+                    if (response.type === '/addFavorite/fulfilled') {
+                        setIsFavorite(true);
+                    }
                 }
                 catch (error) {
-                    alert(error.message);
+                    console.log(error);
+                    toast.error(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
                 try {
-                    const response = await removeNoticeFromFavorite(id);
-                    alert(response.message);
-                    setIsFavorite(false);
+                    console.log("removing");
+                    const response = await dispatch(removeFavorite(id));
+                    if (response.type === '/removeFavorite/fulfilled') {
+                        setIsFavorite(false);
+                    }
                 }
                 catch (error) {
-                    alert(error.message);
+                    toast.error(error.message);
                 }
             }
             if (isFavorite) {
@@ -59,6 +73,8 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
             else {
                 fetchAddFavorite(details._id);
             }
+        } else {
+            notify();
         }
     }
 
@@ -78,8 +94,42 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
     }
     const birthday = getBirthday(details.birthday);
 
-    return <ModalNoticeOverlay>
-        <ModalNoticeModal>
+    const handleOverlayClick = (event) => {
+        if (event.target === event.currentTarget) {
+            close();
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            close();
+        }
+    };
+
+    useEffect(() => {
+        switch (details.category) {
+            case "sell":
+                setCategory("sell");
+                break;
+            case "lostFound":
+                setCategory("lost-found");
+                break;
+            case "inGoodHands":
+                setCategory("for-free");
+                break;
+            case "favorite":
+                setCategory("favorite");
+                break;
+            case "created":
+                setCategory("own");
+                break;
+            default:
+                setCategory("sell");
+        }
+    },[])
+
+    return <ModalNoticeOverlay onClick={handleOverlayClick}>
+        <ModalNoticeModal onKeyDown={handleKeyDown}>
             <ModalNoticeCloseButton type='button' onClick={close}>
                 <ModalNoticeCloseIcon></ModalNoticeCloseIcon>
             </ModalNoticeCloseButton>
@@ -87,7 +137,7 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
                 <ModalNoticePhotoContainer>
                     <ModalNoticePhoto src={details.noticeImage} alt="pet photo" />
                     <ModalNoticeCategoryContainer>
-                        <ModalNoticeCategoryText>{details.category}</ModalNoticeCategoryText>
+                        <ModalNoticeCategoryText>{category}</ModalNoticeCategoryText>
                     </ModalNoticeCategoryContainer>
                 </ModalNoticePhotoContainer>
                 <div>
@@ -105,20 +155,20 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
                         <ModalNoticeListDetails>{details.sex}</ModalNoticeListDetails>
                         <ModalNoticeListTitle>Email:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
-                            <a href={`mailto:${details.email}`} >{details.email}</a>
+                            <ModalNoticeContactLink href={`mailto:${details.owner.email}`} >{details.owner.email}</ModalNoticeContactLink>
                         </ModalNoticeListDetails>
-                        <ModalNoticeListTitle>Phone:</ModalNoticeListTitle>
+                        {!details.owner.phone || <> <ModalNoticeListTitle>Phone:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
-                            <a href={`tel:${details.phone}`} >{details.phone}</a>
-                        </ModalNoticeListDetails>
+                            <ModalNoticeContactLink href={`tel:${details.owner.phone}`} >{details.owner.phone}</ModalNoticeContactLink>
+                        </ModalNoticeListDetails></>}
                     </ModalNoticeList>
                 </div>    
             </ModalNoticePhotoListContainer>
             <ModalNoticeComment>Comments: {details.comment}</ModalNoticeComment>
             <ModalNoticeButtonList>
-                <ModalNoticeButtonItem>
-                    <ModalNoticePhoneLink href={`tel:${details.phone}`}>Contact</ModalNoticePhoneLink>
-                </ModalNoticeButtonItem>
+                {!details.owner.phone || <ModalNoticeButtonItem>
+                    <ModalNoticePhoneLink href={`tel:${details.owner.phone}`}>Contact</ModalNoticePhoneLink>
+                </ModalNoticeButtonItem>}
                 <ModalNoticeButtonItem>
                     <ModalNoticeFavoriteButton type='button' onClick={handleFavoriteBtnClick}>
                         {!isFavorite ? (

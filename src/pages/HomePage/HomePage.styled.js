@@ -2,15 +2,6 @@ import styled from 'styled-components';
 
 import { theme } from '../../utils/theme.jsx';
 
-// export const BackgroundImage = styled.img`
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   width: 100%;
-//   height: 100vh;
-//   object-fit: contain;
-// `;
-
 export const MainTitle = styled.h1`
   position: absolute;
   top: -100px;

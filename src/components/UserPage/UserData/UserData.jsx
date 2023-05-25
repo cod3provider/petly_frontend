@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { theme } from '../../../utils/theme';
 
@@ -36,27 +36,39 @@ const initialState = {
 
 const UserData = () => {
   const [user, setUser] = useState(initialState);
-  const [avatarUser, setAvatarUser] = useState();
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  // Варіант Слави
+  // const [avatarUser, setAvatarUser] = useState();
   const [isConfirm, setIsConfirm] = useState(false);
   const dispatch = useDispatch();
 
   const fileRef = useRef(null);
   const userData = useSelector(getUser);
-  
-  const { avatarUrl } = userData;
 
+  const { avatarUrl } = userData;
+  // Варіант Слави
   // const [showModal, setShowModal] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
+  // Варіант Слави
+  // const selectHandler = () => {
+  //   setUser({ ...user });
+  //   setIsConfirm(true);
+  // };
 
-  const selectHandler = () => {
-    setUser({ ...user });
+  const handleChangeFile = event => {
+    event.preventDefault();
+    dispatch(updateCurrentUser(selectedPhoto));
+  };
+  const selectHandler = event => {
+    const file = event.target.files[0];
+    setSelectedPhoto(URL.createObjectURL(file));
     setIsConfirm(true);
   };
-
+  // Варіант Слави
   useEffect(() => {
     const updateAvatar = () => {
       if (avatarUrl) {
-        setAvatarUser({ avatarUrl });
+        setSelectedPhoto({ avatarUrl });
       }
     };
     updateAvatar();
@@ -71,18 +83,26 @@ const UserData = () => {
   //   setAvatarUser({ avatar: av });
   //   dispatch(updateCurrentUser(data));
   // };
-
-  const handleChangeFile = event => {
-    event.preventDefault();
-    setUser({ ...user });
-    dispatch(updateCurrentUser(user));
-  };
+  // Варіант Слави
+  // const handleChangeFile = event => {
+  //   event.preventDefault();
+  //   setUser({ ...user });
+  //   dispatch(updateCurrentUser(user));
+  // };
 
   return (
     <MainWrap>
       <FormThumb onSubmit={handleChangeFile}>
-        {avatarUser ? (
-          <ImageDef src={avatarUser.avatarUrl} alt="User Avatar" />
+        {selectedPhoto ? (
+          <ImageDef
+            src={selectedPhoto || defaultUserImg}
+            alt="User Avatar"
+            width="182px"
+            height="182px"
+            onClick={() => {
+              fileRef.current.click();
+            }}
+          />
         ) : (
           <ImageDef
             src={defaultUserImg}

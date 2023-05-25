@@ -6,16 +6,19 @@ const NoticesSearch = ({onSubmit}) => {
 
     const handleChange = e => {
         setQuery(e.target.value);
+        if (e.target.value === "") {
+            onSubmit("");
+        }
     }
 
     const handleSubmit = e => {
         e.preventDefault();
         onSubmit(query);
-        reset();
     }
 
     const reset = () => {
         setQuery('');
+        onSubmit("");
     }
 
     return <NoticesSearchForm  onSubmit={handleSubmit}>
