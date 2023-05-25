@@ -6,6 +6,8 @@ export const getLoading = state => state.auth.isLoading;
 // export const refreshThunk = state => state.auth.isRefreshing;
 export const refreshThunk = state => state.auth.isRefreshing;
 
+export const getAvatar = state => state.auth.avatarUrl;
+
 export const getUserFavorite = state => state.auth.favorite;
 
 export const getUser = state => state.auth.user;
