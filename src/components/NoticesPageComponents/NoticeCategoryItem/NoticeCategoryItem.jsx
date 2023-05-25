@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify"
 import {
     NoticeCategoryItemItem,
     NoticeCategoryItemPhotoContainer,
@@ -31,6 +32,9 @@ import { useState, useEffect } from 'react';
 
 const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const [category, setCategory] = useState(data.category);
+    const notify = () => toast.info("You need to be logged in for this action");
+
     const dispatch = useDispatch();
 
     const checkFavorite = (user, id) => {
@@ -62,7 +66,7 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
                 }
                 catch (error) {
                     console.log(error);
-                    alert(error.message);
+                    toast.error(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
@@ -75,7 +79,7 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
                     }
                 }
                 catch (error) {
-                    alert(error.message);
+                    toast.error(error.message);
                 }
             }
             if (isFavorite) {
@@ -84,6 +88,8 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
             else {
                 fetchAddFavorite(data._id);
             }
+        }else {
+            notify();
         }
     }
 
@@ -121,11 +127,33 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
     
     const age = getAge(data.birthday);
 
+    useEffect(() => {
+        switch (data.category) {
+            case "sell":
+                setCategory("sell");
+                break;
+            case "lostFound":
+                setCategory("lost-found");
+                break;
+            case "inGoodHands":
+                setCategory("for-free");
+                break;
+            case "favorite":
+                setCategory("favorite");
+                break;
+            case "created":
+                setCategory("own");
+                break;
+            default:
+                setCategory("sell");
+        }
+    },[])
+
     return <NoticeCategoryItemItem>
         <NoticeCategoryItemPhotoContainer>
             <img src={data.noticeImage} alt="pet photo" />
             <NoticeCategoryItemCategoryContainer>
-                <NoticeCategoryItemCategoryText>{data.category}</NoticeCategoryItemCategoryText>
+                <NoticeCategoryItemCategoryText>{category}</NoticeCategoryItemCategoryText>
             </NoticeCategoryItemCategoryContainer>
             <NoticeCategoryItemButtonList>
                 <NoticeCategoryItemButtonItem>
