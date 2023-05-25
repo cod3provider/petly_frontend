@@ -25,7 +25,6 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   });
 
   const [isDateOpen, setIsDateOpen] = useState(false);
-
   const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => {
