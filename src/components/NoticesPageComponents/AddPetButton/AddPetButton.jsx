@@ -5,9 +5,11 @@ import { AddPetButtonIcon, AddPetButtonLink } from "./AddPetButton.styled";
 
 const AddPetButton = ({ isAuth }) => {
     const location = useLocation();
-    return isAuth ? <AddPetButtonLink to='/addpet' state={{from: location}}>
+    return isAuth ? <AddPetButtonLink to='/addpet' state={{ from: location }}>
         <AddPetButtonIcon />Add pet
-    </AddPetButtonLink> : <button type='button'>Add pet</button>;
+    </AddPetButtonLink> : <AddPetButtonLink to='/login' state={{ from: location }}>
+        <AddPetButtonIcon />Add pet
+    </AddPetButtonLink>;
 }
 
 AddPetButton.propTypes = {

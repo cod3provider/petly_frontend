@@ -4,9 +4,12 @@ import {
   InputStyle,
   LabelStyle,
   DataPickercontainer,
+  InputBox,
+  FormContainer,
+  FormStyledBox,
 } from './SecondStepForm.styled';
 
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { useState, useEffect } from 'react';
@@ -78,63 +81,72 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
       onSubmit={handleSubmit}
       validationSchema={secondStepValidationSchema}
     >
-      <Form>
-        {(type === 'sell' ||
-          type === 'lost/found' ||
-          type === 'in good hands') && (
-          <>
-            <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
+      <FormContainer>
+        <FormStyledBox>
+          {(type === 'sell' ||
+            type === 'lost/found' ||
+            type === 'in good hands') && (
+            <InputBox>
+              <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
+              <InputStyle
+                id="titlePet"
+                name="titlePet"
+                placeholder="Title pet"
+                value={formState.titlePet}
+                onChange={handleChange}
+                required
+              />
+            </InputBox>
+          )}
+          <InputBox>
+            <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
             <InputStyle
-              id="titlePet"
-              name="titlePet"
-              placeholder="Title pet"
-              value={formState.titlePet}
+              id="namePet"
+              name="namePet"
+              placeholder="Name pet"
+              value={formState.namePet}
               onChange={handleChange}
               required
             />
-          </>
-        )}
-        <LabelStyle htmlFor="namePet">Name pet</LabelStyle>
-        <InputStyle
-          id="namePet"
-          name="namePet"
-          placeholder="Name pet"
-          value={formState.namePet}
-          onChange={handleChange}
-          required
-        />
-        {/* оберни вдів і додай позишн реатів */}
-        <LabelStyle htmlFor="birth">Date of birth</LabelStyle>{' '}
-        <DataPickercontainer>
-          <InputStyle
-            id="birth"
-            name="birth"
-            placeholder="Date of birth"
-            value={formState.birth}
-            onChange={handleChange}
-            onFocus={() => setIsDateOpen(true)}
-            // onBlur={() => setIsDateOpen(false)}
-            autocomplete="off"
-            required
-          />
-          {isDateOpen && (
-            <DatePicker
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay}
+          </InputBox>
+
+          <InputBox>
+            <LabelStyle htmlFor="birth">Date of birth</LabelStyle>{' '}
+            <DataPickercontainer>
+              <InputStyle
+                id="birth"
+                name="birth"
+                placeholder="Date of birth"
+                value={formState.birth}
+                onChange={handleChange}
+                onFocus={() => setIsDateOpen(true)}
+                // onBlur={() => setIsDateOpen(false)}
+                autoComplete="off"
+                required
+              />
+              {isDateOpen && (
+                <DatePicker
+                  selectedDay={selectedDay}
+                  setSelectedDay={setSelectedDay}
+                />
+              )}
+            </DataPickercontainer>
+          </InputBox>
+          <InputBox>
+            <LabelStyle htmlFor="breed">Breed</LabelStyle>
+            <InputStyle
+              id="breed"
+              name="breed"
+              placeholder="Breed"
+              value={formState.breed}
+              onChange={handleChange}
+              required
             />
-          )}
-        </DataPickercontainer>
-        <LabelStyle htmlFor="breed">Breed</LabelStyle>
-        <InputStyle
-          id="breed"
-          name="breed"
-          placeholder="Breed"
-          value={formState.breed}
-          onChange={handleChange}
-          required
-        />
+          </InputBox>
+        </FormStyledBox>
+
         <ButtonPet step={step} setStep={setStep} />
-      </Form>
+      </FormContainer>
     </Formik>
   );
 };
