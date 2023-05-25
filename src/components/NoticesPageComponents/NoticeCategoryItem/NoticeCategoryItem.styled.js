@@ -49,9 +49,14 @@ export const NoticeCategoryItemFavoriteButton= styled.button`
     height: 40px;
     border-radius: 50%;
     background-color: #C5DFF6;
+    transition: ${theme.transition.bg};
 
     &:focus{
         outline: none;
+    }
+    &:hover,
+    &:focus{
+        background: #9BD0FF;
     }
 `;
 
@@ -148,7 +153,14 @@ export const NoticeCategoryItemMoreButton = styled.button`
     background-color: #ffffff;
     margin-left: auto;
     margin-right: auto;
+    transition: ${theme.transition.color};
+    transition: border-color 250ms linear;
 
+    &:hover,
+    &:focus{
+        border-color: #9BD0FF;
+        color: #9BD0FF;
+    }
 `;
 
 export const NoticeCategoryItemLocationIcon = styled(HiOutlineLocationMarker)`

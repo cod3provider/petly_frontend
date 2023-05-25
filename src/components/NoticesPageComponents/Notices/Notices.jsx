@@ -118,8 +118,15 @@ const NoticesPage = () => {
                     if (category === "favorite" || category === "created") {
                         const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
                         if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
-                            setNotices(response.payload);
-                            setTotalPages(4);
+                            if (category === "favorite") {
+                                setNotices(response.payload);
+                                setTotalPages(1);
+                            }
+                            if (category === "created") {
+                                setNotices(response.payload.data);
+                                setTotalPages(response.payload.totalPages);
+                            }
+                            
                         } else {
                             setNotices([]);
                         }

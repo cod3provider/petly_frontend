@@ -30,6 +30,12 @@ export const AddPetButtonLink = styled(Link)`
     border-radius: 50%;
     height: 80px;
     background: ${theme.baseColors.accentButtonColor};
+    transition: ${theme.transition.bg};
+
+    &:hover,
+    &:focus{
+        background: ${theme.baseColors.buttonHoverBgColor};
+    }
 
     @media(${theme.breakpoints.mobile.media}){
         position: fixed;

@@ -12,11 +12,12 @@ export const NoticesCategoriesNavLink= styled(NavLink)`
     line-height: 19px;
     letter-spacing: 0.04em;
     color: ${theme.baseColors.filterNonActiveTextColor};
+    transition: ${theme.transition.color};
+    transition: ${theme.transition.bg};
     &:focus,
-    &:hover,
-    &:global(.active) {
-       color: ${theme.baseColors.filterActiveTextColor};
-       background: ${theme.baseColors.filterActiveBgColor};
+    &:hover{
+        color: ${theme.baseColors.filterActiveTextColor};
+        background: ${theme.baseColors.buttonHoverBgColor};
     }
 `;
 
