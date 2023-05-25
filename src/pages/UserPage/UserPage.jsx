@@ -19,7 +19,7 @@ import { PetWrapper } from '../../components/UserPage/PetsData/PetsData.styled.j
 
 function UserPage() {
   const dispatch = useDispatch();
-  const { isOpen, open, close } = useToggle();
+  const { open } = useToggle();
 
   // const user = useSelector(getUser);
 
