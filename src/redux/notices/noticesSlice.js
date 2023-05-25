@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getNoticesByPrivateCategory, addFavorite, removeFavorite } from './noticesOperations';
+import { getNoticesByPrivateCategory, addFavorite, removeFavorite, deleteNotice } from './noticesOperations';
 
 const initialState = {
   notices: [],
@@ -42,6 +42,16 @@ const noticesSlice = createSlice({
         store.loading = false;
       })
       .addCase(removeFavorite.rejected, (store, { payload }) => {
+        store.loading = false;
+        store.error = payload;
+      })
+      .addCase(deleteNotice.pending, store => {
+        store.loading = true;
+      })
+      .addCase(deleteNotice.fulfilled, (store) => {
+        store.loading = false;
+      })
+      .addCase(deleteNotice.rejected, (store, { payload }) => {
         store.loading = false;
         store.error = payload;
       })

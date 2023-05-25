@@ -60,3 +60,20 @@ export const getNoticesByPrivateCategory = createAsyncThunk(
     }
 );
 
+export const deleteNotice = createAsyncThunk(
+    '/deleteNotice',
+    async (credentials, { rejectWithValue, getState }) => {
+        try {
+            const value = getState().auth.token;
+            if (value) {
+                token.set(value);
+            }
+            const response = await axios.delete(`/notices/${credentials}`);
+            return response.data;
+        } catch (error) {
+            // console.log(error.response.data);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
