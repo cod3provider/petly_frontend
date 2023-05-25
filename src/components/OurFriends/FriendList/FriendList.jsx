@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import { CardContainer } from './FriendList.styled.js';
 import FriendItem from '../FriendItem/FriendItem.jsx';
-import { TitleStyled } from '../../Title/Title.styled.js';
+import { TitleStyled } from '../../common/Title/Title.styled.js';
 
 
 const FriendList = ({partners}) => {

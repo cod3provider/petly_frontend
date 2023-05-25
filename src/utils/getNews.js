@@ -7,9 +7,10 @@ const getNews = async (searchKeyword = '') => {
   let response = null;
 
   try {
-    response = await axios.get(searchKeyword ? `/news/${searchKeyword}` : '/news');
+    const response = await axios.get(searchKeyword ? `/news/${searchKeyword}` : '/news');
     console.log(response);
-    console.log(response.data);
+    // console.log(response.data.data);
+    return response.data;
   } catch (error) {
     console.log(error.message);
   }

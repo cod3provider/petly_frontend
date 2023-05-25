@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../utils/theme.jsx';
+import { theme } from '../../../utils/theme.jsx';
 
 export const TitleStyled = styled.h1`
   margin: 40px 0 25px;
