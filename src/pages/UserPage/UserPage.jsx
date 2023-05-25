@@ -14,7 +14,7 @@ import { useToggle } from '../../hooks/useToggle';
 
 function UserPage() {
   const dispatch = useDispatch();
-  const { isOpen, open, close } = useToggle();
+  const { open } = useToggle();
 
   const user = useSelector(getUser);
 
