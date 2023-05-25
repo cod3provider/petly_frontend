@@ -94,7 +94,6 @@ function RegisterForm() {
                       setIsPasswordSecure(false);
                       setIsEmailValid(false);
                       setIsConfirmPassword(false);
-          console.log(newUser);
         }}
       >
         {({
@@ -123,7 +122,7 @@ function RegisterForm() {
               {touched.email && errors.email ? (
                 <ErrorMessage name="email" />
               ) : isEmailValid ? (
-                'Email is valid'
+                ' '
               ) : (
                 ' '
               )}

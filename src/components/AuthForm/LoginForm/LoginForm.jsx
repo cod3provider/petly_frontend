@@ -59,14 +59,12 @@ function LoginForm() {
         }}
         validationSchema={logValidationSchema}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          console.log(values);
           const action = await dispatch(login(values)); // add await before dispatch and save result to a variable
           if (login.fulfilled.match(action)) {
             navigate('/user');
           }
           resetForm();
           setSubmitting(false);
-          console.log(values);
         }}
       >
         {({
@@ -95,7 +93,7 @@ function LoginForm() {
               {touched.email && errors.email ? (
                 <ErrorMessage name="email" />
               ) : isEmailValid ? (
-                'Email is valid'
+                ' '
               ) : (
                 ' '
               )}

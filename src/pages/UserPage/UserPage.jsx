@@ -10,7 +10,7 @@ import UserPets from '../../components/UserPage/PetsData/PetsData';
 import Logout from '../../components/Logout/Logout';
 import { ContainerStyled } from '../../components/common/Container/Container.styled';
 import { SectionStyled } from '../../components/common/Section/Section.styled';
-import { Wrap, UserDiv, Title, UserWrapper } from './UserPage.styled';
+import { Wrap, UserDiv, Title, UserWrapper } from './UserPage.styled.jsx';
 import { useToggle } from '../../hooks/useToggle';
 import { PetWrapper } from '../../components/UserPage/PetsData/PetsData.styled.jsx';
 // import { setIsNewUser } from '../../redux/auth/authSlice';
@@ -19,7 +19,7 @@ import { PetWrapper } from '../../components/UserPage/PetsData/PetsData.styled.j
 
 function UserPage() {
   const dispatch = useDispatch();
-  const { isOpen, open, close } = useToggle();
+  const { open } = useToggle();
 
   // const user = useSelector(getUser);
 
