@@ -50,8 +50,12 @@ export const NoticesDeleteModalCloseButton= styled.button`
     padding: 0;
     top: 12px;
     right: 12px;
+    transition: ${theme.transition.bg};
+
+    &:hover,
     &:focus{
         outline: none;
+        background: #CCE4FB;
     }
 
     @media(${theme.breakpoints.tablet.media}){

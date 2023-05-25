@@ -44,6 +44,7 @@ export const ModalNoticeModal= styled.div`
 export const ModalNoticeCloseButton= styled.button`
     position: absolute;
     display: flex;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     background: #ffffff;
@@ -54,9 +55,12 @@ export const ModalNoticeCloseButton= styled.button`
         outline: none;
     }
 
+    transition: ${theme.transition.bg};
+
     &:hover,
     &:focus{
-        background: ${theme.baseColors.buttonHoverBgColor};
+        background: #CCE4FB;
+        outline: none;
     }
 
     @media(${theme.breakpoints.tablet.media}){
