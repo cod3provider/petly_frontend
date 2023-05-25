@@ -88,7 +88,7 @@ export const InputStyle = styled('input')`
 
   &:hover,
   &:focus {
-    border-color: #ffc107;
+    background-color: ${theme.baseColors.filterActiveTextColor};
   }
 
   @media screen and (min-width: 768px) {

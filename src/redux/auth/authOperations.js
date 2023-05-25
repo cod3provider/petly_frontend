@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { getCurrentUser } from 'redux/user/userOperations';
 import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://your-pet-backend-jfrs.onrender.com/';
@@ -26,10 +25,8 @@ export const register = createAsyncThunk(
           password,
         })
       );
-      console.log(credentials);
     } catch (error) {
       toast.error('Email is invalid or it is used');
-      console.log(error.response.data);
       return rejectWithValue(error.message);
     }
   }
@@ -40,12 +37,10 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post('users/login', credentials);
-      console.log(data);
       token.set(data.token);
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
-      console.log(error.response.data);
       toast.error('Email or password is wrong');
       return rejectWithValue(error.message);
     }
@@ -79,24 +74,10 @@ export const getCurrentUser = createAsyncThunk(
       const { data } = await axios.get('users/current');
       return data;
     } catch (error) {
-      console.log(error.response.data);
       return rejectWithValue(error.message);
     }
   }
 );
-
-// export const refreshThunk = createAsyncThunk(
-//   'users/refresh',
-//   async (credentials, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get('users/', credentials);
-//       token.set(data.data.user.token);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 export const updateCurrentUser = createAsyncThunk(
   'auth/updateCurrentUser',
@@ -107,7 +88,6 @@ export const updateCurrentUser = createAsyncThunk(
         token.set(value);
       }
       const { data } = await axios.patch('users/update', credentials);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error.response.data);

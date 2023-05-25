@@ -12,8 +12,9 @@ export const StyledButton = styled('button')`
   border-radius: 40px;
   cursor: pointer;
 
-  :hover:not(:disabled) {
-    background-color: ${theme.baseColors.buttonHoverBgColor};
+  &:hover,
+  &:focus {
+    background-color: #419EF1;
   }
 `;
 

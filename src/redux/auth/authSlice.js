@@ -31,22 +31,6 @@ function logOutFulfilled(state) {
   state.token = null;
 }
 
-// function getUserFulfilled(state, { payload }) {
-//   state.user = payload;
-//   state.isLoading = false;
-//   state.isLoggedIn = true;
-//   state.error = null;
-// }
-//       .addCase(getCurrentUser.pending, state => {
-//         state.isLoading = true;
-//         state.error = null;
-//       })
-//       .addCase(getCurrentUser.fulfilled, getUserFulfilled)
-//       .addCase(getCurrentUser.rejected, (state, { payload }) => {
-//         state.isLoading = false;
-//         state.error = payload;
-//       })
-
 export const addAccessToken = createAction('auth/token');
 
 const authSlice = createSlice({
