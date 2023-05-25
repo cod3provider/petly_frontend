@@ -16,9 +16,10 @@ import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { toast } from "react-toastify";
 
 import { getNoticesByPrivateCategory } from '../../../redux/notices/noticesOperations';
-import { getNotices } from "../../../redux/notices/noticesSelectors";
+import { NoPets } from "./Notices.styled";
 
 const NoticesPage = () => {
     const { categoryName } = useParams();
@@ -97,7 +98,7 @@ const NoticesPage = () => {
                 setTotalPages(response.totalPages);
             }
             catch (error) {
-                alert(error.message);
+                toast.error(error.message);
             }
         }
         if (query !== '') {
@@ -106,29 +107,31 @@ const NoticesPage = () => {
     }, [query, category, page, limit, isWideScreen]);
 
     useEffect(() => {
-        const fetchNoticesByCategory = async () => {
-            try {
-                if (category === "sell" || category === "lostFound" || category === "inGoodHands") {
-                    const response = await searchNoticesByCategory(category, page, limit);
-                    setNotices(response.data);
-                    setTotalPages(response.totalPages);
-                }
-                if (category === "favorite" || category === "created") {
-                    const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
-                    if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
-                        setNotices(response.payload);
-                        setTotalPages(4); 
-                    } else {
-                        setNotices([]);
+        if (query === "") {
+            const fetchNoticesByCategory = async () => {
+                try {
+                    if (category === "sell" || category === "lostFound" || category === "inGoodHands") {
+                        const response = await searchNoticesByCategory(category, page, limit);
+                        setNotices(response.data);
+                        setTotalPages(response.totalPages);
+                    }
+                    if (category === "favorite" || category === "created") {
+                        const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
+                        if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
+                            setNotices(response.payload);
+                            setTotalPages(4);
+                        } else {
+                            setNotices([]);
+                        }
                     }
                 }
+                catch (error) {
+                    toast.error(error.message);
+                }
             }
-            catch (error) {
-                alert(error.message);
-            }
+            fetchNoticesByCategory();
         }
-        fetchNoticesByCategory();
-    }, [category, page, limit, isWideScreen]);
+    }, [category, page, limit, isWideScreen, query]);
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -159,7 +162,12 @@ const NoticesPage = () => {
                     <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
                     <AddPetButton isAuth={isLoggedIn} />
                 </NoticesNavBox>
-                <NoticesCategoriesList items={notices} openModal={openModal} openDeleteModal={openDeleteModal} user={user} isLoggedIn={isLoggedIn} />
+                {notices.length ? <NoticesCategoriesList
+                    items={notices}
+                    openModal={openModal}
+                    openDeleteModal={openDeleteModal}
+                    user={user}
+                    isLoggedIn={isLoggedIn} /> : <NoPets>No pets in this category</NoPets>}
                 {!notices.length || <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
                 {isModalOpen && <ModalNotice
                     close={closeModal}

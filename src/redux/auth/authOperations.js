@@ -107,7 +107,7 @@ export const updateCurrentUser = createAsyncThunk(
         token.set(value);
       }
       const { data } = await axios.patch('users/update', credentials);
-      console.log(data);
+
       return data;
     } catch (error) {
       console.log(error.response.data);
