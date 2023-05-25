@@ -8,7 +8,8 @@ import { NewsCardContainer } from '../NewsCard/NewsCard.styled.js';
 
 import getNews from '../../../utils/getNews.js';
 import {
-  NoticesSearchButton, NoticesSearchClearIcon, NoticesSearchForm, NoticesSearchIcon,
+  NoticesSearchButton, NoticesSearchClearIcon, NoticesSearchForm,
+  // NoticesSearchIcon,
   NoticesSearchInput,
 } from '../../../components/NoticesPageComponents/NoticesSearch/NoticesSearch.styled.js';
 
@@ -85,9 +86,9 @@ const NewsList = () => {
             {!query || <NoticesSearchButton type='button' onClick={handleClearSearch}>
               <NoticesSearchClearIcon></NoticesSearchClearIcon>
             </NoticesSearchButton>}
-            <NoticesSearchButton type='submit'>
-              <NoticesSearchIcon></NoticesSearchIcon>
-            </NoticesSearchButton>
+            {/*<NoticesSearchButton type='submit'>*/}
+            {/*  <NoticesSearchIcon></NoticesSearchIcon>*/}
+            {/*</NoticesSearchButton>*/}
               {/*{search && (*/}
               {/*  <button className="clear-search-button" onClick={handleClearSearch}>*/}
               {/*    <i className="fa fa-times" aria-hidden="true"></i>*/}

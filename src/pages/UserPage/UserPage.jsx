@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { getIsNewUser, getUser } from '../../redux/auth/authSelectors';
 import { getCurrentUser } from '../../redux/auth/authOperations';
 
+
 import UserData from '../../components/UserPage/UserData/UserData';
 import UserPets from '../../components/UserPage/PetsData/PetsData';
 import Logout from '../../components/Logout/Logout';

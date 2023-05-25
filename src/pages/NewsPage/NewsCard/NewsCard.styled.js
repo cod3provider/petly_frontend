@@ -75,11 +75,9 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
-  /* identical to box height */
+  font-family: 'Manrope';
 
-  text-align: right;
-
-  /* Голубой (ссылки) */
-
-  color: #54ADFF;;
+  //text-align: right;
+  color: #54ADFF;
+  background: transparent;
 `
