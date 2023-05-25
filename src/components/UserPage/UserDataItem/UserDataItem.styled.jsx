@@ -90,6 +90,13 @@ export const InputWrap = styled.div`
   justify-content: space-between;
 `;
 
+export const DataPickerBox = styled.div`
+  position: absolute;
+  z-index: 999;
+  top: -50%;
+  left: 15%;
+`;
+
 export const ErrorBox = styled.div`
   height: 12px;
   display: flex;
@@ -101,4 +108,7 @@ export const Error = styled.div`
   font-size: 10px;
   line-height: 1.33;
   color: #f43f5e;
+`;
+export const DataPickerContainer = styled.div`
+  position: relative;
 `;

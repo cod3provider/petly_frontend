@@ -1,38 +1,30 @@
+// import React, { useRef, useState, useEffect } from 'react';
+
 import { useRef, useState, useEffect } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { theme } from '../../../utils/theme';
 
-import { useDispatch, useSelector } from 'react-redux';
+
+
+// import { useDispatch, useSelector } from 'react-redux';
 import {
-  ImageDef,
-  InputP,
-  SelectWrap,
-  Confirm,
-  ConfirmBtn,
-  Input,
-  InputWrap,
-  IconWrap,
-  InputText,
-  Label,
-  FormThumb,
-  CrossIcon,
   Wrapper,
   MainWrap,
 } from './UserData.styled';
 import UserDataItem from '../UserDataItem/UserDataItem';
+import UserAvatar from './UserAvatar';
 
-import { updateCurrentUser } from '../../../redux/auth/authOperations';
-import { getUser } from '../../../redux/auth/authSelectors.js';
+// import { updateCurrentUser } from '../../../redux/auth/authOperations';
+// import { getUser } from '../../../redux/auth/authSelectors.js';
 
-import defaultUserImg from '../../../images/default-user-img.jpg';
 
-const initialState = {
-  name: '',
-  email: '',
-  birthday: '',
-  phone: '',
-  city: '',
-};
+// const initialState = {
+//   name: '',
+//   email: '',
+//   birthday: '',
+//   phone: '',
+//   city: '',
+// };
 
 const UserData = () => {
   const [user, setUser] = useState(initialState);
@@ -54,6 +46,7 @@ const UserData = () => {
   //   setUser({ ...user });
   //   setIsConfirm(true);
   // };
+
 
   const handleChangeFile = event => {
     event.preventDefault();
@@ -83,6 +76,7 @@ const UserData = () => {
   //   setAvatarUser({ avatar: av });
   //   dispatch(updateCurrentUser(data));
   // };
+
   // Варіант Слави
   // const handleChangeFile = event => {
   //   event.preventDefault();
@@ -161,6 +155,7 @@ const UserData = () => {
         )}
       </FormThumb>
       <Wrapper>
+        <UserAvatar/>
         <UserDataItem />
       </Wrapper>
     </MainWrap>
