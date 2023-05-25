@@ -31,7 +31,6 @@ export const Title = styled.h2`
   letter-spacing: 0.04em;
   line-height: 1.35;
   margin-bottom: 25px;
-  
 
   @media ${theme.breakpoints.tablet.media} {
     font-size: 28px;
@@ -43,7 +42,7 @@ export const Title = styled.h2`
 export const UserDiv = styled.div`
   background-color: #fef9f9;
   //margin: 0 auto;
-  
+
   display: flex;
   gap: 40px;
   flex-direction: column;
@@ -66,7 +65,7 @@ export const UserDiv = styled.div`
 `;
 
 export const UserWrapper = styled.div`
-    width: 280px;
+  width: 280px;
   margin: 0 auto;
 
   @media ${theme.breakpoints.tablet.media} {
@@ -77,4 +76,4 @@ export const UserWrapper = styled.div`
   @media ${theme.breakpoints.desktop.media} {
     width: 395px;
   }
-`
+`;
