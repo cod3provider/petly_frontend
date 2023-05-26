@@ -7,6 +7,7 @@ import {
   InputBox,
   FormContainer,
   FormStyledBox,
+  DataPickerBox,
 } from './SecondStepForm.styled';
 
 import { Formik } from 'formik';
@@ -19,7 +20,7 @@ import DatePicker from '../../common/DatePicker';
 const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [formState, setFormState] = useState({
     namePet: state.namePet || '',
-    birth: state.birth || '',
+    birth: state.birth || '02.02.2012',
     breed: state.breed || '',
     titlePet: state.titlePet || '',
   });
@@ -27,11 +28,26 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
   const [isDateOpen, setIsDateOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
+  const [format, setFormat] = useState('02.02.2012 ');
+  // console.log(format);
+
+  useEffect(() => {
+    const newDate = new Date(formState.birth);
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+    // const date = newDate.toLocaleDateString('de-DE', options);
+    setFormat(newDate.toLocaleDateString('de-DE', options));
+  }, [formState.birth]);
+
   useEffect(() => {
     if (!selectedDay) {
       return;
     }
     setFormState(prev => ({ ...prev, birth: selectedDay }));
+
     setSelectedDay(null);
     setIsDateOpen(false);
   }, [formState, selectedDay]);
@@ -116,7 +132,7 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
                 id="birth"
                 name="birth"
                 placeholder="Date of birth"
-                value={formState.birth}
+                value={format}
                 onChange={handleChange}
                 onFocus={() => setIsDateOpen(true)}
                 // onBlur={() => setIsDateOpen(false)}
@@ -124,10 +140,12 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
                 required
               />
               {isDateOpen && (
-                <DatePicker
-                  selectedDay={selectedDay}
-                  setSelectedDay={setSelectedDay}
-                />
+                <DataPickerBox>
+                  <DatePicker
+                    selectedDay={selectedDay}
+                    setSelectedDay={setSelectedDay}
+                  />
+                </DataPickerBox>
               )}
             </DataPickercontainer>
           </InputBox>
