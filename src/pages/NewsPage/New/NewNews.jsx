@@ -9,9 +9,6 @@ import { NewsCardContainer } from '../NewsCard/NewsCard.styled.js';
 
 import NoticesSearch from '../../../components/NoticesPageComponents/NoticesSearch/NoticesSearch';
 import NoticesPaginationButtons from '../../../components/NoticesPageComponents/NoticesPaginationButtons/NoticesPaginationButtons';
-import { ContainerStyled } from '../../../components/common/Container/Container.styled.jsx';
-// import FriendList from '../../../components/OurFriends/FriendList/FriendList.jsx';
-import { SectionStyled } from '../../../components/common/Section/Section.styled.jsx';
 
 const NewNewsPage = () => {
   const [query, setQuery] = useState('');
@@ -59,15 +56,7 @@ const NewNewsPage = () => {
     const fetchNews = async (page, limit) => {
       try {
         const response = await getNews(page, limit);
-
-        const result = response.data;
-        const sortedResult = result.sort((a, b) => {
-          const fresh = new Date(a.date).getTime();
-          const old = new Date(b.date).getTime();
-          return old - fresh;
-        });
-        setNews(sortedResult);
-        // setNews(response.data);
+        setNews(response.data);
         setTotalPages(response.totalPages);
       } catch (error) {
         toast.error(error.message);
@@ -85,26 +74,22 @@ const NewNewsPage = () => {
 
   return (
     <>
-      <SectionStyled>
-        <ContainerStyled>
-          <TitleStyled>News</TitleStyled>
-          <NoticesSearch onSubmit={searchNews} />
-          <NewsCardContainer className="news-container">
-            {news.map(newsItem => (
-              <NewsCard key={newsItem._id} news={newsItem} />
-            ))}
-          </NewsCardContainer>
+      <TitleStyled>News</TitleStyled>
+      <NoticesSearch onSubmit={searchNews} />
+      <NewsCardContainer className="news-container">
+        {news.map(newsItem => (
+          <NewsCard key={newsItem._id} news={newsItem} />
+        ))}
+      </NewsCardContainer>
 
-          {!news.length || (
-            <NoticesPaginationButtons
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={setPage}
-            />
-          )}
-          {news.length === 0 && <p>not found</p>}
-        </ContainerStyled>
-      </SectionStyled>
+      {!news.length || (
+        <NoticesPaginationButtons
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      )}
+      {news.length === 0 && <p>not found</p>}
     </>
   );
 };
