@@ -3,6 +3,9 @@ import { getNews, getNewsSerch } from '../../services/newsApi';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
+import { ContainerStyled } from '../../components/common/Container/Container.styled';
+import { SectionStyled } from '../../components/common/Section/Section.styled.jsx';
+
 import { TitleStyled } from './../../components/common/Title/Title.styled.js';
 import { NewsCardContainer } from './NewsCard/NewsCard.styled.js';
 
@@ -73,24 +76,26 @@ const NewNewsPage = () => {
   }, [query, page, limit, isWideScreen]);
 
   return (
-    <>
-      <TitleStyled>News</TitleStyled>
-      <NoticesSearch onSubmit={searchNews} />
-      <NewsCardContainer className="news-container">
-        {news.map(newsItem => (
-          <NewsCard key={newsItem._id} news={newsItem} />
-        ))}
-      </NewsCardContainer>
+    <SectionStyled>
+      <ContainerStyled>
+        <TitleStyled>News</TitleStyled>
+        <NoticesSearch onSubmit={searchNews} />
+        <NewsCardContainer className="news-container">
+          {news.map(newsItem => (
+            <NewsCard key={newsItem._id} news={newsItem} />
+          ))}
+        </NewsCardContainer>
 
-      {!news.length || (
-        <NoticesPaginationButtons
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={setPage}
-        />
-      )}
-      {news.length === 0 && <p>not found</p>}
-    </>
+        {!news.length || (
+          <NoticesPaginationButtons
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+          />
+        )}
+        {news.length === 0 && <p>not found</p>}
+      </ContainerStyled>
+    </SectionStyled>
   );
 };
 
