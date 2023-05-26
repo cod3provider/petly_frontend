@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../../utils/theme';
+import { HiOutlinePlus } from 'react-icons/hi';
 
 export const Button = styled.button`
   position: relative;
@@ -9,10 +10,19 @@ export const Button = styled.button`
   gap: 8px;
   min-width: 129px;
   max-height: 40px;
-  padding: 5px 16px;
-  font-family: Manrope-SemiBold;
+  //padding: 5px 16px;
+  padding: 10px 15px;
+  //font-family: Manrope-SemiBold;
   font-size: 16px;
-  color: rgb(253, 247, 242);
+  //color: rgb(253, 247, 242);
+
+  font-weight: 500;
+  line-height: 1.375;
+  letter-spacing: 0.04em;
+  color: #FEF9F9;
+  
+  
+  
   background-color: rgb(84, 173, 255);
   border-width: 0px;
   border-color: rgb(84, 173, 255);
@@ -50,6 +60,20 @@ export const Button = styled.button`
   }
 `;
 
+export const AddPetBtnIcon = styled(HiOutlinePlus)`
+    color: #ffffff;
+    width: 15px;
+    height: 15px;
+
+    @media(${theme.breakpoints.tablet.media}){
+        margin-left: 8px;
+    }
+
+    @media(${theme.breakpoints.desktop.media}){
+        margin-left: 8px;
+    }
+`;
+
 export const PetsWrap = styled.div`
   //width: 280px;
   width: 100%;
@@ -62,7 +86,7 @@ export const PetsWrap = styled.div`
 
 export const BtnWrap = styled.div`
   display: flex;
-  -webkit-box-align: center;
+  //-webkit-box-align: center;
   align-items: baseline;
   -webkit-box-pack: justify;
   justify-content: space-between;

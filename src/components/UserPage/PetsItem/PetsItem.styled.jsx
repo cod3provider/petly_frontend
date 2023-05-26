@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from '../../../utils/theme.jsx';
 // import { theme } from '../../../utils/theme';
 
 export const Text = styled.p`
@@ -14,18 +15,20 @@ export const Text = styled.p`
 
 export const TextWrap = styled.div`
   display: flex;
-  margin-bottom: 12px;
+  gap: 10px;
+  //margin-bottom: 12px;
 
   @media screen and (min-width: 768px) {
-    margin-bottom: 16px;
+    //margin-bottom: 16px;
   }
 `;
 
 export const Image = styled.img`
   width: 240px;
   height: 240px;
-  margin: 0px auto 20px;
+  //margin: 0px auto 20px;
   border-radius: 20px;
+  
 
   @media screen and (min-width: 768px) {
     width: 128px;
@@ -41,17 +44,26 @@ export const Icon = styled.div`
 `;
 
 export const Item = styled.li`
-  padding: 20px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+  padding: 15px 20px 40px;
   margin-bottom: 20px;
   background: rgb(255, 255, 255);
   box-shadow: rgba(136, 198, 253, 0.19) 3px 8px 14px;
   border-radius: 20px;
   width: 100%;
 
+
   @media screen and (min-width: 768px) {
     display: flex;
-    gap: 20px;
+    flex-direction: row;
     padding: 20px;
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    gap: 30px;
   }
 `;
 
@@ -84,3 +96,18 @@ export const BtnWrap = styled.div`
   -webkit-box-pack: justify;
   justify-content: space-between;
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+
+  @media ${theme.breakpoints.tablet.media} {
+    gap: 20px;
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    gap: 10px;
+  }
+`

@@ -3,7 +3,7 @@ import { TfiClose } from 'react-icons/tfi';
 import { theme } from '../../utils/theme.jsx';
 
 export const CloseIcons = styled(TfiClose)`
-  padding: 20px 0;
+  //padding: 20px 0;
   width: 24px;
   height: 24px;
   cursor: pointer;
