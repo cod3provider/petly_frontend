@@ -133,10 +133,10 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
                 setCategory("sell");
                 break;
             case "lostFound":
-                setCategory("lost-found");
+                setCategory("lost/found");
                 break;
             case "inGoodHands":
-                setCategory("for-free");
+                setCategory("in good hands");
                 break;
             case "favorite":
                 setCategory("favorite");
