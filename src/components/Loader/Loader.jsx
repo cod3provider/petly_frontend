@@ -3,8 +3,8 @@ import { Hearts } from 'react-loader-spinner';
 export const Loader = () => {
   return (
     <Hearts
-      height="200"
-      width="200"
+      height="250"
+      width="250"
       color="#FFC107"
       ariaLabel="hearts-loading"
       visible={true}
