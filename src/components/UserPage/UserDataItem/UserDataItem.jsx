@@ -77,7 +77,7 @@ const UserDataItem = () => {
         day: '2-digit',
       };
       const formatDate = newDate.toLocaleDateString('de-DE', options);
-      console.log(formatDate);
+      // console.log(formatDate);
       setState(prev => ({ ...prev, birthday: formatDate }));
       return;
     }
@@ -88,7 +88,7 @@ const UserDataItem = () => {
       day: '2-digit',
     };
     const formatDate = newDate.toLocaleDateString('de-DE', options);
-    console.log(formatDate);
+    // console.log(formatDate);
     const userBirthday = selectedDay;
     dispatch(updateCurrentUser({ birthday: userBirthday }));
     setData({ ...data, birthday: formatDate });

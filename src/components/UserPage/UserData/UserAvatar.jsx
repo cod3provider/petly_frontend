@@ -2,10 +2,18 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAvatar } from '../../../redux/auth/authOperations';
 import { getUser } from '../../../redux/auth/authSelectors';
-import { ConfirmBtn, FormThumb, ImageDef, Input, InputWrap, Label } from './UserData.styled';
+import {
+  ConfirmBtn,
+  FormThumb,
+  ImageDef,
+  Input,
+  InputWrap,
+  Label,
+  Confirm,
+} from './UserData.styled';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { AiOutlineCheck } from 'react-icons/ai';
-
+import { theme } from '../../../utils/theme';
 
 const UserData = () => {
   const user = useSelector(getUser);
@@ -35,19 +43,26 @@ const UserData = () => {
         />
         {!photoEdit ? (
           <InputWrap>
-            <AiOutlineCamera />
             <Label htmlFor="photo">
+              <AiOutlineCamera
+                style={{ marginRight: '11px' }}
+                size="24px"
+                color={theme.baseColors.accentButtonColor}
+              />
               <Input name="photo" type="file" onChange={photoPrewiew} />
               <span>Edit photo</span>
             </Label>
           </InputWrap>
         ) : (
-          <div>
+          <Confirm>
             <ConfirmBtn type="button" onClick={changePhoto}>
-              <AiOutlineCheck />
+              <AiOutlineCheck                 
+                style={{ marginRight: '11px' }}
+                size="24px"
+                color={theme.baseColors.accentButtonColor}/>
               <span>Confirm</span>
             </ConfirmBtn>
-          </div>
+          </Confirm>
         )}
       </div>
     </FormThumb>
