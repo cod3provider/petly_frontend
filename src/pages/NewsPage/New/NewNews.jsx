@@ -78,7 +78,7 @@ const NewNewsPage = () => {
       <NoticesSearch onSubmit={searchNews} />
       <NewsCardContainer className="news-container">
         {news.map(newsItem => (
-          <NewsCard key={newsItem.id} news={newsItem} />
+          <NewsCard key={newsItem._id} news={newsItem} />
         ))}
       </NewsCardContainer>
 

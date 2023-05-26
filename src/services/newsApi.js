@@ -13,14 +13,10 @@ export const getNewsSerch = async (query, page, limit) => {
     },
   });
 
-  console.log('data: ', data);
   return data;
 };
 
 export const getNews = async (page, limit) => {
-  console.log('page: ', page);
-  console.log('limit: ', limit);
-
   const { data } = await instance.get(`/`, {
     params: {
       page,
