@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form } from 'formik';
+import { Form, Field } from 'formik';
 
 import { theme } from '../../../utils/theme';
 // import { IoPawOutline } from 'react-icons/io5';
@@ -48,7 +48,7 @@ export const LabelStyle = styled(`label`)`
     margin-bottom: 8px;
   }
 `;
-export const InputStyle = styled('input')`
+export const InputStyle = styled(Field)`
   position: relative;
   width: 100%;
 
@@ -83,4 +83,11 @@ export const InputStyle = styled('input')`
 
 export const DataPickercontainer = styled.div`
   position: relative;
+`;
+
+export const DataPickerBox = styled.div`
+  position: absolute;
+  z-index: 999;
+  /* top: 0%; */
+  /* left: 15%; */
 `;
