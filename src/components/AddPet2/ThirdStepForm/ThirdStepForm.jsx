@@ -96,7 +96,7 @@ const ThirdStepForm = ({
         postLine = '/notices';
         formData.append('comment', formState.comments);
         formData.append('category', state.type);
-        formData.append('title', state.titlePet);
+        formData.append('title', state.titlePet || ' ');
         formData.append('name', state.namePet);
         formData.append('birthday', state.birth);
         formData.append('breed', state.breed);
