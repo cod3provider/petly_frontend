@@ -154,12 +154,13 @@ export const NoticeCategoryItemMoreButton = styled.button`
     margin-left: auto;
     margin-right: auto;
     transition: ${theme.transition.color};
-    transition: border-color 250ms linear;
+    transition: ${theme.transition.bg};
 
     &:hover,
     &:focus{
-        border-color: #9BD0FF;
-        color: #9BD0FF;
+        border: none;
+        background: ${theme.baseColors.buttonHoverBgColor};
+        color: ${theme.baseColors.buttonTextColor};
     }
 `;
 
