@@ -44,6 +44,7 @@ export const ModalNoticeModal= styled.div`
 export const ModalNoticeCloseButton= styled.button`
     position: absolute;
     display: flex;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     background: #ffffff;
@@ -51,6 +52,14 @@ export const ModalNoticeCloseButton= styled.button`
     top: 12px;
     right: 12px;
     &:focus{
+        outline: none;
+    }
+
+    transition: ${theme.transition.bg};
+
+    &:hover,
+    &:focus{
+        background: #CCE4FB;
         outline: none;
     }
 
@@ -257,6 +266,15 @@ export const ModalNoticePhoneLink = styled.a`
     @media(${theme.breakpoints.desktop.media}){
         width: 129px;
     }
+    transition: ${theme.transition.color};
+    transition: border-color 250ms linear;
+
+    &:hover,
+    &:focus{
+        color: #CCE4FB;
+        border-color: #CCE4FB;
+
+    }
 `;
 
 export const ModalNoticeFavoriteButton = styled.button`
@@ -280,6 +298,12 @@ export const ModalNoticeFavoriteButton = styled.button`
 
     @media(${theme.breakpoints.desktop.media}){
         width: 129px;
+    }
+    transition: ${theme.transition.bg};
+
+    &:hover,
+    &:focus{
+        background: ${theme.baseColors.buttonHoverBgColor};
     }
 `;
 
@@ -331,4 +355,10 @@ export const ModalNoticePhotoListContainer = styled.div`
 export const ModalNoticeContactLink = styled.a`
     text-decoration-line: underline;
     color: ${theme.baseColors.accentYellow};
+    transition: ${theme.transition.color};
+
+    &:hover,
+    &:focus{
+        color: ${theme.baseColors.accentColor};
+    }
 `;

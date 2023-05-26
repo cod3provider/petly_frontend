@@ -46,10 +46,14 @@ export const NoticesPaginationArrowButton = styled.button`
     justify-content: center;
     cursor: pointer;
     border: 1px solid ${theme.baseColors.filterNonActiveBgColor};
-
+    transition: ${theme.transition.color};
+    transition: ${theme.transition.bg};
     &:focus,
     &:hover{
         outline: none;
+        color: #9BD0FF;
+        background: #9BD0FF;
+        border: none;
     }
 `;
 
@@ -64,12 +68,13 @@ export const NoticesPaginationPageButton = styled.button`
     justify-content: center;
     cursor: pointer;
     color: ${theme.baseColors.filterNonActiveBgColor};
-
+    transition: ${theme.transition.color};
+    transition: ${theme.transition.bg};
     &:focus,
     &:hover{
         outline: none;
         color: ${theme.baseColors.buttonTextColor};
-        background: ${theme.baseColors.accentButtonColor};
+        background: ${theme.baseColors.buttonHoverBgColor};
         border: none;
     }
 `;

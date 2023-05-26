@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 import {NoticesCategoriesListList} from "./NoticesCategoriesList.styled"
 
-const NoticesCategoriesList = ({ items, openModal, openDeleteModal, user, isLoggedIn }) => {
+const NoticesCategoriesList = ({ items, openModal, openDeleteModal, user, isLoggedIn, onFavoriteChange }) => {
     return <NoticesCategoriesListList>
         {items.map(item => (<NoticeCategoryItem
             key={item._id}
@@ -11,6 +11,7 @@ const NoticesCategoriesList = ({ items, openModal, openDeleteModal, user, isLogg
             user={user}
             isLoggedIn={isLoggedIn}
             openDeleteModal={openDeleteModal}
+            onFavoriteChange={onFavoriteChange}
         />))}
     </NoticesCategoriesListList>;
 }
@@ -23,4 +24,5 @@ NoticesCategoriesList.propTypes = {
     openDeleteModal: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
+    onFavoriteChange: PropTypes.func.isRequired,
 }

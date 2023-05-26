@@ -14,16 +14,18 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
-
+import { getUser } from '../../../redux/auth/authSelectors';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import React from 'react';
 
 
-const ModalNotice = ({ details, close, isLoggedIn, user }) => {
+const ModalNotice = ({ details, close, isLoggedIn, user, onFavoriteChange }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [category, setCategory] = useState(details.category);
     const dispatch = useDispatch();
     const notify = () => toast.info("You need to be logged in for this action");
+    user = useSelector(getUser);
 
     const checkFavorite = (user, id) => {
         if (user.favorite) {
@@ -44,23 +46,22 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
         if (isLoggedIn) {
             const fetchAddFavorite = async (id) => {
                 try {
-                    console.log("adding");
                     const response = await dispatch(addFavorite(id));
                     if (response.type === '/addFavorite/fulfilled') {
                         setIsFavorite(true);
+                        onFavoriteChange();
                     }
                 }
                 catch (error) {
-                    console.log(error);
                     toast.error(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
                 try {
-                    console.log("removing");
                     const response = await dispatch(removeFavorite(id));
                     if (response.type === '/removeFavorite/fulfilled') {
                         setIsFavorite(false);
+                        onFavoriteChange();
                     }
                 }
                 catch (error) {
@@ -154,9 +155,9 @@ const ModalNotice = ({ details, close, isLoggedIn, user }) => {
                         <ModalNoticeListTitle>The sex:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>{details.sex}</ModalNoticeListDetails>
                         <ModalNoticeListTitle>Email:</ModalNoticeListTitle>
-                        <ModalNoticeListDetails>
+                        {!details.owner.email || <><ModalNoticeListDetails>
                             <ModalNoticeContactLink href={`mailto:${details.owner.email}`} >{details.owner.email}</ModalNoticeContactLink>
-                        </ModalNoticeListDetails>
+                        </ModalNoticeListDetails></>}
                         {!details.owner.phone || <> <ModalNoticeListTitle>Phone:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
                             <ModalNoticeContactLink href={`tel:${details.owner.phone}`} >{details.owner.phone}</ModalNoticeContactLink>
@@ -193,6 +194,7 @@ ModalNotice.propTypes = {
     close: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
+    onFavoriteChange: PropTypes.func.isRequired,
 }
 
 export default ModalNotice;

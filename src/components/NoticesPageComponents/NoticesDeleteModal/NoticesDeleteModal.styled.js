@@ -50,8 +50,12 @@ export const NoticesDeleteModalCloseButton= styled.button`
     padding: 0;
     top: 12px;
     right: 12px;
+    transition: ${theme.transition.bg};
+
+    &:hover,
     &:focus{
         outline: none;
+        background: #CCE4FB;
     }
 
     @media(${theme.breakpoints.tablet.media}){
@@ -134,6 +138,11 @@ export const NoticesDeleteModalYesButton = styled.button`
     letter-spacing: 0.04em;
     cursor: pointer;
 
+    &:hover,
+    &:focus{
+        background: ${theme.baseColors.buttonHoverBgColor};
+    }
+
     @media(${theme.breakpoints.tablet.media}){
         width: 129px;
     }
@@ -158,6 +167,14 @@ export const NoticesDeleteModalCancelButton = styled.button`
     line-height: 22px;
     letter-spacing: 0.04em;
     cursor: pointer;
+    transition: ${theme.transition.color};
+    transition: border-color 250ms linear;
+
+    &:hover,
+    &:focus{
+        color: #9BD0FF;
+        border-color: #9BD0FF;
+    }
 
     @media(${theme.breakpoints.tablet.media}){
         width: 129px;

@@ -27,14 +27,15 @@ import { useDispatch } from 'react-redux';
 
 import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
 
+
 import { useState, useEffect } from 'react';
 
 
-const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn }) => {
+const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn, onFavoriteChange }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [category, setCategory] = useState(data.category);
     const notify = () => toast.info("You need to be logged in for this action");
-
+    
     const dispatch = useDispatch();
 
     const checkFavorite = (user, id) => {
@@ -56,26 +57,23 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
         if (isLoggedIn) {
             const fetchAddFavorite = async (id) => {
                 try {
-                    console.log("adding");
                     const response = await dispatch(addFavorite(id));
-                    console.log(response);
                     if (response.type === '/addFavorite/fulfilled') {
                         setIsFavorite(true);
+                        onFavoriteChange();
                     }
 
                 }
                 catch (error) {
-                    console.log(error);
                     toast.error(error.message);
                 }
             }
             const fetchRemoveFavorite = async (id) => {
                 try {
-                    console.log("removing");
                     const response = await dispatch(removeFavorite(id));
-                    console.log(response);
                     if (response.type === '/removeFavorite/fulfilled') {
                         setIsFavorite(false);
+                        onFavoriteChange();
                     }
                 }
                 catch (error) {
@@ -195,6 +193,7 @@ NoticeCategoryItem.propTypes = {
     openDeleteModal: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
+    onFavoriteChange: PropTypes.func.isRequired,
 }
 
 export default NoticeCategoryItem;

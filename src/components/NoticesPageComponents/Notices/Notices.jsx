@@ -11,6 +11,7 @@ import { NoticesContainer, NoticesContentBox, NoticesNavBox } from "../NoticesCo
 
 import { searchNoticesByName, searchNoticesByCategory } from "../../../services/noticesApi";
 import { getIsLoggedIn, getUser } from "../../../redux/auth/authSelectors";
+import { getCurrentUser } from '../../../redux/auth/authOperations';
 
 import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
@@ -25,7 +26,6 @@ const NoticesPage = () => {
     const { categoryName } = useParams();
 
     let isLoggedIn = useSelector(getIsLoggedIn);
-    let user = useSelector(getUser);
   
     
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,9 +36,11 @@ const NoticesPage = () => {
     const [notices, setNotices] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1280);
+    const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1280);
     const [limit, setLimit] = useState(isWideScreen ? "12" : "10" );
     const [category, setCategory] = useState("sell");
+    const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(true);
+    const [user, setUser] = useState(useSelector(getUser));
 
     const dispatch = useDispatch();
 
@@ -65,9 +67,27 @@ const NoticesPage = () => {
         setPage(1);
     }, [categoryName])
 
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await dispatch(getCurrentUser());
+                setUser(response.payload);
+                            
+            }
+            catch (error) {
+                toast.error(error.message);
+            }
+        }
+        if (favoriteBtnActivated) {
+            fetchUser();
+            setFavoriteBtnActivated(false);
+        }
+    }, [favoriteBtnActivated]);
+
     useEffect(() => {
         const resizeHandler = () => {
-            setIsWideScreen(window.innerWidth > 1280);
+            setIsWideScreen(window.innerWidth >= 1280);
         };
 
         resizeHandler();
@@ -88,6 +108,10 @@ const NoticesPage = () => {
 
     const searchNotices = (query) => {
         setQuery(query);
+    }
+
+    const onFavoriteChange = () => {
+        setFavoriteBtnActivated(true);
     }
 
     useEffect(() => {
@@ -118,8 +142,15 @@ const NoticesPage = () => {
                     if (category === "favorite" || category === "created") {
                         const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
                         if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
-                            setNotices(response.payload);
-                            setTotalPages(4);
+                            if (category === "favorite") {
+                                setNotices(response.payload);
+                                setTotalPages(1);
+                            }
+                            if (category === "created") {
+                                setNotices(response.payload.data);
+                                setTotalPages(response.payload.totalPages);
+                            }
+                            
                         } else {
                             setNotices([]);
                         }
@@ -131,7 +162,7 @@ const NoticesPage = () => {
             }
             fetchNoticesByCategory();
         }
-    }, [category, page, limit, isWideScreen, query]);
+    }, [category, page, limit, isWideScreen, query, user]);
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -167,6 +198,7 @@ const NoticesPage = () => {
                     openModal={openModal}
                     openDeleteModal={openDeleteModal}
                     user={user}
+                    onFavoriteChange={onFavoriteChange}
                     isLoggedIn={isLoggedIn} /> : <NoPets>No pets in this category</NoPets>}
                 {!notices.length || <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
                 {isModalOpen && <ModalNotice
@@ -174,6 +206,7 @@ const NoticesPage = () => {
                     details={modalInfo}
                     isLoggedIn={isLoggedIn}
                     user={user}
+                    onFavoriteChange={onFavoriteChange}
                 />}
                 {isDeleteModalOpen && <NoticesDeleteModal
                     close={closeDeleteModal}
