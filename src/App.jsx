@@ -28,7 +28,6 @@ import { ROUTES } from './utils/keys.js';
 // import Spinner from './pages/Spinner/Spinner';
 
 import './App.css';
-import NewNewsPage from './pages/NewsPage/New/NewNews.jsx';
 
 const Spinner = () => {
   return <></>;
@@ -51,7 +50,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-            <Route path={ROUTES.NEWS} element={<NewNewsPage />} />
+            <Route path={ROUTES.NEWS} element={<NewsPage />} />
             <Route path={ROUTES.NOTICES} element={<NoticesPage />} />
             <Route path={ROUTES.FRIENDS} element={<OurFriendsPage />} />
             <Route
