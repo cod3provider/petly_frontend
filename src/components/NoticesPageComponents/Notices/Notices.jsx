@@ -39,7 +39,8 @@ const NoticesPage = () => {
     const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1280);
     const [limit, setLimit] = useState(isWideScreen ? "12" : "10" );
     const [category, setCategory] = useState("sell");
-    const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(true);
+    const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(false);
+    const [deleteBtnActivated, setDeleteBtnActivated] = useState(false);
     const [user, setUser] = useState(useSelector(getUser));
 
     const dispatch = useDispatch();
@@ -114,6 +115,10 @@ const NoticesPage = () => {
         setFavoriteBtnActivated(true);
     }
 
+    const onDelete = () => {
+        setDeleteBtnActivated(true);
+    }
+
     useEffect(() => {
         const fetchNoticesByName = async (category, query, page, limit) => {
             try {
@@ -159,10 +164,13 @@ const NoticesPage = () => {
                 catch (error) {
                     toast.error(error.message);
                 }
+                if (setFavoriteBtnActivated) {
+                    setDeleteBtnActivated(false);
+                }
             }
             fetchNoticesByCategory();
         }
-    }, [category, page, limit, isWideScreen, query, user]);
+    }, [category, page, limit, isWideScreen, query, user, deleteBtnActivated]);
 
     const openModal = (data) => {
         setIsModalOpen(true);
@@ -211,6 +219,7 @@ const NoticesPage = () => {
                 {isDeleteModalOpen && <NoticesDeleteModal
                     close={closeDeleteModal}
                     details={deleteModalInfo}
+                    onDelete={onDelete}
                 />}
             </NoticesContentBox>
         </NoticesContainer>

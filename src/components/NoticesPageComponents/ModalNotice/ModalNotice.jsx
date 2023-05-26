@@ -154,10 +154,10 @@ const ModalNotice = ({ details, close, isLoggedIn, user, onFavoriteChange }) => 
                         <ModalNoticeListDetails>{details.location}</ModalNoticeListDetails>
                         <ModalNoticeListTitle>The sex:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>{details.sex}</ModalNoticeListDetails>
-                        <ModalNoticeListTitle>Email:</ModalNoticeListTitle>
-                        {!details.owner.email || <><ModalNoticeListDetails>
-                            <ModalNoticeContactLink href={`mailto:${details.owner.email}`} >{details.owner.email}</ModalNoticeContactLink>
-                        </ModalNoticeListDetails></>}
+                        {!details.owner.email || <><ModalNoticeListTitle>Email:</ModalNoticeListTitle>
+                            <ModalNoticeListDetails>
+                                <ModalNoticeContactLink href={`mailto:${details.owner.email}`} >{details.owner.email}</ModalNoticeContactLink>
+                            </ModalNoticeListDetails></>}
                         {!details.owner.phone || <> <ModalNoticeListTitle>Phone:</ModalNoticeListTitle>
                         <ModalNoticeListDetails>
                             <ModalNoticeContactLink href={`tel:${details.owner.phone}`} >{details.owner.phone}</ModalNoticeContactLink>
