@@ -1,48 +1,47 @@
 import styled from 'styled-components';
 
 import { theme } from '../../utils/theme.jsx';
+import { SectionStyled } from '../../components/common/Section/Section.styled.jsx';
 
 export const MainTitle = styled.h1`
-  position: absolute;
-  top: -100px;
   margin: 0 auto;
-  padding-top: 60px;
   width: 280px;
-  font-weight: 700;
+  font-family: 'Manrope', sans-serif;
   font-size: ${theme.fontSizes.x};
+  font-weight: 700;
   line-height: 1.38;
   color: ${theme.baseColors.titleColor};
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-
-  @media (min-width: ${theme.breakpoints.tablet.width}) {
-    padding-top: 80px;
-    width: 580px;
+  
+  
+  @media ${theme.breakpoints.tablet.media} {
+    margin-left: 30px;
+    width: 590px;
+    text-align: left;
     font-size: ${theme.fontSizes.MainTitle};
     line-height: 1.47;
   }
 
   @media ${theme.breakpoints.desktop.media} {
-    //padding-top: 190px;
-    top: 100px;
-    width: 550px;
-    text-align: start;
-    font-weight: 800;
+    padding-top: 160px;
+    margin-left: 15px;
+    width: 500px;
+    text-align: left;
+    font-size: ${theme.fontSizes.MainTitle};
+    line-height: 1.3;
   }
 `;
 
 export const Wrap = styled.div`
   position: relative;
-  margin: 91px auto 0;
   width: 320px;
   height: 560px;
+  margin: 0 auto;
+  
   @media (${theme.breakpoints.tablet.media}) {
     width: 768px;
-    height: 1120px;
+    height: 1125px;
   }
-
-  @media ${theme.breakpoints.desktop.media} {
-    padding: 0 15px;
+  @media (${theme.breakpoints.desktop.media}) {
     width: 1280px;
     height: 700px;
   }
@@ -51,19 +50,30 @@ export const Wrap = styled.div`
 export const HeroImage = styled.img`
   position: absolute;
   width: 550px;
-  top: 168px;
+  top: 120px;
   left: -115px;
 
   @media (${theme.breakpoints.tablet.media}) {
     width: 900px;
-    top: 305px;
+    top: 200px;
     left: -65px;
   }
 
   @media (${theme.breakpoints.desktop.media}) {
     width: 900px;
-    top: 305px;
-    //top: 30px;
+    top: 0;
     left: 365px;
   }
 `;
+
+export const HomeSection= styled(SectionStyled)`
+  padding-top: 60px;
+  
+  @media ${theme.breakpoints.tablet.media} {
+    padding-top: 40px;
+  }
+
+  @media ${theme.breakpoints.desktop.media} {
+    padding-top: 30px;
+  }
+`

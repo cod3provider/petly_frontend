@@ -8,6 +8,7 @@ import { ContainerStyled } from '../../components/common/Container/Container.sty
 import FriendList from '../../components/OurFriends/FriendList/FriendList.jsx';
 
 import getFriends from '../../utils/getFriends.js';
+import { SectionStyled } from '../../components/common/Section/Section.styled.jsx';
 
 
 const Friends = () => {
@@ -24,9 +25,11 @@ const Friends = () => {
 
 
   return (
-    <ContainerStyled>
-      <FriendList partners={partners} />
-    </ContainerStyled>
+    <SectionStyled>
+      <ContainerStyled>
+        <FriendList partners={partners} />
+      </ContainerStyled>
+    </SectionStyled>
   );
 };
 
