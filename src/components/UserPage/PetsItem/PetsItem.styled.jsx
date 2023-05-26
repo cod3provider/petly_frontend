@@ -7,6 +7,7 @@ export const Text = styled.p`
   font-size: 14px;
   line-height: 1.36;
   letter-spacing: 0.04em;
+  text-align: left;
 
   @media screen and (min-width: 768px) {
     font-weight: 600;
@@ -16,6 +17,7 @@ export const Text = styled.p`
 export const TextWrap = styled.div`
   display: flex;
   gap: 10px;
+  //text-align: left;
   //margin-bottom: 12px;
 
   @media screen and (min-width: 768px) {
