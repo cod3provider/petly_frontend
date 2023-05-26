@@ -7,7 +7,7 @@ import {
   BtnWrap,
   Image,
   TextWrap,
-  Text,
+  Text, Wrapper,
 } from './PetsItem.styled';
 
 import { TbTrash } from 'react-icons/tb';
@@ -38,7 +38,7 @@ const PetsItem = ({ pet }) => {
           width="240"
           height="240"
         />
-        <div>
+        <Wrapper>
           <BtnWrap>
             <TextWrap>
               <Text>
@@ -72,7 +72,7 @@ const PetsItem = ({ pet }) => {
               Comments: <Span>{pet.comments}</Span>
             </Text>
           </TextWrap>
-        </div>
+        </Wrapper>
       </Item>
     </>
   );

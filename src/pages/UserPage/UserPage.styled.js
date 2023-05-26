@@ -28,12 +28,12 @@ export const Title = styled.h2`
   color: #000000;
   letter-spacing: 0.04em;
   line-height: 1.35;
-  margin-bottom: 18px;
+  //margin-bottom: 18px;
 
   @media ${theme.breakpoints.tablet.media} {
     font-size: 28px;
     color: #111111;
-    margin: 60px 0px 24px;
+    //margin: 60px 0px 24px;
   }
 `;
 

@@ -1,29 +1,36 @@
-import NoticesSearch from "../NoticesSearch/NoticesSearch";
-import NoticesFilters from "../NoticesFilters/NoticesFilters";
-import NoticesCategoriesNav from "../NoticesCategoriesNav/NoticesCategoriesNav";
-import NoticesCategoriesList from "../NoticesCategoriesList/NoticesCategoriesList";
-import AddPetButton from "../AddPetButton/AddPetButton";
-import NoticesTitle from "../NoticesTitle/NoticesTitle";
-import ModalNotice from "../ModalNotice/ModalNotice";
-import NoticesDeleteModal from "../NoticesDeleteModal/NoticesDeleteModal";
-import NoticesPaginationButtons from "../NoticesPaginationButtons/NoticesPaginationButtons";
-import { NoticesContainer, NoticesContentBox, NoticesNavBox } from "../NoticesContainers/NoticesContainers.styled";
+import NoticesSearch from '../NoticesSearch/NoticesSearch';
+import NoticesFilters from '../NoticesFilters/NoticesFilters';
+import NoticesCategoriesNav from '../NoticesCategoriesNav/NoticesCategoriesNav';
+import NoticesCategoriesList from '../NoticesCategoriesList/NoticesCategoriesList';
+import AddPetButton from '../AddPetButton/AddPetButton';
+import NoticesTitle from '../NoticesTitle/NoticesTitle';
+import ModalNotice from '../ModalNotice/ModalNotice';
+import NoticesDeleteModal from '../NoticesDeleteModal/NoticesDeleteModal';
+import NoticesPaginationButtons from '../NoticesPaginationButtons/NoticesPaginationButtons';
+import {
+  NoticesContainer,
+  NoticesContentBox,
+  NoticesNavBox,
+} from '../NoticesContainers/NoticesContainers.styled';
 
-import { searchNoticesByName, searchNoticesByCategory } from "../../../services/noticesApi";
-import { getIsLoggedIn, getUser } from "../../../redux/auth/authSelectors";
+import {
+  searchNoticesByName,
+  searchNoticesByCategory,
+} from '../../../services/noticesApi';
+import { getIsLoggedIn, getUser } from '../../../redux/auth/authSelectors';
 import { getCurrentUser } from '../../../redux/auth/authOperations';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 import { getNoticesByPrivateCategory } from '../../../redux/notices/noticesOperations';
-import { NoPets } from "./Notices.styled";
+import { NoPets } from './Notices.styled';
 
 const NoticesPage = () => {
-    const { categoryName } = useParams();
+  const { categoryName } = useParams();
 
     let isLoggedIn = useSelector(getIsLoggedIn);
   
@@ -43,77 +50,73 @@ const NoticesPage = () => {
     const [deleteBtnActivated, setDeleteBtnActivated] = useState(false);
     const [user, setUser] = useState(useSelector(getUser));
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        switch (categoryName) {
-            case "sell":
-                setCategory("sell");
-                break;
-            case "lost-found":
-                setCategory("lostFound");
-                break;
-            case "for-free":
-                setCategory("inGoodHands");
-                break;
-            case "favorite":
-                setCategory("favorite");
-                break;
-            case "own":
-                setCategory("created");
-                break;
-            default:
-                setCategory(null);
-        }
-        setPage(1);
-    }, [categoryName])
+  useEffect(() => {
+    switch (categoryName) {
+      case 'sell':
+        setCategory('sell');
+        break;
+      case 'lost-found':
+        setCategory('lostFound');
+        break;
+      case 'for-free':
+        setCategory('inGoodHands');
+        break;
+      case 'favorite':
+        setCategory('favorite');
+        break;
+      case 'own':
+        setCategory('created');
+        break;
+      default:
+        setCategory(null);
+    }
+    setPage(1);
+  }, [categoryName]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await dispatch(getCurrentUser());
+        setUser(response.payload);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    if (favoriteBtnActivated) {
+      fetchUser();
+      setFavoriteBtnActivated(false);
+    }
+  }, [favoriteBtnActivated]);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await dispatch(getCurrentUser());
-                setUser(response.payload);
-                            
-            }
-            catch (error) {
-                toast.error(error.message);
-            }
-        }
-        if (favoriteBtnActivated) {
-            fetchUser();
-            setFavoriteBtnActivated(false);
-        }
-    }, [favoriteBtnActivated]);
+  useEffect(() => {
+    const resizeHandler = () => {
+      setIsWideScreen(window.innerWidth >= 1280);
+    };
 
-    useEffect(() => {
-        const resizeHandler = () => {
-            setIsWideScreen(window.innerWidth >= 1280);
-        };
+    resizeHandler();
 
-        resizeHandler();
-
-        if (isWideScreen) {
-            setLimit("12");
-        } else {
-            setLimit("10");
-        }
-
-        window.addEventListener('resize', resizeHandler);
-
-        return () => {
-            window.removeEventListener('resize', resizeHandler);
-        };
-    }, [isWideScreen]);
-
-
-    const searchNotices = (query) => {
-        setQuery(query);
+    if (isWideScreen) {
+      setLimit('12');
+    } else {
+      setLimit('10');
     }
 
-    const onFavoriteChange = () => {
-        setFavoriteBtnActivated(true);
-    }
+    window.addEventListener('resize', resizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [isWideScreen]);
+
+  const searchNotices = query => {
+    setQuery(query);
+  };
+
+  const onFavoriteChange = () => {
+    setFavoriteBtnActivated(true);
+  };
 
     const onDelete = () => {
         setDeleteBtnActivated(true);
@@ -172,25 +175,25 @@ const NoticesPage = () => {
         }
     }, [category, page, limit, isWideScreen, query, user, deleteBtnActivated]);
 
-    const openModal = (data) => {
-        setIsModalOpen(true);
-        setModalInfo({ ...data});
-    }
+  const openModal = data => {
+    setIsModalOpen(true);
+    setModalInfo({ ...data });
+  };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setModalInfo(null);
-    };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalInfo(null);
+  };
 
-    const openDeleteModal = (data) => {
-        setIsDeleteModalOpen(true);
-        setDeleteModalInfo({ ...data});
-    }
+  const openDeleteModal = data => {
+    setIsDeleteModalOpen(true);
+    setDeleteModalInfo({ ...data });
+  };
 
-    const closeDeleteModal = () => {
-        setIsDeleteModalOpen(false);
-        setDeleteModalInfo(null);
-    };
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setDeleteModalInfo(null);
+  };
 
     return <main>
         <NoticesContainer>
