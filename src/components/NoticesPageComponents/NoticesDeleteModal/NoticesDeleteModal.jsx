@@ -22,11 +22,9 @@ const NoticesDeleteModal = ({ details, close, onDelete }) => {
         const fetchDeleteNotice = async (id) => {
             try {
                 const response = await dispatch(deleteNotice(id));
-                console.log(response);
                 onDelete();
             }
             catch (error) {
-                console.log(error);
                 alert(error.message);
             }
         }
