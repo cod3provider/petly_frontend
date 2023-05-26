@@ -48,7 +48,7 @@ const NoticesPage = () => {
     const [category, setCategory] = useState("sell");
     const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(false);
     const [deleteBtnActivated, setDeleteBtnActivated] = useState(false);
-    const [user, setUser] = useState(useSelector(getUser));
+    const [user, setUser] = useState({});
 
   const dispatch = useDispatch();
 
@@ -75,20 +75,21 @@ const NoticesPage = () => {
     setPage(1);
   }, [categoryName]);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await dispatch(getCurrentUser());
-        setUser(response.payload);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-    if (favoriteBtnActivated) {
-      fetchUser();
-      setFavoriteBtnActivated(false);
-    }
-  }, [favoriteBtnActivated]);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await dispatch(getCurrentUser());
+                setUser(response.payload);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+        fetchUser();
+        if (favoriteBtnActivated) {
+            setFavoriteBtnActivated(false);
+        }
+    }, [favoriteBtnActivated]);
+    
 
   useEffect(() => {
     const resizeHandler = () => {
