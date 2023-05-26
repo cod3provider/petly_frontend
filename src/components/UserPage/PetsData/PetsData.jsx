@@ -13,7 +13,6 @@ import { Title } from '../../../pages/UserPage/UserPage.styled';
 
 const PetsData = () => {
   const location = useLocation();
-  console.log(location);
 
   const dispatch = useDispatch();
 
