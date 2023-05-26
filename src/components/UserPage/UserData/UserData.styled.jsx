@@ -15,9 +15,19 @@ export const MainWrap = styled.div`
 
 export const Confirm = styled.div`
   fill: none;
-  //   background-color: #bf342a;
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 25px;
+  }
 `;
 
 export const ConfirmBtn = styled.button`
@@ -145,7 +155,7 @@ export const Label = styled.label`
   width: 100%;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   cursor: pointer;
   margin: 0 auto;
 
