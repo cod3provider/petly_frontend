@@ -64,10 +64,28 @@ export const NoticesSearchButton = styled.button`
     background-color: transparent;
     border: none;
     padding: 0;
+    margin-left: 10px;
+
+    &:first-child{
+        margin-left: 0;
+    }
 
     &:focus {
        outline:none;
     }
+`;
+
+export const NoticesSearchItem = styled.li`
+    margin-left: 10px;
+
+    &:first-child{
+        margin-left: 0;
+    }
+`;
+
+export const NoticesSearchList = styled.ul`
+    display: flex;
+    align-items: center;
 `;
 
 export const NoticesSearchIcon = styled(FiSearch)`
@@ -79,5 +97,5 @@ export const NoticesSearchIcon = styled(FiSearch)`
 export const NoticesSearchClearIcon = styled(MdClear)`
     width: 24px;
     height: 24px;
-    color: ${theme.baseColors.accentButtonColor};
+    color: ${theme.baseColors.accentYellow};
 `;
