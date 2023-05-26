@@ -130,7 +130,8 @@ const NoticesPage = () => {
                 setTotalPages(response.totalPages);
             }
             catch (error) {
-                toast.error(error.message);
+                toast.error("There are no notices in this category that meet your search query");
+                setNotices([]);
             }
         }
         if (query !== '') {
