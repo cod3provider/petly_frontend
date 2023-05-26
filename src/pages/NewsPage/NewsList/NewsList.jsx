@@ -7,8 +7,11 @@ import { TitleStyled } from '../../../components/common/Title/Title.styled.js';
 import { NewsCardContainer } from '../NewsCard/NewsCard.styled.js';
 
 import getNews from '../../../utils/getNews.js';
+
 import {
-  NoticesSearchButton, NoticesSearchClearIcon, NoticesSearchForm,
+  NoticesSearchButton,
+  NoticesSearchClearIcon,
+  NoticesSearchForm,
   // NoticesSearchIcon,
   NoticesSearchInput,
 } from '../../../components/NoticesPageComponents/NoticesSearch/NoticesSearch.styled.js';
@@ -23,14 +26,12 @@ const NewsList = () => {
     try {
       const news = await getNews(searchKeyword);
       const result = news.data;
-      const sortedResult = result.sort(
-        (a, b) => {
-          const first = new Date(a.date).getTime();
-          const second = new Date(b.date).getTime();
+      const sortedResult = result.sort((a, b) => {
+        const first = new Date(a.date).getTime();
+        const second = new Date(b.date).getTime();
 
-          return second - first;
-        }
-      );
+        return second - first;
+      });
       setNews(sortedResult);
     } catch (error) {
       console.error('Failed to fetch news:', error);
@@ -44,7 +45,7 @@ const NewsList = () => {
   // const sortedNews = news.sort(
   //   (a, b) => b.date - a.date || isNaN(b.date) - isNaN(a.date)
   // );
-  const handleInputChange = (evt) => {
+  const handleInputChange = evt => {
     setSearchParams({ query: evt.currentTarget.value.toLowerCase().trim() });
     setSearch(evt.currentTarget.value.toLowerCase());
   };
@@ -59,7 +60,11 @@ const NewsList = () => {
       // news.sort(
       //   (a, b) => b.date - a.date || isNaN(b.date) - isNaN(a.date)
       // );
-      return news.filter(newsItem => newsItem.title.toLowerCase().includes(query) || newsItem.title.toLowerCase().includes(query));
+      return news.filter(
+        newsItem =>
+          newsItem.title.toLowerCase().includes(query) ||
+          newsItem.title.toLowerCase().includes(query)
+      );
     }
   };
 
@@ -73,38 +78,38 @@ const NewsList = () => {
     <>
       <TitleStyled>News</TitleStyled>
       {/*<div className="search-container">*/}
-        <NoticesSearchForm onSubmit={handleSubmit}>
-          <NoticesSearchInput
-            type="text"
-            name="query"
-            placeholder="Search news..."
-            value={query}
-            onChange={handleInputChange}
-          />
-            {!query || <NoticesSearchButton type='button' onClick={handleClearSearch}>
-              <NoticesSearchClearIcon></NoticesSearchClearIcon>
-            </NoticesSearchButton>}
-            {/*<NoticesSearchButton type='submit'>*/}
-            {/*  <NoticesSearchIcon></NoticesSearchIcon>*/}
-            {/*</NoticesSearchButton>*/}
-              {/*{search && (*/}
-              {/*  <button className="clear-search-button" onClick={handleClearSearch}>*/}
-              {/*    <i className="fa fa-times" aria-hidden="true"></i>*/}
-              {/*  </button>*/}
-              {/*)}*/}
-            {/*<button className="search-button" onClick={handleSubmit}>*/}
-            {/*  <i className="fa fa-search" aria-hidden="true"></i>*/}
-            {/*</button>*/}
-        </NoticesSearchForm>
+      <NoticesSearchForm onSubmit={handleSubmit}>
+        <NoticesSearchInput
+          type="text"
+          name="query"
+          placeholder="Search news..."
+          value={query}
+          onChange={handleInputChange}
+        />
+        {!query || (
+          <NoticesSearchButton type="button" onClick={handleClearSearch}>
+            <NoticesSearchClearIcon></NoticesSearchClearIcon>
+          </NoticesSearchButton>
+        )}
+        {/*<NoticesSearchButton type='submit'>*/}
+        {/*  <NoticesSearchIcon></NoticesSearchIcon>*/}
+        {/*</NoticesSearchButton>*/}
+        {/*{search && (*/}
+        {/*  <button className="clear-search-button" onClick={handleClearSearch}>*/}
+        {/*    <i className="fa fa-times" aria-hidden="true"></i>*/}
+        {/*  </button>*/}
+        {/*)}*/}
+        {/*<button className="search-button" onClick={handleSubmit}>*/}
+        {/*  <i className="fa fa-search" aria-hidden="true"></i>*/}
+        {/*</button>*/}
+      </NoticesSearchForm>
       {/*</div>*/}
       <NewsCardContainer className="news-container">
-        {filteredNews.map((newsItem) => (
+        {filteredNews.map(newsItem => (
           <NewsCard key={newsItem.id} news={newsItem} />
         ))}
       </NewsCardContainer>
-      {search !== '' && query && news.length === 0 && (
-          <p>not found</p>
-      )}
+      {search !== '' && query && news.length === 0 && <p>not found</p>}
     </>
   );
 };

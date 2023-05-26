@@ -21,7 +21,6 @@ const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage/NotFoundPage.jsx')
 );
 
-
 import AddPet from './components/AddPet2/AddPet2.jsx';
 
 import { ROUTES } from './utils/keys.js';
