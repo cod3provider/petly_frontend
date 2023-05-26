@@ -47,16 +47,12 @@ export const getNoticesByPrivateCategory = createAsyncThunk(
             if (value) {
                 token.set(value);
             }
-<<<<<<< Updated upstream
-            const response = await axios.get(`/notices/my/${credentials.category}`);
-=======
             const response = await axios.get(`/notices/my/${credentials.category}`, {
                 params: {
                     page: credentials.page,
                     limit: credentials.limit,
                 }
             });
->>>>>>> Stashed changes
             return response.data;
         } catch (error) {
             return rejectWithValue(error.message);
