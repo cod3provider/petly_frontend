@@ -23,6 +23,8 @@ import {
     NoticeCategoryItemButtonItem
 } from "./NoticeCategoryItem.styled";
 
+import LinesEllipsis from 'react-lines-ellipsis';
+
 import { useDispatch } from 'react-redux';
 
 import { addFavorite, removeFavorite } from '../../../redux/notices/noticesOperations';
@@ -181,7 +183,16 @@ const NoticeCategoryItem = ({ data, openModal, openDeleteModal, user, isLoggedIn
             </NoticeCategoryItemInfoList>
         </NoticeCategoryItemPhotoContainer>
         <NoticeCategoryItemTitleContainer>
-            <NoticeCategoryItemTitle>{data.title}</NoticeCategoryItemTitle>
+            <NoticeCategoryItemTitle>
+                {/*{data.title}*/}
+                <LinesEllipsis
+                  text={data.title}
+                  maxLine='2'
+                  ellipsis='...'
+                  trimRight
+                  basedOn='letters'
+                />
+            </NoticeCategoryItemTitle>
             <NoticeCategoryItemMoreButton type='button' onClick={() => openModal(data)}>Learn more</NoticeCategoryItemMoreButton>
         </NoticeCategoryItemTitleContainer>
     </NoticeCategoryItemItem>;

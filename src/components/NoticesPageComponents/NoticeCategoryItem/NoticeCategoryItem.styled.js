@@ -128,6 +128,7 @@ export const NoticeCategoryItemTitleContainer = styled.div`
 
 export const NoticeCategoryItemTitle = styled.h2`
     width: 231px;
+    min-height: 66px;
     margin-left: 4px;
     text-align: left;
     font-weight: 700;
