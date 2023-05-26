@@ -134,7 +134,7 @@ function LoginForm() {
             </AuthFormButton>
             <LinkWraper>
               <p>Don&#39;t have an account?</p>
-              <LinkStyle to="/register">Register</LinkStyle>
+              <LinkStyle to="/register"> Register</LinkStyle>
             </LinkWraper>
           </AuthForm>
         )}

@@ -65,6 +65,11 @@ export const AddPetButtonLink = styled(Link)`
         letter-spacing: 0.04em;
         padding-top: 0;
         padding-bottom: 0;
+
+        &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
+}
     }
 `;
 

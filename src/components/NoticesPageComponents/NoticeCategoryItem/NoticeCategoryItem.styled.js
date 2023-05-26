@@ -83,9 +83,11 @@ export const NoticeCategoryItemInfoItem = styled.li`
     height: 28px;
     border-radius: 16px;
 
-    &:first-child{
+     &:first-child{
         margin-left: 0;
     }
+
+      
 
     @media(${theme.breakpoints.tablet.media}){
         margin-left: 24px;
@@ -94,6 +96,11 @@ export const NoticeCategoryItemInfoItem = styled.li`
     @media(${theme.breakpoints.desktop.media}){
         margin-left: 12px;
     }
+
+      &:hover,
+  &:focus {
+    background: ${theme.baseColors.accentColor};
+    
 `;
 
 export const NoticeCategoryItemInfoText = styled.p`
@@ -104,6 +111,9 @@ export const NoticeCategoryItemInfoText = styled.p`
     letter-spacing: 0.04em;
     color: ${theme.baseColors.textColor};
 
+  
+    
+
 `;
 
 export const NoticeCategoryItemCategoryText = styled.p`
@@ -113,6 +123,7 @@ export const NoticeCategoryItemCategoryText = styled.p`
     leading-trim: both;
     text-edge: cap;
     color: ${theme.baseColors.textColor};
+
 
 `;
 
@@ -149,36 +160,61 @@ export const NoticeCategoryItemMoreButton = styled.button`
     margin-left: auto;
     margin-right: auto;
 
+     &:hover,
+  &:focus {
+    background: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
+color: #ffffff;
 `;
 
 export const NoticeCategoryItemLocationIcon = styled(HiOutlineLocationMarker)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+
+     &:hover,
+  &:focus {
+    fill: #ffffff;
+
 `;
 
 export const NoticeCategoryItemClockIcon = styled(RxClock)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+
+    &:hover,
+  &:focus {
+    fill: #ffffff;
+
 `;
 
 export const NoticeCategoryItemFemaleIcon = styled(BsGenderFemale)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+    &:hover,
+  &:focus {
+    fill: #ffffff;
+
 `;
 
 export const NoticeCategoryItemMaleIcon = styled(BsGenderMale)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+    &:hover,
+  &:focus {
+    fill: #ffffff;
 `;
 
 export const NoticeCategoryItemHeartIcon = styled(FiHeart)`
     color: ${theme.baseColors.accentColor};
     width: 24px;
     height: 24px;
+
+     &:hover,
+  &:focus {
+    fill: ${theme.baseColors.accentColor};
 `;
 
 export const NoticeCategoryItemFillHeartIcon = styled(FaHeart)`
@@ -199,10 +235,13 @@ export const NoticeCategoryItemButtonList = styled.ul`
     flex-direction: column;
     top: 12px;
     right: 12px;
+
+    
 `;
 
 export const NoticeCategoryItemButtonItem = styled.li`
     margin-top: 16px;
+    
 
     &:first-child{
         margin-top: 0;

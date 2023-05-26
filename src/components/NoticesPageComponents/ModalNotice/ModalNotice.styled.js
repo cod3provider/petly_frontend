@@ -274,12 +274,17 @@ export const ModalNoticeFavoriteButton = styled.button`
     letter-spacing: 0.04em;
     cursor: pointer;
 
+   
+}
+
     @media(${theme.breakpoints.tablet.media}){
         width: 129px;
     }
 
     @media(${theme.breakpoints.desktop.media}){
         width: 129px;
+
+        
     }
 `;
 
@@ -288,6 +293,7 @@ export const ModalNoticeHeartIcon = styled(FiHeart)`
     color: ${theme.baseColors.buttonTextColor};
     width: 24px;
     height: 24px;
+
 `;
 
 export const ModalNoticeButtonItem = styled.li`

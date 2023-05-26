@@ -14,8 +14,8 @@ export const StyledButton = styled('button')`
 
   &:hover,
   &:focus {
-    background-color: #419EF1;
-  }
+    background: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
+}
 `;
 
 export const ButtonText = styled.span`
