@@ -17,11 +17,23 @@ import { setIsNewUser } from '../../redux/auth/authSlice';
 import ModalBack from '../../components/Modals/ModalBack';
 import ModalCongrats from '../../components/Modals/ModalCongrats/ModalCongrats';
 
+import Loader from '../../components/Loader/Loader';
+import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled';
+
 function UserPage() {
   const dispatch = useDispatch();
   const { open } = useToggle();
 
   const user = useSelector(getUser);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }, []);
+
 
   useEffect(() => {
     dispatch(getCurrentUser());
@@ -55,6 +67,8 @@ function UserPage() {
           ) : null}
           {/*<UserPets />*/}
         </UserDiv>
+        {isLoading && <Loader />}
+        <BackgroundImageDiv />
       </SectionStyled>
     </ContainerStyled>
   );

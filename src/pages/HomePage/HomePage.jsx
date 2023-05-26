@@ -1,8 +1,8 @@
 import { useMedia } from 'react-use';
-
+import { useEffect, useState } from 'react';
 import { HeroImage, HomeSection, MainTitle, Wrap } from './HomePage.styled.js';
 import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled.js';
-
+import Loader from '../../components/Loader/Loader';
 import { theme } from '../../utils/theme.jsx';
 
 import HeroMobileImage from './img/hero/hero-mobile.png';
@@ -14,12 +14,20 @@ const HomePage = () => {
   const isMobile = useMedia(theme.breakpoints.mobile.media);
   const isTablet = useMedia(theme.breakpoints.tablet.media);
   const isDesktop = useMedia(theme.breakpoints.desktop.media);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }, []);
 
   return (
     <>
       <ContainerStyled>
         <HomeSection>
           <BackgroundImageDiv />
+          {isLoading && <Loader />}
           <Wrap>
             <MainTitle>Take good care of your small pets</MainTitle>
             {isMobile && (
