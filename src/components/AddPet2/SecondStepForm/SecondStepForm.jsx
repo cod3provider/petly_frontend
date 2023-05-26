@@ -98,9 +98,7 @@ const SecondStepForm = ({ setStep, setState, type, step, state }) => {
     >
       <FormContainer>
         <FormStyledBox>
-          {(type === 'sell' ||
-            type === 'lost/found' ||
-            type === 'in good hands') && (
+          {(type !== 'your pet') && (
             <InputBox>
               <LabelStyle htmlFor="titlePet">Title of add</LabelStyle>
               <InputStyle
