@@ -15,21 +15,21 @@ import React from 'react';
 import { deleteNotice } from '../../../redux/notices/noticesOperations';
 
 
-const NoticesDeleteModal = ({ details, close }) => {
+const NoticesDeleteModal = ({ details, close, onDelete }) => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
         const fetchDeleteNotice = async (id) => {
             try {
                 const response = await dispatch(deleteNotice(id));
-                console.log(response);
+                onDelete();
             }
             catch (error) {
-                console.log(error);
                 alert(error.message);
             }
         }
         fetchDeleteNotice(details._id);
+        close();
     }
 
     const handleOverlayClick = (event) => {
@@ -68,6 +68,7 @@ const NoticesDeleteModal = ({ details, close }) => {
 NoticesDeleteModal.propTypes = {
     details: PropTypes.object.isRequired,
     close: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
 }
 
 export default NoticesDeleteModal;

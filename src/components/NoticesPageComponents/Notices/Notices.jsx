@@ -32,21 +32,23 @@ import { NoPets } from './Notices.styled';
 const NoticesPage = () => {
   const { categoryName } = useParams();
 
-  let isLoggedIn = useSelector(getIsLoggedIn);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalInfo, setModalInfo] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteModalInfo, setDeleteModalInfo] = useState(null);
-  const [query, setQuery] = useState('');
-  const [notices, setNotices] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1280);
-  const [limit, setLimit] = useState(isWideScreen ? '12' : '10');
-  const [category, setCategory] = useState('sell');
-  const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(true);
-  const [user, setUser] = useState(useSelector(getUser));
+    let isLoggedIn = useSelector(getIsLoggedIn);
+  
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalInfo, setModalInfo] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [deleteModalInfo, setDeleteModalInfo] = useState(null);
+    const [query, setQuery] = useState('');
+    const [notices, setNotices] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1280);
+    const [limit, setLimit] = useState(isWideScreen ? "12" : "10" );
+    const [category, setCategory] = useState("sell");
+    const [favoriteBtnActivated, setFavoriteBtnActivated] = useState(false);
+    const [deleteBtnActivated, setDeleteBtnActivated] = useState(false);
+    const [user, setUser] = useState(useSelector(getUser));
 
   const dispatch = useDispatch();
 
@@ -116,67 +118,63 @@ const NoticesPage = () => {
     setFavoriteBtnActivated(true);
   };
 
-  useEffect(() => {
-    const fetchNoticesByName = async (category, query, page, limit) => {
-      try {
-        const response = await searchNoticesByName(
-          category,
-          query,
-          page,
-          limit
-        );
-        setNotices(response.data);
-        setTotalPages(response.totalPages);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-    if (query !== '') {
-      fetchNoticesByName(category, query, page, limit);
+    const onDelete = () => {
+        setDeleteBtnActivated(true);
     }
-  }, [query, category, page, limit, isWideScreen]);
 
-  useEffect(() => {
-    if (query === '') {
-      const fetchNoticesByCategory = async () => {
-        try {
-          if (
-            category === 'sell' ||
-            category === 'lostFound' ||
-            category === 'inGoodHands'
-          ) {
-            const response = await searchNoticesByCategory(
-              category,
-              page,
-              limit
-            );
-            setNotices(response.data);
-            setTotalPages(response.totalPages);
-          }
-          if (category === 'favorite' || category === 'created') {
-            const response = await dispatch(
-              getNoticesByPrivateCategory({ category, page, limit })
-            );
-            if (response.type === '/getNoticesByPrivateCategory/fulfilled') {
-              if (category === 'favorite') {
-                setNotices(response.payload);
-                setTotalPages(1);
-              }
-              if (category === 'created') {
-                setNotices(response.payload.data);
-                setTotalPages(response.payload.totalPages);
-              }
-            } else {
-              setNotices([]);
+    useEffect(() => {
+        const fetchNoticesByName = async (category, query, page, limit) => {
+            try {
+                const response = await searchNoticesByName(category, query, page, limit);
+                setNotices(response.data);
+                setTotalPages(response.totalPages);
             }
-          }
-        } catch (error) {
-          toast.error(error.message);
+            catch (error) {
+                toast.error("There are no notices in this category that meet your search query");
+                setNotices([]);
+            }
         }
-      };
-      fetchNoticesByCategory();
-    }
-  }, [category, page, limit, isWideScreen, query, user]);
+        if (query !== '') {
+            fetchNoticesByName(category, query, page, limit);
+        }
+    }, [query, category, page, limit, isWideScreen]);
+
+    useEffect(() => {
+        if (query === "") {
+            const fetchNoticesByCategory = async () => {
+                try {
+                    if (category === "sell" || category === "lostFound" || category === "inGoodHands") {
+                        const response = await searchNoticesByCategory(category, page, limit);
+                        setNotices(response.data);
+                        setTotalPages(response.totalPages);
+                    }
+                    if (category === "favorite" || category === "created") {
+                        const response = await dispatch(getNoticesByPrivateCategory({ category, page, limit }));
+                        if (response.type === "/getNoticesByPrivateCategory/fulfilled") {
+                            if (category === "favorite") {
+                                setNotices(response.payload);
+                                setTotalPages(1);
+                            }
+                            if (category === "created") {
+                                setNotices(response.payload.data);
+                                setTotalPages(response.payload.totalPages);
+                            }
+                            
+                        } else {
+                            setNotices([]);
+                        }
+                    }
+                }
+                catch (error) {
+                    toast.error(error.message);
+                }
+                if (setFavoriteBtnActivated) {
+                    setDeleteBtnActivated(false);
+                }
+            }
+            fetchNoticesByCategory();
+        }
+    }, [category, page, limit, isWideScreen, query, user, deleteBtnActivated]);
 
   const openModal = data => {
     setIsModalOpen(true);
@@ -198,54 +196,39 @@ const NoticesPage = () => {
     setDeleteModalInfo(null);
   };
 
-  return (
-    <main>
-      <NoticesContainer>
-        <NoticesContentBox>
-          <NoticesTitle />
-          <NoticesSearch onSubmit={searchNotices} />
-          <NoticesNavBox>
-            <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
-            <AddPetButton isAuth={isLoggedIn} />
-          </NoticesNavBox>
-          {notices.length ? (
-            <NoticesCategoriesList
-              items={notices}
-              openModal={openModal}
-              openDeleteModal={openDeleteModal}
-              user={user}
-              onFavoriteChange={onFavoriteChange}
-              isLoggedIn={isLoggedIn}
-            />
-          ) : (
-            <NoPets>No pets in this category</NoPets>
-          )}
-          {!notices.length || (
-            <NoticesPaginationButtons
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={setPage}
-            />
-          )}
-          {isModalOpen && (
-            <ModalNotice
-              close={closeModal}
-              details={modalInfo}
-              isLoggedIn={isLoggedIn}
-              user={user}
-              onFavoriteChange={onFavoriteChange}
-            />
-          )}
-          {isDeleteModalOpen && (
-            <NoticesDeleteModal
-              close={closeDeleteModal}
-              details={deleteModalInfo}
-            />
-          )}
-        </NoticesContentBox>
-      </NoticesContainer>
-    </main>
-  );
-};
+    return <main>
+        <NoticesContainer>
+                <NoticesContentBox>
+                <NoticesTitle />
+                <NoticesSearch onSubmit={searchNotices} />
+                <NoticesNavBox>
+                    <NoticesCategoriesNav isLoggedIn={isLoggedIn} />
+                    <AddPetButton isAuth={isLoggedIn} />
+                </NoticesNavBox>
+                {notices.length ? <NoticesCategoriesList
+                    items={notices}
+                    openModal={openModal}
+                    openDeleteModal={openDeleteModal}
+                    user={user}
+                    onFavoriteChange={onFavoriteChange}
+                    isLoggedIn={isLoggedIn} /> : <NoPets>No pets in this category</NoPets>}
+                {!notices.length || <NoticesPaginationButtons currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
+                {isModalOpen && <ModalNotice
+                    close={closeModal}
+                    details={modalInfo}
+                    isLoggedIn={isLoggedIn}
+                    user={user}
+                    onFavoriteChange={onFavoriteChange}
+                />}
+                {isDeleteModalOpen && <NoticesDeleteModal
+                    close={closeDeleteModal}
+                    details={deleteModalInfo}
+                    onDelete={onDelete}
+                />}
+            </NoticesContentBox>
+        </NoticesContainer>
+            
+    </main>;
+}
 
 export default NoticesPage;
