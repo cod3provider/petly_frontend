@@ -67,14 +67,17 @@ export const StyledLi = styled.li`
       margin-top: 60px;
     }
   }
+  
+  @media ${theme.breakpoints.desktop.media} {
+    &:last-child {
+      margin-right: 270px;
+    }
+  }
 
-  @media (${theme.breakpoints.desktop.media}) {
+  @media ${theme.breakpoints.desktop.media} {
     &:not(:first-child) {
       margin-left: 40px;
       margin-top: 0px;
-    }
-    &:last-child {
-      margin-right: 270px;
     }
 
     &:first-child {
