@@ -13,6 +13,9 @@ import NoticesSearch from './../../components/NoticesPageComponents/NoticesSearc
 import NoticesPaginationButtons from './../../components/NoticesPageComponents/NoticesPaginationButtons/NoticesPaginationButtons';
 import NewsCard from './NewsCard/NewsCard';
 
+import Loader from '../../components/Loader/Loader';
+import { BackgroundImageDiv } from '../../components/common/BgImage/BgImage.styled';
+
 const NewNewsPage = () => {
   const [query, setQuery] = useState('');
   const [news, setNews] = useState([]);
@@ -20,6 +23,14 @@ const NewNewsPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1280);
   const [limit, setLimit] = useState(isWideScreen ? '12' : '10');
+
+  const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }, []);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -94,6 +105,8 @@ const NewNewsPage = () => {
           />
         )}
         {news.length === 0 && <p>not found</p>}
+        {isLoading && <Loader />}
+        <BackgroundImageDiv />
       </ContainerStyled>
     </SectionStyled>
   );
